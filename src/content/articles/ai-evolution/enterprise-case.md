@@ -1,4 +1,5 @@
 ---
+series: "ai-evolution"
 title: "企业 AI 平台发展史（2023—2026）"
 subtitle: "从 POC 到 4000+ 用户"
 description: "一个企业 AI 平台从 POC 走到 4000+ 用户：快速跟进、私有模型、渐进式演进与成本治理，构成一条可复用的落地路径。"

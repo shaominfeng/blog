@@ -1,4 +1,5 @@
 ---
+series: "ai-evolution"
 title: "AI 进化的新范式：推理层才是核心"
 subtitle: "同样的模型，不同的服务团队"
 description: "参数不是唯一的护城河。推理层决定模型如何被调度、约束与优化，也决定了同样能力下的成本、可靠性与体验差距。"
@@ -16,7 +17,7 @@ tags: ["深度"]
 
 > 💡 **餐厅类比提示**：很多人以为AI竞争 = 比较主厨技艺（模型），实际上是在比较"整个餐厅"（主厨+服务团队+管理+优化）。
 > **推理层（服务团队）才是核心差异**：同样的主厨，Anthropic的领班（推理层）更懂规划、成本优化、流程管理。
-> 详见 [餐厅类比完整版](/ai-evolution/read/restaurant-analogy/#推理层服务团队是核心)
+> 详见 [餐厅类比完整版](/blog/ai-evolution/restaurant-analogy/#推理层服务团队是核心)
 
 ---
 
@@ -28,7 +29,7 @@ tags: ["深度"]
 
 ## 用户调用模型的完整架构
 
-![用户调用模型完整架构](/ai-evolution/images/architecture-full-stack.webp)
+![用户调用模型完整架构](/blog/images/architecture-full-stack.webp)
 
 *图：从用户应用到模型执行的5层架构，第3层推理服务层（金色突出）是创新核心*
 

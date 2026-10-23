@@ -1,12 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { SITE } from '../consts';
+import { SITE, SERIES } from '../consts';
 
 const structuredData = {
   '@context': 'https://schema.org',
   '@type': 'AboutPage',
-  name: '关于《从对话到协作》',
-  description: '这份报告的写作方法、数据边界、更新日志与授权说明。',
+  name: '关于邵敏峰的文章集',
+  description: '这个文章集的写作方法、数据边界、更新日志与授权说明。',
   url: new URL(SITE.base + '/about/', Astro.site).toString(),
   author: {
     '@type': 'Person',
@@ -17,13 +17,13 @@ const structuredData = {
 };
 ---
 
-<BaseLayout title="关于这份报告" description="这份报告的写作方法、数据边界、更新日志与授权说明。" structuredData={structuredData}>
+<BaseLayout title="关于这个文章集" description="这个文章集的写作方法、数据边界、更新日志与授权说明。" structuredData={structuredData}>
   <div class="shell page-hero">
     <p class="label">About / Methodology</p>
-    <h1>关于这份报告</h1>
+    <h1>关于这个文章集</h1>
     <p>
-      一份写给工程师的 AI 演进笔记：以时间线为骨架，以技术问题为线索，以企业实践为校验。
-      下面是它的写作方法、数据边界与更新记录。
+      一个工程师的写作空间：以时间线和技术问题为线索，把做过的事、读到的信息和踩过的坑写清楚。
+      这里是它的写作方法、数据边界与更新记录。
     </p>
   </div>
 
@@ -31,12 +31,12 @@ const structuredData = {
     <aside class="about-side">
       <ul class="info-list">
         <li><dt>作者</dt><dd>{SITE.author} / {SITE.authorEn}</dd></li>
-        <li><dt>时间跨度</dt><dd>{SITE.start} — {SITE.end}</dd></li>
-        <li><dt>章节</dt><dd>{SITE.chapterCount} 章</dd></li>
-        <li><dt>篇幅</dt><dd>约 {SITE.words}字</dd></li>
-        <li><dt>初稿</dt><dd>2026.01.27</dd></li>
-        <li><dt>最后更新</dt><dd>{SITE.updated}</dd></li>
-        <li><dt>授权</dt><dd>{SITE.license}</dd></li>
+        <li><dt>系列</dt><dd>1 个（已完结）</dd></li>
+        <li><dt>章节</dt><dd>{SERIES.chapterCount} 章</dd></li>
+        <li><dt>时间跨度</dt><dd>{SERIES.start} — {SERIES.end}</dd></li>
+        <li><dt>篇幅</dt><dd>约 {SERIES.words}字</dd></li>
+        <li><dt>最后更新</dt><dd>{SERIES.updated}</dd></li>
+        <li><dt>授权</dt><dd>{SERIES.license}</dd></li>
       </ul>
     </aside>
 
@@ -47,7 +47,7 @@ const structuredData = {
         甚至开始以「数字同事」的身份进入工作流。变化太快，讨论很容易变成参数对比和产品站队。
       </p>
       <p>
-        这份报告想做的，是把技术放回它出现的那一刻：它当时解决了什么具体问题？为什么是这个方案？
+        这个文章集想做的，是把技术放回它出现的那一刻：它当时解决了什么具体问题？为什么是这个方案？
         代价是什么？下一个瓶颈又在哪里？当这些线索连起来，趋势就不再是新闻标题，而是一条可以理解的因果链。
       </p>
 
@@ -61,7 +61,7 @@ const structuredData = {
 
       <h2>观察窗口与边界</h2>
       <p>
-        报告以 Claude / Anthropic 生态为主要观察窗口，原因是团队在日常开发中使用 Claude Code 最深，
+        目前的主线《从对话到协作》以 Claude / Anthropic 生态为主要观察窗口，原因是团队在日常开发中使用 Claude Code 最深，
         对 Agent 编程的体感最完整；同时覆盖 OpenAI（GPT-5、Codex）、Google（Gemini 3）与 DeepSeek（R1）的关键进展。
         这意味着部分章节的深度并不对称，读者应结合自己的工具栈对照阅读。
       </p>
@@ -70,29 +70,29 @@ const structuredData = {
         所有观点为个人观察，不代表任职机构。若发现事实错误，欢迎通过邮件指出。
       </p>
 
-      <h2>数据与引用</h2>
+      <h2>接下来</h2>
       <p>
-        文中的时间、版本与价格以官方公告和公开报道为准，参考资料汇总在
-        <a href={SITE.base + '/read/overview/'}>总览章节</a>末尾。
-        价格与基准测试会随时间变化，阅读时请留意发布日期。
+        这个文章集会持续更新：除了《从对话到协作》，还会加入单篇的技术笔记、架构复盘和工具实践。
+        下一个系列正在准备中。
       </p>
 
       <h2>更新日志</h2>
       <ul class="update-list">
-        <li><time>2026.10.23</time>上线公开站点，完成章节拆分、图片优化与移动端适配。</li>
-        <li><time>2026.02.24</time>模块化重构，新增餐厅类比导读与双轨对照。</li>
+        <li><time>2026.10.23</time>文章集上线，从单篇报告迁移为可扩展的文章结构。</li>
+        <li><time>2026.02.24</time>《从对话到协作》模块化重构，新增餐厅类比导读与双轨对照。</li>
         <li><time>2026.01.27</time>初稿完成，覆盖 2022.11—2026.01 的时间线与技术演进。</li>
       </ul>
 
       <h2>授权与联系</h2>
       <p>
-        文字以 <strong>{SITE.license}</strong> 授权，可自由阅读与非商业转载，转载请注明作者与原文链接。
+        文字以 <strong>{SERIES.license}</strong> 授权，可自由阅读与非商业转载，转载请注明作者与原文链接。
         图片为作者自制，同样适用该授权。
       </p>
       <p>
         交流、纠错或合作：<a href={'mailto:' + SITE.email}>{SITE.email}</a> ·
         <a href={SITE.github} target="_blank" rel="noopener noreferrer">GitHub</a> ·
-        <a href={SITE.personalSite}>个人主页</a>
+        <a href={SITE.personalSite}>个人主页</a> ·
+        <a href={SITE.base + '/ai-evolution/'}>从对话到协作</a>
       </p>
     </div>
   </div>

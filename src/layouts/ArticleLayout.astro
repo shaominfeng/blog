@@ -3,19 +3,20 @@ import type { CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
 import ChapterNav from '../components/ChapterNav.astro';
 import Toc from '../components/Toc.astro';
-import { SITE } from '../consts';
+import { SITE, SERIES } from '../consts';
 
 interface Props {
-  entry: CollectionEntry<'chapters'>;
+  entry: CollectionEntry<'articles'>;
   headings: { depth: number; slug: string; text: string }[];
-  prev?: CollectionEntry<'chapters'>;
-  next?: CollectionEntry<'chapters'>;
-  chapters: CollectionEntry<'chapters'>[];
+  prev?: CollectionEntry<'articles'>;
+  next?: CollectionEntry<'articles'>;
+  articles: CollectionEntry<'articles'>[];
 }
 
-const { entry, headings, prev, next, chapters } = Astro.props;
+const { entry, headings, prev, next, articles } = Astro.props;
 const { data } = entry;
-const canonical = new URL(SITE.base + '/read/' + entry.id + '/', Astro.site).toString();
+const slug = entry.id.split('/').pop();
+const canonical = new URL(SITE.base + '/ai-evolution/' + slug + '/', Astro.site).toString();
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -31,36 +32,28 @@ const structuredData = {
     alternateName: SITE.authorEn,
     url: SITE.personalSite,
   },
-  publisher: {
-    '@type': 'Person',
-    name: SITE.author,
-  },
+  publisher: { '@type': 'Person', name: SITE.author },
   mainEntityOfPage: canonical,
   isPartOf: {
     '@type': 'Book',
-    name: SITE.title + '：' + SITE.subtitle,
-    url: new URL(SITE.base + '/', Astro.site).toString(),
+    name: SERIES.title + '：' + SERIES.subtitle,
+    url: new URL(SITE.base + '/ai-evolution/', Astro.site).toString(),
   },
 };
 ---
 
-<BaseLayout
-  title={data.title}
-  description={data.description}
-  type="article"
-  structuredData={structuredData}
->
+<BaseLayout title={data.title} description={data.description} type="article" structuredData={structuredData}>
   <div class="progress" aria-hidden="true"></div>
 
   <div class="shell article-grid">
-    <ChapterNav chapters={chapters} currentId={entry.id} />
+    <ChapterNav articles={articles} currentId={entry.id} />
 
     <div class="article-body">
       <header class="article-hero">
         <nav class="crumbs" aria-label="面包屑">
-          <a href={SITE.base + '/'}>报告</a>
+          <a href={SITE.base + '/'}>文章集</a>
           <span class="sep">/</span>
-          <span>{data.part}</span>
+          <a href={SITE.base + '/ai-evolution/'}>{SERIES.title}</a>
           <span class="sep">/</span>
           <span>第 {String(data.num).padStart(2, '0')} 章</span>
         </nav>
@@ -85,12 +78,13 @@ const structuredData = {
               <span>更新于 {data.updated}</span>
             </>
           )}
-        </header>
+        </div>
+      </header>
 
       <details class="mobile-toc">
         <summary>章节目录 · 当前第 {String(data.num).padStart(2, '0')} 章</summary>
         <div class="mobile-nav">
-          <ChapterNav chapters={chapters} currentId={entry.id} />
+          <ChapterNav articles={articles} currentId={entry.id} />
         </div>
       </details>
 
@@ -102,25 +96,25 @@ const structuredData = {
         <span class="article-end-label">Continue reading</span>
         <div class="prev-next">
           {prev ? (
-            <a class="pn-card" href={SITE.base + '/read/' + prev.id + '/'}>
+            <a class="pn-card" href={SITE.base + '/ai-evolution/' + prev.id.split('/').pop() + '/'}>
               <small>← 上一章 · {String(prev.data.num).padStart(2, '0')}</small>
               <strong>{prev.data.title}</strong>
             </a>
           ) : (
-            <a class="pn-card" href={SITE.base + '/#catalog'}>
-              <small>← 回到目录</small>
-              <strong>全部 14 章</strong>
+            <a class="pn-card" href={SITE.base + '/ai-evolution/'}>
+              <small>← 回到系列</small>
+              <strong>{SERIES.title}</strong>
             </a>
           )}
           {next ? (
-            <a class="pn-card next" href={SITE.base + '/read/' + next.id + '/'}>
+            <a class="pn-card next" href={SITE.base + '/ai-evolution/' + next.id.split('/').pop() + '/'}>
               <small>下一章 · {String(next.data.num).padStart(2, '0')} →</small>
               <strong>{next.data.title}</strong>
             </a>
           ) : (
             <a class="pn-card next" href={SITE.base + '/'}>
               <small>读完了 →</small>
-              <strong>回到报告首页</strong>
+              <strong>回到文章集</strong>
             </a>
           )}
         </div>
@@ -135,7 +129,7 @@ const structuredData = {
         </div>
 
         <p class="article-license">
-          本文以 {SITE.license} 授权，转载请注明作者与出处。文中观点为个人观察，不代表任职机构。
+          本文以 {SERIES.license} 授权，转载请注明作者与出处。文中观点为个人观察，不代表任职机构。
         </p>
       </div>
     </div>

@@ -5,6 +5,7 @@ import '@fontsource-variable/inter';
 import '@fontsource/jetbrains-mono/400.css';
 import '@fontsource/jetbrains-mono/500.css';
 import '../styles/global.css';
+import '../styles/blog.css';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import { SITE } from '../consts';
@@ -29,12 +30,7 @@ const {
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL(image, Astro.site);
-const fullTitle =
-  title === SITE.title
-    ? SITE.title + ' · ' + SITE.subtitle
-    : title === '总览：从对话到协作'
-      ? title + ' · ' + SITE.subtitle
-      : title + ' · ' + SITE.title;
+const fullTitle = title === SITE.blogTitle ? SITE.name + ' · ' + SITE.blogTitle : title + ' · ' + SITE.name;
 ---
 
 <!doctype html>
@@ -53,7 +49,7 @@ const fullTitle =
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
-    <meta property="og:site_name" content={SITE.title} />
+    <meta property="og:site_name" content={SITE.blogTitle} />
     <meta property="og:locale" content="zh_CN" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />
@@ -61,11 +57,9 @@ const fullTitle =
     <meta name="twitter:image" content={ogImage} />
 
     <link rel="icon" href={SITE.base + '/favicon.svg'} type="image/svg+xml" />
-    <link rel="alternate" type="application/rss+xml" title={SITE.title + ' · RSS'} href={SITE.base + '/rss.xml'} />
+    <link rel="alternate" type="application/rss+xml" title={SITE.name + ' · ' + SITE.blogTitle} href={SITE.base + '/rss.xml'} />
     <meta name="theme-color" content="#f7f3eb" />
     <meta name="generator" content={Astro.generator} />
-
-    <slot name="head" />
 
     {structuredData && (
       <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />

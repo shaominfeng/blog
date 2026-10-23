@@ -1,4 +1,5 @@
 ---
+series: "ai-evolution"
 title: "用一家餐厅，理解 AI 系统"
 subtitle: "模型是主厨，推理层是领班"
 description: "用「智能餐厅」拆解 AI 系统的四层结构：顾客、服务团队、后厨与工具层。理解推理层为什么是核心差异。"
@@ -21,7 +22,7 @@ cover: "/images/restaurant-architecture.webp"
 
 ### 整体架构图（形象展示）
 
-![AI系统餐厅架构图](/ai-evolution/images/restaurant-architecture.webp)
+![AI系统餐厅架构图](/blog/images/restaurant-architecture.webp)
 
 *图：AI系统的4层餐厅架构 - 从顾客点菜到后厨出菜的完整流程（黑板手绘风格）*
 

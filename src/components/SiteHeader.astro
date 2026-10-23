@@ -2,7 +2,8 @@
 import { SITE } from '../consts';
 
 const path = Astro.url.pathname;
-const isReading = path.startsWith(SITE.base + '/read/');
+const isIndex = path === SITE.base + '/' || path === SITE.base;
+const isSeries = path.startsWith(SITE.base + '/ai-evolution/');
 const isAbout = path === SITE.base + '/about/' || path === SITE.base + '/about';
 ---
 
@@ -11,17 +12,18 @@ const isAbout = path === SITE.base + '/about/' || path === SITE.base + '/about';
     <a class="brand" href={SITE.base + '/'}>
       <span class="seal" aria-hidden="true">邵</span>
       <span class="brand-copy">
-        <strong>从对话到协作</strong>
-        <span>AI Evolution · 2022—2026</span>
+        <strong>邵敏峰 · 文章集</strong>
+        <span>Writing & Notes</span>
       </span>
     </a>
 
     <nav class="site-nav" aria-label="主导航">
-      <a class="nav-text" href={SITE.base + '/#catalog'}>目录</a>
-      <a class="nav-text nav-optional" href={SITE.base + '/#paths'}>阅读路径</a>
+      <a class="nav-text" href={SITE.base + '/'} aria-current={isIndex ? 'page' : undefined}>文章集</a>
+      <a class="nav-text" href={SITE.base + '/ai-evolution/'} aria-current={isSeries ? 'page' : undefined}>从对话到协作</a>
       <a class="nav-text" href={SITE.base + '/about/'} aria-current={isAbout ? 'page' : undefined}>关于</a>
+      <a class="nav-ext" href={SITE.personalSite}>个人主页 ↗</a>
       <a class="nav-ext" href={SITE.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a>
-      {!isReading && <a class="nav-cta" href={SITE.base + '/read/overview/'}>开始阅读 <span aria-hidden="true">→</span></a>}
+      {!isSeries && <a class="nav-cta" href={SITE.base + '/ai-evolution/overview/'}>开始阅读 <span aria-hidden="true">→</span></a>}
     </nav>
   </div>
 </header>

@@ -1,42 +1,43 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import { SITE } from '../consts';
+import { SITE, SERIES } from '../consts';
 
 interface Props {
-  chapters: CollectionEntry<'chapters'>[];
+  articles: CollectionEntry<'articles'>[];
   currentId?: string;
 }
 
-const { chapters, currentId } = Astro.props;
-const sorted = [...chapters].sort((a, b) => a.data.order - b.data.order);
+const { articles, currentId } = Astro.props;
+const sorted = [...articles].sort((a, b) => a.data.order - b.data.order);
 
-const groups: { part: string; items: CollectionEntry<'chapters'>[] }[] = [];
-for (const chapter of sorted) {
+const groups: { part: string; items: CollectionEntry<'articles'>[] }[] = [];
+for (const article of sorted) {
   const last = groups[groups.length - 1];
-  if (!last || last.part !== chapter.data.part) {
-    groups.push({ part: chapter.data.part, items: [chapter] });
+  if (!last || last.part !== article.data.part) {
+    groups.push({ part: article.data.part, items: [article] });
   } else {
-    last.items.push(chapter);
+    last.items.push(article);
   }
 }
 ---
 
 <nav class="side-nav" aria-label="章节目录">
-  <a class="side-brand" href={SITE.base + '/'}>
-    从对话到协作
-    <small>{SITE.chapterCount} 章 · {SITE.start}—{SITE.end}</small>
+  <a class="side-back" href={SITE.base + '/'}>← 文章集</a>
+  <a class="side-brand" href={SITE.base + '/ai-evolution/'}>
+    {SERIES.title}
+    <small>{SERIES.chapterCount} 章 · {SERIES.start}—{SERIES.end}</small>
   </a>
   {groups.map((group) => (
     <div class="side-part">
       <span class="side-part-label">{group.part} / {String(group.items.length).padStart(2, '0')}</span>
-      {group.items.map((chapter) => (
+      {group.items.map((article) => (
         <a
-          href={SITE.base + '/read/' + chapter.id + '/'}
-          class={chapter.id === currentId ? 'active' : undefined}
-          aria-current={chapter.id === currentId ? 'page' : undefined}
+          href={SITE.base + '/ai-evolution/' + article.id.split('/').pop() + '/'}
+          class={article.id === currentId ? 'active' : undefined}
+          aria-current={article.id === currentId ? 'page' : undefined}
         >
-          <span class="side-num">{String(chapter.data.num).padStart(2, '0')}</span>
-          {chapter.data.title}
+          <span class="side-num">{String(article.data.num).padStart(2, '0')}</span>
+          {article.data.title}
         </a>
       ))}
     </div>

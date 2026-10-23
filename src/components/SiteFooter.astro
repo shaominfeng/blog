@@ -1,5 +1,5 @@
 ---
-import { SITE } from '../consts';
+import { SITE, SERIES } from '../consts';
 ---
 
 <footer class="site-footer">
@@ -8,23 +8,23 @@ import { SITE } from '../consts';
       <div class="footer-brand">
         <span class="seal" aria-hidden="true">邵</span>
         <div>
-          <strong>从对话到协作</strong>
-          <span>AI 大模型三年演进全记录 · 2022.11—2026.01</span>
+          <strong>{SITE.name} · {SITE.blogTitle}</strong>
+          <span>{SITE.blogSubtitle} · 持续更新</span>
         </div>
       </div>
       <div class="footer-links">
-        <a href={SITE.base + '/'}>首页</a>
-        <a href={SITE.base + '/#catalog'}>目录</a>
+        <a href={SITE.base + '/'}>文章集</a>
+        <a href={SITE.base + '/ai-evolution/'}>从对话到协作</a>
         <a href={SITE.base + '/about/'}>关于</a>
         <a href={SITE.base + '/rss.xml'}>RSS</a>
         <a href={SITE.personalSite}>个人主页 ↗</a>
-        <a href={SITE.repo} target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+        <a href={SITE.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 {SITE.author} · {SITE.authorEn}</span>
-      <span>文字以 {SITE.license} 授权 · 转载注明出处</span>
-      <span>写于中国 · 用 Astro 构建</span>
+      <span>© 2026 {SITE.name} · {SITE.authorEn}</span>
+      <span>文字以 {SERIES.license} 授权 · 转载注明出处</span>
+      <span>用 Astro 构建 · GitHub Pages</span>
     </div>
   </div>
 </footer>

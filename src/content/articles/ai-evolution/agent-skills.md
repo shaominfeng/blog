@@ -1,4 +1,5 @@
 ---
+series: "ai-evolution"
 title: "Agent Skills：比 MCP 更重要的创新"
 subtitle: "把领域知识变成可安装的资产"
 description: "Skills 补的不是模型能力，而是架构：把团队最佳实践沉淀为可复用、可版本化的知识包，Token 更省，边界更清晰。"
@@ -16,7 +17,7 @@ tags: ["深度"]
 
 > 💡 **餐厅类比提示**：如果说MCP是"采购系统"（能拿到食材），那Skills就是"菜谱宝典"（知道怎么做菜）。
 > 有食材但不会做 = 浪费；会做菜但没食材 = 暂时做不了。但统计显示，80%的任务只需菜谱（Skills），20%才需要采购（MCP）。
-> 详见 [餐厅类比完整版](/ai-evolution/read/restaurant-analogy/#mcp-vs-skills-深度对比)
+> 详见 [餐厅类比完整版](/blog/ai-evolution/restaurant-analogy/#mcp-vs-skills-深度对比)
 
 ---
 

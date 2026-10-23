@@ -6,7 +6,7 @@ import rehypeExternalLinks from 'rehype-external-links';
 
 export default defineConfig({
   site: 'https://shaominfeng.github.io',
-  base: '/ai-evolution',
+  base: '/blog',
   trailingSlash: 'always',
   build: { format: 'directory' },
   integrations: [sitemap()],

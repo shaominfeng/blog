@@ -1,4 +1,5 @@
 ---
+series: "ai-evolution"
 title: "Prompt 工程的兴衰"
 subtitle: "它没有死，只是下沉了"
 description: "从年薪 20 万美元到职位缩减 70%，Prompt 工程从用户侧下沉到系统侧：System Prompt、工具描述与 Skills 成为新的载体。"

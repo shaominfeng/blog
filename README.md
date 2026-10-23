@@ -1,20 +1,35 @@
-# 从对话到协作：AI 大模型三年演进全记录
+# 邵敏峰 · 文章集
 
-> 2022.11 — 2026.01 · 14 章 · 约 2.1 万字
+技术长文与系列连载，部署在 https://shaominfeng.github.io/blog/。
 
-在线阅读：**https://shaominfeng.github.io/ai-evolution/**
+当前系列：**《从对话到协作》** — AI 大模型三年演进全记录（2022.11—2026.01），14 章、约 2.1 万字。
 
-作者：邵敏峰（Allen Shao）
+在线阅读：https://shaominfeng.github.io/blog/ai-evolution/
 
-## 这是什么
+## 结构
 
-一份写给工程师的 AI 演进笔记。以时间线为骨架，把模型、协议与产品放回它们出现的时刻，回答三个问题：
+这是一个**文章集**，不是一个报告仓库：
 
-1. 为什么出现这项技术？
-2. 它解决了什么问题？
-3. 它又留下了什么新问题？
+```
+src/
+├── content/articles/
+│   └── ai-evolution/       # 系列 01 的 14 章
+│       ├── overview.md
+│       ├── context-revolution.md
+│       └── ...
+├── pages/
+│   ├── index.astro          # /blog/ 文章集首页
+│   ├── ai-evolution/
+│   │   ├── index.astro      # /blog/ai-evolution/ 系列首页
+│   │   └── [...slug].astro  # /blog/ai-evolution/<chapter>/ 章节
+│   └── about.astro          # /blog/about/
+├── components/              # 页头、章节导航、TOC
+├── layouts/                 # 基础布局 / 文章布局
+└── styles/                  # 编辑设计系统
+```
 
-全书拆成 14 章：总览、餐厅类比导读、5 个年份、4 个技术深潜、1 个企业实践案例、1 个未来展望。企业案例已做脱敏处理。
+新增同系列文章：在 `src/content/articles/ai-evolution/` 添加 Markdown，补齐 frontmatter（`series`、`order`、`part`、`readingTime` 等），路由会自动生成。
+新增一个系列：新建内容目录、系列首页和路由，并在 `src/consts.ts` 的 `SERIES_LIST` 中登记。
 
 ## 技术栈
 
@@ -27,37 +42,26 @@
 
 ```bash
 npm install
-npm run dev       # http://localhost:4321/ai-evolution/
+npm run dev       # http://localhost:4321/blog/
 npm run build     # 输出到 dist/
 npm run preview
 ```
 
-> 站点配置了 `base: '/ai-evolution'`，本地预览也请带上该前缀。
+> 站点配置了 `base: '/blog'`，本地预览也请带上该前缀。
 
-## 内容更新
+## 内容导入
 
-章节 Markdown 位于 `src/content/chapters/`，由 `scripts/import-content.mjs` 从原始文档转换而来：
+章节 Markdown 由 `scripts/import-content.mjs` 从原始文档转换而来：
 
 ```bash
 SOURCE_DIR=/path/to/原始文档目录 node scripts/import-content.mjs
 ```
 
-脚本会做这些事：拆分章节、补充 frontmatter、计算阅读时长、重写站内链接与图片路径、脱敏企业信息、把图片压缩为 WebP。
-
-## 目录
-
-```
-src/
-├── components/       # 页头、章节导航、TOC
-├── content/chapters/ # 14 章内容
-├── layouts/          # 基础布局 / 文章布局
-├── pages/            # 首页、阅读页、关于、RSS、404
-└── styles/global.css # 编辑设计系统
-```
+脚本会拆分章节、补充 frontmatter、计算阅读时长、重写站内链接与图片路径、脱敏企业信息，并把图片压缩为 WebP。
 
 ## 部署
 
-站点使用 GitHub Pages 的 `gh-pages` 分支发布：
+GitHub Pages 的 `gh-pages` 分支发布：
 
 ```bash
 npm run build

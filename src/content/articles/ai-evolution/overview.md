@@ -1,4 +1,5 @@
 ---
+series: "ai-evolution"
 title: "总览：从对话到协作"
 subtitle: "三年，五个阶段，一条主线"
 description: "把 2022.11 到 2026.01 的模型、协议与产品放回同一条演进线上，看清每一次能力跃迁解决了什么问题，又留下了什么新问题。"
@@ -63,7 +64,7 @@ updated: "2026-02-24"
 
 想象AI系统就像一个智能餐厅，完整的运作涉及多个层次：
 
-![餐厅架构图](/ai-evolution/images/restaurant-architecture.webp)
+![餐厅架构图](/blog/images/restaurant-architecture.webp)
 
 *图：AI系统的4层餐厅架构 - 顾客、服务团队（推理层⭐核心）、后厨、工具层*
 
@@ -231,7 +232,7 @@ Function Calling（基础厨具）= "我有刀锅铲"（工具层）
 
 ### 2022-2023年：觉醒与突破
 
-![2022-2023时间线](/ai-evolution/images/timeline-2022-2023.webp)
+![2022-2023时间线](/blog/images/timeline-2022-2023.webp)
 
 **关键里程碑说明**：
 - **2022.03** - OpenAI发布InstructGPT论文，提出RLHF（基于人类反馈的强化学习）——1.3B小模型用户偏好超过175B的GPT-3，让AI从"自说自话"变成"听懂人话"，直接催生ChatGPT
@@ -245,7 +246,7 @@ Function Calling（基础厨具）= "我有刀锅铲"（工具层）
 
 ### 2024年：推理革命与标准化
 
-![2024时间线](/ai-evolution/images/timeline-2024.webp)
+![2024时间线](/blog/images/timeline-2024.webp)
 
 **关键里程碑说明**：
 - **2024.01.10** - GPT Store上线，3M+自定义GPTs上架——Plugins失败后的第二次工具生态尝试
@@ -259,7 +260,7 @@ Function Calling（基础厨具）= "我有刀锅铲"（工具层）
 
 ### 2025年：生态爆发与范式转移
 
-![2025时间线](/ai-evolution/images/timeline-2025.webp)
+![2025时间线](/blog/images/timeline-2025.webp)
 
 **关键里程碑说明**：
 - **2025.01.20** - DeepSeek-R1，开源推理革命，媲美o1（基于V3基座$5.5M + RL训练$294K）
@@ -275,7 +276,7 @@ Function Calling（基础厨具）= "我有刀锅铲"（工具层）
 
 ### 2026年：协作时代开启
 
-![2026时间线](/ai-evolution/images/timeline-2026.webp)
+![2026时间线](/blog/images/timeline-2026.webp)
 
 **关键里程碑说明**：
 - **2026.01.12** - Claude Cowork，AI数字同事，办公自动化
@@ -287,7 +288,7 @@ Function Calling（基础厨具）= "我有刀锅铲"（工具层）
 
 ### AI能力总体演进
 
-![AI能力演进](/ai-evolution/images/evolution-ai-capability.webp)
+![AI能力演进](/blog/images/evolution-ai-capability.webp)
 
 **能力演进解读**：
 
@@ -337,19 +338,19 @@ AI: [自主执行]
 
 ### 维度1：上下文能力演进（记忆扩张）
 
-![上下文演进](/ai-evolution/images/evolution-context.webp)
+![上下文演进](/blog/images/evolution-context.webp)
 
 **演进规律**：500倍增长（3年），但成本优化是下一个战场
 
 ### 维度2：交互方式演进（如何对话）
 
-![交互方式演进](/ai-evolution/images/evolution-interaction.webp)
+![交互方式演进](/blog/images/evolution-interaction.webp)
 
 **演进规律**：从"人类适应AI"到"AI理解人类"，门槛持续降低
 
 ### 维度3：工具生态演进（AI能做什么）
 
-![工具生态演进](/ai-evolution/images/evolution-tools.webp)
+![工具生态演进](/blog/images/evolution-tools.webp)
 
 **演进规律**：从单一到多元，经历了Plugins的失败探索，最终MCP和Skills分别解决不同问题，互补而非竞争
 
@@ -505,7 +506,7 @@ AI: [自主执行]
 
 在了解了AI从2022到2026的发展历程后，有三个问题值得我们每个人深入思考。
 
-![课后思考题](/ai-evolution/images/after-class-questions.webp)
+![课后思考题](/blog/images/after-class-questions.webp)
 
 *图：像课堂上的课后作业，三个开放性问题等待你的答案*
 

@@ -1,4 +1,5 @@
 ---
+series: "ai-evolution"
 title: "未来展望与结论"
 subtitle: "未来三年的五个判断"
 description: "Skills 生态、云本分化、小模型、开源追赶与 Agent 自主：从演进规律出发，给出未来三年的判断与行动清单。"

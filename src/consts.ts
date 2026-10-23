@@ -1,16 +1,27 @@
 export const SITE = {
-  title: '从对话到协作',
-  subtitle: 'AI 大模型三年演进全记录',
+  name: '邵敏峰',
+  en: 'Allen Shao',
+  blogTitle: '文章集',
+  blogSubtitle: 'Writing & Notes',
   description:
-    '2022.11—2026.01，AI 大模型三年演进全记录。14 章、约 2.1 万字，从时间线、技术架构与企业实践三个视角，理解 AI 如何从对话走向协作。',
+    '邵敏峰的技术写作：AI 大模型、Agent 架构、云安全与企业实践。当前连载《从对话到协作》14 章，约 2.1 万字。',
   author: '邵敏峰',
   authorEn: 'Allen Shao',
   email: 'shaominfeng8@gmail.com',
   github: 'https://github.com/shaominfeng',
   personalSite: 'https://shaominfeng.github.io/',
-  repo: 'https://github.com/shaominfeng/ai-evolution',
+  repo: 'https://github.com/shaominfeng/blog',
   siteUrl: 'https://shaominfeng.github.io',
-  base: '/ai-evolution',
+  base: '/blog',
+  updated: '2026.10',
+};
+
+export const SERIES = {
+  slug: 'ai-evolution',
+  title: '从对话到协作',
+  subtitle: 'AI 大模型三年演进全记录',
+  description:
+    '2022.11—2026.01，AI 大模型三年演进全记录。14 章、约 2.1 万字，从时间线、技术架构与企业实践三个视角，理解 AI 如何从对话走向协作。',
   start: '2022.11',
   end: '2026.01',
   updated: '2026.02.24',
@@ -18,7 +29,10 @@ export const SITE = {
   chapterCount: 14,
   words: '2.1 万',
   sources: 17,
-};
+  cover: '/images/evolution-ai-capability.webp',
+} as const;
+
+export const SERIES_LIST = [SERIES];
 
 export const PARTS = [
   { name: '序章', order: 0, note: '先读这一章' },

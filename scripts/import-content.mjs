@@ -11,9 +11,10 @@ if (!SOURCE) {
   console.error("  SOURCE_DIR='../AI-Sharing/docs/从对话到协作-AI大模型三年演进全记录' npm run import");
   process.exit(1);
 }
-const OUT = path.resolve(ROOT, 'src/content/chapters');
+const OUT = path.resolve(ROOT, 'src/content/articles/ai-evolution');
 const IMG_OUT = path.resolve(ROOT, 'public/images');
-const BASE = '/ai-evolution';
+const BASE = '/blog';
+const SERIES_SLUG = 'ai-evolution';
 
 const CHAPTERS = [
   {
@@ -157,7 +158,7 @@ function rewriteLinks(md) {
     const name = path.basename(target);
     const slug = LINK_MAP[name];
     if (!slug) return label;
-    return '[' + label + '](' + BASE + '/read/' + slug + '/' + (anchor || '') + ')';
+    return '[' + label + '](' + BASE + '/' + SERIES_SLUG + '/' + slug + '/' + (anchor || '') + ')';
   });
 }
 
@@ -209,6 +210,7 @@ function transform(md, chapter) {
 
 function yaml(chapter, body) {
   const data = {
+    series: SERIES_SLUG,
     title: chapter.title,
     subtitle: chapter.subtitle,
     description: chapter.description,

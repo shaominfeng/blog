@@ -1,21 +1,23 @@
 import rss from '@astrojs/rss';
 import { getCollection } from 'astro:content';
-import { SITE } from '../consts';
+import { SITE, SERIES } from '../consts';
 
 export async function GET(context) {
-  const chapters = (await getCollection('chapters')).sort((a, b) => a.data.order - b.data.order);
+  const articles = (await getCollection('articles'))
+    .filter((article) => article.data.series === SERIES.slug)
+    .sort((a, b) => a.data.order - b.data.order);
 
   return rss({
-    title: SITE.title + ' · ' + SITE.subtitle,
+    title: SITE.name + ' · ' + SITE.blogTitle,
     description: SITE.description,
     site: context.site,
     trailingSlash: true,
-    items: chapters.map((chapter) => ({
-      title: chapter.data.title,
-      description: chapter.data.description,
-      pubDate: new Date(chapter.data.updated ?? chapter.data.date ?? '2026-02-24'),
-      link: SITE.base + '/read/' + chapter.id + '/',
-      categories: [chapter.data.part, ...chapter.data.tags],
+    items: articles.map((article) => ({
+      title: article.data.title,
+      description: article.data.description,
+      pubDate: new Date(article.data.updated ?? article.data.date ?? '2026-02-24'),
+      link: SITE.base + '/ai-evolution/' + article.id.split('/').pop() + '/',
+      categories: [SERIES.title, article.data.part, ...article.data.tags],
     })),
     customData: '<language>zh-cn</language>',
   });
