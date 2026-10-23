@@ -5,7 +5,12 @@ import sharp from 'sharp';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
-const SOURCE = process.env.SOURCE_DIR || path.resolve(ROOT, '../AI-Sharing/docs/从对话到协作-AI大模型三年演进全记录');
+const SOURCE = process.env.SOURCE_DIR;
+if (!SOURCE) {
+  console.error('请设置 SOURCE_DIR 指向原始文档目录，例如：');
+  console.error("  SOURCE_DIR='../AI-Sharing/docs/从对话到协作-AI大模型三年演进全记录' npm run import");
+  process.exit(1);
+}
 const OUT = path.resolve(ROOT, 'src/content/chapters');
 const IMG_OUT = path.resolve(ROOT, 'public/images');
 const BASE = '/ai-evolution';

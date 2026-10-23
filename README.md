@@ -55,6 +55,21 @@ src/
 └── styles/global.css # 编辑设计系统
 ```
 
+## 部署
+
+站点使用 GitHub Pages 的 `gh-pages` 分支发布：
+
+```bash
+npm run build
+cd dist
+touch .nojekyll
+git init -b gh-pages
+git add -A && git commit -m "Deploy"
+git push -f <your-remote> gh-pages
+```
+
+仓库设置 → Pages → Source 选择 `gh-pages` 分支。
+
 ## 授权
 
 文字与图片采用 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh) 授权。
