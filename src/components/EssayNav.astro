@@ -1,0 +1,40 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { SITE, SERIES } from '../consts';
+
+interface Props {
+  essays: CollectionEntry<'articles'>[];
+  currentId?: string;
+}
+
+const { essays, currentId } = Astro.props;
+const sorted = [...essays].sort((a, b) => (b.data.date ?? '').localeCompare(a.data.date ?? ''));
+---
+
+<nav class="side-nav" aria-label="单篇目录">
+  <a class="side-back" href={SITE.base + '/'}>← 文章集</a>
+  <a class="side-brand" href={SITE.base + '/essays/'}>
+    单篇长文
+    <small>{sorted.length} 篇 · 持续更新</small>
+  </a>
+  <div class="side-part">
+    <span class="side-part-label">Essays / {String(sorted.length).padStart(2, '0')}</span>
+    {sorted.map((essay) => (
+      <a
+        href={SITE.base + '/essays/' + essay.id.split('/').pop() + '/'}
+        class={essay.id === currentId ? 'active' : undefined}
+        aria-current={essay.id === currentId ? 'page' : undefined}
+      >
+        <span class="side-num">{essay.data.date?.slice(5).replace('-', '.') ?? '—'}</span>
+        {essay.data.title}
+      </a>
+    ))}
+  </div>
+  <div class="side-part">
+    <span class="side-part-label">Series / 01</span>
+    <a href={SITE.base + '/ai-evolution/'}>
+      <span class="side-num">14</span>
+      {SERIES.title}
+    </a>
+  </div>
+</nav>

@@ -9,6 +9,10 @@ const articles = (await getCollection('articles'))
 
 const totalMinutes = articles.reduce((sum, article) => sum + article.data.readingTime, 0);
 
+const essays = (await getCollection('articles'))
+  .filter((article) => article.data.series === 'essays')
+  .sort((a, b) => (b.data.date ?? '').localeCompare(a.data.date ?? ''));
+
 const structuredData = {
   '@context': 'https://schema.org',
   '@type': 'Blog',
@@ -21,11 +25,18 @@ const structuredData = {
     alternateName: SITE.authorEn,
     url: SITE.personalSite,
   },
-  blogPost: articles.map((article) => ({
-    '@type': 'BlogPosting',
-    headline: article.data.title,
-    url: new URL(SITE.base + '/ai-evolution/' + article.id.split('/').pop() + '/', Astro.site).toString(),
-  })),
+  blogPost: [
+    ...articles.map((article) => ({
+      '@type': 'BlogPosting',
+      headline: article.data.title,
+      url: new URL(SITE.base + '/ai-evolution/' + article.id.split('/').pop() + '/', Astro.site).toString(),
+    })),
+    ...essays.map((essay) => ({
+      '@type': 'BlogPosting',
+      headline: essay.data.title,
+      url: new URL(SITE.base + '/essays/' + essay.id.split('/').pop() + '/', Astro.site).toString(),
+    })),
+  ],
 };
 ---
 
@@ -40,7 +51,8 @@ const structuredData = {
     <div class="blog-meta">
       <span>1 个系列</span>
       <span>{SERIES.chapterCount} 章</span>
-      <span>约 {SERIES.words}字</span>
+      <span>{essays.length} 篇单篇</span>
+      <span>约 2.6 万字</span>
       <span>{SERIES.sources} 份参考</span>
       <a href={SITE.base + '/rss.xml'}>RSS</a>
     </div>
@@ -50,6 +62,39 @@ const structuredData = {
     <div class="section-head">
       <div class="section-head-left">
         <span class="section-index">01</span>
+        <h2 class="section-title">单篇</h2>
+      </div>
+      <span class="section-note">{essays.length} essay</span>
+    </div>
+
+    {essays.map((essay) => (
+      <a class="essay-feature" href={SITE.base + '/essays/' + essay.id.split('/').pop() + '/'}>
+        <div class="ef-copy">
+          <span class="project-index">Essay 01 · 写于 {essay.data.date?.replaceAll('-', '.')} · {essay.data.readingTime} 分钟</span>
+          <h3>{essay.data.title}</h3>
+          <p class="sf-sub">{essay.data.subtitle}</p>
+          <p class="sf-desc">{essay.data.description}</p>
+          <div class="sf-metrics">
+            <span><b>09:00</b> → <b>18:00</b></span>
+            <span><b>5</b> 个协作层面</span>
+            <span><b>1</b> 天真实工作流</span>
+          </div>
+          <span class="text-link">阅读全文 →</span>
+        </div>
+        <div class="ef-panel" aria-hidden="true">
+          <span class="ef-time">09—18</span>
+          <span class="ef-label">A DAY OF<br />AGENTIC CODING</span>
+          <span class="ef-rule"></span>
+          <span class="ef-meta">ALLEN SHAO / 2026</span>
+        </div>
+      </a>
+    ))}
+  </section>
+
+  <section class="shell blog-section">
+    <div class="section-head">
+      <div class="section-head-left">
+        <span class="section-index">02</span>
         <h2 class="section-title">系列</h2>
       </div>
       <span class="section-note">01 series</span>
@@ -57,7 +102,7 @@ const structuredData = {
 
     <a class="series-feature" href={SITE.base + '/ai-evolution/'}>
       <div class="sf-copy">
-        <span class="project-index">Series 01 · {SERIES.start}—{SERIES.end} · 已完结</span>
+        <span class="project-index">Series 01 · 写于 {SERIES.written} · 已完结</span>
         <h3>{SERIES.title}</h3>
         <p class="sf-sub">{SERIES.subtitle}</p>
         <p class="sf-desc">{SERIES.description}</p>
@@ -79,7 +124,7 @@ const structuredData = {
   <section class="shell blog-section">
     <div class="section-head">
       <div class="section-head-left">
-        <span class="section-index">02</span>
+        <span class="section-index">03</span>
         <h2 class="section-title">全部章节</h2>
       </div>
       <span class="section-note">{SERIES.chapterCount} chapters</span>
@@ -107,7 +152,7 @@ const structuredData = {
       <div class="about-copy">
         <p class="about-statement">下一篇文章，正在写。</p>
         <p>
-          这个文章集会持续更新：除了《从对话到协作》，还会加入单篇的技术笔记、架构复盘和工具实践。
+          这个文章集会持续更新：除了《从对话到协作》，还有单篇的技术笔记、架构复盘和工具实践。
           如果你有想看的主题，欢迎来信。
         </p>
         <div class="contact-line">

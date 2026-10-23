@@ -337,3 +337,112 @@
     padding-top: 14px;
   }
 }
+
+
+/* ——— essay feature ——— */
+
+.essay-feature {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(260px, 0.7fr);
+  border: 1px solid var(--line-2);
+  background: var(--white);
+  text-decoration: none;
+  transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease), transform 0.2s var(--ease);
+}
+
+.essay-feature:hover {
+  border-color: var(--ink);
+  box-shadow: 12px 14px 0 rgba(23, 20, 15, 0.06);
+  transform: translateY(-2px);
+}
+
+.ef-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: clamp(26px, 3.6vw, 44px);
+}
+
+.ef-copy h3 {
+  margin: 14px 0 8px;
+  font-family: var(--serif);
+  font-size: clamp(30px, 3.7vw, 48px);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.essay-feature:hover .ef-copy h3 {
+  color: var(--accent);
+}
+
+.ef-copy .sf-desc {
+  max-width: 46em;
+}
+
+.ef-copy .text-link {
+  margin-top: 26px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--accent-2);
+  text-transform: uppercase;
+}
+
+.ef-panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+  min-height: 320px;
+  padding: clamp(24px, 3vw, 34px);
+  overflow: hidden;
+  background:
+    radial-gradient(420px 260px at 100% 0%, rgba(205, 67, 29, 0.24), transparent 70%),
+    var(--ink);
+  color: var(--paper);
+}
+
+.ef-time {
+  font-family: var(--serif);
+  font-size: clamp(72px, 8vw, 118px);
+  line-height: 0.86;
+  letter-spacing: -0.03em;
+}
+
+.ef-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  line-height: 1.8;
+  letter-spacing: 0.16em;
+  color: rgba(247, 243, 235, 0.62);
+}
+
+.ef-rule {
+  height: 1px;
+  background: rgba(247, 243, 235, 0.18);
+}
+
+.ef-meta {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  color: rgba(247, 243, 235, 0.48);
+}
+
+@media (max-width: 860px) {
+  .essay-feature {
+    grid-template-columns: 1fr;
+  }
+
+  .ef-panel {
+    min-height: 190px;
+  }
+
+  .ef-time {
+    font-size: 76px;
+  }
+}
+

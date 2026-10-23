@@ -4,7 +4,7 @@ export const SITE = {
   blogTitle: '文章集',
   blogSubtitle: 'Writing & Notes',
   description:
-    'Allen Shao 的技术写作：AI 大模型、Agent 架构、云安全与企业实践。当前连载《从对话到协作》14 章，约 2.1 万字。',
+    'Allen Shao 的技术写作：AI 大模型、Agent 架构、云安全与企业实践。连载《从对话到协作》14 章，另有单篇《工程师 Agentic Coding 的一天》。',
   author: 'Allen Shao',
   authorEn: 'Allen Shao',
   email: 'shaominfeng8@gmail.com',
@@ -24,6 +24,7 @@ export const SERIES = {
     '2022.11—2026.01，AI 大模型三年演进全记录。14 章、约 2.1 万字，从时间线、技术架构与企业实践三个视角，理解 AI 如何从对话走向协作。',
   start: '2022.11',
   end: '2026.01',
+  written: '2026.01.27 — 2026.02.24',
   updated: '2026.02.24',
   license: 'CC BY-NC-SA 4.0',
   chapterCount: 14,

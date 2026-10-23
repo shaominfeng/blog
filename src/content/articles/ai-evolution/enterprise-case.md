@@ -10,6 +10,7 @@ num: 13
 readingTime: 2
 featured: false
 kind: "case"
+date: "2026-01-29"
 tags: []
 ---
 

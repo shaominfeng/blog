@@ -10,6 +10,7 @@ num: 2
 readingTime: 20
 featured: false
 kind: "chapter"
+date: "2026-01-29"
 tags: []
 cover: "/images/restaurant-architecture.webp"
 ---

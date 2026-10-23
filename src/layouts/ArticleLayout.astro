@@ -68,6 +68,12 @@ const structuredData = {
 
         <div class="article-meta">
           <span>{SITE.author}</span>
+          {data.date && (
+            <>
+              <span class="dot" aria-hidden="true"></span>
+              <span>写于 {data.date.replaceAll('-', '.')}</span>
+            </>
+          )}
           <span class="dot" aria-hidden="true"></span>
           <span>{data.readingTime} 分钟</span>
           <span class="dot" aria-hidden="true"></span>

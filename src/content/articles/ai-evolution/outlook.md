@@ -10,6 +10,7 @@ num: 14
 readingTime: 3
 featured: false
 kind: "chapter"
+date: "2026-01-29"
 tags: []
 ---
 

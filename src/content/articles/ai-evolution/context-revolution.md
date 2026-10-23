@@ -10,6 +10,7 @@ num: 8
 readingTime: 4
 featured: true
 kind: "essay"
+date: "2026-01-29"
 tags: ["深度"]
 ---
 
