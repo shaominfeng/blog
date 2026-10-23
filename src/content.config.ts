@@ -1,0 +1,24 @@
+import { defineCollection, z } from 'astro:content';
+import { glob } from 'astro/loaders';
+
+const chapters = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/chapters' }),
+  schema: z.object({
+    title: z.string(),
+    subtitle: z.string().optional(),
+    description: z.string(),
+    part: z.string(),
+    partOrder: z.number(),
+    order: z.number(),
+    num: z.number(),
+    readingTime: z.number(),
+    featured: z.boolean().default(false),
+    kind: z.string().default('chapter'),
+    tags: z.array(z.string()).default([]),
+    cover: z.string().optional(),
+    date: z.string().optional(),
+    updated: z.string().optional(),
+  }),
+});
+
+export const collections = { chapters };

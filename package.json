@@ -1,0 +1,24 @@
+{
+  "name": "ai-evolution-report",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "import": "node scripts/import-content.mjs"
+  },
+  "dependencies": {
+    "@astrojs/rss": "^4.0.12",
+    "@astrojs/sitemap": "^3.6.0",
+    "@fontsource-variable/inter": "^5.2.6",
+    "@fontsource/instrument-serif": "^5.2.6",
+    "@fontsource/jetbrains-mono": "^5.2.6",
+    "astro": "^5.15.0",
+    "rehype-autolink-headings": "^7.1.0",
+    "rehype-external-links": "^3.0.0",
+    "rehype-slug": "^6.0.0",
+    "sharp": "^0.34.4"
+  }
+}

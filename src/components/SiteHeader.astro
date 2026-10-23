@@ -1,0 +1,27 @@
+---
+import { SITE } from '../consts';
+
+const path = Astro.url.pathname;
+const isReading = path.startsWith(SITE.base + '/read/');
+const isAbout = path === SITE.base + '/about/' || path === SITE.base + '/about';
+---
+
+<header class="site-header">
+  <div class="shell header-inner">
+    <a class="brand" href={SITE.base + '/'}>
+      <span class="seal" aria-hidden="true">邵</span>
+      <span class="brand-copy">
+        <strong>从对话到协作</strong>
+        <span>AI Evolution · 2022—2026</span>
+      </span>
+    </a>
+
+    <nav class="site-nav" aria-label="主导航">
+      <a class="nav-text" href={SITE.base + '/#catalog'}>目录</a>
+      <a class="nav-text nav-optional" href={SITE.base + '/#paths'}>阅读路径</a>
+      <a class="nav-text" href={SITE.base + '/about/'} aria-current={isAbout ? 'page' : undefined}>关于</a>
+      <a class="nav-ext" href={SITE.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+      {!isReading && <a class="nav-cta" href={SITE.base + '/read/overview/'}>开始阅读 <span aria-hidden="true">→</span></a>}
+    </nav>
+  </div>
+</header>

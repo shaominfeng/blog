@@ -1,0 +1,270 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../consts';
+
+const chapters = (await getCollection('chapters')).sort((a, b) => a.data.order - b.data.order);
+const totalMinutes = chapters.reduce((sum, chapter) => sum + chapter.data.readingTime, 0);
+
+const groups: { part: string; items: typeof chapters }[] = [];
+for (const chapter of chapters) {
+  const last = groups[groups.length - 1];
+  if (!last || last.part !== chapter.data.part) {
+    groups.push({ part: chapter.data.part, items: [chapter] });
+  } else {
+    last.items.push(chapter);
+  }
+}
+
+const byId = Object.fromEntries(chapters.map((chapter) => [chapter.id, chapter]));
+const paths = [
+  {
+    time: '30',
+    unit: '分钟',
+    title: '快速概览',
+    desc: '先建立全景：三年发生了什么，为什么每一步都顺理成章。',
+    items: ['overview', 'restaurant-analogy', 'year-2025', 'year-2026'],
+  },
+  {
+    time: '2',
+    unit: '小时',
+    title: '时间线深度游',
+    desc: '按年份走一遍，把模型、产品与协议放回它们出现的时刻。',
+    items: ['overview', 'year-2022', 'year-2023', 'year-2024', 'year-2025', 'year-2026', 'outlook'],
+  },
+  {
+    time: '3.5',
+    unit: '小时',
+    title: '技术深度游',
+    desc: '适合工程师：上下文、Prompt、MCP、Skills，以及推理层为什么重要。',
+    items: ['overview', 'context-revolution', 'agent-skills', 'new-paradigm', 'enterprise-case', 'outlook'],
+  },
+];
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Book',
+  name: SITE.title + '：' + SITE.subtitle,
+  description: SITE.description,
+  author: {
+    '@type': 'Person',
+    name: SITE.author,
+    alternateName: SITE.authorEn,
+    url: SITE.personalSite,
+  },
+  datePublished: '2026-01-27',
+  dateModified: '2026-02-24',
+  inLanguage: 'zh-CN',
+  bookFormat: 'https://schema.org/EBook',
+  url: new URL(SITE.base + '/', Astro.site).toString(),
+  image: new URL(SITE.base + '/og.png', Astro.site).toString(),
+};
+---
+
+<BaseLayout title={SITE.title} description={SITE.description} structuredData={structuredData}>
+  <section class="shell hero">
+    <div class="hero-copy">
+      <p class="kicker">Research note · {SITE.start} — {SITE.end}</p>
+      <h1 class="display">从对话<br /><span class="accent">到协作</span></h1>
+      <p class="hero-sub">AI 大模型三年演进全记录</p>
+      <p class="hero-desc">
+        三年，上下文放大 500 倍，交互从「写提示词」变成「说目标」，AI 从工具变成同事。
+        这份报告把模型、协议与产品放回同一条时间线，解释每一次跃迁解决了什么，又留下了什么。
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href={SITE.base + '/read/overview/'}>开始阅读 <span aria-hidden="true">→</span></a>
+        <a class="btn btn-ghost" href="#catalog">查看目录</a>
+      </div>
+      <p class="hero-note">
+        <span>{SITE.chapterCount} 章</span>
+        <span>约 {SITE.words}字</span>
+        <span>{SITE.sources} 份参考资料</span>
+        <span>更新于 {SITE.updated}</span>
+      </p>
+    </div>
+
+    <div class="hero-visual">
+      <figure class="cover-card">
+        <img
+          src={SITE.base + '/images/evolution-ai-capability.webp'}
+          alt="AI 能力演进：从 2022 年对话 AI 到 2026 年协作 AI"
+          width="1408"
+          height="768"
+          fetchpriority="high"
+        />
+        <figcaption>
+          <span>Fig. 01 / AI capability</span>
+          <span>2022 → 2026</span>
+        </figcaption>
+      </figure>
+      <div class="float-stat" aria-hidden="true">
+        <strong>500×</strong>
+        <span>context growth</span>
+      </div>
+      <div class="stamp" aria-hidden="true">三年</div>
+    </div>
+  </section>
+
+  <div class="shell">
+    <dl class="meta-strip">
+      <div>
+        <dt>Author</dt>
+        <dd>{SITE.author} / {SITE.authorEn}</dd>
+      </div>
+      <div>
+        <dt>Chapters</dt>
+        <dd>{SITE.chapterCount} 章 · 约 {totalMinutes} 分钟</dd>
+      </div>
+      <div>
+        <dt>Scope</dt>
+        <dd>{SITE.start} — {SITE.end}</dd>
+      </div>
+      <div>
+        <dt>Updated</dt>
+        <dd>{SITE.updated}</dd>
+      </div>
+    </dl>
+  </div>
+
+  <section class="shell section" aria-labelledby="tldr-title">
+    <div class="section-head">
+      <div class="section-head-left">
+        <span class="section-index">01</span>
+        <h2 class="section-title" id="tldr-title">三句话读完</h2>
+      </div>
+      <span class="section-note">The short version</span>
+    </div>
+    <div class="tldr-grid">
+      <div class="tldr-item">
+        <span class="num">01 / 能力</span>
+        <p><strong>能力在跃迁，瓶颈也在转移。</strong>上下文、推理、工具、协作依次成为主战场，每一次突破都会暴露下一层约束。</p>
+      </div>
+      <div class="tldr-item">
+        <span class="num">02 / 架构</span>
+        <p><strong>MCP 与 Skills 不是替代关系。</strong>一个解决「能连什么」，一个解决「知道怎么做」。真正的 Agent 架构，两者都要。</p>
+      </div>
+      <div class="tldr-item">
+        <span class="num">03 / 差距</span>
+        <p><strong>真正的差距在推理层。</strong>同样的模型，不同的调度、约束与领域知识，产出可以差一个量级。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="shell section" id="paths" aria-labelledby="paths-title">
+    <div class="section-head">
+      <div class="section-head-left">
+        <span class="section-index">02</span>
+        <h2 class="section-title" id="paths-title">选一条阅读路径</h2>
+      </div>
+      <span class="section-note">30 min / 2 h / 3.5 h</span>
+    </div>
+    <div class="paths-grid">
+      {paths.map((path) => (
+        <a class="path-card" href={SITE.base + '/read/overview/'}>
+          <div class="path-time">{path.time}<small>{path.unit}</small></div>
+          <h3>{path.title}</h3>
+          <p>{path.desc}</p>
+          <ul class="path-list">
+            {path.items.map((id) => (
+              <li>{byId[id]?.data.title ?? id}</li>
+            ))}
+          </ul>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="shell section" id="catalog" aria-labelledby="catalog-title">
+    <div class="section-head">
+      <div class="section-head-left">
+        <span class="section-index">03</span>
+        <h2 class="section-title" id="catalog-title">目录</h2>
+      </div>
+      <span class="section-note">{SITE.chapterCount} chapters · {SITE.words}字</span>
+    </div>
+
+    <div class="catalog">
+      {groups.map((group) => (
+        <div class="catalog-part">
+          <div class="part-head">
+            <h3 class="part-name">{group.part} <span>{String(group.items[0].data.num).padStart(2, '0')}</span></h3>
+            <p class="part-note">{group.items.length} chapters</p>
+          </div>
+          <div class="chapter-list">
+            {group.items.map((chapter) => (
+              <a class="chapter-row" href={SITE.base + '/read/' + chapter.id + '/'}>
+                <span class="row-num">{String(chapter.data.num).padStart(2, '0')}</span>
+                <span class="row-main">
+                  <span class="row-title">{chapter.data.title}</span>
+                  <span class="row-desc">{chapter.data.description}</span>
+                </span>
+                <span class="row-tags">
+                  {chapter.data.tags.map((tag) => (
+                    <span class={'tag' + (tag === '深度' ? ' tag-hot' : '')}>{tag}</span>
+                  ))}
+                </span>
+                <span class="row-time">{chapter.data.readingTime} min</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="stats-band" aria-label="报告数据">
+    <div class="shell stats-inner">
+      <div class="stat">
+        <strong>3<em>年</em></strong>
+        <span>2022.11 — 2026.01</span>
+      </div>
+      <div class="stat">
+        <strong>500<em>×</em></strong>
+        <span>上下文窗口增长</span>
+      </div>
+      <div class="stat">
+        <strong>{SITE.chapterCount}<em>章</em></strong>
+        <span>约 {SITE.words}字 · {totalMinutes} 分钟</span>
+      </div>
+      <div class="stat">
+        <strong>{SITE.sources}<em>份</em></strong>
+        <span>官方公告与公开资料</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="shell section" aria-labelledby="about-title">
+    <div class="section-head">
+      <div class="section-head-left">
+        <span class="section-index">04</span>
+        <h2 class="section-title" id="about-title">关于这份报告</h2>
+      </div>
+      <a class="section-note" href={SITE.base + '/about/'}>方法论与更新日志 →</a>
+    </div>
+    <div class="about-grid">
+      <div class="about-mark" aria-hidden="true">
+        <span class="monogram">邵</span>
+        <span class="mark-label">SHAO MINFENG</span>
+      </div>
+      <div class="about-copy">
+        <p>
+          这是一份写给工程师的 AI 演进笔记。它不追求覆盖每一款模型，而是想回答三个问题：
+          为什么出现这项技术，它解决了什么问题，又留下了什么新问题。
+        </p>
+        <p>
+          写作以 Claude / Anthropic 生态为主要观察窗口，同时覆盖 OpenAI、Google 与 DeepSeek 的关键进展；
+          企业实践部分来自真实平台建设，已做脱敏处理，只保留可迁移的方法。
+        </p>
+        <p>
+          文中观点为个人观察，不代表任职机构。欢迎指出事实错误，或补充你的一线经验。
+        </p>
+        <div class="about-links">
+          <a href={SITE.personalSite}>个人主页 ↗</a>
+          <a href={'mailto:' + SITE.email}>Email</a>
+          <a href={SITE.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+          <a href={SITE.base + '/rss.xml'}>RSS</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

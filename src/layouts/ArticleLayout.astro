@@ -1,0 +1,200 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from './BaseLayout.astro';
+import ChapterNav from '../components/ChapterNav.astro';
+import Toc from '../components/Toc.astro';
+import { SITE } from '../consts';
+
+interface Props {
+  entry: CollectionEntry<'chapters'>;
+  headings: { depth: number; slug: string; text: string }[];
+  prev?: CollectionEntry<'chapters'>;
+  next?: CollectionEntry<'chapters'>;
+  chapters: CollectionEntry<'chapters'>[];
+}
+
+const { entry, headings, prev, next, chapters } = Astro.props;
+const { data } = entry;
+const canonical = new URL(SITE.base + '/read/' + entry.id + '/', Astro.site).toString();
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: data.title,
+  description: data.description,
+  inLanguage: 'zh-CN',
+  datePublished: data.date ?? '2026-01-27',
+  dateModified: data.updated ?? data.date ?? '2026-02-24',
+  author: {
+    '@type': 'Person',
+    name: SITE.author,
+    alternateName: SITE.authorEn,
+    url: SITE.personalSite,
+  },
+  publisher: {
+    '@type': 'Person',
+    name: SITE.author,
+  },
+  mainEntityOfPage: canonical,
+  isPartOf: {
+    '@type': 'Book',
+    name: SITE.title + '：' + SITE.subtitle,
+    url: new URL(SITE.base + '/', Astro.site).toString(),
+  },
+};
+---
+
+<BaseLayout
+  title={data.title}
+  description={data.description}
+  type="article"
+  structuredData={structuredData}
+>
+  <div class="progress" aria-hidden="true"></div>
+
+  <div class="shell article-grid">
+    <ChapterNav chapters={chapters} currentId={entry.id} />
+
+    <div class="article-body">
+      <header class="article-hero">
+        <nav class="crumbs" aria-label="面包屑">
+          <a href={SITE.base + '/'}>报告</a>
+          <span class="sep">/</span>
+          <span>{data.part}</span>
+          <span class="sep">/</span>
+          <span>第 {String(data.num).padStart(2, '0')} 章</span>
+        </nav>
+
+        {data.tags.includes('速览') && (
+          <span class="tag tag-hot" style="margin-bottom:14px;display:inline-block">本章为要点速览</span>
+        )}
+
+        <h1>{data.title}</h1>
+        <p class="article-sub">{data.subtitle}</p>
+        <p class="article-sub" style="font-size:15px;line-height:1.8;color:var(--ink-3)">{data.description}</p>
+
+        <div class="article-meta">
+          <span>{SITE.author} / {SITE.authorEn}</span>
+          <span class="dot" aria-hidden="true"></span>
+          <span>{data.readingTime} 分钟</span>
+          <span class="dot" aria-hidden="true"></span>
+          <span>{data.part}</span>
+          {data.updated && (
+            <>
+              <span class="dot" aria-hidden="true"></span>
+              <span>更新于 {data.updated}</span>
+            </>
+          )}
+        </header>
+
+      <details class="mobile-toc">
+        <summary>章节目录 · 当前第 {String(data.num).padStart(2, '0')} 章</summary>
+        <div class="mobile-nav">
+          <ChapterNav chapters={chapters} currentId={entry.id} />
+        </div>
+      </details>
+
+      <article class="prose">
+        <slot />
+      </article>
+
+      <div class="article-end">
+        <span class="article-end-label">Continue reading</span>
+        <div class="prev-next">
+          {prev ? (
+            <a class="pn-card" href={SITE.base + '/read/' + prev.id + '/'}>
+              <small>← 上一章 · {String(prev.data.num).padStart(2, '0')}</small>
+              <strong>{prev.data.title}</strong>
+            </a>
+          ) : (
+            <a class="pn-card" href={SITE.base + '/#catalog'}>
+              <small>← 回到目录</small>
+              <strong>全部 14 章</strong>
+            </a>
+          )}
+          {next ? (
+            <a class="pn-card next" href={SITE.base + '/read/' + next.id + '/'}>
+              <small>下一章 · {String(next.data.num).padStart(2, '0')} →</small>
+              <strong>{next.data.title}</strong>
+            </a>
+          ) : (
+            <a class="pn-card next" href={SITE.base + '/'}>
+              <small>读完了 →</small>
+              <strong>回到报告首页</strong>
+            </a>
+          )}
+        </div>
+
+        <div class="author-card">
+          <span class="seal" aria-hidden="true">邵</span>
+          <p>
+            <strong>{SITE.author} · {SITE.authorEn}</strong>
+            全栈工程师，关注 AI Agent、云安全与开发者体验。把公开信息放回时间线，也把自己踩过的坑写下来。
+            <a href={SITE.personalSite} style="color:var(--accent-2);text-decoration:underline;text-underline-offset:3px">个人主页 ↗</a>
+          </p>
+        </div>
+
+        <p class="article-license">
+          本文以 {SITE.license} 授权，转载请注明作者与出处。文中观点为个人观察，不代表任职机构。
+        </p>
+      </div>
+    </div>
+
+    <Toc headings={headings} />
+  </div>
+
+  <script is:inline>
+    (() => {
+      const bar = document.querySelector('.progress');
+      if (!bar) return;
+      let ticking = false;
+      const update = () => {
+        const root = document.documentElement;
+        const max = root.scrollHeight - root.clientHeight;
+        bar.style.width = (max > 0 ? (root.scrollTop / max) * 100 : 0) + '%';
+        ticking = false;
+      };
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          window.requestAnimationFrame(update);
+          ticking = true;
+        }
+      }, { passive: true });
+      update();
+    })();
+  </script>
+
+  <script is:inline>
+    (() => {
+      const links = Array.from(document.querySelectorAll('.toc a'));
+      if (!links.length) return;
+      const targets = links
+        .map((link) => {
+          const href = link.getAttribute('href') || '';
+          const id = decodeURIComponent(href.replace('#', ''));
+          return { link, target: document.getElementById(id) };
+        })
+        .filter((item) => item.target);
+      if (!targets.length) return;
+
+      const setActive = (active) => {
+        links.forEach((link) => link.classList.toggle('active', link === active));
+      };
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          const visible = entries
+            .filter((entry) => entry.isIntersecting)
+            .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+          if (visible.length) {
+            const match = targets.find((item) => item.target === visible[0].target);
+            if (match) setActive(match.link);
+          }
+        },
+        { rootMargin: '-90px 0px -70% 0px', threshold: 0 }
+      );
+
+      targets.forEach((item) => observer.observe(item.target));
+    })();
+  </script>
+</BaseLayout>
