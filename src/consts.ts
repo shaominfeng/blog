@@ -1,11 +1,11 @@
 export const SITE = {
-  name: '邵敏峰',
+  name: 'Allen Shao',
   en: 'Allen Shao',
   blogTitle: '文章集',
   blogSubtitle: 'Writing & Notes',
   description:
-    '邵敏峰的技术写作：AI 大模型、Agent 架构、云安全与企业实践。当前连载《从对话到协作》14 章，约 2.1 万字。',
-  author: '邵敏峰',
+    'Allen Shao 的技术写作：AI 大模型、Agent 架构、云安全与企业实践。当前连载《从对话到协作》14 章，约 2.1 万字。',
+  author: 'Allen Shao',
   authorEn: 'Allen Shao',
   email: 'shaominfeng8@gmail.com',
   github: 'https://github.com/shaominfeng',

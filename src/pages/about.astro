@@ -5,7 +5,7 @@ import { SITE, SERIES } from '../consts';
 const structuredData = {
   '@context': 'https://schema.org',
   '@type': 'AboutPage',
-  name: '关于邵敏峰的文章集',
+  name: '关于 Allen Shao 的文章集',
   description: '这个文章集的写作方法、数据边界、更新日志与授权说明。',
   url: new URL(SITE.base + '/about/', Astro.site).toString(),
   author: {
@@ -30,7 +30,7 @@ const structuredData = {
   <div class="shell about-page-grid">
     <aside class="about-side">
       <ul class="info-list">
-        <li><dt>作者</dt><dd>{SITE.author} / {SITE.authorEn}</dd></li>
+        <li><dt>作者</dt><dd>{SITE.author}</dd></li>
         <li><dt>系列</dt><dd>1 个（已完结）</dd></li>
         <li><dt>章节</dt><dd>{SERIES.chapterCount} 章</dd></li>
         <li><dt>时间跨度</dt><dd>{SERIES.start} — {SERIES.end}</dd></li>

@@ -21,5 +21,5 @@
     "rehype-slug": "^6.0.0",
     "sharp": "^0.34.4"
   },
-  "description": "邵敏峰的文章集：AI 大模型、Agent 架构、云安全与企业实践"
+  "description": "Allen Shao 的文章集：AI 大模型、Agent 架构、云安全与企业实践"
 }

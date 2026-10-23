@@ -1,4 +1,4 @@
-# 邵敏峰 · 文章集
+# Allen Shao · 文章集
 
 技术长文与系列连载，部署在 https://shaominfeng.github.io/blog/。
 
