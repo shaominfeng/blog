@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://shaominfeng.github.io/blog/sitemap-index.xml

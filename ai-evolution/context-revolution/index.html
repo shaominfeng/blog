@@ -1,0 +1,264 @@
+<!DOCTYPE html><html lang="zh-CN"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>上下文革命：从 4K 到 2M · Allen Shao</title><meta name="description" content="三年 500 倍。长上下文解决了遗忘，也把成本、延迟与信息噪音推到新的量级，并催生缓存、压缩与检索三条优化路径。"><link rel="canonical" href="https://shaominfeng.github.io/blog/ai-evolution/context-revolution/"><meta name="author" content="Allen Shao"><meta property="og:type" content="article"><meta property="og:title" content="上下文革命：从 4K 到 2M · Allen Shao"><meta property="og:description" content="三年 500 倍。长上下文解决了遗忘，也把成本、延迟与信息噪音推到新的量级，并催生缓存、压缩与检索三条优化路径。"><meta property="og:url" content="https://shaominfeng.github.io/blog/ai-evolution/context-revolution/"><meta property="og:image" content="https://shaominfeng.github.io/blog/og.png"><meta property="og:site_name" content="文章集"><meta property="og:locale" content="zh_CN"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="上下文革命：从 4K 到 2M · Allen Shao"><meta name="twitter:description" content="三年 500 倍。长上下文解决了遗忘，也把成本、延迟与信息噪音推到新的量级，并催生缓存、压缩与检索三条优化路径。"><meta name="twitter:image" content="https://shaominfeng.github.io/blog/og.png"><link rel="icon" href="/blog/favicon.svg" type="image/svg+xml"><link rel="alternate" type="application/rss+xml" title="Allen Shao · 文章集" href="/blog/rss.xml"><meta name="theme-color" content="#f7f3eb"><meta name="generator" content="Astro v5.18.2"><script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"上下文革命：从 4K 到 2M","description":"三年 500 倍。长上下文解决了遗忘，也把成本、延迟与信息噪音推到新的量级，并催生缓存、压缩与检索三条优化路径。","inLanguage":"zh-CN","datePublished":"2026-01-29","dateModified":"2026-01-29","author":{"@type":"Person","name":"Allen Shao","alternateName":"Allen Shao","url":"https://shaominfeng.github.io/"},"publisher":{"@type":"Person","name":"Allen Shao"},"mainEntityOfPage":"https://shaominfeng.github.io/blog/ai-evolution/context-revolution/","isPartOf":{"@type":"Book","name":"从对话到协作：AI 大模型三年演进全记录","url":"https://shaominfeng.github.io/blog/ai-evolution/"}}</script><link rel="stylesheet" href="/blog/_astro/_slug_.B8v9EhdI.css"></head> <body> <a class="skip-link" href="#main">跳到正文</a> <header class="site-header"> <div class="shell header-inner"> <a class="brand" href="/blog/"> <span class="seal" aria-hidden="true">AS</span> <span class="brand-copy"> <strong>Allen Shao · 文章集</strong> <span>Writing & Notes</span> </span> </a> <nav class="site-nav" aria-label="主导航"> <a class="nav-text" href="/blog/">文章集</a> <a class="nav-text" href="/blog/essays/">单篇</a> <a class="nav-text" href="/blog/ai-evolution/" aria-current="page">从对话到协作</a> <a class="nav-text" href="/blog/about/">关于</a> <a class="nav-ext" href="https://shaominfeng.github.io/">个人主页 ↗</a> <a class="nav-ext" href="https://github.com/shaominfeng" target="_blank" rel="noopener noreferrer">GitHub ↗</a>  </nav> </div> </header> <main id="main">  <div class="progress" aria-hidden="true"></div> <div class="shell article-grid"> <nav class="side-nav" aria-label="章节目录"> <a class="side-back" href="/blog/">← 文章集</a> <a class="side-brand" href="/blog/ai-evolution/"> 从对话到协作 <small>14 章 · 2022.11—2026.01</small> </a> <div class="side-part"> <span class="side-part-label">序章 / 01</span> <a href="/blog/ai-evolution/overview/"> <span class="side-num">01</span> 总览：从对话到协作 </a> </div><div class="side-part"> <span class="side-part-label">导读 / 01</span> <a href="/blog/ai-evolution/restaurant-analogy/"> <span class="side-num">02</span> 用一家餐厅，理解 AI 系统 </a> </div><div class="side-part"> <span class="side-part-label">时间线 / 05</span> <a href="/blog/ai-evolution/year-2022/"> <span class="side-num">03</span> 2022：生成式 AI 的觉醒 </a><a href="/blog/ai-evolution/year-2023/"> <span class="side-num">04</span> 2023：长文本元年与百模大战 </a><a href="/blog/ai-evolution/year-2024/"> <span class="side-num">05</span> 2024：推理革命与生态标准化 </a><a href="/blog/ai-evolution/year-2025/"> <span class="side-num">06</span> 2025：生态爆发与范式转移 </a><a href="/blog/ai-evolution/year-2026/"> <span class="side-num">07</span> 2026：协作时代的开启 </a> </div><div class="side-part"> <span class="side-part-label">技术深潜 / 04</span> <a href="/blog/ai-evolution/context-revolution/" class="active" aria-current="page"> <span class="side-num">08</span> 上下文革命：从 4K 到 2M </a><a href="/blog/ai-evolution/prompt-engineering/"> <span class="side-num">09</span> Prompt 工程的兴衰 </a><a href="/blog/ai-evolution/mcp/"> <span class="side-num">10</span> MCP 协议：从炒作到现实 </a><a href="/blog/ai-evolution/agent-skills/"> <span class="side-num">11</span> Agent Skills：比 MCP 更重要的创新 </a> </div><div class="side-part"> <span class="side-part-label">洞察 / 01</span> <a href="/blog/ai-evolution/new-paradigm/"> <span class="side-num">12</span> AI 进化的新范式：推理层才是核心 </a> </div><div class="side-part"> <span class="side-part-label">实践 / 01</span> <a href="/blog/ai-evolution/enterprise-case/"> <span class="side-num">13</span> 企业 AI 平台发展史（2023—2026） </a> </div><div class="side-part"> <span class="side-part-label">展望 / 01</span> <a href="/blog/ai-evolution/outlook/"> <span class="side-num">14</span> 未来展望与结论 </a> </div> </nav> <div class="article-body"> <header class="article-hero"> <nav class="crumbs" aria-label="面包屑"> <a href="/blog/">文章集</a> <span class="sep">/</span> <a href="/blog/ai-evolution/">从对话到协作</a> <span class="sep">/</span> <span>第 08 章</span> </nav>  <h1>上下文革命：从 4K 到 2M</h1> <p class="article-sub">500 倍增长之后，成本才是下一个战场</p> <p class="article-sub" style="font-size:15px;line-height:1.8;color:var(--ink-3)">三年 500 倍。长上下文解决了遗忘，也把成本、延迟与信息噪音推到新的量级，并催生缓存、压缩与检索三条优化路径。</p> <div class="article-meta"> <span>Allen Shao</span>  <span class="dot" aria-hidden="true"></span> <span>写于 2026.01.29</span>  <span class="dot" aria-hidden="true"></span> <span>4 分钟</span> <span class="dot" aria-hidden="true"></span> <span>技术深潜</span>  </div> </header> <details class="mobile-toc"> <summary>章节目录 · 当前第 08 章</summary> <div class="mobile-nav"> <nav class="side-nav" aria-label="章节目录"> <a class="side-back" href="/blog/">← 文章集</a> <a class="side-brand" href="/blog/ai-evolution/"> 从对话到协作 <small>14 章 · 2022.11—2026.01</small> </a> <div class="side-part"> <span class="side-part-label">序章 / 01</span> <a href="/blog/ai-evolution/overview/"> <span class="side-num">01</span> 总览：从对话到协作 </a> </div><div class="side-part"> <span class="side-part-label">导读 / 01</span> <a href="/blog/ai-evolution/restaurant-analogy/"> <span class="side-num">02</span> 用一家餐厅，理解 AI 系统 </a> </div><div class="side-part"> <span class="side-part-label">时间线 / 05</span> <a href="/blog/ai-evolution/year-2022/"> <span class="side-num">03</span> 2022：生成式 AI 的觉醒 </a><a href="/blog/ai-evolution/year-2023/"> <span class="side-num">04</span> 2023：长文本元年与百模大战 </a><a href="/blog/ai-evolution/year-2024/"> <span class="side-num">05</span> 2024：推理革命与生态标准化 </a><a href="/blog/ai-evolution/year-2025/"> <span class="side-num">06</span> 2025：生态爆发与范式转移 </a><a href="/blog/ai-evolution/year-2026/"> <span class="side-num">07</span> 2026：协作时代的开启 </a> </div><div class="side-part"> <span class="side-part-label">技术深潜 / 04</span> <a href="/blog/ai-evolution/context-revolution/" class="active" aria-current="page"> <span class="side-num">08</span> 上下文革命：从 4K 到 2M </a><a href="/blog/ai-evolution/prompt-engineering/"> <span class="side-num">09</span> Prompt 工程的兴衰 </a><a href="/blog/ai-evolution/mcp/"> <span class="side-num">10</span> MCP 协议：从炒作到现实 </a><a href="/blog/ai-evolution/agent-skills/"> <span class="side-num">11</span> Agent Skills：比 MCP 更重要的创新 </a> </div><div class="side-part"> <span class="side-part-label">洞察 / 01</span> <a href="/blog/ai-evolution/new-paradigm/"> <span class="side-num">12</span> AI 进化的新范式：推理层才是核心 </a> </div><div class="side-part"> <span class="side-part-label">实践 / 01</span> <a href="/blog/ai-evolution/enterprise-case/"> <span class="side-num">13</span> 企业 AI 平台发展史（2023—2026） </a> </div><div class="side-part"> <span class="side-part-label">展望 / 01</span> <a href="/blog/ai-evolution/outlook/"> <span class="side-num">14</span> 未来展望与结论 </a> </div> </nav> </div> </details> <article class="prose">  <blockquote>
+<p>本章内容：上下文长度指数级增长、解决的问题、当前痛点、解决方案、未来趋势</p>
+</blockquote>
+<blockquote>
+<p>💡 <strong>餐厅类比提示</strong>：上下文窗口就像”餐桌大小”和”主厨记忆力”。
+从4K（小餐桌，只能放4个盘子）→ 2M（超大宴会厅，能放2000个盘子）。
+但问题来了：餐桌越大租金越贵（成本），服务员传菜走的路越远（延迟），顾客找菜越困难（信息噪音）。
+详见 <a href="/blog/ai-evolution/restaurant-analogy/#%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF%E6%98%A0%E5%B0%84">餐厅类比完整版</a></p>
+</blockquote>
+<hr>
+<h2 id="上下文长度的指数级增长">上下文长度的指数级增长<a class="heading-anchor" aria-label="本节链接" href="#上下文长度的指数级增长"><span class="anchor-mark">#</span></a></h2>
+<h3 id="完整演进表">完整演进表<a class="heading-anchor" aria-label="本节链接" href="#完整演进表"><span class="anchor-mark">#</span></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>时间</th><th>模型</th><th>上下文长度</th><th>增长倍数</th><th>里程碑意义</th><th>成本影响</th></tr></thead><tbody><tr><td>⏱️ 2022.11</td><td>GPT-3.5</td><td>4K</td><td>基准</td><td>ChatGPT时代开启</td><td>$0.012</td></tr><tr><td>⏱️ 2023.03</td><td>GPT-4</td><td>8K → 32K</td><td>2-8x</td><td>多模态突破</td><td>$0.06-0.24</td></tr><tr><td>⏱️ 2023.07</td><td>Claude 2</td><td>100K</td><td>25x</td><td><strong>长文本元年</strong></td><td>$3.00</td></tr><tr><td>⏱️ 2024.03</td><td>Claude 3</td><td>200K</td><td>50x</td><td>双倍长文本</td><td>$6.00</td></tr><tr><td>⏱️ 2024.06</td><td>Gemini 1.5</td><td>1M</td><td>250x</td><td>首个百万token</td><td>$7.50</td></tr><tr><td>⏱️ 2025.10</td><td>Claude Sonnet 4.5</td><td>1M</td><td>250x</td><td>百万token普及</td><td>$3.00</td></tr><tr><td>⏱️ 2025.11</td><td>Gemini 3</td><td>2M</td><td>500x</td><td><strong>当前纪录</strong></td><td>$15.00</td></tr></tbody></table>
+<p><strong>增长速度</strong>：3年时间，从4K增长到2M，扩大了<strong>500倍</strong>！</p>
+<hr>
+<h2 id="长上下文解决了什么问题">长上下文解决了什么问题？<a class="heading-anchor" aria-label="本节链接" href="#长上下文解决了什么问题"><span class="anchor-mark">#</span></a></h2>
+<h3 id="1-多轮对话遗忘-已解决">1. 多轮对话遗忘（✅ 已解决）<a class="heading-anchor" aria-label="本节链接" href="#1-多轮对话遗忘-已解决"><span class="anchor-mark">#</span></a></h3>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>短上下文时代（4K）:</span></span>
+<span class="line"><span>用户: "帮我分析这份代码"</span></span>
+<span class="line"><span>AI: [分析]</span></span>
+<span class="line"><span>用户: "那个函数能优化吗？"</span></span>
+<span class="line"><span>AI: "什么函数？" ❌ - 已经忘记前面的对话</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>长上下文时代（1M）:</span></span>
+<span class="line"><span>AI能记住整个会话历史，无缝对话 ✅</span></span></code></pre>
+<h3 id="2-长文档理解-已解决">2. 长文档理解（✅ 已解决）<a class="heading-anchor" aria-label="本节链接" href="#2-长文档理解-已解决"><span class="anchor-mark">#</span></a></h3>
+<ul>
+<li><strong>4K时代</strong> - 只能分析2-3页文档</li>
+<li><strong>100K时代</strong> - 可以处理300页书籍</li>
+<li><strong>1M时代</strong> - 可以理解整个代码库（10万行代码）</li>
+<li><strong>2M时代</strong> - 可以分析多个关联项目</li>
+</ul>
+<h3 id="3-复杂任务追踪-已解决">3. 复杂任务追踪（✅ 已解决）<a class="heading-anchor" aria-label="本节链接" href="#3-复杂任务追踪-已解决"><span class="anchor-mark">#</span></a></h3>
+<ul>
+<li><strong>短上下文</strong> - 需要频繁提醒AI当前任务</li>
+<li><strong>长上下文</strong> - AI记住整个开发过程，自动保持状态</li>
+</ul>
+<hr>
+<h2 id="但上下文工程依然是痛点">但上下文工程依然是痛点！<a class="heading-anchor" aria-label="本节链接" href="#但上下文工程依然是痛点"><span class="anchor-mark">#</span></a></h2>
+<h3 id="痛点1成本线性增长-">痛点1：成本线性增长 💸<a class="heading-anchor" aria-label="本节链接" href="#痛点1成本线性增长-"><span class="anchor-mark">#</span></a></h3>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Claude Sonnet 4.5价格：</span></span>
+<span class="line"><span>- 输入：$3 / 1M tokens</span></span>
+<span class="line"><span>- 输出：$15 / 1M tokens</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>满载使用（1M上下文）:</span></span>
+<span class="line"><span>- 单次请求输入成本：$3</span></span>
+<span class="line"><span>- 如果生成5K输出：$0.075</span></span>
+<span class="line"><span>- 总成本：$3.075</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>vs 短上下文（10K）:</span></span>
+<span class="line"><span>- 输入成本：$0.03</span></span>
+<span class="line"><span>- 100倍成本差异！</span></span></code></pre>
+<h3 id="痛点2延迟问题-️">痛点2：延迟问题 ⏱️<a class="heading-anchor" aria-label="本节链接" href="#痛点2延迟问题-️"><span class="anchor-mark">#</span></a></h3>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>上下文长度 → 首次响应延迟</span></span>
+<span class="line"><span>- 10K tokens → 1-2秒</span></span>
+<span class="line"><span>- 100K tokens → 3-5秒</span></span>
+<span class="line"><span>- 1M tokens → 8-15秒 ❗</span></span>
+<span class="line"><span>- 2M tokens → 20-30秒 ❗❗</span></span></code></pre>
+<h3 id="痛点3信息噪音与注意力分散-">痛点3：信息噪音与注意力分散 🎯<a class="heading-anchor" aria-label="本节链接" href="#痛点3信息噪音与注意力分散-"><span class="anchor-mark">#</span></a></h3>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>上下文结构：</span></span>
+<span class="line"><span>[系统提示 3K] → 必要</span></span>
+<span class="line"><span>[历史对话 800K] → 大部分不相关 ❗</span></span>
+<span class="line"><span>[当前任务 5K] → 关键信息</span></span>
+<span class="line"><span>[工具定义 50K] → 部分需要</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>AI需要在800K历史中找到关键信息 → 困难！</span></span></code></pre>
+<hr>
+<h2 id="当前解决方案2025-2026">当前解决方案（2025-2026）<a class="heading-anchor" aria-label="本节链接" href="#当前解决方案2025-2026"><span class="anchor-mark">#</span></a></h2>
+<h3 id="1-auto-compact自动压缩">1. Auto-Compact（自动压缩）<a class="heading-anchor" aria-label="本节链接" href="#1-auto-compact自动压缩"><span class="anchor-mark">#</span></a></h3>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#8B949E">// Claude Code实现</span></span>
+<span class="line"><span style="color:#FF7B72">if</span><span style="color:#E6EDF3"> (contextTokens </span><span style="color:#FF7B72">></span><span style="color:#E6EDF3"> 900</span><span style="color:#79C0FF">K</span><span style="color:#E6EDF3">) {</span></span>
+<span class="line"><span style="color:#8B949E">  // 保留：</span></span>
+<span class="line"><span style="color:#FF7B72">  -</span><span style="color:#E6EDF3"> 系统提示（必需）</span></span>
+<span class="line"><span style="color:#FF7B72">  -</span><span style="color:#E6EDF3"> 最近20轮对话（关键）</span></span>
+<span class="line"><span style="color:#FF7B72">  -</span><span style="color:#E6EDF3"> 当前任务上下文（核心）</span></span>
+<span class="line"><span style="color:#FF7B72">  -</span><span style="color:#E6EDF3"> 重要工具定义（精选）</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#8B949E">  // 压缩：</span></span>
+<span class="line"><span style="color:#FF7B72">  -</span><span style="color:#E6EDF3"> 旧对话 → 摘要（从50K压缩到2K）</span></span>
+<span class="line"><span style="color:#FF7B72">  -</span><span style="color:#E6EDF3"> 历史代码 → 关键部分</span></span>
+<span class="line"><span style="color:#FF7B72">  -</span><span style="color:#E6EDF3"> 工具输出 → 重要结果</span></span>
+<span class="line"><span style="color:#E6EDF3">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E6EDF3">效果：</span></span>
+<span class="line"><span style="color:#FF7B72">-</span><span style="color:#E6EDF3"> 保持上下文相关性</span></span>
+<span class="line"><span style="color:#FF7B72">-</span><span style="color:#E6EDF3"> 减少50</span><span style="color:#FF7B72">-</span><span style="color:#79C0FF">70</span><span style="color:#FF7B72">%</span><span style="color:#E6EDF3"> token使用</span></span>
+<span class="line"><span style="color:#FF7B72">-</span><span style="color:#E6EDF3"> 轻微信息损失（可接受）</span></span></code></pre>
+<h3 id="2-prompt-caching提示词缓存">2. Prompt Caching（提示词缓存）<a class="heading-anchor" aria-label="本节链接" href="#2-prompt-caching提示词缓存"><span class="anchor-mark">#</span></a></h3>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>原理：</span></span>
+<span class="line"><span>- 缓存系统提示、工具定义等静态部分</span></span>
+<span class="line"><span>- 后续请求只传输变化的部分</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>成本优化：</span></span>
+<span class="line"><span>- 缓存命中：$0.30 / 1M tokens（10x便宜）</span></span>
+<span class="line"><span>- 延迟降低：~90%的处理时间节省</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>限制：</span></span>
+<span class="line"><span>- 缓存保留5分钟</span></span>
+<span class="line"><span>- 仅适用静态内容</span></span></code></pre>
+<h3 id="3-rag检索增强生成">3. RAG（检索增强生成）<a class="heading-anchor" aria-label="本节链接" href="#3-rag检索增强生成"><span class="anchor-mark">#</span></a></h3>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>传统方式：</span></span>
+<span class="line"><span>把整个代码库塞进上下文 → 1M tokens</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>RAG方式：</span></span>
+<span class="line"><span>1. 用户问题 → 向量搜索相关代码</span></span>
+<span class="line"><span>2. 只加载相关的5-10个文件 → 50K tokens</span></span>
+<span class="line"><span>3. 生成答案</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>节省：95% tokens ✅</span></span>
+<span class="line"><span>精准：更相关的上下文 ✅</span></span></code></pre>
+<h3 id="4-skills按需加载">4. Skills按需加载<a class="heading-anchor" aria-label="本节链接" href="#4-skills按需加载"><span class="anchor-mark">#</span></a></h3>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>传统：加载所有MCP工具 → 550K tokens</span></span>
+<span class="line"><span>Skills：只加载元数据 → 10K tokens</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>按需加载：</span></span>
+<span class="line"><span>- 用户提到code review → 加载code-review skill</span></span>
+<span class="line"><span>- 不提deployment → 不加载deployment skill</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>节省：98% tokens ✅</span></span></code></pre>
+<hr>
+<h2 id="未来展望下一代上下文管理">未来展望：下一代上下文管理<a class="heading-anchor" aria-label="本节链接" href="#未来展望下一代上下文管理"><span class="anchor-mark">#</span></a></h2>
+<h3 id="短期2026-2027">短期（2026-2027）<a class="heading-anchor" aria-label="本节链接" href="#短期2026-2027"><span class="anchor-mark">#</span></a></h3>
+<ul>
+<li>✅ 智能压缩算法普及</li>
+<li>✅ 上下文分层存储</li>
+<li>✅ 实时相关性评估</li>
+</ul>
+<h3 id="中期2027-2028">中期（2027-2028）<a class="heading-anchor" aria-label="本节链接" href="#中期2027-2028"><span class="anchor-mark">#</span></a></h3>
+<ul>
+<li>🔮 无限上下文（实时检索）</li>
+<li>🔮 上下文质量 > 上下文长度</li>
+<li>🔮 自动上下文优化</li>
+</ul>
+<h3 id="长期2028">长期（2028+）<a class="heading-anchor" aria-label="本节链接" href="#长期2028"><span class="anchor-mark">#</span></a></h3>
+<ul>
+<li>🔮 不再比拼长度</li>
+<li>🔮 智能内存管理成为标配</li>
+<li>🔮 上下文成本接近零</li>
+</ul>
+<hr>  </article> <div class="article-end"> <span class="article-end-label">Continue reading</span> <div class="prev-next"> <a class="pn-card" href="/blog/ai-evolution/year-2026/"> <small>← 上一章 · 07</small> <strong>2026：协作时代的开启</strong> </a> <a class="pn-card next" href="/blog/ai-evolution/prompt-engineering/"> <small>下一章 · 09 →</small> <strong>Prompt 工程的兴衰</strong> </a> </div> <div class="author-card"> <span class="seal" aria-hidden="true">AS</span> <p> <strong>Allen Shao</strong>
+全栈工程师，关注 AI Agent、云安全与开发者体验。把公开信息放回时间线，也把自己踩过的坑写下来。
+<a href="https://shaominfeng.github.io/" style="color:var(--accent-2);text-decoration:underline;text-underline-offset:3px">个人主页 ↗</a> </p> </div> <p class="article-license">
+本文以 CC BY-NC-SA 4.0 授权，转载请注明作者与出处。文中观点为个人观察，不代表任职机构。
+</p> </div> </div> <aside class="toc" aria-label="本页目录"><span class="toc-label">On this page</span><ul><li class="depth-2"><a href="#上下文长度的指数级增长">上下文长度的指数级增长</a></li><li class="depth-3"><a href="#完整演进表">完整演进表</a></li><li class="depth-2"><a href="#长上下文解决了什么问题">长上下文解决了什么问题？</a></li><li class="depth-3"><a href="#1-多轮对话遗忘-已解决">1. 多轮对话遗忘（✅ 已解决）</a></li><li class="depth-3"><a href="#2-长文档理解-已解决">2. 长文档理解（✅ 已解决）</a></li><li class="depth-3"><a href="#3-复杂任务追踪-已解决">3. 复杂任务追踪（✅ 已解决）</a></li><li class="depth-2"><a href="#但上下文工程依然是痛点">但上下文工程依然是痛点！</a></li><li class="depth-3"><a href="#痛点1成本线性增长-">痛点1：成本线性增长 💸</a></li><li class="depth-3"><a href="#痛点2延迟问题-️">痛点2：延迟问题 ⏱️</a></li><li class="depth-3"><a href="#痛点3信息噪音与注意力分散-">痛点3：信息噪音与注意力分散 🎯</a></li><li class="depth-2"><a href="#当前解决方案2025-2026">当前解决方案（2025-2026）</a></li><li class="depth-3"><a href="#1-auto-compact自动压缩">1. Auto-Compact（自动压缩）</a></li><li class="depth-3"><a href="#2-prompt-caching提示词缓存">2. Prompt Caching（提示词缓存）</a></li><li class="depth-3"><a href="#3-rag检索增强生成">3. RAG（检索增强生成）</a></li><li class="depth-3"><a href="#4-skills按需加载">4. Skills按需加载</a></li><li class="depth-2"><a href="#未来展望下一代上下文管理">未来展望：下一代上下文管理</a></li><li class="depth-3"><a href="#短期2026-2027">短期（2026-2027）</a></li><li class="depth-3"><a href="#中期2027-2028">中期（2027-2028）</a></li><li class="depth-3"><a href="#长期2028">长期（2028+）</a></li></ul></aside> </div> <script>
+    (() => {
+      const bar = document.querySelector('.progress');
+      if (!bar) return;
+      let ticking = false;
+      const update = () => {
+        const root = document.documentElement;
+        const max = root.scrollHeight - root.clientHeight;
+        bar.style.width = (max > 0 ? (root.scrollTop / max) * 100 : 0) + '%';
+        ticking = false;
+      };
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          window.requestAnimationFrame(update);
+          ticking = true;
+        }
+      }, { passive: true });
+      update();
+    })();
+  </script> <script>
+    (() => {
+      const links = Array.from(document.querySelectorAll('.toc a'));
+      if (!links.length) return;
+      const targets = links
+        .map((link) => {
+          const href = link.getAttribute('href') || '';
+          const id = decodeURIComponent(href.replace('#', ''));
+          return { link, target: document.getElementById(id) };
+        })
+        .filter((item) => item.target);
+      if (!targets.length) return;
+
+      const setActive = (active) => {
+        links.forEach((link) => link.classList.toggle('active', link === active));
+      };
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          const visible = entries
+            .filter((entry) => entry.isIntersecting)
+            .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+          if (visible.length) {
+            const match = targets.find((item) => item.target === visible[0].target);
+            if (match) setActive(match.link);
+          }
+        },
+        { rootMargin: '-90px 0px -70% 0px', threshold: 0 }
+      );
+
+      targets.forEach((item) => observer.observe(item.target));
+    })();
+  </script>  </main> <footer class="site-footer"> <div class="shell"> <div class="footer-top"> <div class="footer-brand"> <span class="seal" aria-hidden="true">AS</span> <div> <strong>Allen Shao · 文章集</strong> <span>Writing &amp; Notes · 持续更新</span> </div> </div> <div class="footer-links"> <a href="/blog/">文章集</a> <a href="/blog/ai-evolution/">从对话到协作</a> <a href="/blog/about/">关于</a> <a href="/blog/rss.xml">RSS</a> <a href="https://shaominfeng.github.io/">个人主页 ↗</a> <a href="https://github.com/shaominfeng" target="_blank" rel="noopener noreferrer">GitHub ↗</a> </div> </div> <div class="footer-bottom"> <span>© 2026 Allen Shao</span> <span>文字以 CC BY-NC-SA 4.0 授权 · 转载注明出处</span> <span>用 Astro 构建 · GitHub Pages</span> </div> </div> </footer> </body></html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html><html lang="zh-CN"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>AI 进化的新范式：推理层才是核心 · Allen Shao</title><meta name="description" content="参数不是唯一的护城河。推理层决定模型如何被调度、约束与优化，也决定了同样能力下的成本、可靠性与体验差距。"><link rel="canonical" href="https://shaominfeng.github.io/blog/ai-evolution/new-paradigm/"><meta name="author" content="Allen Shao"><meta property="og:type" content="article"><meta property="og:title" content="AI 进化的新范式：推理层才是核心 · Allen Shao"><meta property="og:description" content="参数不是唯一的护城河。推理层决定模型如何被调度、约束与优化，也决定了同样能力下的成本、可靠性与体验差距。"><meta property="og:url" content="https://shaominfeng.github.io/blog/ai-evolution/new-paradigm/"><meta property="og:image" content="https://shaominfeng.github.io/blog/og.png"><meta property="og:site_name" content="文章集"><meta property="og:locale" content="zh_CN"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="AI 进化的新范式：推理层才是核心 · Allen Shao"><meta name="twitter:description" content="参数不是唯一的护城河。推理层决定模型如何被调度、约束与优化，也决定了同样能力下的成本、可靠性与体验差距。"><meta name="twitter:image" content="https://shaominfeng.github.io/blog/og.png"><link rel="icon" href="/blog/favicon.svg" type="image/svg+xml"><link rel="alternate" type="application/rss+xml" title="Allen Shao · 文章集" href="/blog/rss.xml"><meta name="theme-color" content="#f7f3eb"><meta name="generator" content="Astro v5.18.2"><script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"AI 进化的新范式：推理层才是核心","description":"参数不是唯一的护城河。推理层决定模型如何被调度、约束与优化，也决定了同样能力下的成本、可靠性与体验差距。","inLanguage":"zh-CN","datePublished":"2026-01-29","dateModified":"2026-01-29","author":{"@type":"Person","name":"Allen Shao","alternateName":"Allen Shao","url":"https://shaominfeng.github.io/"},"publisher":{"@type":"Person","name":"Allen Shao"},"mainEntityOfPage":"https://shaominfeng.github.io/blog/ai-evolution/new-paradigm/","isPartOf":{"@type":"Book","name":"从对话到协作：AI 大模型三年演进全记录","url":"https://shaominfeng.github.io/blog/ai-evolution/"}}</script><link rel="stylesheet" href="/blog/_astro/_slug_.B8v9EhdI.css"></head> <body> <a class="skip-link" href="#main">跳到正文</a> <header class="site-header"> <div class="shell header-inner"> <a class="brand" href="/blog/"> <span class="seal" aria-hidden="true">AS</span> <span class="brand-copy"> <strong>Allen Shao · 文章集</strong> <span>Writing & Notes</span> </span> </a> <nav class="site-nav" aria-label="主导航"> <a class="nav-text" href="/blog/">文章集</a> <a class="nav-text" href="/blog/essays/">单篇</a> <a class="nav-text" href="/blog/ai-evolution/" aria-current="page">从对话到协作</a> <a class="nav-text" href="/blog/about/">关于</a> <a class="nav-ext" href="https://shaominfeng.github.io/">个人主页 ↗</a> <a class="nav-ext" href="https://github.com/shaominfeng" target="_blank" rel="noopener noreferrer">GitHub ↗</a>  </nav> </div> </header> <main id="main">  <div class="progress" aria-hidden="true"></div> <div class="shell article-grid"> <nav class="side-nav" aria-label="章节目录"> <a class="side-back" href="/blog/">← 文章集</a> <a class="side-brand" href="/blog/ai-evolution/"> 从对话到协作 <small>14 章 · 2022.11—2026.01</small> </a> <div class="side-part"> <span class="side-part-label">序章 / 01</span> <a href="/blog/ai-evolution/overview/"> <span class="side-num">01</span> 总览：从对话到协作 </a> </div><div class="side-part"> <span class="side-part-label">导读 / 01</span> <a href="/blog/ai-evolution/restaurant-analogy/"> <span class="side-num">02</span> 用一家餐厅，理解 AI 系统 </a> </div><div class="side-part"> <span class="side-part-label">时间线 / 05</span> <a href="/blog/ai-evolution/year-2022/"> <span class="side-num">03</span> 2022：生成式 AI 的觉醒 </a><a href="/blog/ai-evolution/year-2023/"> <span class="side-num">04</span> 2023：长文本元年与百模大战 </a><a href="/blog/ai-evolution/year-2024/"> <span class="side-num">05</span> 2024：推理革命与生态标准化 </a><a href="/blog/ai-evolution/year-2025/"> <span class="side-num">06</span> 2025：生态爆发与范式转移 </a><a href="/blog/ai-evolution/year-2026/"> <span class="side-num">07</span> 2026：协作时代的开启 </a> </div><div class="side-part"> <span class="side-part-label">技术深潜 / 04</span> <a href="/blog/ai-evolution/context-revolution/"> <span class="side-num">08</span> 上下文革命：从 4K 到 2M </a><a href="/blog/ai-evolution/prompt-engineering/"> <span class="side-num">09</span> Prompt 工程的兴衰 </a><a href="/blog/ai-evolution/mcp/"> <span class="side-num">10</span> MCP 协议：从炒作到现实 </a><a href="/blog/ai-evolution/agent-skills/"> <span class="side-num">11</span> Agent Skills：比 MCP 更重要的创新 </a> </div><div class="side-part"> <span class="side-part-label">洞察 / 01</span> <a href="/blog/ai-evolution/new-paradigm/" class="active" aria-current="page"> <span class="side-num">12</span> AI 进化的新范式：推理层才是核心 </a> </div><div class="side-part"> <span class="side-part-label">实践 / 01</span> <a href="/blog/ai-evolution/enterprise-case/"> <span class="side-num">13</span> 企业 AI 平台发展史（2023—2026） </a> </div><div class="side-part"> <span class="side-part-label">展望 / 01</span> <a href="/blog/ai-evolution/outlook/"> <span class="side-num">14</span> 未来展望与结论 </a> </div> </nav> <div class="article-body"> <header class="article-hero"> <nav class="crumbs" aria-label="面包屑"> <a href="/blog/">文章集</a> <span class="sep">/</span> <a href="/blog/ai-evolution/">从对话到协作</a> <span class="sep">/</span> <span>第 12 章</span> </nav>  <h1>AI 进化的新范式：推理层才是核心</h1> <p class="article-sub">同样的模型，不同的服务团队</p> <p class="article-sub" style="font-size:15px;line-height:1.8;color:var(--ink-3)">参数不是唯一的护城河。推理层决定模型如何被调度、约束与优化，也决定了同样能力下的成本、可靠性与体验差距。</p> <div class="article-meta"> <span>Allen Shao</span>  <span class="dot" aria-hidden="true"></span> <span>写于 2026.01.29</span>  <span class="dot" aria-hidden="true"></span> <span>4 分钟</span> <span class="dot" aria-hidden="true"></span> <span>洞察</span>  </div> </header> <details class="mobile-toc"> <summary>章节目录 · 当前第 12 章</summary> <div class="mobile-nav"> <nav class="side-nav" aria-label="章节目录"> <a class="side-back" href="/blog/">← 文章集</a> <a class="side-brand" href="/blog/ai-evolution/"> 从对话到协作 <small>14 章 · 2022.11—2026.01</small> </a> <div class="side-part"> <span class="side-part-label">序章 / 01</span> <a href="/blog/ai-evolution/overview/"> <span class="side-num">01</span> 总览：从对话到协作 </a> </div><div class="side-part"> <span class="side-part-label">导读 / 01</span> <a href="/blog/ai-evolution/restaurant-analogy/"> <span class="side-num">02</span> 用一家餐厅，理解 AI 系统 </a> </div><div class="side-part"> <span class="side-part-label">时间线 / 05</span> <a href="/blog/ai-evolution/year-2022/"> <span class="side-num">03</span> 2022：生成式 AI 的觉醒 </a><a href="/blog/ai-evolution/year-2023/"> <span class="side-num">04</span> 2023：长文本元年与百模大战 </a><a href="/blog/ai-evolution/year-2024/"> <span class="side-num">05</span> 2024：推理革命与生态标准化 </a><a href="/blog/ai-evolution/year-2025/"> <span class="side-num">06</span> 2025：生态爆发与范式转移 </a><a href="/blog/ai-evolution/year-2026/"> <span class="side-num">07</span> 2026：协作时代的开启 </a> </div><div class="side-part"> <span class="side-part-label">技术深潜 / 04</span> <a href="/blog/ai-evolution/context-revolution/"> <span class="side-num">08</span> 上下文革命：从 4K 到 2M </a><a href="/blog/ai-evolution/prompt-engineering/"> <span class="side-num">09</span> Prompt 工程的兴衰 </a><a href="/blog/ai-evolution/mcp/"> <span class="side-num">10</span> MCP 协议：从炒作到现实 </a><a href="/blog/ai-evolution/agent-skills/"> <span class="side-num">11</span> Agent Skills：比 MCP 更重要的创新 </a> </div><div class="side-part"> <span class="side-part-label">洞察 / 01</span> <a href="/blog/ai-evolution/new-paradigm/" class="active" aria-current="page"> <span class="side-num">12</span> AI 进化的新范式：推理层才是核心 </a> </div><div class="side-part"> <span class="side-part-label">实践 / 01</span> <a href="/blog/ai-evolution/enterprise-case/"> <span class="side-num">13</span> 企业 AI 平台发展史（2023—2026） </a> </div><div class="side-part"> <span class="side-part-label">展望 / 01</span> <a href="/blog/ai-evolution/outlook/"> <span class="side-num">14</span> 未来展望与结论 </a> </div> </nav> </div> </details> <article class="prose">  <blockquote>
+<p>核心洞察：从模型迭代到推理层优化</p>
+</blockquote>
+<blockquote>
+<p>💡 <strong>餐厅类比提示</strong>：很多人以为AI竞争 = 比较主厨技艺（模型），实际上是在比较”整个餐厅”（主厨+服务团队+管理+优化）。
+<strong>推理层（服务团队）才是核心差异</strong>：同样的主厨，Anthropic的领班（推理层）更懂规划、成本优化、流程管理。
+详见 <a href="/blog/ai-evolution/restaurant-analogy/#%E6%8E%A8%E7%90%86%E5%B1%82%E6%9C%8D%E5%8A%A1%E5%9B%A2%E9%98%9F%E6%98%AF%E6%A0%B8%E5%BF%83">餐厅类比完整版</a></p>
+</blockquote>
+<hr>
+<h2 id="核心洞察">核心洞察<a class="heading-anchor" aria-label="本节链接" href="#核心洞察"><span class="anchor-mark">#</span></a></h2>
+<p>当前AI行业的”模型升级”，本质上可能只是推理层的优化，而非重新训练模型。同时，<strong>Skills正在成为推理层的标准化组件</strong>，这两个趋势正在重塑整个AI产业。</p>
+<hr>
+<h2 id="用户调用模型的完整架构">用户调用模型的完整架构<a class="heading-anchor" aria-label="本节链接" href="#用户调用模型的完整架构"><span class="anchor-mark">#</span></a></h2>
+<p><img src="/blog/images/architecture-full-stack.webp" alt="用户调用模型完整架构"></p>
+<p><em>图：从用户应用到模型执行的5层架构，第3层推理服务层（金色突出）是创新核心</em></p>
+<hr>
+<h2 id="架构层次详解">架构层次详解<a class="heading-anchor" aria-label="本节链接" href="#架构层次详解"><span class="anchor-mark">#</span></a></h2>
+<h3 id="第1层api-gateway">第1层：API Gateway<a class="heading-anchor" aria-label="本节链接" href="#第1层api-gateway"><span class="anchor-mark">#</span></a></h3>
+<ul>
+<li><strong>职责</strong>：流量入口、安全第一关</li>
+<li><strong>关键技术</strong>：Nginx/Kong、Rate Limiting、地理路由</li>
+</ul>
+<h3 id="第2层业务服务层">第2层：业务服务层<a class="heading-anchor" aria-label="本节链接" href="#第2层业务服务层"><span class="anchor-mark">#</span></a></h3>
+<ul>
+<li><strong>职责</strong>：Prompt Caching（这里实现！）、业务逻辑</li>
+<li><strong>关键技术</strong>：Redis缓存、内容过滤、计费系统</li>
+</ul>
+<h3 id="第3层推理服务层-️">第3层：推理服务层 ⭐️<a class="heading-anchor" aria-label="本节链接" href="#第3层推理服务层-️"><span class="anchor-mark">#</span></a></h3>
+<ul>
+<li><strong>职责</strong>：<strong>这是创新的核心战场</strong></li>
+<li>Skills插件让同一个模型呈现不同能力</li>
+<li>推理优化（批处理、量化）带来3-5倍性能提升</li>
+<li><strong>关键技术</strong>：vLLM、TensorRT-LLM、动态批处理</li>
+</ul>
+<h3 id="第4层模型本身">第4层：模型本身<a class="heading-anchor" aria-label="本节链接" href="#第4层模型本身"><span class="anchor-mark">#</span></a></h3>
+<ul>
+<li><strong>职责</strong>：纯数学计算，相对稳定</li>
+<li>这一层不常变化（训练成本太高）</li>
+</ul>
+<hr>
+<h2 id="第一层真相推理层才是进化引擎">第一层真相：推理层才是进化引擎<a class="heading-anchor" aria-label="本节链接" href="#第一层真相推理层才是进化引擎"><span class="anchor-mark">#</span></a></h2>
+<p>我们看到的GPT-4到GPT-4 Turbo，或Claude 3到Claude 3.5的”升级”，很可能不是花费数千万美元重新训练，而是：</p>
+<ul>
+<li><strong>系统提示词优化</strong>：通过更精细的指令让模型表现更好</li>
+<li><strong>思维链注入（CoT）</strong>：在推理层加入”逐步思考”逻辑，准确率提升30-50%</li>
+<li><strong>批处理与量化</strong>：通过INT8量化和动态批处理，速度提升3-4倍，成本降低70%</li>
+<li><strong>工具编排</strong>：在推理层外挂搜索、代码执行等能力，而非训练新模型</li>
+</ul>
+<p>这意味着：<strong>同一个基础模型，通过推理层的持续优化，就能呈现出”不断进化”的效果。</strong></p>
+<hr>
+<h2 id="第二层真相skills是推理层的插件系统">第二层真相：Skills是推理层的插件系统<a class="heading-anchor" aria-label="本节链接" href="#第二层真相skills是推理层的插件系统"><span class="anchor-mark">#</span></a></h2>
+<p>当前的Skills（如Claude的MCP、OpenAI的GPTs）本质上不是”给模型的指令”，而是<strong>推理层的可插拔优化模块</strong>：</p>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>基础模型（稳定，第4层）</span></span>
+<span class="line"><span>    ↓</span></span>
+<span class="line"><span>推理层 + Skills插件（第3层）</span></span>
+<span class="line"><span>    ↓</span></span>
+<span class="line"><span>呈现出的"能力"</span></span></code></pre>
+<p>每个Skill都是一个独立的推理层组件：</p>
+<ul>
+<li><strong>Web Search Skill</strong>：自动判断需要实时信息，调用搜索API并整合结果</li>
+<li><strong>Code Execution Skill</strong>：提取代码、沙盒执行、返回结果</li>
+<li><strong>Memory Skill</strong>：用RAG检索历史对话，注入上下文</li>
+</ul>
+<hr>
+<h2 id="数据流实例">数据流实例<a class="heading-anchor" aria-label="本节链接" href="#数据流实例"><span class="anchor-mark">#</span></a></h2>
+<p>让我们追踪一次实际调用：</p>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>1. 用户输入："今天北京天气怎么样？"</span></span>
+<span class="line"><span>   ↓</span></span>
+<span class="line"><span>2. API Gateway：验证身份，通过</span></span>
+<span class="line"><span>   ↓</span></span>
+<span class="line"><span>3. 业务服务层：</span></span>
+<span class="line"><span>   - 检查Prompt Cache：未命中</span></span>
+<span class="line"><span>   - 注入系统提示词："你是Claude，当前时间2026-01-27"</span></span>
+<span class="line"><span>   ↓</span></span>
+<span class="line"><span>4. 推理服务层：</span></span>
+<span class="line"><span>   - Skills检测：需要Web Search Skill</span></span>
+<span class="line"><span>   - 调用搜索API：获取北京天气数据</span></span>
+<span class="line"><span>   - 组装增强prompt："[天气数据] 28°C晴天 + 用户问题"</span></span>
+<span class="line"><span>   - 批处理：与其他7个请求打包</span></span>
+<span class="line"><span>   - 发送给模型</span></span>
+<span class="line"><span>   ↓</span></span>
+<span class="line"><span>5. 模型计算：生成回答token序列</span></span>
+<span class="line"><span>   ↓</span></span>
+<span class="line"><span>6. 回传处理：</span></span>
+<span class="line"><span>   - Skills后处理：添加数据来源链接</span></span>
+<span class="line"><span>   - 内容检查：通过</span></span>
+<span class="line"><span>   - 计费：150 input + 50 output tokens</span></span>
+<span class="line"><span>   - 缓存prompt供下次使用</span></span>
+<span class="line"><span>   ↓</span></span>
+<span class="line"><span>7. 用户收到："北京今天28°C，晴天☀️，适合出行。"</span></span></code></pre>
+<hr>
+<h2 id="产业意义">产业意义<a class="heading-anchor" aria-label="本节链接" href="#产业意义"><span class="anchor-mark">#</span></a></h2>
+<p>这个范式转变带来三个深远影响：</p>
+<h3 id="1-创新提速">1. 创新提速<a class="heading-anchor" aria-label="本节链接" href="#1-创新提速"><span class="anchor-mark">#</span></a></h3>
+<p>从”6个月训练新模型”变成”1周开发新Skill”</p>
+<h3 id="2-生态爆发">2. 生态爆发<a class="heading-anchor" aria-label="本节链接" href="#2-生态爆发"><span class="anchor-mark">#</span></a></h3>
+<p>未来将出现Skills市场，类似App Store，第三方开发者可贡献专业领域Skills</p>
+<h3 id="3-价值转移">3. 价值转移<a class="heading-anchor" aria-label="本节链接" href="#3-价值转移"><span class="anchor-mark">#</span></a></h3>
+<p>竞争焦点从”谁的模型更强”转向”谁的推理层优化更好、Skills生态更丰富”</p>
+<hr>
+<h2 id="结论">结论<a class="heading-anchor" aria-label="本节链接" href="#结论"><span class="anchor-mark">#</span></a></h2>
+<p><strong>基础模型正在成为”商品化”的底座，真正的护城河在于推理层的工程优化和Skills的组合编排。</strong></p>
+<p>这不仅降低了AI应用的开发门槛，也为个性化AI打开了大门——未来每个人、每个公司都将拥有独特的Skills组合，让同一个基础模型呈现出千人千面的能力。</p>
+<p><strong>理解这一点的开发者，将在下一个十年获得巨大优势。</strong></p>
+<hr>  </article> <div class="article-end"> <span class="article-end-label">Continue reading</span> <div class="prev-next"> <a class="pn-card" href="/blog/ai-evolution/agent-skills/"> <small>← 上一章 · 11</small> <strong>Agent Skills：比 MCP 更重要的创新</strong> </a> <a class="pn-card next" href="/blog/ai-evolution/enterprise-case/"> <small>下一章 · 13 →</small> <strong>企业 AI 平台发展史（2023—2026）</strong> </a> </div> <div class="author-card"> <span class="seal" aria-hidden="true">AS</span> <p> <strong>Allen Shao</strong>
+全栈工程师，关注 AI Agent、云安全与开发者体验。把公开信息放回时间线，也把自己踩过的坑写下来。
+<a href="https://shaominfeng.github.io/" style="color:var(--accent-2);text-decoration:underline;text-underline-offset:3px">个人主页 ↗</a> </p> </div> <p class="article-license">
+本文以 CC BY-NC-SA 4.0 授权，转载请注明作者与出处。文中观点为个人观察，不代表任职机构。
+</p> </div> </div> <aside class="toc" aria-label="本页目录"><span class="toc-label">On this page</span><ul><li class="depth-2"><a href="#核心洞察">核心洞察</a></li><li class="depth-2"><a href="#用户调用模型的完整架构">用户调用模型的完整架构</a></li><li class="depth-2"><a href="#架构层次详解">架构层次详解</a></li><li class="depth-3"><a href="#第1层api-gateway">第1层：API Gateway</a></li><li class="depth-3"><a href="#第2层业务服务层">第2层：业务服务层</a></li><li class="depth-3"><a href="#第3层推理服务层-️">第3层：推理服务层 ⭐️</a></li><li class="depth-3"><a href="#第4层模型本身">第4层：模型本身</a></li><li class="depth-2"><a href="#第一层真相推理层才是进化引擎">第一层真相：推理层才是进化引擎</a></li><li class="depth-2"><a href="#第二层真相skills是推理层的插件系统">第二层真相：Skills是推理层的插件系统</a></li><li class="depth-2"><a href="#数据流实例">数据流实例</a></li><li class="depth-2"><a href="#产业意义">产业意义</a></li><li class="depth-3"><a href="#1-创新提速">1. 创新提速</a></li><li class="depth-3"><a href="#2-生态爆发">2. 生态爆发</a></li><li class="depth-3"><a href="#3-价值转移">3. 价值转移</a></li><li class="depth-2"><a href="#结论">结论</a></li></ul></aside> </div> <script>
+    (() => {
+      const bar = document.querySelector('.progress');
+      if (!bar) return;
+      let ticking = false;
+      const update = () => {
+        const root = document.documentElement;
+        const max = root.scrollHeight - root.clientHeight;
+        bar.style.width = (max > 0 ? (root.scrollTop / max) * 100 : 0) + '%';
+        ticking = false;
+      };
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          window.requestAnimationFrame(update);
+          ticking = true;
+        }
+      }, { passive: true });
+      update();
+    })();
+  </script> <script>
+    (() => {
+      const links = Array.from(document.querySelectorAll('.toc a'));
+      if (!links.length) return;
+      const targets = links
+        .map((link) => {
+          const href = link.getAttribute('href') || '';
+          const id = decodeURIComponent(href.replace('#', ''));
+          return { link, target: document.getElementById(id) };
+        })
+        .filter((item) => item.target);
+      if (!targets.length) return;
+
+      const setActive = (active) => {
+        links.forEach((link) => link.classList.toggle('active', link === active));
+      };
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          const visible = entries
+            .filter((entry) => entry.isIntersecting)
+            .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+          if (visible.length) {
+            const match = targets.find((item) => item.target === visible[0].target);
+            if (match) setActive(match.link);
+          }
+        },
+        { rootMargin: '-90px 0px -70% 0px', threshold: 0 }
+      );
+
+      targets.forEach((item) => observer.observe(item.target));
+    })();
+  </script>  </main> <footer class="site-footer"> <div class="shell"> <div class="footer-top"> <div class="footer-brand"> <span class="seal" aria-hidden="true">AS</span> <div> <strong>Allen Shao · 文章集</strong> <span>Writing &amp; Notes · 持续更新</span> </div> </div> <div class="footer-links"> <a href="/blog/">文章集</a> <a href="/blog/ai-evolution/">从对话到协作</a> <a href="/blog/about/">关于</a> <a href="/blog/rss.xml">RSS</a> <a href="https://shaominfeng.github.io/">个人主页 ↗</a> <a href="https://github.com/shaominfeng" target="_blank" rel="noopener noreferrer">GitHub ↗</a> </div> </div> <div class="footer-bottom"> <span>© 2026 Allen Shao</span> <span>文字以 CC BY-NC-SA 4.0 授权 · 转载注明出处</span> <span>用 Astro 构建 · GitHub Pages</span> </div> </div> </footer> </body></html>

@@ -1,0 +1,344 @@
+<!DOCTYPE html><html lang="zh-CN"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Agent Skills：比 MCP 更重要的创新 · Allen Shao</title><meta name="description" content="Skills 补的不是模型能力，而是架构：把团队最佳实践沉淀为可复用、可版本化的知识包，Token 更省，边界更清晰。"><link rel="canonical" href="https://shaominfeng.github.io/blog/ai-evolution/agent-skills/"><meta name="author" content="Allen Shao"><meta property="og:type" content="article"><meta property="og:title" content="Agent Skills：比 MCP 更重要的创新 · Allen Shao"><meta property="og:description" content="Skills 补的不是模型能力，而是架构：把团队最佳实践沉淀为可复用、可版本化的知识包，Token 更省，边界更清晰。"><meta property="og:url" content="https://shaominfeng.github.io/blog/ai-evolution/agent-skills/"><meta property="og:image" content="https://shaominfeng.github.io/blog/og.png"><meta property="og:site_name" content="文章集"><meta property="og:locale" content="zh_CN"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Agent Skills：比 MCP 更重要的创新 · Allen Shao"><meta name="twitter:description" content="Skills 补的不是模型能力，而是架构：把团队最佳实践沉淀为可复用、可版本化的知识包，Token 更省，边界更清晰。"><meta name="twitter:image" content="https://shaominfeng.github.io/blog/og.png"><link rel="icon" href="/blog/favicon.svg" type="image/svg+xml"><link rel="alternate" type="application/rss+xml" title="Allen Shao · 文章集" href="/blog/rss.xml"><meta name="theme-color" content="#f7f3eb"><meta name="generator" content="Astro v5.18.2"><script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Agent Skills：比 MCP 更重要的创新","description":"Skills 补的不是模型能力，而是架构：把团队最佳实践沉淀为可复用、可版本化的知识包，Token 更省，边界更清晰。","inLanguage":"zh-CN","datePublished":"2026-01-29","dateModified":"2026-01-29","author":{"@type":"Person","name":"Allen Shao","alternateName":"Allen Shao","url":"https://shaominfeng.github.io/"},"publisher":{"@type":"Person","name":"Allen Shao"},"mainEntityOfPage":"https://shaominfeng.github.io/blog/ai-evolution/agent-skills/","isPartOf":{"@type":"Book","name":"从对话到协作：AI 大模型三年演进全记录","url":"https://shaominfeng.github.io/blog/ai-evolution/"}}</script><link rel="stylesheet" href="/blog/_astro/_slug_.B8v9EhdI.css"></head> <body> <a class="skip-link" href="#main">跳到正文</a> <header class="site-header"> <div class="shell header-inner"> <a class="brand" href="/blog/"> <span class="seal" aria-hidden="true">AS</span> <span class="brand-copy"> <strong>Allen Shao · 文章集</strong> <span>Writing & Notes</span> </span> </a> <nav class="site-nav" aria-label="主导航"> <a class="nav-text" href="/blog/">文章集</a> <a class="nav-text" href="/blog/essays/">单篇</a> <a class="nav-text" href="/blog/ai-evolution/" aria-current="page">从对话到协作</a> <a class="nav-text" href="/blog/about/">关于</a> <a class="nav-ext" href="https://shaominfeng.github.io/">个人主页 ↗</a> <a class="nav-ext" href="https://github.com/shaominfeng" target="_blank" rel="noopener noreferrer">GitHub ↗</a>  </nav> </div> </header> <main id="main">  <div class="progress" aria-hidden="true"></div> <div class="shell article-grid"> <nav class="side-nav" aria-label="章节目录"> <a class="side-back" href="/blog/">← 文章集</a> <a class="side-brand" href="/blog/ai-evolution/"> 从对话到协作 <small>14 章 · 2022.11—2026.01</small> </a> <div class="side-part"> <span class="side-part-label">序章 / 01</span> <a href="/blog/ai-evolution/overview/"> <span class="side-num">01</span> 总览：从对话到协作 </a> </div><div class="side-part"> <span class="side-part-label">导读 / 01</span> <a href="/blog/ai-evolution/restaurant-analogy/"> <span class="side-num">02</span> 用一家餐厅，理解 AI 系统 </a> </div><div class="side-part"> <span class="side-part-label">时间线 / 05</span> <a href="/blog/ai-evolution/year-2022/"> <span class="side-num">03</span> 2022：生成式 AI 的觉醒 </a><a href="/blog/ai-evolution/year-2023/"> <span class="side-num">04</span> 2023：长文本元年与百模大战 </a><a href="/blog/ai-evolution/year-2024/"> <span class="side-num">05</span> 2024：推理革命与生态标准化 </a><a href="/blog/ai-evolution/year-2025/"> <span class="side-num">06</span> 2025：生态爆发与范式转移 </a><a href="/blog/ai-evolution/year-2026/"> <span class="side-num">07</span> 2026：协作时代的开启 </a> </div><div class="side-part"> <span class="side-part-label">技术深潜 / 04</span> <a href="/blog/ai-evolution/context-revolution/"> <span class="side-num">08</span> 上下文革命：从 4K 到 2M </a><a href="/blog/ai-evolution/prompt-engineering/"> <span class="side-num">09</span> Prompt 工程的兴衰 </a><a href="/blog/ai-evolution/mcp/"> <span class="side-num">10</span> MCP 协议：从炒作到现实 </a><a href="/blog/ai-evolution/agent-skills/" class="active" aria-current="page"> <span class="side-num">11</span> Agent Skills：比 MCP 更重要的创新 </a> </div><div class="side-part"> <span class="side-part-label">洞察 / 01</span> <a href="/blog/ai-evolution/new-paradigm/"> <span class="side-num">12</span> AI 进化的新范式：推理层才是核心 </a> </div><div class="side-part"> <span class="side-part-label">实践 / 01</span> <a href="/blog/ai-evolution/enterprise-case/"> <span class="side-num">13</span> 企业 AI 平台发展史（2023—2026） </a> </div><div class="side-part"> <span class="side-part-label">展望 / 01</span> <a href="/blog/ai-evolution/outlook/"> <span class="side-num">14</span> 未来展望与结论 </a> </div> </nav> <div class="article-body"> <header class="article-hero"> <nav class="crumbs" aria-label="面包屑"> <a href="/blog/">文章集</a> <span class="sep">/</span> <a href="/blog/ai-evolution/">从对话到协作</a> <span class="sep">/</span> <span>第 11 章</span> </nav>  <h1>Agent Skills：比 MCP 更重要的创新</h1> <p class="article-sub">把领域知识变成可安装的资产</p> <p class="article-sub" style="font-size:15px;line-height:1.8;color:var(--ink-3)">Skills 补的不是模型能力，而是架构：把团队最佳实践沉淀为可复用、可版本化的知识包，Token 更省，边界更清晰。</p> <div class="article-meta"> <span>Allen Shao</span>  <span class="dot" aria-hidden="true"></span> <span>写于 2026.01.29</span>  <span class="dot" aria-hidden="true"></span> <span>5 分钟</span> <span class="dot" aria-hidden="true"></span> <span>技术深潜</span>  </div> </header> <details class="mobile-toc"> <summary>章节目录 · 当前第 11 章</summary> <div class="mobile-nav"> <nav class="side-nav" aria-label="章节目录"> <a class="side-back" href="/blog/">← 文章集</a> <a class="side-brand" href="/blog/ai-evolution/"> 从对话到协作 <small>14 章 · 2022.11—2026.01</small> </a> <div class="side-part"> <span class="side-part-label">序章 / 01</span> <a href="/blog/ai-evolution/overview/"> <span class="side-num">01</span> 总览：从对话到协作 </a> </div><div class="side-part"> <span class="side-part-label">导读 / 01</span> <a href="/blog/ai-evolution/restaurant-analogy/"> <span class="side-num">02</span> 用一家餐厅，理解 AI 系统 </a> </div><div class="side-part"> <span class="side-part-label">时间线 / 05</span> <a href="/blog/ai-evolution/year-2022/"> <span class="side-num">03</span> 2022：生成式 AI 的觉醒 </a><a href="/blog/ai-evolution/year-2023/"> <span class="side-num">04</span> 2023：长文本元年与百模大战 </a><a href="/blog/ai-evolution/year-2024/"> <span class="side-num">05</span> 2024：推理革命与生态标准化 </a><a href="/blog/ai-evolution/year-2025/"> <span class="side-num">06</span> 2025：生态爆发与范式转移 </a><a href="/blog/ai-evolution/year-2026/"> <span class="side-num">07</span> 2026：协作时代的开启 </a> </div><div class="side-part"> <span class="side-part-label">技术深潜 / 04</span> <a href="/blog/ai-evolution/context-revolution/"> <span class="side-num">08</span> 上下文革命：从 4K 到 2M </a><a href="/blog/ai-evolution/prompt-engineering/"> <span class="side-num">09</span> Prompt 工程的兴衰 </a><a href="/blog/ai-evolution/mcp/"> <span class="side-num">10</span> MCP 协议：从炒作到现实 </a><a href="/blog/ai-evolution/agent-skills/" class="active" aria-current="page"> <span class="side-num">11</span> Agent Skills：比 MCP 更重要的创新 </a> </div><div class="side-part"> <span class="side-part-label">洞察 / 01</span> <a href="/blog/ai-evolution/new-paradigm/"> <span class="side-num">12</span> AI 进化的新范式：推理层才是核心 </a> </div><div class="side-part"> <span class="side-part-label">实践 / 01</span> <a href="/blog/ai-evolution/enterprise-case/"> <span class="side-num">13</span> 企业 AI 平台发展史（2023—2026） </a> </div><div class="side-part"> <span class="side-part-label">展望 / 01</span> <a href="/blog/ai-evolution/outlook/"> <span class="side-num">14</span> 未来展望与结论 </a> </div> </nav> </div> </details> <article class="prose">  <blockquote>
+<p>本章内容：Skills诞生背景、核心问题、开放标准、生态爆发、Skills vs MCP终极对比</p>
+</blockquote>
+<blockquote>
+<p>💡 <strong>餐厅类比提示</strong>：如果说MCP是”采购系统”（能拿到食材），那Skills就是”菜谱宝典”（知道怎么做菜）。
+有食材但不会做 = 浪费；会做菜但没食材 = 暂时做不了。但统计显示，80%的任务只需菜谱（Skills），20%才需要采购（MCP）。
+详见 <a href="/blog/ai-evolution/restaurant-analogy/#mcp-vs-skills-%E6%B7%B1%E5%BA%A6%E5%AF%B9%E6%AF%94">餐厅类比完整版</a></p>
+</blockquote>
+<hr>
+<h2 id="skills诞生架构问题而非智能问题">Skills诞生：架构问题而非智能问题<a class="heading-anchor" aria-label="本节链接" href="#skills诞生架构问题而非智能问题"><span class="anchor-mark">#</span></a></h2>
+<p><strong>⏱️ 2025年10月16日</strong>，Anthropic<a href="https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills" rel="noopener noreferrer" target="_blank">发布Agent Skills</a>。</p>
+<h3 id="核心洞察">核心洞察<a class="heading-anchor" aria-label="本节链接" href="#核心洞察"><span class="anchor-mark">#</span></a></h3>
+<blockquote>
+<p><strong>Anthropic工程博客原文</strong>：
+“随着agents变得更强大，我们需要更可组合、可扩展、可移植的方式为它们装备领域专业知识。<strong>这不主要是模型智能问题，而是架构问题</strong> - agents缺乏结构化的方式来存储、检索和重用过程知识。”</p>
+</blockquote>
+<hr>
+<h2 id="skills解决的三大核心问题">Skills解决的三大核心问题<a class="heading-anchor" aria-label="本节链接" href="#skills解决的三大核心问题"><span class="anchor-mark">#</span></a></h2>
+<h3 id="问题1ai有工具但不会用">问题1：AI有工具但不会用<a class="heading-anchor" aria-label="本节链接" href="#问题1ai有工具但不会用"><span class="anchor-mark">#</span></a></h3>
+<p><strong>MCP时代的困境（2024年）</strong>：</p>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#FF7B72">const</span><span style="color:#79C0FF"> agent</span><span style="color:#FF7B72"> =</span><span style="color:#FF7B72"> new</span><span style="color:#D2A8FF"> Agent</span><span style="color:#E6EDF3">({</span></span>
+<span class="line"><span style="color:#E6EDF3">  tools: [github, database, slack] </span><span style="color:#8B949E">// ✅ 有能力</span></span>
+<span class="line"><span style="color:#E6EDF3">});</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FFA657">用户</span><span style="color:#E6EDF3">: </span><span style="color:#A5D6FF">"帮我做code review"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E6EDF3">AI的困惑：</span></span>
+<span class="line"><span style="color:#E6EDF3">❌ 应该先看什么？PR描述还是代码？</span></span>
+<span class="line"><span style="color:#E6EDF3">❌ 审查顺序是什么？</span></span>
+<span class="line"><span style="color:#E6EDF3">❌ 公司的审查标准是什么？</span></span>
+<span class="line"><span style="color:#E6EDF3">❌ 如何写review comments？</span></span>
+<span class="line"><span style="color:#E6EDF3">❌ 何时approve？</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E6EDF3">→ 结果：AI有刀但不会切菜</span></span></code></pre>
+<p><strong>Skills的解决方案</strong>：</p>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="markdown"><code><span class="line"><span style="color:#79C0FF;font-weight:bold"># code-review.skill.md</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79C0FF;font-weight:bold">## Metadata</span></span>
+<span class="line"><span style="color:#E6EDF3">name: code-review</span></span>
+<span class="line"><span style="color:#E6EDF3">description: Perform professional code reviews</span></span>
+<span class="line"><span style="color:#E6EDF3">triggers: ["review", "PR", "pull request"]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79C0FF;font-weight:bold">## Instructions</span></span>
+<span class="line"><span style="color:#FFA657">1.</span><span style="color:#E6EDF3"> 先读PR描述，理解改动目的</span></span>
+<span class="line"><span style="color:#FFA657">2.</span><span style="color:#E6EDF3"> 检查测试覆盖率</span></span>
+<span class="line"><span style="color:#FFA657">3.</span><span style="color:#E6EDF3"> 审查代码逻辑</span></span>
+<span class="line"><span style="color:#FFA657">4.</span><span style="color:#E6EDF3"> 检查安全漏洞</span></span>
+<span class="line"><span style="color:#FFA657">5.</span><span style="color:#E6EDF3"> 给出建设性反馈</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79C0FF;font-weight:bold">## Company Standards</span></span>
+<span class="line"><span style="color:#FFA657">-</span><span style="color:#E6EDF3"> 每个函数必须有单元测试</span></span>
+<span class="line"><span style="color:#FFA657">-</span><span style="color:#E6EDF3"> 不允许console.log</span></span>
+<span class="line"><span style="color:#FFA657">-</span><span style="color:#E6EDF3"> API需要错误处理</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E6EDF3">→ 结果：AI有刀也会切菜了 ✅</span></span></code></pre>
+<hr>
+<h3 id="问题2token低效">问题2：Token低效<a class="heading-anchor" aria-label="本节链接" href="#问题2token低效"><span class="anchor-mark">#</span></a></h3>
+<p><strong>MCP的Token消耗</strong>：</p>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>场景：50个MCP工具加载到上下文</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>每个工具定义：</span></span>
+<span class="line"><span>- 工具名</span></span>
+<span class="line"><span>- 参数schema (JSON Schema)</span></span>
+<span class="line"><span>- 描述</span></span>
+<span class="line"><span>- 示例</span></span>
+<span class="line"><span>平均每个工具：~11K tokens</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>50个工具 = 550K tokens</span></span>
+<span class="line"><span>→ 占用超过一半的1M上下文！</span></span>
+<span class="line"><span>→ 每次对话都要付费 $1.65</span></span></code></pre>
+<p><strong>Skills的Token效率</strong>：</p>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>场景：50个Skills（同样功能）</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>加载到上下文的只是：</span></span>
+<span class="line"><span>- Skill元数据（名称、触发词、简短描述）</span></span>
+<span class="line"><span>- 平均每个Skill：~200 tokens</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>50个Skills = 10K tokens</span></span>
+<span class="line"><span>→ 仅占1%的上下文</span></span>
+<span class="line"><span>→ 每次对话仅$0.03</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Token效率提升：98% ✅</span></span></code></pre>
+<hr>
+<h3 id="问题3无法复用和版本化">问题3：无法复用和版本化<a class="heading-anchor" aria-label="本节链接" href="#问题3无法复用和版本化"><span class="anchor-mark">#</span></a></h3>
+<p><strong>MCP困境</strong>：</p>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="markdown"><code><span class="line"><span style="color:#E6EDF3">问题：</span></span>
+<span class="line"><span style="color:#FFA657">-</span><span style="color:#E6EDF3"> Prompt散落在各处，难以管理</span></span>
+<span class="line"><span style="color:#FFA657">-</span><span style="color:#E6EDF3"> 每个项目重新写</span></span>
+<span class="line"><span style="color:#FFA657">-</span><span style="color:#E6EDF3"> 没有版本控制</span></span>
+<span class="line"><span style="color:#FFA657">-</span><span style="color:#E6EDF3"> 团队无法共享最佳实践</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E6EDF3">结果：</span></span>
+<span class="line"><span style="color:#FFA657">-</span><span style="color:#E6EDF3"> 重复造轮子</span></span>
+<span class="line"><span style="color:#FFA657">-</span><span style="color:#E6EDF3"> 知识无法积累</span></span>
+<span class="line"><span style="color:#FFA657">-</span><span style="color:#E6EDF3"> 新人上手困难</span></span></code></pre>
+<p><strong>Skills生态</strong>：</p>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#8B949E"># 像npm一样安装Skills</span></span>
+<span class="line"><span style="color:#FFA657">claude</span><span style="color:#A5D6FF"> skill</span><span style="color:#A5D6FF"> install</span><span style="color:#A5D6FF"> code-review</span></span>
+<span class="line"><span style="color:#FFA657">claude</span><span style="color:#A5D6FF"> skill</span><span style="color:#A5D6FF"> install</span><span style="color:#A5D6FF"> deployment</span></span>
+<span class="line"><span style="color:#FFA657">claude</span><span style="color:#A5D6FF"> skill</span><span style="color:#A5D6FF"> install</span><span style="color:#A5D6FF"> security-scan</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#8B949E"># 版本化管理</span></span>
+<span class="line"><span style="color:#FFA657">code-review@1.2.3</span></span>
+<span class="line"><span style="color:#FFA657">deployment@2.0.1</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#8B949E"># 团队共享</span></span>
+<span class="line"><span style="color:#FFA657">company-internal/api-design@1.0.0</span></span>
+<span class="line"><span style="color:#FFA657">company-internal/incident-response@1.5.2</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FFA657">→</span><span style="color:#A5D6FF"> 知识可复用、可版本化、可积累</span><span style="color:#A5D6FF"> ✅</span></span></code></pre>
+<hr>
+<h2 id="20251218开放标准时刻">2025.12.18：开放标准时刻<a class="heading-anchor" aria-label="本节链接" href="#20251218开放标准时刻"><span class="anchor-mark">#</span></a></h2>
+<h3 id="历史性决策">历史性决策<a class="heading-anchor" aria-label="本节链接" href="#历史性决策"><span class="anchor-mark">#</span></a></h3>
+<p>Anthropic宣布将Agent Skills规范变成<strong>开放标准</strong>：</p>
+<ol>
+<li><strong>公开规范</strong> - 任何人都能实现</li>
+<li><strong>MIT许可</strong> - 商业友好</li>
+<li><strong>跨平台兼容</strong> - 不绑定Claude</li>
+</ol>
+<h3 id="行业快速采用">行业快速采用<a class="heading-anchor" aria-label="本节链接" href="#行业快速采用"><span class="anchor-mark">#</span></a></h3>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>2025.12.18 - Anthropic发布标准</span></span>
+<span class="line"><span>2025.12.20 - OpenAI悄悄采用（Codex CLI）</span></span>
+<span class="line"><span>2025.12.22 - ChatGPT集成Skills格式</span></span>
+<span class="line"><span>2025.12.25 - Google宣布Gemini支持</span></span>
+<span class="line"><span>2026.01.05 - Microsoft集成到Copilot</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>→ 不到1个月，行业统一 🎉</span></span></code></pre>
+<h3 id="为什么openai这么快就采用">为什么OpenAI这么快就采用？<a class="heading-anchor" aria-label="本节链接" href="#为什么openai这么快就采用"><span class="anchor-mark">#</span></a></h3>
+<ol>
+<li><strong>Token效率</strong> - OpenAI也想降低成本</li>
+<li><strong>用户需求</strong> - 开发者呼声很高</li>
+<li><strong>竞争压力</strong> - Claude Code太好用了</li>
+<li><strong>技术优势</strong> - 确实比自己的方案好</li>
+</ol>
+<hr>
+<h2 id="skills生态爆发">Skills生态爆发<a class="heading-anchor" aria-label="本节链接" href="#skills生态爆发"><span class="anchor-mark">#</span></a></h2>
+<h3 id="skills市场2026年初">Skills市场（2026年初）<a class="heading-anchor" aria-label="本节链接" href="#skills市场2026年初"><span class="anchor-mark">#</span></a></h3>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>官方Skills（Anthropic维护）：</span></span>
+<span class="line"><span>- code-review</span></span>
+<span class="line"><span>- deployment</span></span>
+<span class="line"><span>- security-scan</span></span>
+<span class="line"><span>- api-design</span></span>
+<span class="line"><span>- documentation</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>社区Skills（开源）：</span></span>
+<span class="line"><span>- web-scraping</span></span>
+<span class="line"><span>- data-analysis</span></span>
+<span class="line"><span>- image-processing</span></span>
+<span class="line"><span>- audio-transcription</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>企业Skills（私有）：</span></span>
+<span class="line"><span>- company-workflow</span></span>
+<span class="line"><span>- compliance-check</span></span>
+<span class="line"><span>- custom-integration</span></span></code></pre>
+<h3 id="类似npm的生态">类似npm的生态<a class="heading-anchor" aria-label="本节链接" href="#类似npm的生态"><span class="anchor-mark">#</span></a></h3>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#8B949E"># 搜索Skills</span></span>
+<span class="line"><span style="color:#FFA657">claude</span><span style="color:#A5D6FF"> skill</span><span style="color:#A5D6FF"> search</span><span style="color:#A5D6FF"> "react"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#8B949E"># 安装</span></span>
+<span class="line"><span style="color:#FFA657">claude</span><span style="color:#A5D6FF"> skill</span><span style="color:#A5D6FF"> install</span><span style="color:#A5D6FF"> react-best-practices</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#8B949E"># 发布自己的Skill</span></span>
+<span class="line"><span style="color:#FFA657">claude</span><span style="color:#A5D6FF"> skill</span><span style="color:#A5D6FF"> publish</span><span style="color:#A5D6FF"> my-workflow</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#8B949E"># 团队共享</span></span>
+<span class="line"><span style="color:#FFA657">claude</span><span style="color:#A5D6FF"> skill</span><span style="color:#A5D6FF"> share</span><span style="color:#A5D6FF"> company-internal/api-design</span></span></code></pre>
+<hr>
+<h2 id="skills-vs-mcp终极对比">Skills vs MCP：终极对比<a class="heading-anchor" aria-label="本节链接" href="#skills-vs-mcp终极对比"><span class="anchor-mark">#</span></a></h2>
+<h3 id="不是竞争而是互补">不是竞争，而是互补<a class="heading-anchor" aria-label="本节链接" href="#不是竞争而是互补"><span class="anchor-mark">#</span></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>维度</th><th>MCP</th><th>Agent Skills</th><th>关系</th></tr></thead><tbody><tr><td><strong>本质</strong></td><td>连接能力</td><td>执行智慧</td><td>互补</td></tr><tr><td><strong>比喻</strong></td><td>给AI一把刀</td><td>教AI如何切菜</td><td>都需要</td></tr><tr><td><strong>Token消耗</strong></td><td>550K（50工具）</td><td>10K（50技能）</td><td>Skills优</td></tr><tr><td><strong>安全性</strong></td><td>有风险</td><td>相对安全</td><td>Skills优</td></tr><tr><td><strong>实时数据</strong></td><td>✅ 擅长</td><td>❌ 不擅长</td><td>MCP优</td></tr><tr><td><strong>流程知识</strong></td><td>❌ 不擅长</td><td>✅ 擅长</td><td>Skills优</td></tr><tr><td><strong>跨平台</strong></td><td>✅ 设计目标</td><td>✅ 开放标准</td><td>都支持</td></tr><tr><td><strong>学习曲线</strong></td><td>陡峭</td><td>平缓</td><td>Skills优</td></tr></tbody></table>
+<h3 id="混合架构最佳实践2026">混合架构最佳实践（2026）<a class="heading-anchor" aria-label="本节链接" href="#混合架构最佳实践2026"><span class="anchor-mark">#</span></a></h3>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#8B949E">// 最佳组合</span></span>
+<span class="line"><span style="color:#FF7B72">const</span><span style="color:#79C0FF"> agent</span><span style="color:#FF7B72"> =</span><span style="color:#FF7B72"> new</span><span style="color:#D2A8FF"> Agent</span><span style="color:#E6EDF3">({</span></span>
+<span class="line"><span style="color:#8B949E">  // MCP：外部服务连接</span></span>
+<span class="line"><span style="color:#E6EDF3">  mcp: [</span></span>
+<span class="line"><span style="color:#A5D6FF">    'mcp-github'</span><span style="color:#E6EDF3">,      </span><span style="color:#8B949E">// 调用GitHub API</span></span>
+<span class="line"><span style="color:#A5D6FF">    'mcp-slack'</span><span style="color:#E6EDF3">,       </span><span style="color:#8B949E">// 发送Slack消息</span></span>
+<span class="line"><span style="color:#A5D6FF">    'mcp-database'</span><span style="color:#8B949E">     // 数据库查询</span></span>
+<span class="line"><span style="color:#E6EDF3">  ],</span></span>
+<span class="line"><span style="color:#E6EDF3">  </span></span>
+<span class="line"><span style="color:#8B949E">  // Skills：领域知识与流程</span></span>
+<span class="line"><span style="color:#E6EDF3">  skills: [</span></span>
+<span class="line"><span style="color:#A5D6FF">    'code-review'</span><span style="color:#E6EDF3">,     </span><span style="color:#8B949E">// 如何审查代码</span></span>
+<span class="line"><span style="color:#A5D6FF">    'deployment'</span><span style="color:#E6EDF3">,      </span><span style="color:#8B949E">// 如何部署</span></span>
+<span class="line"><span style="color:#A5D6FF">    'incident-response'</span><span style="color:#8B949E"> // 如何响应事故</span></span>
+<span class="line"><span style="color:#E6EDF3">  ]</span></span>
+<span class="line"><span style="color:#E6EDF3">});</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#8B949E">// 协同工作</span></span>
+<span class="line"><span style="color:#FFA657">用户</span><span style="color:#E6EDF3">: </span><span style="color:#A5D6FF">"审查PR #123并部署到staging"</span></span>
+<span class="line"><span style="color:#FFA657">AI</span><span style="color:#E6EDF3">:</span></span>
+<span class="line"><span style="color:#79C0FF">1.</span><span style="color:#E6EDF3"> 使用code</span><span style="color:#FF7B72">-</span><span style="color:#E6EDF3">review Skill → 知道如何审查</span></span>
+<span class="line"><span style="color:#79C0FF">2.</span><span style="color:#E6EDF3"> 调用mcp</span><span style="color:#FF7B72">-</span><span style="color:#E6EDF3">github → 获取PR内容</span></span>
+<span class="line"><span style="color:#79C0FF">3.</span><span style="color:#E6EDF3"> 执行审查流程</span></span>
+<span class="line"><span style="color:#79C0FF">4.</span><span style="color:#E6EDF3"> 使用deployment Skill → 知道如何部署</span></span>
+<span class="line"><span style="color:#79C0FF">5.</span><span style="color:#E6EDF3"> 调用mcp</span><span style="color:#FF7B72">-</span><span style="color:#E6EDF3">deployment → 执行部署</span></span>
+<span class="line"><span style="color:#79C0FF">6.</span><span style="color:#E6EDF3"> 使用mcp</span><span style="color:#FF7B72">-</span><span style="color:#E6EDF3">slack → 通知团队</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E6EDF3">→ MCP提供能力，Skills提供智慧 ✅</span></span></code></pre>
+<hr>
+<h2 id="核心启示">核心启示<a class="heading-anchor" aria-label="本节链接" href="#核心启示"><span class="anchor-mark">#</span></a></h2>
+<h3 id="1-架构问题--智能问题">1. 架构问题 > 智能问题<a class="heading-anchor" aria-label="本节链接" href="#1-架构问题--智能问题"><span class="anchor-mark">#</span></a></h3>
+<p>模型已经足够聪明，缺的是结构化的知识管理系统。</p>
+<h3 id="2-token效率至关重要">2. Token效率至关重要<a class="heading-anchor" aria-label="本节链接" href="#2-token效率至关重要"><span class="anchor-mark">#</span></a></h3>
+<p>98%的Token节省不仅是成本，更是架构优势。</p>
+<h3 id="3-开放标准赢得市场">3. 开放标准赢得市场<a class="heading-anchor" aria-label="本节链接" href="#3-开放标准赢得市场"><span class="anchor-mark">#</span></a></h3>
+<p>OpenAI快速采用证明：好的标准会被行业认可。</p>
+<h3 id="4-mcp和skills互补">4. MCP和Skills互补<a class="heading-anchor" aria-label="本节链接" href="#4-mcp和skills互补"><span class="anchor-mark">#</span></a></h3>
+<p>不是”谁更好”，而是”各自擅长什么”。</p>
+<hr>
+<h2 id="未来展望">未来展望<a class="heading-anchor" aria-label="本节链接" href="#未来展望"><span class="anchor-mark">#</span></a></h2>
+<h3 id="短期2026-2027">短期（2026-2027）<a class="heading-anchor" aria-label="本节链接" href="#短期2026-2027"><span class="anchor-mark">#</span></a></h3>
+<ul>
+<li>✅ Skills市场成熟（类似npm）</li>
+<li>✅ 企业级Skills平台</li>
+<li>✅ 自动生成Skills工具</li>
+</ul>
+<h3 id="中期2027-2028">中期（2027-2028）<a class="heading-anchor" aria-label="本节链接" href="#中期2027-2028"><span class="anchor-mark">#</span></a></h3>
+<ul>
+<li>🔮 AI自动编写Skills</li>
+<li>🔮 Skills自动优化</li>
+<li>🔮 跨AI模型共享</li>
+</ul>
+<h3 id="长期2028">长期（2028+）<a class="heading-anchor" aria-label="本节链接" href="#长期2028"><span class="anchor-mark">#</span></a></h3>
+<ul>
+<li>🔮 Skills成为AI的”基因”</li>
+<li>🔮 个性化Skills组合</li>
+<li>🔮 Skills自进化</li>
+</ul>
+<hr>  </article> <div class="article-end"> <span class="article-end-label">Continue reading</span> <div class="prev-next"> <a class="pn-card" href="/blog/ai-evolution/mcp/"> <small>← 上一章 · 10</small> <strong>MCP 协议：从炒作到现实</strong> </a> <a class="pn-card next" href="/blog/ai-evolution/new-paradigm/"> <small>下一章 · 12 →</small> <strong>AI 进化的新范式：推理层才是核心</strong> </a> </div> <div class="author-card"> <span class="seal" aria-hidden="true">AS</span> <p> <strong>Allen Shao</strong>
+全栈工程师，关注 AI Agent、云安全与开发者体验。把公开信息放回时间线，也把自己踩过的坑写下来。
+<a href="https://shaominfeng.github.io/" style="color:var(--accent-2);text-decoration:underline;text-underline-offset:3px">个人主页 ↗</a> </p> </div> <p class="article-license">
+本文以 CC BY-NC-SA 4.0 授权，转载请注明作者与出处。文中观点为个人观察，不代表任职机构。
+</p> </div> </div> <aside class="toc" aria-label="本页目录"><span class="toc-label">On this page</span><ul><li class="depth-2"><a href="#skills诞生架构问题而非智能问题">Skills诞生：架构问题而非智能问题</a></li><li class="depth-3"><a href="#核心洞察">核心洞察</a></li><li class="depth-2"><a href="#skills解决的三大核心问题">Skills解决的三大核心问题</a></li><li class="depth-3"><a href="#问题1ai有工具但不会用">问题1：AI有工具但不会用</a></li><li class="depth-3"><a href="#问题2token低效">问题2：Token低效</a></li><li class="depth-3"><a href="#问题3无法复用和版本化">问题3：无法复用和版本化</a></li><li class="depth-2"><a href="#20251218开放标准时刻">2025.12.18：开放标准时刻</a></li><li class="depth-3"><a href="#历史性决策">历史性决策</a></li><li class="depth-3"><a href="#行业快速采用">行业快速采用</a></li><li class="depth-3"><a href="#为什么openai这么快就采用">为什么OpenAI这么快就采用？</a></li><li class="depth-2"><a href="#skills生态爆发">Skills生态爆发</a></li><li class="depth-3"><a href="#skills市场2026年初">Skills市场（2026年初）</a></li><li class="depth-3"><a href="#类似npm的生态">类似npm的生态</a></li><li class="depth-2"><a href="#skills-vs-mcp终极对比">Skills vs MCP：终极对比</a></li><li class="depth-3"><a href="#不是竞争而是互补">不是竞争，而是互补</a></li><li class="depth-3"><a href="#混合架构最佳实践2026">混合架构最佳实践（2026）</a></li><li class="depth-2"><a href="#核心启示">核心启示</a></li><li class="depth-3"><a href="#1-架构问题--智能问题">1. 架构问题 &gt; 智能问题</a></li><li class="depth-3"><a href="#2-token效率至关重要">2. Token效率至关重要</a></li><li class="depth-3"><a href="#3-开放标准赢得市场">3. 开放标准赢得市场</a></li><li class="depth-3"><a href="#4-mcp和skills互补">4. MCP和Skills互补</a></li><li class="depth-2"><a href="#未来展望">未来展望</a></li><li class="depth-3"><a href="#短期2026-2027">短期（2026-2027）</a></li><li class="depth-3"><a href="#中期2027-2028">中期（2027-2028）</a></li><li class="depth-3"><a href="#长期2028">长期（2028+）</a></li></ul></aside> </div> <script>
+    (() => {
+      const bar = document.querySelector('.progress');
+      if (!bar) return;
+      let ticking = false;
+      const update = () => {
+        const root = document.documentElement;
+        const max = root.scrollHeight - root.clientHeight;
+        bar.style.width = (max > 0 ? (root.scrollTop / max) * 100 : 0) + '%';
+        ticking = false;
+      };
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          window.requestAnimationFrame(update);
+          ticking = true;
+        }
+      }, { passive: true });
+      update();
+    })();
+  </script> <script>
+    (() => {
+      const links = Array.from(document.querySelectorAll('.toc a'));
+      if (!links.length) return;
+      const targets = links
+        .map((link) => {
+          const href = link.getAttribute('href') || '';
+          const id = decodeURIComponent(href.replace('#', ''));
+          return { link, target: document.getElementById(id) };
+        })
+        .filter((item) => item.target);
+      if (!targets.length) return;
+
+      const setActive = (active) => {
+        links.forEach((link) => link.classList.toggle('active', link === active));
+      };
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          const visible = entries
+            .filter((entry) => entry.isIntersecting)
+            .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+          if (visible.length) {
+            const match = targets.find((item) => item.target === visible[0].target);
+            if (match) setActive(match.link);
+          }
+        },
+        { rootMargin: '-90px 0px -70% 0px', threshold: 0 }
+      );
+
+      targets.forEach((item) => observer.observe(item.target));
+    })();
+  </script>  </main> <footer class="site-footer"> <div class="shell"> <div class="footer-top"> <div class="footer-brand"> <span class="seal" aria-hidden="true">AS</span> <div> <strong>Allen Shao · 文章集</strong> <span>Writing &amp; Notes · 持续更新</span> </div> </div> <div class="footer-links"> <a href="/blog/">文章集</a> <a href="/blog/ai-evolution/">从对话到协作</a> <a href="/blog/about/">关于</a> <a href="/blog/rss.xml">RSS</a> <a href="https://shaominfeng.github.io/">个人主页 ↗</a> <a href="https://github.com/shaominfeng" target="_blank" rel="noopener noreferrer">GitHub ↗</a> </div> </div> <div class="footer-bottom"> <span>© 2026 Allen Shao</span> <span>文字以 CC BY-NC-SA 4.0 授权 · 转载注明出处</span> <span>用 Astro 构建 · GitHub Pages</span> </div> </div> </footer> </body></html>

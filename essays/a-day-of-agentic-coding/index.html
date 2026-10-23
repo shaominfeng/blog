@@ -1,0 +1,281 @@
+<!DOCTYPE html><html lang="zh-CN"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>工程师 Agentic Coding 的一天 · Allen Shao</title><meta name="description" content="从 09:00 的自动晨报到 18:00 的最后一轮巡检：一个工程师怎样把 AI 嵌进工单、调试、开发、复盘与工具改进，让时间从「排队」变成「重叠」。"><link rel="canonical" href="https://shaominfeng.github.io/blog/essays/a-day-of-agentic-coding/"><meta name="author" content="Allen Shao"><meta property="og:type" content="article"><meta property="og:title" content="工程师 Agentic Coding 的一天 · Allen Shao"><meta property="og:description" content="从 09:00 的自动晨报到 18:00 的最后一轮巡检：一个工程师怎样把 AI 嵌进工单、调试、开发、复盘与工具改进，让时间从「排队」变成「重叠」。"><meta property="og:url" content="https://shaominfeng.github.io/blog/essays/a-day-of-agentic-coding/"><meta property="og:image" content="https://shaominfeng.github.io/blog/og-agentic-coding.png"><meta property="og:site_name" content="文章集"><meta property="og:locale" content="zh_CN"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="工程师 Agentic Coding 的一天 · Allen Shao"><meta name="twitter:description" content="从 09:00 的自动晨报到 18:00 的最后一轮巡检：一个工程师怎样把 AI 嵌进工单、调试、开发、复盘与工具改进，让时间从「排队」变成「重叠」。"><meta name="twitter:image" content="https://shaominfeng.github.io/blog/og-agentic-coding.png"><link rel="icon" href="/blog/favicon.svg" type="image/svg+xml"><link rel="alternate" type="application/rss+xml" title="Allen Shao · 文章集" href="/blog/rss.xml"><meta name="theme-color" content="#f7f3eb"><meta name="generator" content="Astro v5.18.2"><script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"工程师 Agentic Coding 的一天","description":"从 09:00 的自动晨报到 18:00 的最后一轮巡检：一个工程师怎样把 AI 嵌进工单、调试、开发、复盘与工具改进，让时间从「排队」变成「重叠」。","inLanguage":"zh-CN","datePublished":"2026-06-26","dateModified":"2026-06-26","author":{"@type":"Person","name":"Allen Shao","alternateName":"Allen Shao","url":"https://shaominfeng.github.io/"},"publisher":{"@type":"Person","name":"Allen Shao"},"mainEntityOfPage":"https://shaominfeng.github.io/blog/essays/a-day-of-agentic-coding/","isPartOf":{"@type":"Blog","name":"Allen Shao · 文章集","url":"https://shaominfeng.github.io/blog/"}}</script><link rel="stylesheet" href="/blog/_astro/_slug_.B8v9EhdI.css"></head> <body> <a class="skip-link" href="#main">跳到正文</a> <header class="site-header"> <div class="shell header-inner"> <a class="brand" href="/blog/"> <span class="seal" aria-hidden="true">AS</span> <span class="brand-copy"> <strong>Allen Shao · 文章集</strong> <span>Writing & Notes</span> </span> </a> <nav class="site-nav" aria-label="主导航"> <a class="nav-text" href="/blog/" aria-current="page">文章集</a> <a class="nav-text" href="/blog/essays/" aria-current="page">单篇</a> <a class="nav-text" href="/blog/ai-evolution/">从对话到协作</a> <a class="nav-text" href="/blog/about/">关于</a> <a class="nav-ext" href="https://shaominfeng.github.io/">个人主页 ↗</a> <a class="nav-ext" href="https://github.com/shaominfeng" target="_blank" rel="noopener noreferrer">GitHub ↗</a>  </nav> </div> </header> <main id="main">  <div class="progress" aria-hidden="true"></div> <div class="shell article-grid"> <nav class="side-nav" aria-label="单篇目录"> <a class="side-back" href="/blog/">← 文章集</a> <a class="side-brand" href="/blog/essays/">
+单篇长文
+<small>1 篇 · 持续更新</small> </a> <div class="side-part"> <span class="side-part-label">Essays / 01</span> <a href="/blog/essays/a-day-of-agentic-coding/" class="active" aria-current="page"> <span class="side-num">06.26</span> 工程师 Agentic Coding 的一天 </a> </div> <div class="side-part"> <span class="side-part-label">Series / 01</span> <a href="/blog/ai-evolution/"> <span class="side-num">14</span> 从对话到协作 </a> </div> </nav> <div class="article-body"> <header class="article-hero"> <nav class="crumbs" aria-label="面包屑"> <a href="/blog/">文章集</a> <span class="sep">/</span> <a href="/blog/essays/">单篇</a> <span class="sep">/</span> <span>Essay 01</span> </nav> <span class="tag tag-hot" style="margin-bottom:14px;display:inline-block">单篇长文</span> <h1>工程师 Agentic Coding 的一天</h1> <p class="article-sub">当 AI 从「打开来用的工具」，变成「一直在跑的同事」</p> <p class="article-sub" style="font-size:15px;line-height:1.8;color:var(--ink-3)">从 09:00 的自动晨报到 18:00 的最后一轮巡检：一个工程师怎样把 AI 嵌进工单、调试、开发、复盘与工具改进，让时间从「排队」变成「重叠」。</p> <div class="article-meta"> <span>Allen Shao</span> <span class="dot" aria-hidden="true"></span> <span>写于 2026.06.26</span> <span class="dot" aria-hidden="true"></span> <span>19 分钟</span> <span class="dot" aria-hidden="true"></span> <span>单篇</span> </div> </header> <details class="mobile-toc"> <summary>单篇目录</summary> <div class="mobile-nav"> <nav class="side-nav" aria-label="单篇目录"> <a class="side-back" href="/blog/">← 文章集</a> <a class="side-brand" href="/blog/essays/">
+单篇长文
+<small>1 篇 · 持续更新</small> </a> <div class="side-part"> <span class="side-part-label">Essays / 01</span> <a href="/blog/essays/a-day-of-agentic-coding/" class="active" aria-current="page"> <span class="side-num">06.26</span> 工程师 Agentic Coding 的一天 </a> </div> <div class="side-part"> <span class="side-part-label">Series / 01</span> <a href="/blog/ai-evolution/"> <span class="side-num">14</span> 从对话到协作 </a> </div> </nav> </div> </details> <article class="prose">  <blockquote>
+<p>过去 AI 是我「打开来用」的工具；现在它是我工作流里「一直在跑」的同事。</p>
+</blockquote>
+<p>文中的 <code>/daily-brief</code>、<code>/case-brief</code>、<code>/debug</code> 等，都是我自己搭的快捷指令。名字不重要，重要的是每个环节里，谁在执行、谁在做判断。</p>
+<h2 id="0900--一杯水的功夫晨报已经跑完">09:00 · 一杯水的功夫，晨报已经跑完<a class="heading-anchor" aria-label="本节链接" href="#0900--一杯水的功夫晨报已经跑完"><span class="anchor-mark">#</span></a></h2>
+<p>09:00，我端着杯子回到工位。屏幕上的晨报已经跑完了。</p>
+<p>它在我坐下之前就开始了：扫邮箱、扫团队消息、扫工单系统，把过去十几个小时里发生的事过一遍。我看到的不是一堆未读，而是一张已经分好类的表：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>类别</th><th>数量</th><th>判断</th></tr></thead><tbody><tr><td>需回复邮件</td><td>0</td><td>没有「火」要救，可以安心进开发状态</td></tr><tr><td>需要关注</td><td>1</td><td>一个应用注册将在 7 月 8 日自动停用</td></tr><tr><td>工单</td><td>1</td><td>客户在 #107487 留了评论，等我答复</td></tr><tr><td>安全</td><td>1</td><td>静态扫描报了一个 Critical：硬编码凭证</td></tr><tr><td>噪音</td><td>9</td><td>DMARC 告警、自动化字段变更，已折叠</td></tr></tbody></table>
+<p>这张表最值钱的地方，不是「把消息列了一遍」，而是替我完成了第一轮分诊：哪些要立刻处理，哪些只要知道，哪些根本不用看。</p>
+<p>这背后没有什么神秘的能力。我只是把每天 9 点触发一次的任务固定了下来：电脑一开机，<code>/daily-brief</code> 自己跑；它读哪些来源、按什么规则归类、什么算噪音，都写在配置文件里。过去我每天开机的前 20 分钟，基本都耗在「把各个系统翻一遍」上；现在这 20 分钟被压缩成一次阅读，而且是从判断开始，不是从原始信息开始。</p>
+<p><strong>自动化的价值，不是让我知道得更多，而是让我更快决定先做什么。</strong></p>
+<p>当然，第一版并不好。它会把自动化通知当成客户消息，也会把一封普通公告标成「需要回复」。分诊规则是我一条条改出来的：哪些发件人进白名单，哪些关键词直接折叠，哪些工单状态变化才值得叫醒我。这件事没有一劳永逸，只有持续调参。</p>
+<p>但方向是对的：<strong>先让信息变成判断，再让人进入工作。</strong></p>
+<h2 id="0925--同时甩出两个-case">09:25 · 同时甩出两个 case<a class="heading-anchor" aria-label="本节链接" href="#0925--同时甩出两个-case"><span class="anchor-mark">#</span></a></h2>
+<p>晨报里有两件事，必须钻进去才能解决。</p>
+<p>一件是客户工单 #107487，涉及配置核查；另一件是 #104828，问题更深，可能要读代码。以前我的做法是串行：先做第一件，查完数据库、翻完日志、写完回复，再开始第二件。光切换上下文，就要浪费不少时间。</p>
+<p>这一次，我把两个任务同时派了出去。</p>
+<p>每个 <code>/case-brief</code> 会做同一套动作：拉工单历史，识别客户和产品线，主动去查数据库、日志、代码，把散落的信息拼成一份中文分析文档，最后给出几个可能的判断方向。它不是简单地「总结一下工单」，而是先替我把上下文准备好。</p>
+<p>两个任务并行跑，我一个都不用守着。</p>
+<p>这就是 Agentic Coding 和「用 AI 聊天」最大的区别。</p>
+<p>聊天是发一句、等一句：我问「这个报错什么意思」，它答；我再问，它再答。主动权一直在我的手上，AI 只是一个更快的搜索引擎。Agentic 是另一回事：我把一件完整的事交出去，定义好目标、边界和验收标准，然后离开。它自己决定先查什么、再查什么，遇到信息不足时自己去补，最后交回一个可以被我 review 的结果。</p>
+<p>比喻的话，前者是「问一个懂行的同事」，后者是「给一个实习生一份完整的任务书」。后者需要我更清楚地表达，也需要我更认真地验收，但它换来的，是我可以在它跑的时候去做别的事。</p>
+<h2 id="0950--等待不是空白">09:50 · 等待不是空白<a class="heading-anchor" aria-label="本节链接" href="#0950--等待不是空白"><span class="anchor-mark">#</span></a></h2>
+<figure>
+  <img src="/blog/images/agentic-concurrency.svg" alt="上午 09:00 到 11:00 的并发泳道图：我在沟通、分流、review，两个工单分析和一次 debug 在后台同时推进" loading="lazy">
+  <figcaption>09:25—09:50 这三条泳道同时是满的：我在沟通，两个 case 分析在后台跑。琥珀色区域是「同一时刻多件事在跑」。</figcaption>
+</figure>
+<p>这张图里，蓝色是 AI 在干，绿色是我在干，灰色是我在读或在等。</p>
+<p>09:25 到 09:50 这 25 分钟，竖着切一刀，上下三条泳道都填满了：两个 case 分析在跑，我在和客户、团队沟通。这就是「一个人当 N 个人用」的真实来源——不是我真的分裂成了三个人，而是我把原本会互相等待的时间重叠了起来。</p>
+<p>那这 25 分钟我具体在做什么？</p>
+<p>在做只有人能做的事：确认客户真正想解决的是什么，判断哪件事更急，跟团队对齐优先级，决定哪些事今天可以不做。这些事情有一个共同点——它们没有标准答案，需要读空气、读组织、读对方的潜台词。AI 可以给我材料，但不能替我拍板。</p>
+<p>所以「并发」并不是没有代价的。它把瓶颈从「我一次只能做一件」转移到了「我一次只能 review 一件」。当 AI 的产出速度超过我的判断速度时，真正的稀缺资源就变成了我的注意力。这也是为什么我后来越来越在意「任务边界」：边界越清楚，我 review 得越快，并发的收益才越高。</p>
+<h2 id="1015--让-ai-修-bug先让它学会复现">10:15 · 让 AI 修 bug，先让它学会复现<a class="heading-anchor" aria-label="本节链接" href="#1015--让-ai-修-bug先让它学会复现"><span class="anchor-mark">#</span></a></h2>
+<p>上午 10 点多，团队频道里有人 @ 我：某个站点的 DLP 模板加载失败，三个接口齐刷刷 404。</p>
+<p>我把现象、接口路径和最近的变更一起丢给 <code>/debug</code>，然后切走去做别的事。</p>
+<p>注意，我没有坐在那里等它「想一想」。我给它的是一个明确的任务：先复现，再定位，再修，最后证明修好了。<code>/debug</code> 的内部约束是写死的——<strong>先写一个能复现 bug 的测试，再动手改代码</strong>。没有失败的测试，就没有资格提出修复。</p>
+<p>这个约束看起来很小，实际上决定了 AI 调试的质量。</p>
+<p>没有纪律的 AI 调试，很容易变成「随机补丁机」：它读一遍代码，找到一个看起来可疑的地方，改掉，然后告诉你「应该修好了」。这种补丁有时能碰对，但你不知道它为什么对，也不知道它有没有破坏别的东西。有了「先复现」这道门槛，它必须先证明自己真的理解了问题：什么输入会触发、错误发生在哪一层、修复后同一个测试是否转绿。</p>
+<p><strong>信任不是来自它说得像，而是来自它能证明。</strong></p>
+<p>我回到工位时，拿到的不是一堆猜测，而是一份带证据的诊断：复现路径、根因位置、修改点、测试结果。我要做的仍然是 review——检查它有没有绕过真正的边界条件，有没有为了通过测试而改测试——但至少，我不是从零开始。</p>
+<h2 id="1150--我去吃饭它继续写">11:50 · 我去吃饭，它继续写<a class="heading-anchor" aria-label="本节链接" href="#1150--我去吃饭它继续写"><span class="anchor-mark">#</span></a></h2>
+<p>临近午饭，我手上有一个开发任务。评估之后，我判断它边界清楚、风险可控，适合交出去。</p>
+<p>走之前，我花了五分钟把任务书写清楚：</p>
+<ul>
+<li><strong>目标</strong>：做完之后，什么行为会发生变化；</li>
+<li><strong>范围</strong>：只改哪几个文件、哪一层，不碰什么；</li>
+<li><strong>验收</strong>：哪些测试必须通过，边界情况怎么处理；</li>
+<li><strong>约束</strong>：不要改公共接口，不要引入新依赖，遇到不确定的地方先停下来问我。</li>
+</ul>
+<p>然后我起身去吃饭。</p>
+<p>这 40 分钟里，AI 在后台读代码、改实现、跑测试。等我回来，diff 已经摆在那里，测试结果也附在后面。我做的第一件事是 review，不是从零开始写。</p>
+<p>前面的并发，我人还在工位；这一次不一样——<strong>我离开了，产出没有跟着停。</strong></p>
+<p>对个人来说，这意味着午休、通勤、开会这些「不在工位」的时间，不再天然等于产能归零。对团队来说，这意味着一个人的产出开始和他的在线时长解耦。这个变化很大，但它有前提：任务必须被定义清楚。</p>
+<p>我试过反例。有一次我只丢了一句「把这个模块优化一下」，结果它改了一大片，方向还不是我想要的。那不是 AI 的问题，是我的问题——我没有说清楚「优化」是指性能、可读性，还是减少重复。<strong>模糊的任务不会因为交给 AI 就变清晰，只会把返工推迟到我发现的那一刻。</strong></p>
+<h2 id="1400--我不在流程还在跑">14:00 · 我不在，流程还在跑<a class="heading-anchor" aria-label="本节链接" href="#1400--我不在流程还在跑"><span class="anchor-mark">#</span></a></h2>
+<p>下午两点，我去开会。</p>
+<p>与此同时，<code>case-watch</code> 按计划触发。它不是我手动调用的，而是一个工作日每两小时跑一次的定时 loop。开会期间，15:00 那一轮照常执行，全程没有我参与。</p>
+<p>它做三件事：</p>
+<ol>
+<li>扫「等待响应、还没人认领」的工单，按团队整理出来；</li>
+<li>把「停滞超过 3 天」和「状态发生变化」的工单写进告警板；</li>
+<li>把结果主动推到团队频道——我在吃饭或开会，手机也会弹。</li>
+</ol>
+<p>这是「AI 嵌进流程」的最高形态。前面的晨报、case 分析、debug，都还需要我发起；<code>case-watch</code> 连发起都不需要。它按时自己跑，主动来找我。</p>
+<p>但定时任务不是「设一个 cron 就完了」。要让它在真实团队里活下去，至少得处理几件事：</p>
+<ul>
+<li><strong>幂等和去重</strong>：同一件事不能每两小时提醒一次，否则大家很快学会无视它；</li>
+<li><strong>权限最小化</strong>：巡检以只读为主，任何写操作都要有白名单和审计；</li>
+<li><strong>噪音预算</strong>：一次推送超过几条，人就不看了；宁可少报，也不要误报；</li>
+<li><strong>规则可版本化</strong>：规则文件进 git，改了什么、为什么改，都能回滚。</li>
+</ul>
+<p>自动化真正难的部分，从来不是「把按钮藏起来」，而是<strong>把判断规则写下来，并且持续维护它</strong>。</p>
+<h2 id="1500--从干活切换到管事">15:00 · 从「干活」切换到「管事」<a class="heading-anchor" aria-label="本节链接" href="#1500--从干活切换到管事"><span class="anchor-mark">#</span></a></h2>
+<p>开完会回来，我不需要重新「打开工单系统看一圈」。告警板就是现成的作战地图。</p>
+<p>扫一眼：没有新的火，但有 6 笔卡了 3 天以上，1 笔状态变化，0 笔未分配。该催的催，该重分配的重分配。</p>
+<p>于是我从「自己干活」切换到「管事」。</p>
+<p>这两种状态需要的注意力完全不同。干活时，我盯着一个问题的细节；管事时，我盯的是整张板的流动：哪一笔在等客户，哪一笔在等我们，哪一笔其实已经死了但没人关。AI 把「团队层面的盘点」也自动化之后，我回工位的第一分钟就能基于一份准确的清单做分配决策，而不是先花半小时重建上下文。</p>
+<p>盯团队进度的人最怕的，是「有 case 在角落卡住，但没人发现」。定时巡检让这种沉底变得很难发生。</p>
+<h2 id="1530--一封安全邮件变成一个-pr">15:30 · 一封安全邮件，变成一个 PR<a class="heading-anchor" aria-label="本节链接" href="#1530--一封安全邮件变成一个-pr"><span class="anchor-mark">#</span></a></h2>
+<figure>
+  <img src="/blog/images/agentic-security-fix.svg" alt="安全漏洞从晨报告警到 PR 的闭环：晨报捞出 Critical 漏洞、debug 分析根因、我 review、dev-init 建开发单、AI 修复、dev-complete 提 PR" loading="lazy">
+  <figcaption>整条链里只有一格是绿的：我 review。其余环节由晨报、debug 和开发流程自动推进。</figcaption>
+</figure>
+<p>早上晨报捞出的那条 Critical，是一处硬编码凭证。</p>
+<p>下午 15:30，我把它捡起来：<code>/debug</code> 分析根因，确认凭证写死在了代码里；我 review 结论，确认修复方向；<code>/dev-init</code> 新建开发单和分支；AI 把凭证挪进 secret 管理；<code>/dev-complete</code> 跑完测试、提交 PR。</p>
+<p>从一封差点被忽略的安全告警，到一个有工单、有分支、正在 review 的 PR，这中间我没有做任何「搬运」的活。</p>
+<p>但有几件事，我没有交给 AI，也不应该交：</p>
+<ul>
+<li><strong>这个修复能不能上线</strong>，要由我判断；</li>
+<li><strong>凭证要不要轮换、git 历史要不要清理</strong>，要按安全流程走；</li>
+<li><strong>扫描规则要不要加固</strong>，要回到团队规范里讨论。</li>
+</ul>
+<p>把凭证挪进 secret，只是第一步。真实的安全修复，还要处理已经泄露的时间窗口、日志里可能残留的明文、以及同类代码的横向排查。AI 可以加速这些动作，但不能替我承担「确认它真的安全」的责任。</p>
+<p>这也是我对「AI 同事」这个比喻保持警惕的地方：它可以执行，可以分析，可以提出方案，但它不承担后果。<strong>责任仍然在人这里，所以关键节点仍然要有人。</strong></p>
+<h2 id="1630--上午甩出去的-case下午关单">16:30 · 上午甩出去的 case，下午关单<a class="heading-anchor" aria-label="本节链接" href="#1630--上午甩出去的-case下午关单"><span class="anchor-mark">#</span></a></h2>
+<p>上午并发分析的两个 case，下午开始收口。</p>
+<p>#104828 的根因是一个代码 bug。上午的分析文档已经把它定位到了具体模块，下午我另开了一个开发单 #4304——它和上午的安全单 #4303 是两个独立的开发单——然后走修复、提 PR、合并的流程，最后回到客户工单关单。</p>
+<p>全程我只在关单那一步做判断：客户的问题真的解决了吗？回复里有没有说清楚？还有没有遗留的临时方案？</p>
+<p>上午那份分析文档，下午直接变成了开发任务书。我不需要重新读一遍工单，也不需要再把背景讲一遍。<strong>上下文没有在交接处丢掉，这是 agentic 工作流最容易被低估的收益。</strong></p>
+<p>「闭环」也不是「代码合并」就结束了。对我来说，一个客户工单的闭环至少包含四件事：客户收到回复、代码完成修复、工单状态关闭、经验被留下。少一件，下次还会以另一种形式再来一遍。</p>
+<h2 id="1700--复盘ai-也在学习怎么和我协作">17:00 · 复盘：AI 也在学习「怎么和我协作」<a class="heading-anchor" aria-label="本节链接" href="#1700--复盘ai-也在学习怎么和我协作"><span class="anchor-mark">#</span></a></h2>
+<p>傍晚是复盘时间。我常用三个命令：</p>
+<ul>
+<li><code>/session-report</code>：今天的账单——哪个命令烧的 token 最多，哪个 subagent 调了却没有任何产出；</li>
+<li><code>/weekly-summary</code>：本周周报，跨工单、开发单和项目自动汇总，数据它拉，我只补「反思」；</li>
+<li><code>/learn</code> → <code>/remember</code>：从今天的会话里挑出值得记的教训，写进长期记忆。</li>
+</ul>
+<p>用得好不好，凭感觉永远不准。<code>/session-report</code> 最有价值的地方，是它会把「我以为有用」和「实际有产出」之间的差距摊开：有些命令我天天用，其实一直在空转；有些 subagent 我以为是并行，其实只是多烧了一份 token。</p>
+<p><code>/learn</code> 到 <code>/remember</code> 之间，我故意留了一步人工筛选。AI 可以提议「今天这条经验值得记」，但要不要落盘，由我决定。原因很简单：<strong>记忆污染比遗忘更可怕。</strong> 一条错误的偏好一旦写进长期记忆，未来所有会话都会带着它跑。</p>
+<p>这套协作是会复利增长的，但复利的前提是：记录、筛选、检索、淘汰，四个动作都要有。只记录不淘汰，记忆会变成垃圾场；只检索不更新，经验会过期。</p>
+<h2 id="1740--当晚改掉一个盲区">17:40 · 当晚改掉一个盲区<a class="heading-anchor" aria-label="本节链接" href="#1740--当晚改掉一个盲区"><span class="anchor-mark">#</span></a></h2>
+<p>复盘时我发现，<code>case-watch</code> 有一个盲区。</p>
+<p>它只按「停滞超过 3 天」和「状态变化」告警，但对「分给我本人、有客户新评论、正在等我响应」的工单，没有单独拎出来。早上那位客户的评论，是晨报先发现的，不是巡检发现的——这说明巡检策略漏了一类最重要的信号。</p>
+<p>于是我当场改它的规则文件：</p>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="text"><code><span class="line"><span>编辑 loops/case-watch/rule.md</span></span>
+<span class="line"><span>→ git push</span></span></code></pre>
+<p><code>rule.md</code> 是这个 loop 的单一事实源。改完 push，下一次定时巡检自动拉取生效，不需要重启任何东西。</p>
+<p>这是这一天闭环的最后一环，也是我认为最重要的一环：<strong>工程师不只是工具的使用者，更是工具的改进者。</strong></p>
+<p>一个今天踩到的痛点，当晚就固化成明天更聪明的自动化。这比多写几行代码有价值得多，因为它改变的是明天、后天、下个月的工作方式。</p>
+<h2 id="1755--把没做完的事交给明天">17:55 · 把没做完的事，交给明天<a class="heading-anchor" aria-label="本节链接" href="#1755--把没做完的事交给明天"><span class="anchor-mark">#</span></a></h2>
+<p>最后一次 EOD 版 <code>/daily-brief</code>，用来查缺补漏。</p>
+<p>它捞出一条我上午没顾上的消息：需要找测试负责人确认 E2E 测试账号是否有改动。但对方今天不在，我没法当下闭环。</p>
+<p>换以前，这种「今天做不了、要等明天」的事，最容易一觉醒来就忘。现在我直接把它记进明天的 TODO，明早 9 点的晨报会重新把它顶到我面前。</p>
+<p>晨报和 EOD 一头一尾，组成一个闭环：早上 AI 告诉我今天该做什么，晚上帮我把没做完的事安全地交给明天。</p>
+<p><strong>跨天的事不再靠脑子记，系统替我兜底。</strong></p>
+<p>当然，这也有反面：如果 TODO 只进不出，它会变成另一种形式的债务。所以我每周会过一遍「一直没被闭环」的条目，要么拆小，要么删掉，要么承认它不重要。</p>
+<h2 id="1800--我走了它还在">18:00 · 我走了，它还在<a class="heading-anchor" aria-label="本节链接" href="#1800--我走了它还在"><span class="anchor-mark">#</span></a></h2>
+<p>18:00，我关机离开。<code>case-watch</code> 又自动跑了最后一次。</p>
+<p>我走了，它还在替我盯着。</p>
+<p>但我不希望把这描述成「7×24 小时不停工作的 AI」。真实系统里，定时任务要有静默时段，告警要有升级路径，深夜的异常最终仍然要叫醒一个人。自动化不是让人永远在线，而是让人只在真正需要的时候在线。</p>
+<h2 id="这一天ai-在五个层面帮了我">这一天，AI 在五个层面帮了我<a class="heading-anchor" aria-label="本节链接" href="#这一天ai-在五个层面帮了我"><span class="anchor-mark">#</span></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>层面</th><th>它具体做什么</th><th>我的角色</th></tr></thead><tbody><tr><td>整理信息 · 秘书</td><td>晨报拢齐邮件、消息、工单，告诉我该看什么；EOD 把没闭环的交给明天</td><td>判断优先级</td></tr><tr><td>接管重复劳动 · 助理工程师</td><td>拉工单、查多区域配置、建单、跑标准化流程、回写文档</td><td>定义标准</td></tr><tr><td>陪我解决难题 · 结对工程师</td><td>有纪律地复现、定位、验证；复杂 case 我指线索，它深挖</td><td>指方向、验收</td></tr><tr><td>替我跑完流程 · 自动接手的执行者</td><td>debug → dev-init 建单建分支 → 修复 → dev-complete 提 PR</td><td>review</td></tr><tr><td>不在场也盯着 · 全天在岗的值班员</td><td>定时巡检，停滞和状态变化主动告警，无需我发起</td><td>定规则、处理异常</td></tr></tbody></table>
+<p>这五个层面不是并列的，而是一条递进线：从「帮我整理」，到「替我做」，再到「不用我说就做」。越往后，我让渡的执行权越多，但保留的判断权也必须越清晰。</p>
+<h2 id="衡量标准它让我少做了多少不需要人做的事">衡量标准：它让我少做了多少不需要人做的事<a class="heading-anchor" aria-label="本节链接" href="#衡量标准它让我少做了多少不需要人做的事"><span class="anchor-mark">#</span></a></h2>
+<p>一整天下来，我没有「停下手头的活去用 AI」。</p>
+<p>AI 是嵌在流程里的：我做事的同时它就在跑，我开会的时候它还在跑，我吃饭的时候它也在跑。我不是先做完 A 再做 B，而是让 A 和 B 在时间上重叠。</p>
+<p>所以衡量这套工作流的标准，不是「它帮我写了多少行代码」，而是：</p>
+<blockquote>
+<p>它让工程师少做了多少「不需要人来做的事」，从而把人的注意力，还给真正需要判断的环节。</p>
+</blockquote>
+<p>按这个标准，这一天里最值钱的不是那个 PR，也不是那份分析文档，而是几件很小的事：开机时不用再翻五个系统；等结果的时候不用盯着进度条；开会回来不用重建上下文；晚上不用靠脑子记住「明天还要找谁」。</p>
+<p>这些事单看都很小，加起来却是一整天。</p>
+<h2 id="附我现在会守住的五条">附：我现在会守住的五条<a class="heading-anchor" aria-label="本节链接" href="#附我现在会守住的五条"><span class="anchor-mark">#</span></a></h2>
+<p>如果你也想这样过一天，下面五条是我踩过坑之后仍然在守的：</p>
+<ol>
+<li><strong>先有流程，再有 agent。</strong> 自己都没想清楚步骤的事，交给 AI 只会把混乱放大。</li>
+<li><strong>任务边界写清楚。</strong> 目标、范围、验收、约束，四件事缺一不可。</li>
+<li><strong>让测试先失败。</strong> 没有复现的修复，不值得信任。</li>
+<li><strong>所有产出都要可 review。</strong> 不是看它写得多不多，而是看证据全不全。</li>
+<li><strong>每周改一次规则。</strong> 工具不进化，工作流就会很快过时。</li>
+</ol>
+<p>这一天里，AI 没有替我把日子过完。它只是让我少做了很多不需要我做的事，把省下来的注意力，放回那些真正需要我的地方。</p>  </article> <div class="article-end"> <span class="article-end-label">Continue reading</span> <div class="prev-next"> <a class="pn-card" href="/blog/"> <small>← 回到</small> <strong>文章集</strong> </a> <a class="pn-card next" href="/blog/essays/"> <small>更多 →</small> <strong>全部单篇</strong> </a> </div> <div class="author-card"> <span class="seal" aria-hidden="true">AS</span> <p> <strong>Allen Shao</strong>
+全栈工程师，关注 AI Agent、云安全与开发者体验。把公开信息放回时间线，也把自己踩过的坑写下来。
+<a href="https://shaominfeng.github.io/" style="color:var(--accent-2);text-decoration:underline;text-underline-offset:3px">个人主页 ↗</a> </p> </div> <p class="article-license">
+本文以 CC BY-NC-SA 4.0 授权，转载请注明作者与出处。文中观点为个人观察，不代表任职机构。
+</p> </div> </div> <aside class="toc" aria-label="本页目录"><span class="toc-label">On this page</span><ul><li class="depth-2"><a href="#0900--一杯水的功夫晨报已经跑完">09:00 · 一杯水的功夫，晨报已经跑完</a></li><li class="depth-2"><a href="#0925--同时甩出两个-case">09:25 · 同时甩出两个 case</a></li><li class="depth-2"><a href="#0950--等待不是空白">09:50 · 等待不是空白</a></li><li class="depth-2"><a href="#1015--让-ai-修-bug先让它学会复现">10:15 · 让 AI 修 bug，先让它学会复现</a></li><li class="depth-2"><a href="#1150--我去吃饭它继续写">11:50 · 我去吃饭，它继续写</a></li><li class="depth-2"><a href="#1400--我不在流程还在跑">14:00 · 我不在，流程还在跑</a></li><li class="depth-2"><a href="#1500--从干活切换到管事">15:00 · 从「干活」切换到「管事」</a></li><li class="depth-2"><a href="#1530--一封安全邮件变成一个-pr">15:30 · 一封安全邮件，变成一个 PR</a></li><li class="depth-2"><a href="#1630--上午甩出去的-case下午关单">16:30 · 上午甩出去的 case，下午关单</a></li><li class="depth-2"><a href="#1700--复盘ai-也在学习怎么和我协作">17:00 · 复盘：AI 也在学习「怎么和我协作」</a></li><li class="depth-2"><a href="#1740--当晚改掉一个盲区">17:40 · 当晚改掉一个盲区</a></li><li class="depth-2"><a href="#1755--把没做完的事交给明天">17:55 · 把没做完的事，交给明天</a></li><li class="depth-2"><a href="#1800--我走了它还在">18:00 · 我走了，它还在</a></li><li class="depth-2"><a href="#这一天ai-在五个层面帮了我">这一天，AI 在五个层面帮了我</a></li><li class="depth-2"><a href="#衡量标准它让我少做了多少不需要人做的事">衡量标准：它让我少做了多少不需要人做的事</a></li><li class="depth-2"><a href="#附我现在会守住的五条">附：我现在会守住的五条</a></li></ul></aside> </div> <script>
+    (() => {
+      const bar = document.querySelector('.progress');
+      if (!bar) return;
+      let ticking = false;
+      const update = () => {
+        const root = document.documentElement;
+        const max = root.scrollHeight - root.clientHeight;
+        bar.style.width = (max > 0 ? (root.scrollTop / max) * 100 : 0) + '%';
+        ticking = false;
+      };
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          window.requestAnimationFrame(update);
+          ticking = true;
+        }
+      }, { passive: true });
+      update();
+    })();
+  </script> <script>
+    (() => {
+      const links = Array.from(document.querySelectorAll('.toc a'));
+      if (!links.length) return;
+      const targets = links
+        .map((link) => {
+          const href = link.getAttribute('href') || '';
+          const id = decodeURIComponent(href.replace('#', ''));
+          return { link, target: document.getElementById(id) };
+        })
+        .filter((item) => item.target);
+      if (!targets.length) return;
+
+      const setActive = (active) => {
+        links.forEach((link) => link.classList.toggle('active', link === active));
+      };
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          const visible = entries
+            .filter((entry) => entry.isIntersecting)
+            .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+          if (visible.length) {
+            const match = targets.find((item) => item.target === visible[0].target);
+            if (match) setActive(match.link);
+          }
+        },
+        { rootMargin: '-90px 0px -70% 0px', threshold: 0 }
+      );
+
+      targets.forEach((item) => observer.observe(item.target));
+    })();
+  </script>  </main> <footer class="site-footer"> <div class="shell"> <div class="footer-top"> <div class="footer-brand"> <span class="seal" aria-hidden="true">AS</span> <div> <strong>Allen Shao · 文章集</strong> <span>Writing &amp; Notes · 持续更新</span> </div> </div> <div class="footer-links"> <a href="/blog/">文章集</a> <a href="/blog/ai-evolution/">从对话到协作</a> <a href="/blog/about/">关于</a> <a href="/blog/rss.xml">RSS</a> <a href="https://shaominfeng.github.io/">个人主页 ↗</a> <a href="https://github.com/shaominfeng" target="_blank" rel="noopener noreferrer">GitHub ↗</a> </div> </div> <div class="footer-bottom"> <span>© 2026 Allen Shao</span> <span>文字以 CC BY-NC-SA 4.0 授权 · 转载注明出处</span> <span>用 Astro 构建 · GitHub Pages</span> </div> </div> </footer> </body></html>

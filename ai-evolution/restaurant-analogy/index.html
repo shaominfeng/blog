@@ -1,0 +1,1169 @@
+<!DOCTYPE html><html lang="zh-CN"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>用一家餐厅，理解 AI 系统 · Allen Shao</title><meta name="description" content="用「智能餐厅」拆解 AI 系统的四层结构：顾客、服务团队、后厨与工具层。理解推理层为什么是核心差异。"><link rel="canonical" href="https://shaominfeng.github.io/blog/ai-evolution/restaurant-analogy/"><meta name="author" content="Allen Shao"><meta property="og:type" content="article"><meta property="og:title" content="用一家餐厅，理解 AI 系统 · Allen Shao"><meta property="og:description" content="用「智能餐厅」拆解 AI 系统的四层结构：顾客、服务团队、后厨与工具层。理解推理层为什么是核心差异。"><meta property="og:url" content="https://shaominfeng.github.io/blog/ai-evolution/restaurant-analogy/"><meta property="og:image" content="https://shaominfeng.github.io/blog/og.png"><meta property="og:site_name" content="文章集"><meta property="og:locale" content="zh_CN"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="用一家餐厅，理解 AI 系统 · Allen Shao"><meta name="twitter:description" content="用「智能餐厅」拆解 AI 系统的四层结构：顾客、服务团队、后厨与工具层。理解推理层为什么是核心差异。"><meta name="twitter:image" content="https://shaominfeng.github.io/blog/og.png"><link rel="icon" href="/blog/favicon.svg" type="image/svg+xml"><link rel="alternate" type="application/rss+xml" title="Allen Shao · 文章集" href="/blog/rss.xml"><meta name="theme-color" content="#f7f3eb"><meta name="generator" content="Astro v5.18.2"><script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"用一家餐厅，理解 AI 系统","description":"用「智能餐厅」拆解 AI 系统的四层结构：顾客、服务团队、后厨与工具层。理解推理层为什么是核心差异。","inLanguage":"zh-CN","datePublished":"2026-01-29","dateModified":"2026-01-29","author":{"@type":"Person","name":"Allen Shao","alternateName":"Allen Shao","url":"https://shaominfeng.github.io/"},"publisher":{"@type":"Person","name":"Allen Shao"},"mainEntityOfPage":"https://shaominfeng.github.io/blog/ai-evolution/restaurant-analogy/","isPartOf":{"@type":"Book","name":"从对话到协作：AI 大模型三年演进全记录","url":"https://shaominfeng.github.io/blog/ai-evolution/"}}</script><link rel="stylesheet" href="/blog/_astro/_slug_.B8v9EhdI.css"></head> <body> <a class="skip-link" href="#main">跳到正文</a> <header class="site-header"> <div class="shell header-inner"> <a class="brand" href="/blog/"> <span class="seal" aria-hidden="true">AS</span> <span class="brand-copy"> <strong>Allen Shao · 文章集</strong> <span>Writing & Notes</span> </span> </a> <nav class="site-nav" aria-label="主导航"> <a class="nav-text" href="/blog/">文章集</a> <a class="nav-text" href="/blog/essays/">单篇</a> <a class="nav-text" href="/blog/ai-evolution/" aria-current="page">从对话到协作</a> <a class="nav-text" href="/blog/about/">关于</a> <a class="nav-ext" href="https://shaominfeng.github.io/">个人主页 ↗</a> <a class="nav-ext" href="https://github.com/shaominfeng" target="_blank" rel="noopener noreferrer">GitHub ↗</a>  </nav> </div> </header> <main id="main">  <div class="progress" aria-hidden="true"></div> <div class="shell article-grid"> <nav class="side-nav" aria-label="章节目录"> <a class="side-back" href="/blog/">← 文章集</a> <a class="side-brand" href="/blog/ai-evolution/"> 从对话到协作 <small>14 章 · 2022.11—2026.01</small> </a> <div class="side-part"> <span class="side-part-label">序章 / 01</span> <a href="/blog/ai-evolution/overview/"> <span class="side-num">01</span> 总览：从对话到协作 </a> </div><div class="side-part"> <span class="side-part-label">导读 / 01</span> <a href="/blog/ai-evolution/restaurant-analogy/" class="active" aria-current="page"> <span class="side-num">02</span> 用一家餐厅，理解 AI 系统 </a> </div><div class="side-part"> <span class="side-part-label">时间线 / 05</span> <a href="/blog/ai-evolution/year-2022/"> <span class="side-num">03</span> 2022：生成式 AI 的觉醒 </a><a href="/blog/ai-evolution/year-2023/"> <span class="side-num">04</span> 2023：长文本元年与百模大战 </a><a href="/blog/ai-evolution/year-2024/"> <span class="side-num">05</span> 2024：推理革命与生态标准化 </a><a href="/blog/ai-evolution/year-2025/"> <span class="side-num">06</span> 2025：生态爆发与范式转移 </a><a href="/blog/ai-evolution/year-2026/"> <span class="side-num">07</span> 2026：协作时代的开启 </a> </div><div class="side-part"> <span class="side-part-label">技术深潜 / 04</span> <a href="/blog/ai-evolution/context-revolution/"> <span class="side-num">08</span> 上下文革命：从 4K 到 2M </a><a href="/blog/ai-evolution/prompt-engineering/"> <span class="side-num">09</span> Prompt 工程的兴衰 </a><a href="/blog/ai-evolution/mcp/"> <span class="side-num">10</span> MCP 协议：从炒作到现实 </a><a href="/blog/ai-evolution/agent-skills/"> <span class="side-num">11</span> Agent Skills：比 MCP 更重要的创新 </a> </div><div class="side-part"> <span class="side-part-label">洞察 / 01</span> <a href="/blog/ai-evolution/new-paradigm/"> <span class="side-num">12</span> AI 进化的新范式：推理层才是核心 </a> </div><div class="side-part"> <span class="side-part-label">实践 / 01</span> <a href="/blog/ai-evolution/enterprise-case/"> <span class="side-num">13</span> 企业 AI 平台发展史（2023—2026） </a> </div><div class="side-part"> <span class="side-part-label">展望 / 01</span> <a href="/blog/ai-evolution/outlook/"> <span class="side-num">14</span> 未来展望与结论 </a> </div> </nav> <div class="article-body"> <header class="article-hero"> <nav class="crumbs" aria-label="面包屑"> <a href="/blog/">文章集</a> <span class="sep">/</span> <a href="/blog/ai-evolution/">从对话到协作</a> <span class="sep">/</span> <span>第 02 章</span> </nav>  <h1>用一家餐厅，理解 AI 系统</h1> <p class="article-sub">模型是主厨，推理层是领班</p> <p class="article-sub" style="font-size:15px;line-height:1.8;color:var(--ink-3)">用「智能餐厅」拆解 AI 系统的四层结构：顾客、服务团队、后厨与工具层。理解推理层为什么是核心差异。</p> <div class="article-meta"> <span>Allen Shao</span>  <span class="dot" aria-hidden="true"></span> <span>写于 2026.01.29</span>  <span class="dot" aria-hidden="true"></span> <span>20 分钟</span> <span class="dot" aria-hidden="true"></span> <span>导读</span>  </div> </header> <details class="mobile-toc"> <summary>章节目录 · 当前第 02 章</summary> <div class="mobile-nav"> <nav class="side-nav" aria-label="章节目录"> <a class="side-back" href="/blog/">← 文章集</a> <a class="side-brand" href="/blog/ai-evolution/"> 从对话到协作 <small>14 章 · 2022.11—2026.01</small> </a> <div class="side-part"> <span class="side-part-label">序章 / 01</span> <a href="/blog/ai-evolution/overview/"> <span class="side-num">01</span> 总览：从对话到协作 </a> </div><div class="side-part"> <span class="side-part-label">导读 / 01</span> <a href="/blog/ai-evolution/restaurant-analogy/" class="active" aria-current="page"> <span class="side-num">02</span> 用一家餐厅，理解 AI 系统 </a> </div><div class="side-part"> <span class="side-part-label">时间线 / 05</span> <a href="/blog/ai-evolution/year-2022/"> <span class="side-num">03</span> 2022：生成式 AI 的觉醒 </a><a href="/blog/ai-evolution/year-2023/"> <span class="side-num">04</span> 2023：长文本元年与百模大战 </a><a href="/blog/ai-evolution/year-2024/"> <span class="side-num">05</span> 2024：推理革命与生态标准化 </a><a href="/blog/ai-evolution/year-2025/"> <span class="side-num">06</span> 2025：生态爆发与范式转移 </a><a href="/blog/ai-evolution/year-2026/"> <span class="side-num">07</span> 2026：协作时代的开启 </a> </div><div class="side-part"> <span class="side-part-label">技术深潜 / 04</span> <a href="/blog/ai-evolution/context-revolution/"> <span class="side-num">08</span> 上下文革命：从 4K 到 2M </a><a href="/blog/ai-evolution/prompt-engineering/"> <span class="side-num">09</span> Prompt 工程的兴衰 </a><a href="/blog/ai-evolution/mcp/"> <span class="side-num">10</span> MCP 协议：从炒作到现实 </a><a href="/blog/ai-evolution/agent-skills/"> <span class="side-num">11</span> Agent Skills：比 MCP 更重要的创新 </a> </div><div class="side-part"> <span class="side-part-label">洞察 / 01</span> <a href="/blog/ai-evolution/new-paradigm/"> <span class="side-num">12</span> AI 进化的新范式：推理层才是核心 </a> </div><div class="side-part"> <span class="side-part-label">实践 / 01</span> <a href="/blog/ai-evolution/enterprise-case/"> <span class="side-num">13</span> 企业 AI 平台发展史（2023—2026） </a> </div><div class="side-part"> <span class="side-part-label">展望 / 01</span> <a href="/blog/ai-evolution/outlook/"> <span class="side-num">14</span> 未来展望与结论 </a> </div> </nav> </div> </details> <article class="prose">  <blockquote>
+<p>💡 用一个日常场景帮你理解AI系统的完整工作原理，从点菜到上菜的全流程。</p>
+</blockquote>
+<hr>
+<h2 id="餐厅的完整架构">餐厅的完整架构<a class="heading-anchor" aria-label="本节链接" href="#餐厅的完整架构"><span class="anchor-mark">#</span></a></h2>
+<h3 id="整体架构图形象展示">整体架构图（形象展示）<a class="heading-anchor" aria-label="本节链接" href="#整体架构图形象展示"><span class="anchor-mark">#</span></a></h3>
+<p><img src="/blog/images/restaurant-architecture.webp" alt="AI系统餐厅架构图"></p>
+<p><em>图：AI系统的4层餐厅架构 - 从顾客点菜到后厨出菜的完整流程（黑板手绘风格）</em></p>
+<p><strong>架构四层说明</strong>：</p>
+<p><strong>Layer 1 - 顾客层（蓝色）</strong>：</p>
+<ul>
+<li>顾客提出需求：“我要川菜宴席，8人”</li>
+<li>从2022年需要详细描述 → 2026年只说目标</li>
+</ul>
+<p><strong>Layer 2 - 前厅服务团队/推理层（金色）⭐ 最重要</strong>：</p>
+<ul>
+<li><strong>Agent领班</strong>（中央）：规划菜单、协调后厨、优化成本</li>
+<li><strong>助手系统</strong>（左）：记录历史、传递需求</li>
+<li><strong>API Gateway</strong>（右）：接待、收银</li>
+<li>这层是<strong>核心差异所在</strong>：同样的主厨，不同的服务团队决定体验</li>
+</ul>
+<p><strong>Layer 3 - 后厨/模型层（红色）</strong>：</p>
+<ul>
+<li><strong>主厨（AI模型）</strong>：GPT-4、Claude Opus、DeepSeek-R1</li>
+<li><strong>记忆力演进</strong>：4K → 100K → 1M（上下文窗口）</li>
+<li><strong>炉灶（GPU）</strong>：火力大小决定速度</li>
+<li><strong>资源监控</strong>：温度计（算力）、时钟（时间）</li>
+</ul>
+<p><strong>Layer 4 - 工具资源层（绿色）</strong>：</p>
+<ul>
+<li><strong>Skills菜谱</strong>（左）：《川菜大全》《法式甜点》= 知识、方法论</li>
+<li><strong>MCP采购</strong>（中）：菜市场、供应商 = 获取外部资源</li>
+<li><strong>Function Calling</strong>（右）：刀、锅、铲 = 基础工具</li>
+</ul>
+<p><strong>信息流动</strong>（箭头方向）：</p>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>顾客点菜 → 服务团队理解规划 → 后厨执行烹饪 → 调用工具资源</span></span></code></pre>
+<hr>
+<h3 id="流程图技术视角">流程图（技术视角）<a class="heading-anchor" aria-label="本节链接" href="#流程图技术视角"><span class="anchor-mark">#</span></a></h3>
+<hr>
+<h2 id="各角色详细解析">各角色详细解析<a class="heading-anchor" aria-label="本节链接" href="#各角色详细解析"><span class="anchor-mark">#</span></a></h2>
+<h3 id="1-顾客用户">1. 顾客（用户）<a class="heading-anchor" aria-label="本节链接" href="#1-顾客用户"><span class="anchor-mark">#</span></a></h3>
+<p><strong>角色</strong>：提出用餐需求
+<strong>演进</strong>：从”烹饪专家”到”说目标就行”</p>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>2022年：必须是烹饪专家</span></span>
+<span class="line"><span>"鸡肉切1cm见方，腌制15分钟，加生抽料酒..."</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>2026年：只说目标</span></span>
+<span class="line"><span>"给我一桌川菜宴席，8人，预算2000"</span></span></code></pre>
+<h3 id="2-前厅服务团队推理层-最重要">2. 前厅服务团队（推理层）⭐ 最重要<a class="heading-anchor" aria-label="本节链接" href="#2-前厅服务团队推理层-最重要"><span class="anchor-mark">#</span></a></h3>
+<p><strong>核心成员</strong>：</p>
+<ul>
+<li><strong>领班（Agent核心）</strong>：规划、决策、协调</li>
+<li><strong>服务员（助手系统）</strong>：记录历史、传递需求</li>
+<li><strong>前台（API Gateway）</strong>：接待、收银</li>
+</ul>
+<p><strong>领班的关键职责</strong>：</p>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>理解需求：</span></span>
+<span class="line"><span>"川菜宴席，8人，预算2000，有人不吃辣"</span></span>
+<span class="line"><span>↓ 解析成</span></span>
+<span class="line"><span>- 菜系：川菜</span></span>
+<span class="line"><span>- 人数：8人</span></span>
+<span class="line"><span>- 预算：¥2000（约¥250/人）</span></span>
+<span class="line"><span>- 约束：至少1-2道不辣的菜</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>规划菜单：</span></span>
+<span class="line"><span>查阅《川菜大全》(Skills)</span></span>
+<span class="line"><span>→ 设计：凉菜×3、热菜×6、汤×1、主食×2</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>协调资源：</span></span>
+<span class="line"><span>- 检查库存（有什么食材）</span></span>
+<span class="line"><span>- 采购清单（去MCP买什么）</span></span>
+<span class="line"><span>- 安排炉灶（哪个GPU做什么）</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>优化流程：</span></span>
+<span class="line"><span>- 凉菜提前做</span></span>
+<span class="line"><span>- 热菜控制上菜节奏</span></span>
+<span class="line"><span>- 汤慢炖，最后上</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>成本控制：</span></span>
+<span class="line"><span>- 提前备好常用料（Prompt Caching）</span></span>
+<span class="line"><span>- 收走空盘子（Auto-Compact）</span></span>
+<span class="line"><span>- 只给主厨需要的菜谱（Skills按需加载）</span></span></code></pre>
+<p><strong>为什么推理层最重要？</strong></p>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>很多人以为：AI = 主厨（模型）</span></span>
+<span class="line"><span>实际上：AI系统 = 主厨 + 服务团队</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>同样的主厨（同样的模型），不同的服务团队（推理层）：</span></span>
+<span class="line"><span>- 差的服务团队：顾客说不清楚，后厨做错菜，成本高昂</span></span>
+<span class="line"><span>- 好的服务团队：快速理解需求，优化流程，成本可控</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>这就是为什么：</span></span>
+<span class="line"><span>Claude Code（Anthropic的服务团队）> ChatGPT（OpenAI的服务团队）</span></span>
+<span class="line"><span>即使用的是同等级的主厨（模型）</span></span></code></pre>
+<h3 id="3-后厨模型层">3. 后厨（模型层）<a class="heading-anchor" aria-label="本节链接" href="#3-后厨模型层"><span class="anchor-mark">#</span></a></h3>
+<p><strong>主厨（AI模型）</strong>：</p>
+<ul>
+<li><strong>大脑/技艺</strong> = 模型参数（GPT-4, Claude Opus, DeepSeek-R1）</li>
+<li><strong>记忆力</strong> = 上下文窗口
+<ul>
+<li>新手（4K）：只记得4道菜</li>
+<li>大厨（100K）：记得100道菜</li>
+<li>特级大厨（1M）：记得1000道菜的所有细节</li>
+</ul>
+</li>
+</ul>
+<p><strong>炉灶（GPU/显卡）</strong>：</p>
+<ul>
+<li>火力大小 = 算力（H100 vs A100 vs 消费级显卡）</li>
+<li>炉灶数量 = GPU集群规模</li>
+<li>火力越大，出菜越快</li>
+</ul>
+<p><strong>电力（算力资源）</strong>：</p>
+<ul>
+<li>燃料供应 = 电力成本</li>
+<li>决定能开几个炉灶</li>
+<li>云端餐厅（无限电力）vs 家庭厨房（有限电力）</li>
+</ul>
+<p><strong>仓库（存储）</strong>：</p>
+<ul>
+<li>存放食材、半成品</li>
+<li>对应模型的中间计算结果</li>
+</ul>
+<h3 id="4-工具与资源层">4. 工具与资源层<a class="heading-anchor" aria-label="本节链接" href="#4-工具与资源层"><span class="anchor-mark">#</span></a></h3>
+<h4 id="skills菜谱宝典">Skills（菜谱宝典）📚<a class="heading-anchor" aria-label="本节链接" href="#skills菜谱宝典"><span class="anchor-mark">#</span></a></h4>
+<p><strong>定义</strong>：烹饪知识、方法论、最佳实践</p>
+<p><strong>具体内容</strong>：</p>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>《川菜大全》：</span></span>
+<span class="line"><span>- 宫保鸡丁标准做法</span></span>
+<span class="line"><span>- 火候控制技巧</span></span>
+<span class="line"><span>- 刀工要求</span></span>
+<span class="line"><span>- 摆盘风格</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>《法式甜点》：</span></span>
+<span class="line"><span>- 马卡龙温度曲线（150°C烤15分钟）</span></span>
+<span class="line"><span>- 舒芙蕾打发技巧（打到湿性发泡）</span></span>
+<span class="line"><span>- 焦糖制作要点</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>《粤菜精髓》：</span></span>
+<span class="line"><span>- 煲汤时间表（老火汤3小时）</span></span>
+<span class="line"><span>- 清蒸技巧（水开后蒸8分钟）</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>《烹饪宝典》：</span></span>
+<span class="line"><span>- 刀工百科</span></span>
+<span class="line"><span>- 火候控制</span></span>
+<span class="line"><span>- 味道平衡</span></span></code></pre>
+<p><strong>特点</strong>：</p>
+<ul>
+<li>✅ 知识、方法论、标准流程</li>
+<li>✅ 保证质量一致性</li>
+<li>✅ 可复用（每次做宫保鸡丁都参考同一个配方）</li>
+<li>✅ Token效率高（只给需要的菜谱）</li>
+</ul>
+<h4 id="mcp采购系统">MCP（采购系统）🛒<a class="heading-anchor" aria-label="本节链接" href="#mcp采购系统"><span class="anchor-mark">#</span></a></h4>
+<p><strong>定义</strong>：获取外部资源的渠道</p>
+<p><strong>具体渠道</strong>：</p>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>菜市场接口：</span></span>
+<span class="line"><span>- 新鲜蔬菜（本地文件系统）</span></span>
+<span class="line"><span>- 时令水果（实时数据）</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>海鲜供应商：</span></span>
+<span class="line"><span>- 深海鱼（数据库查询）</span></span>
+<span class="line"><span>- 龙虾帝王蟹（API调用）</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>调料仓库：</span></span>
+<span class="line"><span>- 各种香料（工具集成）</span></span>
+<span class="line"><span>- 酱料（第三方服务）</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>超市API：</span></span>
+<span class="line"><span>- 日常食材（常用数据源）</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>进口食品商：</span></span>
+<span class="line"><span>- 罕见食材（专业API）</span></span></code></pre>
+<p><strong>特点</strong>：</p>
+<ul>
+<li>✅ 连接外部世界（数据、服务、工具）</li>
+<li>✅ 实时获取（动态数据）</li>
+<li>⚠️ Token消耗大（所有供应商信息都要告诉厨师）</li>
+<li>⚠️ 安全风险（不可信的供应商可能有问题）</li>
+</ul>
+<h4 id="function-calling基础厨具">Function Calling（基础厨具）🔪<a class="heading-anchor" aria-label="本节链接" href="#function-calling基础厨具"><span class="anchor-mark">#</span></a></h4>
+<p><strong>定义</strong>：最基础的工具调用能力</p>
+<p><strong>工具清单</strong>：</p>
+<ul>
+<li>刀（切）</li>
+<li>锅（煮）</li>
+<li>铲（炒）</li>
+<li>勺（盛）</li>
+</ul>
+<p><strong>类比</strong>：</p>
+<ul>
+<li>就像厨师必备的基本工具</li>
+<li>没有菜谱指导，也能”瞎炒”</li>
+<li>但效果不稳定，质量难保证</li>
+</ul>
+<hr>
+<h2 id="点菜方式的演进史">点菜方式的演进史<a class="heading-anchor" aria-label="本节链接" href="#点菜方式的演进史"><span class="anchor-mark">#</span></a></h2>
+<h3 id="2022年必须当烹饪专家prompt工程萌芽">2022年：必须当烹饪专家（Prompt工程萌芽）<a class="heading-anchor" aria-label="本节链接" href="#2022年必须当烹饪专家prompt工程萌芽"><span class="anchor-mark">#</span></a></h3>
+<p><strong>场景</strong>：</p>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>顾客（需要非常详细的描述）：</span></span>
+<span class="line"><span>"我要宫保鸡丁。</span></span>
+<span class="line"><span>鸡肉切1cm见方的丁，用生抽、料酒、淀粉腌制15分钟。</span></span>
+<span class="line"><span>花生提前用油炸至金黄。</span></span>
+<span class="line"><span>干辣椒用朝天椒，剪成2cm段，去籽。</span></span>
+<span class="line"><span>葱姜蒜切末，葱白葱绿分开。</span></span>
+<span class="line"><span>糖醋比例1:2，加酱油、料酒、淀粉调汁。</span></span>
+<span class="line"><span>锅烧热下油，先大火爆香花椒30秒捞出。</span></span>
+<span class="line"><span>下鸡丁中火翻炒2分钟至变色。</span></span>
+<span class="line"><span>加干辣椒、葱姜蒜爆香1分钟。</span></span>
+<span class="line"><span>下黄瓜丁、花生翻炒1分钟。</span></span>
+<span class="line"><span>最后淋汁快速翻炒10秒出锅。"</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>厨师：严格按照描述执行（一个步骤错了就失败）</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>结果：</span></span>
+<span class="line"><span>✅ 如果描述准确，能做出好菜</span></span>
+<span class="line"><span>❌ 顾客必须是烹饪专家</span></span>
+<span class="line"><span>❌ 描述稍有不清楚，菜就做错</span></span></code></pre>
+<p><strong>痛点</strong>：</p>
+<ul>
+<li>门槛太高（普通人不会这么点菜）</li>
+<li>不稳定（细节没说清楚就失败）</li>
+<li>不可维护（下次点菜要重新描述一遍）</li>
+</ul>
+<h3 id="2023年prompt工程师是高薪职业">2023年：Prompt工程师是高薪职业<a class="heading-anchor" aria-label="本节链接" href="#2023年prompt工程师是高薪职业"><span class="anchor-mark">#</span></a></h3>
+<p><strong>场景</strong>：</p>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>顾客（需要专业知识）：</span></span>
+<span class="line"><span>"宫保鸡丁，按川菜传统做法，鸡肉嫩，花生脆，</span></span>
+<span class="line"><span>微辣，糖醋适中，不要太咸。"</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>厨师：理解基本要求，按标准流程做，但细节靠经验</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>结果：</span></span>
+<span class="line"><span>✅ 比2022年好很多</span></span>
+<span class="line"><span>✅ 成功率提高到70-80%</span></span>
+<span class="line"><span>⚠️ 但顾客还是要知道"川菜传统做法"是什么</span></span>
+<span class="line"><span>⚠️ 不同厨师理解不同，质量不稳定</span></span></code></pre>
+<p><strong>行业现象</strong>：</p>
+<ul>
+<li>出现专门的”点菜顾问”（Prompt工程师）</li>
+<li>年薪$20万（2023年真实数据）</li>
+<li>专门研究”怎么说话，厨师才听得懂”</li>
+</ul>
+<h3 id="2024年厨师变聪明了模型推理能力提升">2024年：厨师变聪明了（模型推理能力提升）<a class="heading-anchor" aria-label="本节链接" href="#2024年厨师变聪明了模型推理能力提升"><span class="anchor-mark">#</span></a></h3>
+<p><strong>场景</strong>：</p>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>顾客（简化描述）：</span></span>
+<span class="line"><span>"来个宫保鸡丁，微辣，花生多一点"</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>厨师（会推理了）：</span></span>
+<span class="line"><span>"宫保鸡丁"→ 自动知道标准做法</span></span>
+<span class="line"><span>"微辣"→ 减少辣椒用量</span></span>
+<span class="line"><span>"花生多一点"→ 加量20%</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>结果：</span></span>
+<span class="line"><span>✅ 顾客不需要是专家</span></span>
+<span class="line"><span>✅ 质量稳定（厨师有基础知识）</span></span>
+<span class="line"><span>✅ 个性化（能理解偏好）</span></span></code></pre>
+<p><strong>技术突破</strong>：</p>
+<ul>
+<li>OpenAI o1（推理能力）</li>
+<li>Claude 3（长上下文+推理）</li>
+<li>厨师从”严格执行命令”到”理解意图”</li>
+</ul>
+<h3 id="2025年领班接管全流程agent诞生">2025年：领班接管全流程（Agent诞生）<a class="heading-anchor" aria-label="本节链接" href="#2025年领班接管全流程agent诞生"><span class="anchor-mark">#</span></a></h3>
+<p><strong>场景</strong>：</p>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>顾客（目标导向）：</span></span>
+<span class="line"><span>"给我一顿正宗的川菜宴席，8个人吃，预算2000"</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>领班（Agent）自主决定：</span></span>
+<span class="line"><span>1. 【查菜谱】翻《川菜大全》(Skills)</span></span>
+<span class="line"><span>   → 确定经典菜单结构：凉菜×3、热菜×6、汤×1</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>2. 【列清单】需要哪些食材</span></span>
+<span class="line"><span>   → 鸡肉、鱼、虾、各种蔬菜...</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>3. 【去采购】调用采购系统（MCP）</span></span>
+<span class="line"><span>   → 菜市场买新鲜菜、供应商拿海鲜</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>4. 【排计划】安排上菜顺序</span></span>
+<span class="line"><span>   → 汤先炖（3小时）</span></span>
+<span class="line"><span>   → 凉菜提前做（可冷藏）</span></span>
+<span class="line"><span>   → 热菜按时间倒推</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>5. 【协调后厨】告诉主厨按什么顺序做</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>6. 【质量检查】每道菜品尝，不满意重做</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>7. 【上菜服务】观察节奏，及时调整</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>8. 【最终确认】"川菜宴席已全部上齐，请慢用！"</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>顾客全程不用管细节，只等着吃就行</span></span></code></pre>
+<p><strong>关键突破</strong>：</p>
+<ul>
+<li>从”被动响应”到”自主执行”</li>
+<li>从”每步确认”到”说目标就行”</li>
+<li>从”单个任务”到”完整流程”</li>
+</ul>
+<h3 id="2026年多领班协作多agent系统">2026年：多领班协作（多Agent系统）<a class="heading-anchor" aria-label="本节链接" href="#2026年多领班协作多agent系统"><span class="anchor-mark">#</span></a></h3>
+<p><strong>场景</strong>：</p>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>顾客："办一场200人的婚宴，中西结合，预算10万"</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>餐厅经理（主Agent）：</span></span>
+<span class="line"><span>"这个任务太大，我来协调多个领班"</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>分配任务：</span></span>
+<span class="line"><span>- 领班A（中餐区）：负责50道中餐</span></span>
+<span class="line"><span>- 领班B（西餐区）：负责西式冷餐</span></span>
+<span class="line"><span>- 领班C（甜品区）：负责婚礼蛋糕和甜点</span></span>
+<span class="line"><span>- 领班D（酒水区）：负责饮料和酒水搭配</span></span>
+<span class="line"><span>- 领班E（协调员）：控制整体节奏</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>各领班自主工作：</span></span>
+<span class="line"><span>- 同时查各自的菜谱（Skills）</span></span>
+<span class="line"><span>- 同时去采购（MCP）</span></span>
+<span class="line"><span>- 并行准备食材和烹饪</span></span>
+<span class="line"><span>- 互相协调（"甜品区，主菜快好了，准备切蛋糕"）</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>最终：</span></span>
+<span class="line"><span>经理："婚宴已准备就绪，请入席！"</span></span></code></pre>
+<p><strong>这就是 Claude Cowork 和多Agent协作的概念！</strong></p>
+<hr>
+<h2 id="mcp-vs-skills-深度对比">MCP vs Skills 深度对比<a class="heading-anchor" aria-label="本节链接" href="#mcp-vs-skills-深度对比"><span class="anchor-mark">#</span></a></h2>
+<h3 id="核心区别">核心区别<a class="heading-anchor" aria-label="本节链接" href="#核心区别"><span class="anchor-mark">#</span></a></h3>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>┌─────────────────────────────────────────────────────┐</span></span>
+<span class="line"><span>│                   关键区分                            │</span></span>
+<span class="line"><span>├─────────────────────────────────────────────────────┤</span></span>
+<span class="line"><span>│  MCP（采购系统）= "我能拿到什么食材"（能力层）        │</span></span>
+<span class="line"><span>│  Skills（菜谱）   = "我知道怎么做菜"（知识层）        │</span></span>
+<span class="line"><span>│  Function Call   = "我有基本厨具"（工具层）          │</span></span>
+<span class="line"><span>└─────────────────────────────────────────────────────┘</span></span></code></pre>
+<h3 id="详细对比表">详细对比表<a class="heading-anchor" aria-label="本节链接" href="#详细对比表"><span class="anchor-mark">#</span></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>维度</th><th>MCP（采购系统）</th><th>Skills（菜谱宝典）</th><th>Function Calling（基础厨具）</th></tr></thead><tbody><tr><td><strong>类比</strong></td><td>菜市场、供应商</td><td>烹饪书、菜谱</td><td>刀、锅、铲</td></tr><tr><td><strong>作用</strong></td><td>获取外部资源</td><td>提供知识方法</td><td>基础工具能力</td></tr><tr><td><strong>解决问题</strong></td><td>“没有食材怎么办”</td><td>“不知道怎么做怎么办”</td><td>“怎么切菜炒菜”</td></tr><tr><td><strong>Token消耗</strong></td><td>很大（50个供应商信息）</td><td>很小（按需给菜谱）</td><td>中等</td></tr><tr><td><strong>适用场景</strong></td><td>需要外部数据</td><td>需要领域知识</td><td>基础操作</td></tr><tr><td><strong>安全性</strong></td><td>⚠️ 风险高（供应商可能有问题）</td><td>✅ 安全（内部知识）</td><td>✅ 可控</td></tr></tbody></table>
+<h3 id="三种组合场景">三种组合场景<a class="heading-anchor" aria-label="本节链接" href="#三种组合场景"><span class="anchor-mark">#</span></a></h3>
+<h4 id="场景1只有mcp没有skills">场景1：只有MCP，没有Skills<a class="heading-anchor" aria-label="本节链接" href="#场景1只有mcp没有skills"><span class="anchor-mark">#</span></a></h4>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>厨师有采购能力，但不会做菜：</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>厨师："我能拿到龙虾、松露、鹅肝、鱼子酱"</span></span>
+<span class="line"><span>（但不知道法餐怎么做，只能瞎炒）</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>结果：</span></span>
+<span class="line"><span>食材：⭐⭐⭐⭐⭐（顶级）</span></span>
+<span class="line"><span>技术：⭐（不会做）</span></span>
+<span class="line"><span>成品：⭐⭐（浪费了好食材）</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>类比现实：</span></span>
+<span class="line"><span>有GitHub API但不知道code review流程</span></span>
+<span class="line"><span>→ 能拿到代码，但不知道怎么review</span></span></code></pre>
+<h4 id="场景2只有skills没有mcp">场景2：只有Skills，没有MCP<a class="heading-anchor" aria-label="本节链接" href="#场景2只有skills没有mcp"><span class="anchor-mark">#</span></a></h4>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>厨师会做菜，但拿不到食材：</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>《法餐圣经》写着：</span></span>
+<span class="line"><span>"用龙虾、松露、鹅肝制作..."</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>但厨师出不了门（无采购能力）</span></span>
+<span class="line"><span>只能看着菜谱流口水</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>结果：</span></span>
+<span class="line"><span>理论：⭐⭐⭐⭐⭐（完美配方）</span></span>
+<span class="line"><span>食材：❌（没有）</span></span>
+<span class="line"><span>成品：❌（做不出来）</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>类比现实：</span></span>
+<span class="line"><span>有code review的最佳实践，但拿不到代码</span></span>
+<span class="line"><span>→ 知道怎么review，但无代码可review</span></span></code></pre>
+<h4 id="场景3mcp--skills完美组合">场景3：MCP + Skills（完美组合）✅<a class="heading-anchor" aria-label="本节链接" href="#场景3mcp--skills完美组合"><span class="anchor-mark">#</span></a></h4>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>厨师既会做菜，又能采购：</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>顾客："来道法式海鲜汤"</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>1. 【查菜谱】打开《法餐圣经》(Skills)</span></span>
+<span class="line"><span>   → "需要：龙虾、扇贝、白葡萄酒、藏红花..."</span></span>
+<span class="line"><span>   → "做法：先熬高汤2小时，加海鲜..."</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>2. 【去采购】调用MCP</span></span>
+<span class="line"><span>   → 海鲜供应商拿龙虾、扇贝</span></span>
+<span class="line"><span>   → 酒水商拿白葡萄酒</span></span>
+<span class="line"><span>   → 香料商拿藏红花</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>3. 【按菜谱制作】</span></span>
+<span class="line"><span>   → 严格按《法餐圣经》的标准流程</span></span>
+<span class="line"><span>   → 火候、时间、比例都精确控制</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>结果：</span></span>
+<span class="line"><span>食材：⭐⭐⭐⭐⭐</span></span>
+<span class="line"><span>技术：⭐⭐⭐⭐⭐</span></span>
+<span class="line"><span>成品：⭐⭐⭐⭐⭐（完美）</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>类比现实：</span></span>
+<span class="line"><span>Code Review任务</span></span>
+<span class="line"><span>→ 知道review标准（Skills）</span></span>
+<span class="line"><span>→ 能拿到代码（MCP调用GitHub API）</span></span>
+<span class="line"><span>→ 完美执行review流程</span></span></code></pre>
+<h3 id="为什么skills比mcp更重要">为什么Skills比MCP更重要？<a class="heading-anchor" aria-label="本节链接" href="#为什么skills比mcp更重要"><span class="anchor-mark">#</span></a></h3>
+<p><strong>统计数据（2025-2026实际使用）</strong>：</p>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>100个顾客点菜：</span></span>
+<span class="line"><span>- 80个：只需要菜谱（Skills）</span></span>
+<span class="line"><span>  例："做个宫保鸡丁"（食材餐厅有）</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>- 15个：需要菜谱 + 采购（Skills + MCP）</span></span>
+<span class="line"><span>  例："做法餐"（需要进口食材）</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>- 5个：只需要采购（MCP）</span></span>
+<span class="line"><span>  例："去超市买瓶酱油"</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>结论：Skills覆盖95%的场景</span></span></code></pre>
+<p><strong>实际应用映射</strong>：</p>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>常见AI任务：</span></span>
+<span class="line"><span>- 代码Review → 需要Skills（review标准），不需要MCP</span></span>
+<span class="line"><span>- 写文档 → 需要Skills（写作规范），不需要MCP</span></span>
+<span class="line"><span>- 架构设计 → 需要Skills（设计模式），不需要MCP</span></span>
+<span class="line"><span>- 调试Bug → 需要Skills（调试方法），可能需要MCP（读日志）</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>少数任务需要MCP：</span></span>
+<span class="line"><span>- 查GitHub PR状态</span></span>
+<span class="line"><span>- 读取数据库数据</span></span>
+<span class="line"><span>- 调用第三方API</span></span></code></pre>
+<hr>
+<h2 id="agent自主性的演进">Agent自主性的演进<a class="heading-anchor" aria-label="本节链接" href="#agent自主性的演进"><span class="anchor-mark">#</span></a></h2>
+<h3 id="level-0被动工具2022-2023">Level 0：被动工具（2022-2023）<a class="heading-anchor" aria-label="本节链接" href="#level-0被动工具2022-2023"><span class="anchor-mark">#</span></a></h3>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>顾客："我要吃饭"</span></span>
+<span class="line"><span>服务员："您想吃什么？"</span></span>
+<span class="line"><span>顾客："川菜"</span></span>
+<span class="line"><span>服务员："哪道川菜？"</span></span>
+<span class="line"><span>顾客："宫保鸡丁"</span></span>
+<span class="line"><span>服务员："什么辣度？"</span></span>
+<span class="line"><span>顾客："微辣"</span></span>
+<span class="line"><span>服务员："要花生吗？"</span></span>
+<span class="line"><span>顾客："要"</span></span>
+<span class="line"><span>服务员："多少克？"</span></span>
+<span class="line"><span>顾客："50克"</span></span>
+<span class="line"><span>...</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>特点：每个细节都要顾客说，像"遥控玩具"</span></span></code></pre>
+<h3 id="level-1有一定理解2024">Level 1：有一定理解（2024）<a class="heading-anchor" aria-label="本节链接" href="#level-1有一定理解2024"><span class="anchor-mark">#</span></a></h3>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>顾客："来份宫保鸡丁套餐"</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>服务员（开始推理）：</span></span>
+<span class="line"><span>"套餐包括：主菜+米饭+小菜+汤，可以吗？"</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>顾客："可以"</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>特点：能理解常见需求，但需要确认方案</span></span></code></pre>
+<h3 id="level-2半自主规划2025初">Level 2：半自主规划（2025初）<a class="heading-anchor" aria-label="本节链接" href="#level-2半自主规划2025初"><span class="anchor-mark">#</span></a></h3>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>顾客："给我一顿川菜，4个人"</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>领班（开始规划）：</span></span>
+<span class="line"><span>"好的，建议：</span></span>
+<span class="line"><span>- 凉菜：夫妻肺片</span></span>
+<span class="line"><span>- 热菜：宫保鸡丁、麻婆豆腐、水煮鱼</span></span>
+<span class="line"><span>- 主食：米饭</span></span>
+<span class="line"><span>预计¥500，大约1小时，可以吗？"</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>顾客："可以"</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>特点：能规划完整方案，但需要用户批准</span></span></code></pre>
+<h3 id="level-3完全自主2025末-2026">Level 3：完全自主（2025末-2026）⭐<a class="heading-anchor" aria-label="本节链接" href="#level-3完全自主2025末-2026"><span class="anchor-mark">#</span></a></h3>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>顾客："给我一桌川菜宴席，8人，预算2000，有人不吃辣"</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>领班（Agent完全自主）：</span></span>
+<span class="line"><span>[内心独白，不打扰顾客]</span></span>
+<span class="line"><span>1. 查《川菜大全》→ 确定菜单结构</span></span>
+<span class="line"><span>2. 计算预算分配 → ¥250/人，合理</span></span>
+<span class="line"><span>3. 特殊需求 → 2道不辣菜</span></span>
+<span class="line"><span>4. 采购清单 → 去MCP拿食材</span></span>
+<span class="line"><span>5. 排时间表 → 汤3小时前开始炖</span></span>
+<span class="line"><span>6. 协调后厨 → 3个炉灶并行</span></span>
+<span class="line"><span>7. 质量把控 → 每道菜品尝</span></span>
+<span class="line"><span>8. 观察反馈 → 顾客吃得慢，延后上菜</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>[40分钟后]</span></span>
+<span class="line"><span>领班："川菜宴席已全部上齐，请慢用！"</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>顾客全程不用管，只说了一句话</span></span></code></pre>
+<p><strong>关键能力对比</strong>：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>能力</th><th>2022</th><th>2024</th><th>2026 Agent</th></tr></thead><tbody><tr><td><strong>理解意图</strong></td><td>❌</td><td>⭐⭐⭐</td><td>⭐⭐⭐⭐⭐</td></tr><tr><td><strong>自主规划</strong></td><td>❌</td><td>⭐⭐</td><td>⭐⭐⭐⭐⭐</td></tr><tr><td><strong>工具使用</strong></td><td>⭐</td><td>⭐⭐⭐</td><td>⭐⭐⭐⭐⭐</td></tr><tr><td><strong>质量保证</strong></td><td>❌</td><td>⭐⭐</td><td>⭐⭐⭐⭐⭐</td></tr><tr><td><strong>动态调整</strong></td><td>❌</td><td>⭐</td><td>⭐⭐⭐⭐⭐</td></tr><tr><td><strong>需要确认</strong></td><td>每步都要</td><td>方案确认</td><td>几乎不需要</td></tr></tbody></table>
+<hr>
+<h2 id="性能优化技术映射">性能优化技术映射<a class="heading-anchor" aria-label="本节链接" href="#性能优化技术映射"><span class="anchor-mark">#</span></a></h2>
+<h3 id="1-prompt-caching备菜缓存">1. Prompt Caching（备菜缓存）<a class="heading-anchor" aria-label="本节链接" href="#1-prompt-caching备菜缓存"><span class="anchor-mark">#</span></a></h3>
+<p><strong>没有缓存的情况</strong>：</p>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>第1个顾客点宫保鸡丁：</span></span>
+<span class="line"><span>切葱姜蒜（5分钟）→ 腌鸡肉（15分钟）→ 炸花生（10分钟）→ 炒制（5分钟）</span></span>
+<span class="line"><span>总耗时：35分钟</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>第2个顾客点宫保鸡丁：</span></span>
+<span class="line"><span>又要从头开始：切葱姜蒜（5分钟）→ 腌鸡肉（15分钟）...</span></span>
+<span class="line"><span>总耗时：35分钟</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>第10个顾客：还是35分钟</span></span>
+<span class="line"><span>→ 慢、贵、浪费时间</span></span></code></pre>
+<p><strong>有缓存（备菜）</strong>：</p>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>早上提前备好（这些是固定流程）：</span></span>
+<span class="line"><span>- 切好一大盘葱姜蒜（可用一整天）</span></span>
+<span class="line"><span>- 腌好5份鸡肉（冷藏待用）</span></span>
+<span class="line"><span>- 炸好一大碗花生（密封保存）</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>顾客点单后：</span></span>
+<span class="line"><span>直接拿备好的食材 → 炒制（5分钟）→ 出菜</span></span>
+<span class="line"><span>总耗时：5分钟（快了7倍！）</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>成本：</span></span>
+<span class="line"><span>人工：35分钟 × 10份 = 350分钟 → 50分钟（省80%）</span></span></code></pre>
+<p><strong>对应AI技术</strong>：</p>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>系统提示、工具定义（固定内容）→ 提前缓存</span></span>
+<span class="line"><span>每次对话 → 直接用缓存，不重新处理</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>效果：</span></span>
+<span class="line"><span>成本降低90%（$3/M → $0.3/M）</span></span>
+<span class="line"><span>延迟降低85%（5秒 → 0.5秒）</span></span></code></pre>
+<h3 id="2-auto-compact收盘子腾地方">2. Auto-Compact（收盘子，腾地方）<a class="heading-anchor" aria-label="本节链接" href="#2-auto-compact收盘子腾地方"><span class="anchor-mark">#</span></a></h3>
+<p><strong>没有压缩的情况</strong>：</p>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>餐桌（上下文窗口）：</span></span>
+<span class="line"><span>┌─────────────────────────────────┐</span></span>
+<span class="line"><span>│ 空盘1 | 空盘2 | 空盘3 | ...     │</span></span>
+<span class="line"><span>│ 空盘10 | 空盘20 | 正在吃的菜   │</span></span>
+<span class="line"><span>│ 空盘50 | ... | 空盘90 | 空盘100│</span></span>
+<span class="line"><span>└─────────────────────────────────┘</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>问题：</span></span>
+<span class="line"><span>- 100个盘子占满餐桌（租金贵）</span></span>
+<span class="line"><span>- 服务员传菜要绕一大圈（慢）</span></span>
+<span class="line"><span>- 顾客找正在吃的菜很困难（信息噪音）</span></span></code></pre>
+<p><strong>压缩（收盘子）</strong>：</p>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>服务员收拾：</span></span>
+<span class="line"><span>- 空盘子收走</span></span>
+<span class="line"><span>- 只留：正在吃的菜 + 菜单记录</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>结果：</span></span>
+<span class="line"><span>┌─────────────────────────────────┐</span></span>
+<span class="line"><span>│ 菜单记录 | 正在吃的菜1         │</span></span>
+<span class="line"><span>│ 正在吃的菜2 | 正在吃的菜3       │</span></span>
+<span class="line"><span>│              [大量空间]          │</span></span>
+<span class="line"><span>└─────────────────────────────────┘</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>100个盘子 → 25个盘子</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>效果：</span></span>
+<span class="line"><span>- 租金降75%（成本）</span></span>
+<span class="line"><span>- 传菜更快（延迟降低）</span></span>
+<span class="line"><span>- 找菜容易（用户体验好）</span></span></code></pre>
+<p><strong>对应AI技术</strong>：</p>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>长对话历史（800K tokens）→ 自动压缩成摘要（200K）</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>效果：</span></span>
+<span class="line"><span>成本降60-75%</span></span>
+<span class="line"><span>延迟降50%</span></span></code></pre>
+<h3 id="3-skills按需加载选择性携带菜谱">3. Skills按需加载（选择性携带菜谱）<a class="heading-anchor" aria-label="本节链接" href="#3-skills按需加载选择性携带菜谱"><span class="anchor-mark">#</span></a></h3>
+<p><strong>老方式（全部携带 = MCP方式）</strong>：</p>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>厨师背着50本菜谱进厨房：</span></span>
+<span class="line"><span>📚《川菜大全》《粤菜精选》《法餐圣经》</span></span>
+<span class="line"><span>  《日料百科》《韩国料理》《东南亚风味》</span></span>
+<span class="line"><span>  《烘焙宝典》《西餐礼仪》...</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>顾客点："宫保鸡丁"</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>厨师：</span></span>
+<span class="line"><span>翻第1本（川菜）→ "找到了！"</span></span>
+<span class="line"><span>但还要随身带其他49本（占地方、很重）</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>问题：</span></span>
+<span class="line"><span>- Token消耗大（50本书的信息都要告诉AI）</span></span>
+<span class="line"><span>- 反应慢（要过滤49本无关的书）</span></span>
+<span class="line"><span>- 容易混淆（法餐技巧混进川菜）</span></span></code></pre>
+<p><strong>新方式（按需加载 = Skills方式）</strong>：</p>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>顾客点："宫保鸡丁"</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>领班（推理层）：</span></span>
+<span class="line"><span>"这是川菜" → 只给厨师《川菜大全》</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>厨师：</span></span>
+<span class="line"><span>只拿1本书，翻开就是宫保鸡丁</span></span>
+<span class="line"><span>做完收回书架</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>下一桌点："法式海鲜汤"</span></span>
+<span class="line"><span>领班：换成《法餐圣经》</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>效果：</span></span>
+<span class="line"><span>- Token省98%（50本 → 1本）</span></span>
+<span class="line"><span>- 反应快（不用翻其他书）</span></span>
+<span class="line"><span>- 更专注（不会把法餐技巧用到川菜）</span></span></code></pre>
+<h3 id="4-rag检索智能菜谱索引">4. RAG检索（智能菜谱索引）<a class="heading-anchor" aria-label="本节链接" href="#4-rag检索智能菜谱索引"><span class="anchor-mark">#</span></a></h3>
+<p><strong>传统方式</strong>：</p>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>餐厅有1000本菜谱，每次都要翻遍？</span></span>
+<span class="line"><span>→ 太慢了！</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>顾客："我想吃海鲜"</span></span>
+<span class="line"><span>厨师翻遍1000本书找所有海鲜菜 → 耗时1小时</span></span></code></pre>
+<p><strong>RAG方式</strong>：</p>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>建立智能索引：</span></span>
+<span class="line"><span>海鲜 → 《川菜大全》第30章、《粤菜精选》第5章、《法餐》第12章</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>顾客："我想吃海鲜"</span></span>
+<span class="line"><span>领班：</span></span>
+<span class="line"><span>1. 查索引（1秒）→ 找到3个相关章节</span></span>
+<span class="line"><span>2. 只给厨师这3章（精准）</span></span>
+<span class="line"><span>3. 快速完成</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>效果：</span></span>
+<span class="line"><span>1000本书 → 3章内容</span></span>
+<span class="line"><span>速度提升100倍</span></span></code></pre>
+<hr>
+<h2 id="完整用餐流程示例">完整用餐流程示例<a class="heading-anchor" aria-label="本节链接" href="#完整用餐流程示例"><span class="anchor-mark">#</span></a></h2>
+<h3 id="示例8人川菜宴席2026-agent时代">示例：8人川菜宴席（2026 Agent时代）<a class="heading-anchor" aria-label="本节链接" href="#示例8人川菜宴席2026-agent时代"><span class="anchor-mark">#</span></a></h3>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>⏰ T-0分钟：顾客进门</span></span>
+<span class="line"><span>─────────────────────────────────────</span></span>
+<span class="line"><span>顾客："给我一桌川菜宴席，8人，预算2000，</span></span>
+<span class="line"><span>      有2个人不能吃辣，不吃牛肉"</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>领班："好的，请稍等片刻"</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>⏰ T+1分钟：领班规划（推理层工作）</span></span>
+<span class="line"><span>─────────────────────────────────────</span></span>
+<span class="line"><span>领班（心中快速决策）：</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>1. 【查菜谱】打开《川菜大全》(Skills)</span></span>
+<span class="line"><span>   → 经典宴席结构：凉菜×3、热菜×6、汤×1、主食×2</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>2. 【约束分析】</span></span>
+<span class="line"><span>   - 预算：¥2000 ÷ 8人 = ¥250/人（中高档）</span></span>
+<span class="line"><span>   - 忌口：2人不吃辣 → 至少2道不辣菜</span></span>
+<span class="line"><span>   - 忌口：不吃牛肉 → 避开夫妻肺片（有牛肉）</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>3. 【菜单设计】</span></span>
+<span class="line"><span>   凉菜：蒜泥白肉、口水鸡、酸辣粉皮</span></span>
+<span class="line"><span>   热菜：宫保鸡丁、清蒸鱼(不辣)、回锅肉、</span></span>
+<span class="line"><span>        麻婆豆腐、干煸豆角(不辣)、水煮虾</span></span>
+<span class="line"><span>   汤：酸辣汤</span></span>
+<span class="line"><span>   主食：米饭、担担面</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>4. 【检查库存】</span></span>
+<span class="line"><span>   有：鸡、猪肉、豆腐、蔬菜</span></span>
+<span class="line"><span>   缺：鱼、虾、特色调料</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>⏰ T+2分钟：采购（MCP工作）</span></span>
+<span class="line"><span>─────────────────────────────────────</span></span>
+<span class="line"><span>领班→采购员："去拿这些食材"</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>调用MCP：</span></span>
+<span class="line"><span>- 海鲜供应商API：拿鲈鱼1条、大虾500g</span></span>
+<span class="line"><span>- 调料仓库：拿郫县豆瓣酱、花椒</span></span>
+<span class="line"><span>- 检查结果：✅ 全部到位</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>⏰ T+5分钟：安排后厨（协调资源）</span></span>
+<span class="line"><span>─────────────────────────────────────</span></span>
+<span class="line"><span>领班→主厨（模型）：</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>"按这个顺序做：</span></span>
+<span class="line"><span>1. [立即开始] 酸辣汤（慢炖40分钟）</span></span>
+<span class="line"><span>2. [提前准备] 凉菜×3（可冷藏）</span></span>
+<span class="line"><span>3. [客人到后] 清蒸鱼（8分钟）</span></span>
+<span class="line"><span>4. [依次上菜] 其他热菜，每隔5分钟一道</span></span>
+<span class="line"><span>5. [最后] 主食</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>炉灶分配：</span></span>
+<span class="line"><span>- 炉灶1：汤（长期占用）</span></span>
+<span class="line"><span>- 炉灶2：清蒸（短平快）</span></span>
+<span class="line"><span>- 炉灶3：热菜（快速炒）"</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>⏰ T+10分钟：后厨执行（模型层工作）</span></span>
+<span class="line"><span>─────────────────────────────────────</span></span>
+<span class="line"><span>主厨（Claude Opus）：</span></span>
+<span class="line"><span>[炉灶1] 酸辣汤 → 慢炖中...</span></span>
+<span class="line"><span>[炉灶2] 清蒸鱼准备 → 待命</span></span>
+<span class="line"><span>[炉灶3] 凉菜制作 → 蒜泥白肉完成 ✅</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>助理厨师：</span></span>
+<span class="line"><span>口水鸡完成 ✅</span></span>
+<span class="line"><span>酸辣粉皮完成 ✅</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>3道凉菜冷藏待上</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>⏰ T+45分钟：客人到达，开始上菜</span></span>
+<span class="line"><span>─────────────────────────────────────</span></span>
+<span class="line"><span>领班：</span></span>
+<span class="line"><span>[上凉菜] 3道凉菜摆盘上桌 ✅</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>主厨：</span></span>
+<span class="line"><span>[炉灶3] 宫保鸡丁 → 炒制中...</span></span>
+<span class="line"><span>→ 品尝 → 味道稍淡 → 补盐 → 再尝 ✅</span></span>
+<span class="line"><span>→ 上桌</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>[5分钟后]</span></span>
+<span class="line"><span>[炉灶2] 清蒸鱼 → 水开，蒸8分钟 ✅</span></span>
+<span class="line"><span>→ 上桌</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>[依次]</span></span>
+<span class="line"><span>回锅肉 ✅ → 麻婆豆腐 ✅ → 干煸豆角 ✅ → 水煮虾 ✅</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>领班观察：</span></span>
+<span class="line"><span>"客人吃得慢，延后5分钟上汤和主食"</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>⏰ T+70分钟：完成</span></span>
+<span class="line"><span>─────────────────────────────────────</span></span>
+<span class="line"><span>酸辣汤 ✅</span></span>
+<span class="line"><span>米饭、担担面 ✅</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>领班："您的川菜宴席已全部上齐，请慢用！</span></span>
+<span class="line"><span>      如有需要请随时叫我。"</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>顾客（满意）：</span></span>
+<span class="line"><span>"很好，我全程只说了一句话，</span></span>
+<span class="line"><span> 领班自己安排好了一切，</span></span>
+<span class="line"><span> 还记得我的忌口！"</span></span></code></pre>
+<p><strong>这就是Agent的自主性！</strong></p>
+<hr>
+<h2 id="推理层服务团队是核心">推理层（服务团队）是核心<a class="heading-anchor" aria-label="本节链接" href="#推理层服务团队是核心"><span class="anchor-mark">#</span></a></h2>
+<h3 id="很多人的误解">很多人的误解<a class="heading-anchor" aria-label="本节链接" href="#很多人的误解"><span class="anchor-mark">#</span></a></h3>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>❌ 错误理解：AI系统 = 主厨（模型）</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>大部分人以为：</span></span>
+<span class="line"><span>GPT-4 vs Claude Opus = 厨师A vs 厨师B</span></span>
+<span class="line"><span>→ 比较谁炒菜更好</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>实际上是在比较：</span></span>
+<span class="line"><span>OpenAI餐厅 vs Anthropic餐厅</span></span>
+<span class="line"><span>= 主厨 + 服务团队 + 管理 + 优化</span></span></code></pre>
+<h3 id="真正的竞争">真正的竞争<a class="heading-anchor" aria-label="本节链接" href="#真正的竞争"><span class="anchor-mark">#</span></a></h3>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>✅ 正确理解：AI系统 = 主厨 + 服务团队（推理层）</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Anthropic餐厅（Claude Code）：</span></span>
+<span class="line"><span>- 主厨：Claude Opus（⭐⭐⭐⭐⭐）</span></span>
+<span class="line"><span>- 领班：超级智能（Agent能力强）</span></span>
+<span class="line"><span>- 服务：菜谱系统（Skills）成熟</span></span>
+<span class="line"><span>- 优化：Prompt Caching、Auto-Compact</span></span>
+<span class="line"><span>- 成本：优化到位，性价比高</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>OpenAI餐厅（ChatGPT）：</span></span>
+<span class="line"><span>- 主厨：GPT-4o（⭐⭐⭐⭐⭐）</span></span>
+<span class="line"><span>- 领班：较传统（Agent能力一般）</span></span>
+<span class="line"><span>- 服务：刚开始用Skills（2025.12后）</span></span>
+<span class="line"><span>- 优化：有，但不如Anthropic</span></span>
+<span class="line"><span>- 成本：较高</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Google餐厅（Gemini）：</span></span>
+<span class="line"><span>- 主厨：Gemini Ultra（⭐⭐⭐⭐）</span></span>
+<span class="line"><span>- 领班：传统服务</span></span>
+<span class="line"><span>- 上下文：最大（2M），像超大餐桌</span></span>
+<span class="line"><span>- 特色：多模态（能看图）</span></span></code></pre>
+<p><strong>结论</strong>：</p>
+<blockquote>
+<p>同样级别的主厨（模型），但服务团队（推理层）的差异决定了用餐体验！</p>
+<p>这就是为什么”推理层才是进化引擎”</p>
+</blockquote>
+<hr>
+<h2 id="关键洞察总结">关键洞察总结<a class="heading-anchor" aria-label="本节链接" href="#关键洞察总结"><span class="anchor-mark">#</span></a></h2>
+<h3 id="1-分层架构清晰">1. 分层架构清晰<a class="heading-anchor" aria-label="本节链接" href="#1-分层架构清晰"><span class="anchor-mark">#</span></a></h3>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>顾客层（用户）</span></span>
+<span class="line"><span>    ↓ "我要川菜宴席"</span></span>
+<span class="line"><span>服务层（推理层）← 最被忽视但最重要</span></span>
+<span class="line"><span>    ↓ 理解+规划+优化</span></span>
+<span class="line"><span>执行层（模型）</span></span>
+<span class="line"><span>    ↓ 烹饪（生成）</span></span>
+<span class="line"><span>工具层（MCP + Skills）</span></span>
+<span class="line"><span>    ↓ 食材 + 菜谱</span></span></code></pre>
+<h3 id="2-mcp-vs-skills-的本质区别">2. MCP vs Skills 的本质区别<a class="heading-anchor" aria-label="本节链接" href="#2-mcp-vs-skills-的本质区别"><span class="anchor-mark">#</span></a></h3>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>MCP = 采购能力 = "我能拿到什么"</span></span>
+<span class="line"><span>Skills = 烹饪知识 = "我知道怎么做"</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>单独的MCP：有食材不会做 → 浪费</span></span>
+<span class="line"><span>单独的Skills：会做菜没食材 → 暂时做不了</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>最佳组合：MCP + Skills</span></span>
+<span class="line"><span>（但80%的任务只需Skills）</span></span></code></pre>
+<h3 id="3-agent的自主性是关键突破">3. Agent的自主性是关键突破<a class="heading-anchor" aria-label="本节链接" href="#3-agent的自主性是关键突破"><span class="anchor-mark">#</span></a></h3>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>2022：顾客必须是烹饪专家（每个步骤都说）</span></span>
+<span class="line"><span>2023：顾客要懂烹饪术语（详细描述）</span></span>
+<span class="line"><span>2024：顾客说大概（厨师能理解）</span></span>
+<span class="line"><span>2025：顾客说目标（领班自己搞定）</span></span>
+<span class="line"><span>2026：顾客说需求（多领班协作完成）</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>→ 从"遥控玩具"到"自主同事"</span></span></code></pre>
+<h3 id="4-性能优化是工程问题">4. 性能优化是工程问题<a class="heading-anchor" aria-label="本节链接" href="#4-性能优化是工程问题"><span class="anchor-mark">#</span></a></h3>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>餐厅经营的艺术：</span></span>
+<span class="line"><span>✅ 提前备菜（Caching）→ 快7倍</span></span>
+<span class="line"><span>✅ 收空盘子（Compact）→ 省75%租金</span></span>
+<span class="line"><span>✅ 选择性携带菜谱（Skills）→ 省98% Token</span></span>
+<span class="line"><span>✅ 智能索引（RAG）→ 快100倍</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>→ 不是单一技术，是组合优化</span></span></code></pre>
+<h3 id="5-演进规律降低门槛">5. 演进规律：降低门槛<a class="heading-anchor" aria-label="本节链接" href="#5-演进规律降低门槛"><span class="anchor-mark">#</span></a></h3>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>2022：只有专家能用（烹饪专家才会点菜）</span></span>
+<span class="line"><span>2026：人人能用（说需求就行）</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>→ AI正在从"专业工具"变成"大众助手"</span></span></code></pre>
+<hr>
+<h2 id="映射表技术术语--餐厅类比">映射表：技术术语 ↔ 餐厅类比<a class="heading-anchor" aria-label="本节链接" href="#映射表技术术语--餐厅类比"><span class="anchor-mark">#</span></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>技术术语</th><th>餐厅类比</th><th>说明</th></tr></thead><tbody><tr><td><strong>用户</strong></td><td>顾客</td><td>提出需求</td></tr><tr><td><strong>推理层</strong></td><td>领班+服务团队</td><td>理解需求、规划、优化</td></tr><tr><td><strong>AI模型</strong></td><td>主厨</td><td>核心能力（生成内容）</td></tr><tr><td><strong>模型参数</strong></td><td>主厨技艺/大脑</td><td>GPT-4, Claude Opus</td></tr><tr><td><strong>上下文窗口</strong></td><td>主厨记忆力</td><td>能记住多少道菜</td></tr><tr><td><strong>GPU</strong></td><td>炉灶</td><td>算力，火力越大越快</td></tr><tr><td><strong>电力资源</strong></td><td>燃料</td><td>能开几个炉灶</td></tr><tr><td><strong>Skills</strong></td><td>菜谱宝典</td><td>知识、方法、最佳实践</td></tr><tr><td><strong>MCP</strong></td><td>采购系统</td><td>获取外部食材/资源</td></tr><tr><td><strong>Function Calling</strong></td><td>基础厨具</td><td>刀、锅、铲（基础工具）</td></tr><tr><td><strong>Prompt</strong></td><td>点菜描述</td><td>2022需要详细，2026简单说</td></tr><tr><td><strong>Prompt Caching</strong></td><td>提前备菜</td><td>葱姜蒜提前切好</td></tr><tr><td><strong>Auto-Compact</strong></td><td>收空盘子</td><td>腾出餐桌空间</td></tr><tr><td><strong>RAG</strong></td><td>菜谱智能索引</td><td>快速找到相关菜谱</td></tr><tr><td><strong>Agent</strong></td><td>自主领班</td><td>说目标就能全流程搞定</td></tr><tr><td><strong>多Agent</strong></td><td>多领班协作</td><td>婚宴需要多个领班分工</td></tr><tr><td><strong>Token</strong></td><td>餐桌空间</td><td>摆的盘子越多越贵</td></tr><tr><td><strong>延迟</strong></td><td>等待时间</td><td>从点菜到上菜的时间</td></tr><tr><td><strong>成本</strong></td><td>餐费</td><td>租金+人工+食材</td></tr></tbody></table>
+<hr>
+<h2 id="实际应用示例">实际应用示例<a class="heading-anchor" aria-label="本节链接" href="#实际应用示例"><span class="anchor-mark">#</span></a></h2>
+<h3 id="示例1code-review只需skills">示例1：Code Review（只需Skills）<a class="heading-anchor" aria-label="本节链接" href="#示例1code-review只需skills"><span class="anchor-mark">#</span></a></h3>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>顾客（开发者）：</span></span>
+<span class="line"><span>"帮我review这段代码"</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>领班（Claude Code Agent）：</span></span>
+<span class="line"><span>1. 【识别任务】这是code review</span></span>
+<span class="line"><span>2. 【查菜谱】打开《代码审查规范》(Skills)</span></span>
+<span class="line"><span>   → 检查清单：安全性、性能、可维护性...</span></span>
+<span class="line"><span>3. 【无需采购】代码已经提供，不需要MCP</span></span>
+<span class="line"><span>4. 【执行review】主厨按规范审查</span></span>
+<span class="line"><span>5. 【输出报告】"发现3个安全问题，2个性能优化建议..."</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>不需要MCP：食材（代码）已经有了</span></span>
+<span class="line"><span>只需要Skills：知道怎么review</span></span></code></pre>
+<h3 id="示例2分析github趋势需要mcp--skills">示例2：分析GitHub趋势（需要MCP + Skills）<a class="heading-anchor" aria-label="本节链接" href="#示例2分析github趋势需要mcp--skills"><span class="anchor-mark">#</span></a></h3>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>顾客："分析最近一周GitHub上AI项目的趋势"</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>领班（Agent）：</span></span>
+<span class="line"><span>1. 【识别任务】需要外部数据 + 分析能力</span></span>
+<span class="line"><span>2. 【查菜谱】《数据分析方法》(Skills)</span></span>
+<span class="line"><span>   → 知道分析什么维度：star增长、fork、语言...</span></span>
+<span class="line"><span>3. 【去采购】调用GitHub API (MCP)</span></span>
+<span class="line"><span>   → 拿到最近一周的项目数据</span></span>
+<span class="line"><span>4. 【按菜谱分析】主厨根据分析方法处理数据</span></span>
+<span class="line"><span>5. 【输出报告】"Top 10项目，增长趋势图..."</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>需要MCP：获取GitHub数据</span></span>
+<span class="line"><span>需要Skills：知道如何分析趋势</span></span></code></pre>
+<h3 id="示例3写技术文档只需skills">示例3：写技术文档（只需Skills）<a class="heading-anchor" aria-label="本节链接" href="#示例3写技术文档只需skills"><span class="anchor-mark">#</span></a></h3>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>顾客："帮我写一份API文档"</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>领班：</span></span>
+<span class="line"><span>1. 【查菜谱】《技术写作规范》(Skills)</span></span>
+<span class="line"><span>   → 标准结构：概述、端点、参数、示例...</span></span>
+<span class="line"><span>2. 【无需采购】信息已提供</span></span>
+<span class="line"><span>3. 【按模板生成】主厨按规范写作</span></span>
+<span class="line"><span>4. 【质量检查】检查格式、完整性</span></span>
+<span class="line"><span>5. 【输出】完整的API文档</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>不需要MCP</span></span>
+<span class="line"><span>只需要Skills：知道怎么写技术文档</span></span></code></pre>
+<hr>
+<h2 id="为什么用餐厅类比">为什么用餐厅类比？<a class="heading-anchor" aria-label="本节链接" href="#为什么用餐厅类比"><span class="anchor-mark">#</span></a></h2>
+<h3 id="1-日常场景易于理解">1. 日常场景，易于理解<a class="heading-anchor" aria-label="本节链接" href="#1-日常场景易于理解"><span class="anchor-mark">#</span></a></h3>
+<ul>
+<li>人人都去过餐厅</li>
+<li>点菜、上菜的流程很熟悉</li>
+<li>容易建立心智模型</li>
+</ul>
+<h3 id="2-映射精准关键概念清晰">2. 映射精准，关键概念清晰<a class="heading-anchor" aria-label="本节链接" href="#2-映射精准关键概念清晰"><span class="anchor-mark">#</span></a></h3>
+<ul>
+<li><strong>分层架构</strong>：前厅（推理层）vs 后厨（模型）</li>
+<li><strong>资源区分</strong>：食材（能力）vs 菜谱（知识）</li>
+<li><strong>演进规律</strong>：点菜方式的变化 = Prompt的变化</li>
+</ul>
+<h3 id="3-突出容易忽略的重点">3. 突出容易忽略的重点<a class="heading-anchor" aria-label="本节链接" href="#3-突出容易忽略的重点"><span class="anchor-mark">#</span></a></h3>
+<ul>
+<li><strong>推理层的重要性</strong>（服务团队 > 主厨本身）</li>
+<li><strong>Skills vs MCP的本质区别</strong>（知识 vs 能力）</li>
+<li><strong>Agent的自主性</strong>（领班 vs 服务员）</li>
+</ul>
+<hr>
+<h2 id="使用这个类比框架阅读后续章节">使用这个类比框架阅读后续章节<a class="heading-anchor" aria-label="本节链接" href="#使用这个类比框架阅读后续章节"><span class="anchor-mark">#</span></a></h2>
+<p>当你阅读后续技术章节时，记住这个餐厅框架：</p>
+<ul>
+<li>看到”上下文窗口”→ 想到”餐桌大小，记忆力”</li>
+<li>看到”Prompt工程”→ 想到”点菜方式的演进”</li>
+<li>看到”Skills”→ 想到”菜谱宝典”</li>
+<li>看到”MCP”→ 想到”采购系统”</li>
+<li>看到”Agent”→ 想到”自主的领班”</li>
+<li>看到”推理层”→ 想到”服务团队”</li>
+</ul>
+<p>这将帮助你快速理解复杂的技术概念！</p>
+<hr>
+<h2 id="延伸思考">延伸思考<a class="heading-anchor" aria-label="本节链接" href="#延伸思考"><span class="anchor-mark">#</span></a></h2>
+<h3 id="q1-为什么不能只要主厨模型不要服务团队推理层">Q1: 为什么不能只要主厨（模型），不要服务团队（推理层）？<a class="heading-anchor" aria-label="本节链接" href="#q1-为什么不能只要主厨模型不要服务团队推理层"><span class="anchor-mark">#</span></a></h3>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>就像：</span></span>
+<span class="line"><span>❌ 顾客直接对着后厨喊："给我做个宫保鸡丁！"</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>问题：</span></span>
+<span class="line"><span>- 厨师听不清（理解错误）</span></span>
+<span class="line"><span>- 厨师不知道你的忌口（缺乏上下文）</span></span>
+<span class="line"><span>- 厨师不会优化成本（浪费食材）</span></span>
+<span class="line"><span>- 没人协调（多道菜全乱了）</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>✅ 必须有服务团队：</span></span>
+<span class="line"><span>- 理解顾客需求</span></span>
+<span class="line"><span>- 记住顾客偏好</span></span>
+<span class="line"><span>- 优化流程</span></span>
+<span class="line"><span>- 协调资源</span></span></code></pre>
+<h3 id="q2-本地aiclawdbotvs-云端aiclaude-code的区别">Q2: 本地AI（Clawdbot）vs 云端AI（Claude Code）的区别？<a class="heading-anchor" aria-label="本节链接" href="#q2-本地aiclawdbotvs-云端aiclaude-code的区别"><span class="anchor-mark">#</span></a></h3>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>云端餐厅（Claude Code）：</span></span>
+<span class="line"><span>- 大型餐厅，设备齐全</span></span>
+<span class="line"><span>- 主厨技艺顶级（Opus 4.5）</span></span>
+<span class="line"><span>- 炉灶很多（无限GPU）</span></span>
+<span class="line"><span>- 但：需要网络，有延迟，按量收费</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>家庭厨房（Clawdbot）：</span></span>
+<span class="line"><span>- 小厨房，Mac mini（M4 Pro）</span></span>
+<span class="line"><span>- 主厨技艺不错（DeepSeek-R1本地版）</span></span>
+<span class="line"><span>- 炉灶有限（36GB统一内存）</span></span>
+<span class="line"><span>- 但：在家里，随时用，不花钱</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>适用场景：</span></span>
+<span class="line"><span>- 宴请重要客户 → 云端餐厅（复杂任务）</span></span>
+<span class="line"><span>- 日常做饭 → 家庭厨房（简单任务）</span></span></code></pre>
+<h3 id="q3-为什么skills比mcp重要">Q3: 为什么Skills比MCP重要？<a class="heading-anchor" aria-label="本节链接" href="#q3-为什么skills比mcp重要"><span class="anchor-mark">#</span></a></h3>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>统计数据（假设100个点菜需求）：</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>只需菜谱（Skills）：80个</span></span>
+<span class="line"><span>- "做个宫保鸡丁"（食材餐厅有）</span></span>
+<span class="line"><span>- "写份文档"（信息已有）</span></span>
+<span class="line"><span>- "review代码"（代码已有）</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>需要菜谱+采购（Skills+MCP）：15个</span></span>
+<span class="line"><span>- "做法餐"（需要进口食材）</span></span>
+<span class="line"><span>- "分析GitHub趋势"（需要API数据）</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>只需采购（MCP）：5个</span></span>
+<span class="line"><span>- "去超市买瓶酱油"（简单获取）</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>结论：</span></span>
+<span class="line"><span>Skills覆盖95%的场景</span></span>
+<span class="line"><span>MCP只在20%的场景需要</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>→ Skills是基础设施，MCP是补充</span></span></code></pre>
+<hr>  </article> <div class="article-end"> <span class="article-end-label">Continue reading</span> <div class="prev-next"> <a class="pn-card" href="/blog/ai-evolution/overview/"> <small>← 上一章 · 01</small> <strong>总览：从对话到协作</strong> </a> <a class="pn-card next" href="/blog/ai-evolution/year-2022/"> <small>下一章 · 03 →</small> <strong>2022：生成式 AI 的觉醒</strong> </a> </div> <div class="author-card"> <span class="seal" aria-hidden="true">AS</span> <p> <strong>Allen Shao</strong>
+全栈工程师，关注 AI Agent、云安全与开发者体验。把公开信息放回时间线，也把自己踩过的坑写下来。
+<a href="https://shaominfeng.github.io/" style="color:var(--accent-2);text-decoration:underline;text-underline-offset:3px">个人主页 ↗</a> </p> </div> <p class="article-license">
+本文以 CC BY-NC-SA 4.0 授权，转载请注明作者与出处。文中观点为个人观察，不代表任职机构。
+</p> </div> </div> <aside class="toc" aria-label="本页目录"><span class="toc-label">On this page</span><ul><li class="depth-2"><a href="#餐厅的完整架构">餐厅的完整架构</a></li><li class="depth-3"><a href="#整体架构图形象展示">整体架构图（形象展示）</a></li><li class="depth-3"><a href="#流程图技术视角">流程图（技术视角）</a></li><li class="depth-2"><a href="#各角色详细解析">各角色详细解析</a></li><li class="depth-3"><a href="#1-顾客用户">1. 顾客（用户）</a></li><li class="depth-3"><a href="#2-前厅服务团队推理层-最重要">2. 前厅服务团队（推理层）⭐ 最重要</a></li><li class="depth-3"><a href="#3-后厨模型层">3. 后厨（模型层）</a></li><li class="depth-3"><a href="#4-工具与资源层">4. 工具与资源层</a></li><li class="depth-2"><a href="#点菜方式的演进史">点菜方式的演进史</a></li><li class="depth-3"><a href="#2022年必须当烹饪专家prompt工程萌芽">2022年：必须当烹饪专家（Prompt工程萌芽）</a></li><li class="depth-3"><a href="#2023年prompt工程师是高薪职业">2023年：Prompt工程师是高薪职业</a></li><li class="depth-3"><a href="#2024年厨师变聪明了模型推理能力提升">2024年：厨师变聪明了（模型推理能力提升）</a></li><li class="depth-3"><a href="#2025年领班接管全流程agent诞生">2025年：领班接管全流程（Agent诞生）</a></li><li class="depth-3"><a href="#2026年多领班协作多agent系统">2026年：多领班协作（多Agent系统）</a></li><li class="depth-2"><a href="#mcp-vs-skills-深度对比">MCP vs Skills 深度对比</a></li><li class="depth-3"><a href="#核心区别">核心区别</a></li><li class="depth-3"><a href="#详细对比表">详细对比表</a></li><li class="depth-3"><a href="#三种组合场景">三种组合场景</a></li><li class="depth-3"><a href="#为什么skills比mcp更重要">为什么Skills比MCP更重要？</a></li><li class="depth-2"><a href="#agent自主性的演进">Agent自主性的演进</a></li><li class="depth-3"><a href="#level-0被动工具2022-2023">Level 0：被动工具（2022-2023）</a></li><li class="depth-3"><a href="#level-1有一定理解2024">Level 1：有一定理解（2024）</a></li><li class="depth-3"><a href="#level-2半自主规划2025初">Level 2：半自主规划（2025初）</a></li><li class="depth-3"><a href="#level-3完全自主2025末-2026">Level 3：完全自主（2025末-2026）⭐</a></li><li class="depth-2"><a href="#性能优化技术映射">性能优化技术映射</a></li><li class="depth-3"><a href="#1-prompt-caching备菜缓存">1. Prompt Caching（备菜缓存）</a></li><li class="depth-3"><a href="#2-auto-compact收盘子腾地方">2. Auto-Compact（收盘子，腾地方）</a></li><li class="depth-3"><a href="#3-skills按需加载选择性携带菜谱">3. Skills按需加载（选择性携带菜谱）</a></li><li class="depth-3"><a href="#4-rag检索智能菜谱索引">4. RAG检索（智能菜谱索引）</a></li><li class="depth-2"><a href="#完整用餐流程示例">完整用餐流程示例</a></li><li class="depth-3"><a href="#示例8人川菜宴席2026-agent时代">示例：8人川菜宴席（2026 Agent时代）</a></li><li class="depth-2"><a href="#推理层服务团队是核心">推理层（服务团队）是核心</a></li><li class="depth-3"><a href="#很多人的误解">很多人的误解</a></li><li class="depth-3"><a href="#真正的竞争">真正的竞争</a></li><li class="depth-2"><a href="#关键洞察总结">关键洞察总结</a></li><li class="depth-3"><a href="#1-分层架构清晰">1. 分层架构清晰</a></li><li class="depth-3"><a href="#2-mcp-vs-skills-的本质区别">2. MCP vs Skills 的本质区别</a></li><li class="depth-3"><a href="#3-agent的自主性是关键突破">3. Agent的自主性是关键突破</a></li><li class="depth-3"><a href="#4-性能优化是工程问题">4. 性能优化是工程问题</a></li><li class="depth-3"><a href="#5-演进规律降低门槛">5. 演进规律：降低门槛</a></li><li class="depth-2"><a href="#映射表技术术语--餐厅类比">映射表：技术术语 ↔ 餐厅类比</a></li><li class="depth-2"><a href="#实际应用示例">实际应用示例</a></li><li class="depth-3"><a href="#示例1code-review只需skills">示例1：Code Review（只需Skills）</a></li><li class="depth-3"><a href="#示例2分析github趋势需要mcp--skills">示例2：分析GitHub趋势（需要MCP + Skills）</a></li><li class="depth-3"><a href="#示例3写技术文档只需skills">示例3：写技术文档（只需Skills）</a></li><li class="depth-2"><a href="#为什么用餐厅类比">为什么用餐厅类比？</a></li><li class="depth-3"><a href="#1-日常场景易于理解">1. 日常场景，易于理解</a></li><li class="depth-3"><a href="#2-映射精准关键概念清晰">2. 映射精准，关键概念清晰</a></li><li class="depth-3"><a href="#3-突出容易忽略的重点">3. 突出容易忽略的重点</a></li><li class="depth-2"><a href="#使用这个类比框架阅读后续章节">使用这个类比框架阅读后续章节</a></li><li class="depth-2"><a href="#延伸思考">延伸思考</a></li><li class="depth-3"><a href="#q1-为什么不能只要主厨模型不要服务团队推理层">Q1: 为什么不能只要主厨（模型），不要服务团队（推理层）？</a></li><li class="depth-3"><a href="#q2-本地aiclawdbotvs-云端aiclaude-code的区别">Q2: 本地AI（Clawdbot）vs 云端AI（Claude Code）的区别？</a></li><li class="depth-3"><a href="#q3-为什么skills比mcp重要">Q3: 为什么Skills比MCP重要？</a></li></ul></aside> </div> <script>
+    (() => {
+      const bar = document.querySelector('.progress');
+      if (!bar) return;
+      let ticking = false;
+      const update = () => {
+        const root = document.documentElement;
+        const max = root.scrollHeight - root.clientHeight;
+        bar.style.width = (max > 0 ? (root.scrollTop / max) * 100 : 0) + '%';
+        ticking = false;
+      };
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          window.requestAnimationFrame(update);
+          ticking = true;
+        }
+      }, { passive: true });
+      update();
+    })();
+  </script> <script>
+    (() => {
+      const links = Array.from(document.querySelectorAll('.toc a'));
+      if (!links.length) return;
+      const targets = links
+        .map((link) => {
+          const href = link.getAttribute('href') || '';
+          const id = decodeURIComponent(href.replace('#', ''));
+          return { link, target: document.getElementById(id) };
+        })
+        .filter((item) => item.target);
+      if (!targets.length) return;
+
+      const setActive = (active) => {
+        links.forEach((link) => link.classList.toggle('active', link === active));
+      };
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          const visible = entries
+            .filter((entry) => entry.isIntersecting)
+            .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+          if (visible.length) {
+            const match = targets.find((item) => item.target === visible[0].target);
+            if (match) setActive(match.link);
+          }
+        },
+        { rootMargin: '-90px 0px -70% 0px', threshold: 0 }
+      );
+
+      targets.forEach((item) => observer.observe(item.target));
+    })();
+  </script>  </main> <footer class="site-footer"> <div class="shell"> <div class="footer-top"> <div class="footer-brand"> <span class="seal" aria-hidden="true">AS</span> <div> <strong>Allen Shao · 文章集</strong> <span>Writing &amp; Notes · 持续更新</span> </div> </div> <div class="footer-links"> <a href="/blog/">文章集</a> <a href="/blog/ai-evolution/">从对话到协作</a> <a href="/blog/about/">关于</a> <a href="/blog/rss.xml">RSS</a> <a href="https://shaominfeng.github.io/">个人主页 ↗</a> <a href="https://github.com/shaominfeng" target="_blank" rel="noopener noreferrer">GitHub ↗</a> </div> </div> <div class="footer-bottom"> <span>© 2026 Allen Shao</span> <span>文字以 CC BY-NC-SA 4.0 授权 · 转载注明出处</span> <span>用 Astro 构建 · GitHub Pages</span> </div> </div> </footer> </body></html>
