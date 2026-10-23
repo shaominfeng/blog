@@ -1955,7 +1955,7 @@ button {
   }
 
   .site-nav .nav-cta {
-    padding: 7px 10px;
+    display: none;
   }
 
   .hero {
