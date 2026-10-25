@@ -1,12 +1,9 @@
 # Allen Shao · 文章集
 
-技术长文与系列连载，部署在 <https://shaominfeng.github.io/blog/>。
+技术长文与系列连载：<https://shaominfeng.github.io/blog/>
 
-当前系列：**《从对话到协作》** — AI 大模型三年演进全记录（2022.11—2026.01），14 章、约 1.8 万字。
-
-当前单篇：**《工程师 Agentic Coding 的一天》** — 从 09:00 晨报到 18:00 巡检的一天真实工作流。
-
-在线阅读：<https://shaominfeng.github.io/blog/ai-evolution/> · <https://shaominfeng.github.io/blog/essays/a-day-of-agentic-coding/>
+- 系列 [《从对话到协作》](https://shaominfeng.github.io/blog/ai-evolution/)：AI 大模型三年演进全记录（2022.11—2026.01），14 章、约 1.8 万字
+- 单篇 [《工程师 Agentic Coding 的一天》](https://shaominfeng.github.io/blog/essays/a-day-of-agentic-coding/)：从 09:00 晨报到 18:00 巡检的一天真实工作流
 
 ## 结构
 
@@ -35,9 +32,11 @@ src/
 └── styles/                  # 编辑设计系统
 ```
 
-新增同系列文章：在 `src/content/articles/ai-evolution/` 添加 Markdown，补齐 frontmatter（`series`、`order`、`part`、`readingTime` 等），路由会自动生成。
-新增单篇：在 `src/content/articles/essays/` 添加 Markdown，设置 `series: "essays"`、`date`、`readingTime`，`/blog/essays/<slug>/` 会自动生成。
-新增一个系列：新建内容目录、系列首页和路由，并在 `src/consts.ts` 的 `SERIES_LIST` 中登记。
+新增内容时：
+
+- **同系列章节**：在 `src/content/articles/ai-evolution/` 添加 Markdown，补齐 frontmatter（`series`、`order`、`part`、`readingTime` 等），路由自动生成。
+- **单篇**：在 `src/content/articles/essays/` 添加 Markdown，设置 `series: "essays"`、`date`、`readingTime`，`/blog/essays/<slug>/` 自动生成。
+- **新系列**：新建内容目录、系列首页和路由，并在 `src/consts.ts` 的 `SERIES_LIST` 中登记。
 
 ## 技术栈
 
