@@ -6,7 +6,7 @@ export const SITE = {
   description:
     'Allen Shao 的技术写作：AI 大模型、Agent 架构、云安全与企业实践。连载《从对话到协作》14 章，另有单篇《工程师 Agentic Coding 的一天》。',
   author: 'Allen Shao',
-  authorEn: 'Allen Shao',
+  authorEn: '邵敏峰',
   email: 'shaominfeng8@gmail.com',
   github: 'https://github.com/shaominfeng',
   personalSite: 'https://shaominfeng.github.io/',
