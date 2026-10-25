@@ -69,21 +69,17 @@ SOURCE_DIR=/path/to/原始文档目录 node scripts/import-content.mjs
 
 ## 部署
 
-推送到 `main` 即自动发布。`.github/workflows/deploy.yml` 在每次 push 时执行 `npm ci` → `npm run build`，把 `dist/` 作为 Pages 制品上传部署。
+推送到 `main` 即自动发布。`.github/workflows/deploy.yml` 会执行 `npm ci` → `npm run build`，把 `dist/` 上传到 GitHub Pages。
 
-仓库设置 → Pages → Source 选择 **GitHub Actions**（对应 API 里的 `build_type: workflow`）。
+仓库设置 → Pages → Source 选择 **GitHub Actions**。
 
-本地要检查构建结果时：
+本地检查构建：
 
 ```bash
 npm ci
 npm run build      # 产物在 dist/
 npm run preview    # 预览构建产物
 ```
-
-> 不要改回 `gh-pages` 分支或 `main` 根目录两种旧模式。前者会和 Actions 争抢同一套 Pages 配置；后者走 Jekyll 的 legacy 构建，而仓库根目录是 Astro 源码，没有 `index.html`，也不存在 `npm run build` 这一步，部署上去就是一个空站。
->
-> 首次开启或调整 workflow 后，若 Actions 显示成功但页面仍旧，先确认 Pages 的 Source 是不是还停在 legacy。
 
 ## 授权
 
