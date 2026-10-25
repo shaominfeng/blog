@@ -7,7 +7,7 @@ part: "导读"
 partOrder: 1
 order: 1
 num: 2
-readingTime: 20
+readingTime: 24
 featured: false
 kind: "chapter"
 date: "2026-01-29"
@@ -76,7 +76,7 @@ cover: "/images/restaurant-architecture.webp"
 "给我一桌川菜宴席，8人，预算2000"
 ```
 
-### 2. 前厅服务团队（推理层）⭐ 最重要
+### 2. 前厅服务团队（推理层）最重要
 
 **核心成员**：
 - **领班（Agent核心）**：规划、决策、协调
@@ -152,7 +152,7 @@ Claude Code（Anthropic的服务团队）> ChatGPT（OpenAI的服务团队）
 
 ### 4. 工具与资源层
 
-#### Skills（菜谱宝典）📚
+#### Skills（菜谱宝典）
 
 **定义**：烹饪知识、方法论、最佳实践
 
@@ -185,7 +185,7 @@ Claude Code（Anthropic的服务团队）> ChatGPT（OpenAI的服务团队）
 - ✅ 可复用（每次做宫保鸡丁都参考同一个配方）
 - ✅ Token效率高（只给需要的菜谱）
 
-#### MCP（采购系统）🛒
+#### MCP（采购系统）
 
 **定义**：获取外部资源的渠道
 
@@ -216,7 +216,7 @@ Claude Code（Anthropic的服务团队）> ChatGPT（OpenAI的服务团队）
 - ⚠️ Token消耗大（所有供应商信息都要告诉厨师）
 - ⚠️ 安全风险（不可信的供应商可能有问题）
 
-#### Function Calling（基础厨具）🔪
+#### Function Calling（基础厨具）
 
 **定义**：最基础的工具调用能力
 
@@ -444,7 +444,7 @@ Claude Code（Anthropic的服务团队）> ChatGPT（OpenAI的服务团队）
 → 知道怎么review，但无代码可review
 ```
 
-#### 场景3：MCP + Skills（完美组合）✅
+#### 场景3：MCP + Skills（完美组合）
 
 ```
 厨师既会做菜，又能采购：
@@ -560,7 +560,7 @@ Code Review任务
 特点：能规划完整方案，但需要用户批准
 ```
 
-### Level 3：完全自主（2025末-2026）⭐
+### Level 3：完全自主（2025末-2026）
 
 ```
 顾客："给我一桌川菜宴席，8人，预算2000，有人不吃辣"

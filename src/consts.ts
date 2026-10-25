@@ -21,14 +21,14 @@ export const SERIES = {
   title: '从对话到协作',
   subtitle: 'AI 大模型三年演进全记录',
   description:
-    '2022.11—2026.01，AI 大模型三年演进全记录。14 章、约 2.1 万字，从时间线、技术架构与企业实践三个视角，理解 AI 如何从对话走向协作。',
+    '2022.11—2026.01，AI 大模型三年演进全记录。14 章、约 1.8 万字，从时间线、技术架构与企业实践三个视角，理解 AI 如何从对话走向协作。',
   start: '2022.11',
   end: '2026.01',
   written: '2026.01.27 — 2026.02.24',
   updated: '2026.02.24',
   license: 'CC BY-NC-SA 4.0',
   chapterCount: 14,
-  words: '2.1 万',
+  words: '1.8 万',
   sources: 17,
   cover: '/images/evolution-ai-capability.webp',
 } as const;

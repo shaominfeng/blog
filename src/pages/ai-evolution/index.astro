@@ -21,27 +21,33 @@ for (const chapter of chapters) {
 const byId = Object.fromEntries(chapters.map((chapter) => [chapter.id.split('/').pop(), chapter]));
 const paths = [
   {
-    time: '30',
-    unit: '分钟',
     title: '快速概览',
-    desc: '先建立全景：三年发生了什么，为什么每一步都顺理成章。',
-    items: ['overview', 'restaurant-analogy', 'year-2025', 'year-2026'],
+    desc: '只有半小时：先拿到全景和心智模型，知道三年里发生了什么。',
+    items: ['overview', 'restaurant-analogy'],
   },
   {
-    time: '2',
-    unit: '小时',
-    title: '时间线深度游',
-    desc: '按年份走一遍，把模型、产品与协议放回它们出现的时刻。',
+    title: '按时间线走',
+    desc: '一年一章，把模型、产品与协议放回它们出现的时刻。',
     items: ['overview', 'year-2022', 'year-2023', 'year-2024', 'year-2025', 'year-2026', 'outlook'],
   },
   {
-    time: '3.5',
-    unit: '小时',
-    title: '技术深度游',
-    desc: '适合工程师：上下文、Prompt、MCP、Skills，以及推理层为什么重要。',
-    items: ['overview', 'context-revolution', 'agent-skills', 'new-paradigm', 'enterprise-case', 'outlook'],
+    title: '工程师视角',
+    desc: '上下文、Prompt、MCP、Skills 四条技术主线，加上推理层与企业落地。',
+    items: [
+      'overview',
+      'context-revolution',
+      'prompt-engineering',
+      'mcp',
+      'agent-skills',
+      'new-paradigm',
+      'enterprise-case',
+      'outlook',
+    ],
   },
 ];
+
+const pathMinutes = (items: string[]) =>
+  items.reduce((sum, id) => sum + (byId[id]?.data.readingTime ?? 0), 0);
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -160,20 +166,21 @@ const structuredData = {
         <span class="section-index">02</span>
         <h2 class="section-title" id="paths-title">选一条阅读路径</h2>
       </div>
-      <span class="section-note">30 min / 2 h / 3.5 h</span>
+      <span class="section-note">全书 {totalMinutes} 分钟</span>
     </div>
     <div class="paths-grid">
       {paths.map((path) => (
-        <a class="path-card" href={SITE.base + '/ai-evolution/overview/'}>
-          <div class="path-time">{path.time}<small>{path.unit}</small></div>
+        <div class="path-card">
+          <div class="path-time">{path.items.length}<small>章</small></div>
           <h3>{path.title}</h3>
           <p>{path.desc}</p>
           <ul class="path-list">
             {path.items.map((id) => (
-              <li>{byId[id]?.data.title ?? id}</li>
+              <li><a href={SITE.base + '/ai-evolution/' + id + '/'}>{byId[id]?.data.title ?? id}</a></li>
             ))}
           </ul>
-        </a>
+          <span class="path-meta">约 {pathMinutes(path.items)} 分钟</span>
+        </div>
       ))}
     </div>
   </section>

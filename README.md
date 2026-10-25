@@ -1,12 +1,12 @@
 # Allen Shao · 文章集
 
-技术长文与系列连载，部署在 https://shaominfeng.github.io/blog/。
+技术长文与系列连载，部署在 <https://shaominfeng.github.io/blog/>。
 
-当前系列：**《从对话到协作》** — AI 大模型三年演进全记录（2022.11—2026.01），14 章、约 2.1 万字。
+当前系列：**《从对话到协作》** — AI 大模型三年演进全记录（2022.11—2026.01），14 章、约 1.8 万字。
 
 当前单篇：**《工程师 Agentic Coding 的一天》** — 从 09:00 晨报到 18:00 巡检的一天真实工作流。
 
-在线阅读：https://shaominfeng.github.io/blog/ai-evolution/ · https://shaominfeng.github.io/blog/essays/a-day-of-agentic-coding/
+在线阅读：<https://shaominfeng.github.io/blog/ai-evolution/> · <https://shaominfeng.github.io/blog/essays/a-day-of-agentic-coding/>
 
 ## 结构
 

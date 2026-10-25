@@ -7,7 +7,7 @@ part: "实践"
 partOrder: 5
 order: 12
 num: 13
-readingTime: 2
+readingTime: 1
 featured: false
 kind: "case"
 date: "2026-01-29"

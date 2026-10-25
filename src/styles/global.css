@@ -690,6 +690,27 @@ button {
   color: var(--accent);
 }
 
+.path-list li a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.path-list li a:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.path-meta {
+  display: block;
+  margin-top: 12px;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: var(--ink-3);
+}
+
 /* ——— catalog ——— */
 
 .catalog {
@@ -1754,6 +1775,66 @@ button {
   font-size: 9px;
   color: var(--ink-3);
   letter-spacing: 0.08em;
+}
+
+/* ——— 参考资料 ——— */
+
+.ref-note {
+  max-width: 68ch;
+  margin: 0 0 8px;
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--ink-3);
+}
+
+.ref-group {
+  margin: 30px 0 8px;
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  color: var(--ink-3);
+  text-transform: uppercase;
+}
+
+.ref-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-left: 1px solid var(--line);
+}
+
+.ref-list li {
+  padding: 8px 0 8px 18px;
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--ink-2);
+  border-bottom: 1px solid var(--line);
+}
+
+.ref-list li:last-child {
+  border-bottom: 0;
+}
+
+.ref-list a {
+  color: var(--ink-2);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.ref-list a:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.ref-list span {
+  margin-left: 8px;
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--ink-3);
+  letter-spacing: 0.06em;
+  white-space: nowrap;
 }
 
 /* ——— 404 ——— */

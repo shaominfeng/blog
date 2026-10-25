@@ -7,7 +7,7 @@ part: "技术深潜"
 partOrder: 3
 order: 10
 num: 11
-readingTime: 5
+readingTime: 4
 featured: true
 kind: "essay"
 date: "2026-01-29"
