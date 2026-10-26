@@ -12,6 +12,17 @@ featured: true
 kind: "essay"
 tags: ["Agentic Coding", "AI 工作流", "工程实践"]
 date: "2026-06-26"
+metrics:
+  - value: "09:00 → 18:00"
+    label: ""
+  - value: "5"
+    label: "个协作层面"
+  - value: "1"
+    label: "天真实工作流"
+panel:
+  time: "09—18"
+  label: "A DAY OF<br />AGENTIC CODING"
+  meta: "ALLEN SHAO / 2026"
 ---
 
 > 过去 AI 是我「打开来用」的工具；现在它是我工作流里「一直在跑」的同事。

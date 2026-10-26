@@ -19,6 +19,16 @@ const articles = defineCollection({
     cover: z.string().optional(),
     date: z.string().optional(),
     updated: z.string().optional(),
+    metrics: z
+      .array(z.object({ value: z.string(), label: z.string().default('') }))
+      .default([]),
+    panel: z
+      .object({
+        time: z.string(),
+        label: z.string(),
+        meta: z.string().default('ALLEN SHAO / 2026'),
+      })
+      .optional(),
   }),
 });
 

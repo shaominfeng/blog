@@ -4,6 +4,7 @@
 
 - 系列 [《从对话到协作》](https://shaominfeng.github.io/blog/ai-evolution/)：AI 大模型三年演进全记录（2022.11—2026.01），14 章、约 1.8 万字
 - 单篇 [《工程师 Agentic Coding 的一天》](https://shaominfeng.github.io/blog/essays/a-day-of-agentic-coding/)：从 09:00 晨报到 18:00 巡检的一天真实工作流
+- 单篇 [《AI 编码成本优化》](https://shaominfeng.github.io/blog/essays/ai-coding-cost/)：三个月真实账单拆解，日均花费 $47.56 → $2.21，别只盯单价，盯单任务成本
 
 ## 结构
 
@@ -17,7 +18,8 @@ src/
 │   │   ├── context-revolution.md
 │   │   └── ...
 │   └── essays/             # 不进入连载的单篇
-│       └── a-day-of-agentic-coding.md
+│       ├── a-day-of-agentic-coding.md
+│       └── ai-coding-cost.md
 ├── pages/
 │   ├── index.astro          # /blog/ 文章集首页
 │   ├── ai-evolution/
@@ -35,7 +37,7 @@ src/
 新增内容时：
 
 - **同系列章节**：在 `src/content/articles/ai-evolution/` 添加 Markdown，补齐 frontmatter（`series`、`order`、`part`、`readingTime` 等），路由自动生成。
-- **单篇**：在 `src/content/articles/essays/` 添加 Markdown，设置 `series: "essays"`、`date`、`readingTime`，`/blog/essays/<slug>/` 自动生成。
+- **单篇**：在 `src/content/articles/essays/` 添加 Markdown，设置 `series: "essays"`、`date`、`readingTime`，`/blog/essays/<slug>/` 自动生成。首页卡片底部那行指标与右侧装饰面板，分别由可选字段 `metrics`、`panel` 驱动；`cover` 用于该篇的 OG 分享图。
 - **新系列**：新建内容目录、系列首页和路由，并在 `src/consts.ts` 的 `SERIES_LIST` 中登记。
 
 ## 技术栈

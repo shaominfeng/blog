@@ -4,7 +4,7 @@ export const SITE = {
   blogTitle: '文章集',
   blogSubtitle: 'Writing & Notes',
   description:
-    'Allen Shao 的技术写作：AI 大模型、Agent 架构、云安全与企业实践。连载《从对话到协作》14 章，另有单篇《工程师 Agentic Coding 的一天》。',
+    'Allen Shao 的技术写作：AI 大模型、Agent 架构、云安全与企业实践。连载《从对话到协作》14 章，另有单篇《工程师 Agentic Coding 的一天》《AI 编码成本优化》。',
   author: 'Allen Shao',
   authorEn: '邵敏峰',
   email: 'shaominfeng8@gmail.com',

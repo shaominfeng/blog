@@ -18,6 +18,7 @@ const { data } = entry;
 const slug = entry.id.split('/').pop();
 const canonical = new URL(SITE.base + '/essays/' + slug + '/', Astro.site).toString();
 const dateLabel = data.date ? data.date.replaceAll('-', '.') : '';
+const ogImage = data.cover ? SITE.base + data.cover : SITE.base + '/og-agentic-coding.png';
 
 const sorted = [...essays].sort((a, b) => (b.data.date ?? '').localeCompare(a.data.date ?? ''));
 const index = sorted.findIndex((essay) => essay.id === entry.id) + 1;
@@ -46,7 +47,7 @@ const structuredData = {
 };
 ---
 
-<BaseLayout title={data.title} description={data.description} type="article" image={SITE.base + '/og-agentic-coding.png'} structuredData={structuredData}>
+<BaseLayout title={data.title} description={data.description} type="article" image={ogImage} structuredData={structuredData}>
   <div class="progress" aria-hidden="true"></div>
 
   <div class="shell article-grid">

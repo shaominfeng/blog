@@ -52,7 +52,7 @@ const structuredData = {
       <span>1 个系列</span>
       <span>{SERIES.chapterCount} 章</span>
       <span>{essays.length} 篇单篇</span>
-      <span>约 2.3 万字</span>
+      <span>约 2.8 万字</span>
       <span>{SERIES.sources} 份参考</span>
       <a href={SITE.base + '/rss.xml'}>RSS</a>
     </div>
@@ -67,25 +67,25 @@ const structuredData = {
       <span class="section-note">{essays.length} essay</span>
     </div>
 
-    {essays.map((essay) => (
+    {essays.map((essay, index) => (
       <a class="essay-feature" href={SITE.base + '/essays/' + essay.id.split('/').pop() + '/'}>
         <div class="ef-copy">
-          <span class="project-index">Essay 01 · 写于 {essay.data.date?.replaceAll('-', '.')} · {essay.data.readingTime} 分钟</span>
+          <span class="project-index">Essay {String(index + 1).padStart(2, '0')} · 写于 {essay.data.date?.replaceAll('-', '.')} · {essay.data.readingTime} 分钟</span>
           <h3>{essay.data.title}</h3>
           <p class="sf-sub">{essay.data.subtitle}</p>
           <p class="sf-desc">{essay.data.description}</p>
           <div class="sf-metrics">
-            <span><b>09:00</b> → <b>18:00</b></span>
-            <span><b>5</b> 个协作层面</span>
-            <span><b>1</b> 天真实工作流</span>
+            {essay.data.metrics.map((metric) => (
+              <span><b>{metric.value}</b>{metric.label ? ' ' + metric.label : ''}</span>
+            ))}
           </div>
           <span class="text-link">阅读全文 →</span>
         </div>
         <div class="ef-panel" aria-hidden="true">
-          <span class="ef-time">09—18</span>
-          <span class="ef-label">A DAY OF<br />AGENTIC CODING</span>
+          <span class="ef-time">{essay.data.panel?.time}</span>
+          <span class="ef-label" set:html={essay.data.panel?.label} />
           <span class="ef-rule"></span>
-          <span class="ef-meta">ALLEN SHAO / 2026</span>
+          <span class="ef-meta">{essay.data.panel?.meta}</span>
         </div>
       </a>
     ))}
