@@ -1,3 +1,5 @@
+const SITE_URL = (import.meta.env.SITE || 'https://shaominfeng.github.io').replace(/\/+$/, '');
+
 export const SITE = {
   name: 'Allen Shao',
   en: 'Allen Shao',
@@ -9,9 +11,9 @@ export const SITE = {
   authorEn: '邵敏峰',
   email: 'shaominfeng8@gmail.com',
   github: 'https://github.com/shaominfeng',
-  personalSite: 'https://shaominfeng.github.io/',
+  personalSite: SITE_URL + '/',
   repo: 'https://github.com/shaominfeng/blog',
-  siteUrl: 'https://shaominfeng.github.io',
+  siteUrl: SITE_URL,
   base: '/blog',
   updated: '2026.10',
 };

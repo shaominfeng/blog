@@ -4,8 +4,11 @@ import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeExternalLinks from 'rehype-external-links';
 
+// 站点域名可切换：默认 GitHub Pages，国内部署时用 SITE_URL 覆盖
+const SITE_URL = (process.env.SITE_URL || 'https://shaominfeng.github.io').replace(/\/+$/, '');
+
 export default defineConfig({
-  site: 'https://shaominfeng.github.io',
+  site: SITE_URL,
   base: '/blog',
   trailingSlash: 'always',
   build: { format: 'directory' },
