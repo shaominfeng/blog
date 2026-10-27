@@ -1,0 +1,115 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE, SERIES } from '../../consts';
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: 'About this collection',
+  description: 'How these essays are researched and written, their scope, changelog and licence.',
+  url: new URL(SITE.base + '/en/about/', Astro.site).toString(),
+  inLanguage: 'en',
+  author: {
+    '@type': 'Person',
+    name: SITE.author,
+    alternateName: SITE.authorEn,
+    url: SITE.personalSite,
+  },
+};
+---
+
+<BaseLayout
+  title="About this collection"
+  description="How these essays are researched and written, their scope, changelog and licence."
+  structuredData={structuredData}
+>
+  <div class="shell page-hero">
+    <p class="label">About / Methodology</p>
+    <h1>About this collection</h1>
+    <p>
+      One engineer's writing space: following a timeline and a set of technical questions to spell out
+      what I have built, what I have read, and which potholes I fell into. This page covers how the
+      writing works, where its data comes from, and what changed when.
+    </p>
+  </div>
+
+  <div class="shell about-page-grid">
+    <aside class="about-side">
+      <ul class="info-list">
+        <li><dt>Author</dt><dd>{SITE.author}</dd></li>
+        <li><dt>Structure</dt><dd>1 series + 2 essays</dd></li>
+        <li><dt>Chapters</dt><dd>{SERIES.chapterCount}</dd></li>
+        <li><dt>Span</dt><dd>{SERIES.start} — {SERIES.end}</dd></li>
+        <li><dt>Last update</dt><dd>2026.10.27</dd></li>
+        <li><dt>Licence</dt><dd>{SERIES.license}</dd></li>
+      </ul>
+    </aside>
+
+    <div class="about-prose">
+      <h2>Why write</h2>
+      <p>
+        When ChatGPT shipped in November 2022, most people saw “an AI that chats”. Three years later
+        AI writes code, runs processes and does research — increasingly as a digital colleague inside
+        the workflow. The pace makes most discussion collapse into parameter comparisons and product
+        tribalism.
+      </p>
+      <p>
+        What this collection tries to do is put the technology back at the moment it appeared: which
+        concrete problem did it solve then? Why this design? What did it cost? And where is the next
+        bottleneck? Once those dots connect, a trend stops being a headline and becomes a causal chain
+        you can reason about.
+      </p>
+
+      <h2>How it is written</h2>
+      <ul>
+        <li><strong>Timeline as the spine.</strong> Official launches, papers and product updates anchor the question of what happened when.</li>
+        <li><strong>Questions as the thread.</strong> Every technology answers “what old approach did this replace, and what new problem did it create”.</li>
+        <li><strong>Multiple viewpoints.</strong> The same technology matters differently to users, application developers, product managers and model builders.</li>
+        <li><strong>Checked against practice.</strong> Real deployments are used to test which conclusions only hold on a slide.</li>
+      </ul>
+
+      <h2>Scope and limits</h2>
+      <p>
+        The main series takes the Claude / Anthropic ecosystem as its primary vantage point, because
+        that is the toolchain my team uses most deeply day to day; it also covers key moves from OpenAI
+        (GPT-5, Codex), Google (Gemini 3) and DeepSeek (R1). Depth is therefore uneven across chapters —
+        read it against your own stack.
+      </p>
+      <p>
+        The enterprise chapters describe internal platforms with company names, product names and exact
+        figures removed, keeping only transferable method and milestones. Usage and rate figures in the
+        cost essays come from my own billing data; third-party models are converted from public list
+        prices. All views are personal and do not represent my employer. Corrections by email are welcome.
+      </p>
+
+      <h2>What's next</h2>
+      <p>
+        The collection keeps growing: more standalone notes on tooling, architecture post-mortems and
+        engineering practice. The next series is in preparation.
+      </p>
+
+      <h2>Changelog</h2>
+      <ul class="update-list">
+        <li><time>2026.10.27</time>English editions added for the whole collection; Chinese remains the original.</li>
+        <li><time>2026.10.26</time>New essay: AI coding cost optimisation — three months of usage data with the cost formula.</li>
+        <li><time>2026.10.25</time>Prologue rewritten as a master outline; MCP and prompt-engineering chapters expanded; references consolidated here.</li>
+        <li><time>2026.10.23</time>The collection launched as a structured, extensible site.</li>
+        <li><time>2026.06.26</time>New essay: A Day of Agentic Coding.</li>
+        <li><time>2026.02.24</time>The series was modularised; the restaurant analogy primer and dual-track comparison were added.</li>
+        <li><time>2026.01.27</time>First draft completed, covering 2022.11—2026.01.</li>
+      </ul>
+
+      <h2>Licence and contact</h2>
+      <p>
+        Text is licensed under <strong>{SERIES.license}</strong>: read and repost freely for
+        non-commercial use, with credit and a link back. Images are my own and share the same licence.
+      </p>
+      <p>
+        Feedback, corrections or collaboration: <a href={'mailto:' + SITE.email}>{SITE.email}</a> ·
+        <a href={SITE.github} target="_blank" rel="noopener noreferrer">GitHub</a> ·
+        <a href={SITE.personalSite}>Home</a> ·
+        <a href={SITE.base + '/en/ai-evolution/'}>The series</a>
+      </p>
+    </div>
+  </div>
+</BaseLayout>

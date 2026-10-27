@@ -1,0 +1,73 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { SERIES, SITE } from '../../../consts';
+import { SERIES_I18N } from '../../../i18n';
+import { seriesOf, slugOf } from '../../../lib/articles';
+
+const chapters = seriesOf(await getCollection('articles'), SERIES.slug, 'en');
+const series = SERIES_I18N.en;
+const totalMinutes = chapters.reduce((sum, chapter) => sum + chapter.data.readingTime, 0);
+
+const groups: { part: string; items: typeof chapters }[] = [];
+for (const chapter of chapters) {
+  const last = groups[groups.length - 1];
+  if (!last || last.part !== chapter.data.part) {
+    groups.push({ part: chapter.data.part, items: [chapter] });
+  } else {
+    last.items.push(chapter);
+  }
+}
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Book',
+  name: series.title + ': ' + series.subtitle,
+  description: series.description,
+  inLanguage: 'en',
+  numberOfPages: chapters.length,
+  author: { '@type': 'Person', name: SITE.author, alternateName: SITE.authorEn, url: SITE.personalSite },
+  url: new URL(SITE.base + '/en/ai-evolution/', Astro.site).toString(),
+};
+---
+
+<BaseLayout title={series.title} description={series.description} structuredData={structuredData}>
+  <section class="shell blog-hero">
+    <p class="label">Series 01 · {SERIES.start}—{SERIES.end} · Complete</p>
+    <h1>{series.title}</h1>
+    <p class="blog-intro">{series.description}</p>
+    <div class="blog-meta">
+      <span>{chapters.length} chapters</span>
+      <span>{totalMinutes} min</span>
+      <span>{SERIES.sources} sources</span>
+      <span>{SERIES.license}</span>
+      <a href={SITE.base + '/en/'}>← All writing</a>
+    </div>
+  </section>
+
+  {groups.map((group) => (
+    <section class="shell blog-section">
+      <div class="section-head">
+        <div class="section-head-left">
+          <span class="section-index">{series.parts[group.part as keyof typeof series.parts] ?? group.part}</span>
+          <h2 class="section-title">{series.parts[group.part as keyof typeof series.parts] ?? group.part}</h2>
+        </div>
+        <span class="section-note">{String(group.items.length).padStart(2, '0')} chapters</span>
+      </div>
+      <div class="post-list">
+        {group.items.map((chapter) => (
+          <a class="post-row" href={SITE.base + '/en/ai-evolution/' + slugOf(chapter) + '/'}>
+            <span class="pr-num">{String(chapter.data.num).padStart(2, '0')}</span>
+            <span class="pr-main">
+              <span class="pr-title">{chapter.data.title}</span>
+              <span class="pr-desc">{chapter.data.description}</span>
+            </span>
+            <span class="pr-meta">
+              <span>{chapter.data.readingTime} min</span>
+            </span>
+          </a>
+        ))}
+      </div>
+    </section>
+  ))}
+</BaseLayout>

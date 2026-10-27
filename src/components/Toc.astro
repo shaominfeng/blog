@@ -1,4 +1,6 @@
 ---
+import { BLOG_UI, type Lang } from '../i18n';
+
 interface Heading {
   depth: number;
   slug: string;
@@ -7,14 +9,15 @@ interface Heading {
 
 interface Props {
   headings: Heading[];
+  lang?: Lang;
 }
 
-const { headings } = Astro.props;
+const { headings, lang = 'zh' } = Astro.props;
 const items = headings.filter((heading) => heading.depth === 2 || heading.depth === 3);
 ---
 
 {items.length > 2 && (
-  <aside class="toc" aria-label="本页目录">
+  <aside class="toc" aria-label={BLOG_UI[lang].tocLabel}>
     <span class="toc-label">On this page</span>
     <ul>
       {items.map((heading) => (

@@ -1,27 +1,33 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import { SITE, SERIES } from '../consts';
+import { SERIES } from '../consts';
+import { BLOG_UI, SERIES_I18N, basePath, type Lang } from '../i18n';
+import { slugOf } from '../lib/articles';
 
 interface Props {
   essays: CollectionEntry<'articles'>[];
   currentId?: string;
+  lang?: Lang;
 }
 
-const { essays, currentId } = Astro.props;
+const { essays, currentId, lang = 'zh' } = Astro.props;
+const t = BLOG_UI[lang];
+const series = SERIES_I18N[lang];
+const base = basePath(lang);
 const sorted = [...essays].sort((a, b) => (b.data.date ?? '').localeCompare(a.data.date ?? ''));
 ---
 
-<nav class="side-nav" aria-label="单篇目录">
-  <a class="side-back" href={SITE.base + '/'}>← 文章集</a>
-  <a class="side-brand" href={SITE.base + '/essays/'}>
-    单篇长文
-    <small>{sorted.length} 篇 · 持续更新</small>
+<nav class="side-nav" aria-label={t.side.essayNavLabel}>
+  <a class="side-back" href={base + '/'}>{t.side.back}</a>
+  <a class="side-brand" href={base + '/essays/'}>
+    {t.side.essays}
+    <small>{sorted.length}{t.side.essayCount}</small>
   </a>
   <div class="side-part">
     <span class="side-part-label">Essays / {String(sorted.length).padStart(2, '0')}</span>
     {sorted.map((essay) => (
       <a
-        href={SITE.base + '/essays/' + essay.id.split('/').pop() + '/'}
+        href={base + '/essays/' + slugOf(essay) + '/'}
         class={essay.id === currentId ? 'active' : undefined}
         aria-current={essay.id === currentId ? 'page' : undefined}
       >
@@ -31,10 +37,10 @@ const sorted = [...essays].sort((a, b) => (b.data.date ?? '').localeCompare(a.da
     ))}
   </div>
   <div class="side-part">
-    <span class="side-part-label">Series / 01</span>
-    <a href={SITE.base + '/ai-evolution/'}>
-      <span class="side-num">14</span>
-      {SERIES.title}
+    <span class="side-part-label">{t.side.seriesLabel}</span>
+    <a href={base + '/ai-evolution/'}>
+      <span class="side-num">{SERIES.chapterCount}</span>
+      {series.title}
     </a>
   </div>
 </nav>

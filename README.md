@@ -17,9 +17,12 @@ src/
 │   │   ├── overview.md
 │   │   ├── context-revolution.md
 │   │   └── ...
-│   └── essays/             # 不进入连载的单篇
-│       ├── a-day-of-agentic-coding.md
-│       └── ai-coding-cost.md
+│   ├── essays/             # 不进入连载的单篇
+│   │   ├── a-day-of-agentic-coding.md
+│   │   └── ai-coding-cost.md
+│   └── en/                 # 英文译文，目录结构与上面一一对应
+│       ├── ai-evolution/*.md
+│       └── essays/*.md
 ├── pages/
 │   ├── index.astro          # /blog/ 文章集首页
 │   ├── ai-evolution/
@@ -28,9 +31,16 @@ src/
 │   ├── essays/
 │   │   ├── index.astro      # /blog/essays/ 单篇列表
 │   │   └── [...slug].astro  # /blog/essays/<slug>/ 单篇
+│   ├── en/                  # 英文版：结构与上面完全镜像
+│   │   ├── index.astro      # /blog/en/
+│   │   ├── ai-evolution/…
+│   │   ├── essays/…
+│   │   └── about.astro
 │   └── about.astro          # /blog/about/
 ├── components/              # 页头、章节导航、TOC
 ├── layouts/                 # 基础布局 / 文章布局
+├── i18n.ts                  # 界面文案（中/英）+ 语言与路径工具
+├── lib/articles.ts          # 按语言筛选文章
 └── styles/                  # 编辑设计系统
 ```
 
@@ -39,6 +49,11 @@ src/
 - **同系列章节**：在 `src/content/articles/ai-evolution/` 添加 Markdown，补齐 frontmatter（`series`、`order`、`part`、`readingTime` 等），路由自动生成。
 - **单篇**：在 `src/content/articles/essays/` 添加 Markdown，设置 `series: "essays"`、`date`、`readingTime`，`/blog/essays/<slug>/` 自动生成。首页卡片底部那行指标与右侧装饰面板，分别由可选字段 `metrics`、`panel` 驱动；`cover` 用于该篇的 OG 分享图。
 - **新系列**：新建内容目录、系列首页和路由，并在 `src/consts.ts` 的 `SERIES_LIST` 中登记。
+- **英文版**：把同名的 Markdown 放进 `src/content/articles/en/<系列>/`，frontmatter 加 `lang: "en"`，`part` 用英文档位（`Prologue` / `Primer` / `Timeline` / `Deep dive` / `Insight` / `Practice` / `Outlook` / `Standalone`），`/blog/en/<系列>/<slug>/` 自动生成。
+  - 中文页面会自动排除 `lang: "en"` 的文章，两个语言互不串台（列表、RSS、路由都按语言过滤）。
+  - 页头 `中 / EN` 切换器按当前路径换算等价路径；`<head>` 输出 `hreflang` 与 `og:locale`。
+  - 文内跨章链接要指向同语言的页面，例如 `/blog/en/ai-evolution/restaurant-analogy/#mcp-vs-skills-head-to-head`。
+  - 英文内容的正文里不要留下中文（包括代码块里作为说明的注释）。
 
 ## 技术栈
 

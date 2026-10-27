@@ -4,7 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE, SERIES } from '../../consts';
 
 const chapters = (await getCollection('articles'))
-  .filter((article) => article.data.series === SERIES.slug)
+  .filter((article) => article.data.lang !== 'en' && article.data.series === SERIES.slug)
   .sort((a, b) => a.data.order - b.data.order);
 const totalMinutes = chapters.reduce((sum, chapter) => sum + chapter.data.readingTime, 0);
 

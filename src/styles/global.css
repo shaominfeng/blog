@@ -2208,3 +2208,74 @@ button {
   }
 }
 
+
+/* ——— 语言切换器（博客页头） ——— */
+
+.site-nav .lang-switch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 27px;
+  height: 22px;
+  padding: 0 7px;
+  margin-left: 2px;
+  border: 1px solid var(--line-2);
+  border-radius: 999px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  color: var(--ink-2);
+}
+
+.site-nav a.lang-switch::after {
+  display: none;
+}
+
+.site-nav a.lang-switch:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+@media (max-width: 720px) {
+  .site-nav .lang-switch {
+    min-width: 24px;
+    height: 20px;
+    padding: 0 5px;
+    font-size: 9px;
+  }
+}
+
+/* ——— 窄屏：英文导航标签更长，收紧间距保证语言切换器不贴边 ——— */
+
+@media (max-width: 560px) {
+  .site-nav {
+    gap: 10px;
+  }
+
+  .site-nav a {
+    font-size: 12px;
+  }
+
+  .site-nav .lang-switch {
+    min-width: 22px;
+    padding: 0 4px;
+  }
+}
+
+/* ——— 窄屏：英文导航标签更长，收紧间距保证语言切换器不贴边 ——— */
+
+@media (max-width: 560px) {
+  .site-nav {
+    gap: 10px;
+  }
+
+  .site-nav a {
+    font-size: 12px;
+  }
+
+  .site-nav .lang-switch {
+    min-width: 22px;
+    padding: 0 4px;
+  }
+}

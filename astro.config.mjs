@@ -21,7 +21,7 @@ export default defineConfig({
         rehypeAutolinkHeadings,
         {
           behavior: 'append',
-          properties: { className: ['heading-anchor'], 'aria-label': '本节链接' },
+          properties: { className: ['heading-anchor'], 'aria-label': 'Permalink' },
           content: {
             type: 'element',
             tagName: 'span',

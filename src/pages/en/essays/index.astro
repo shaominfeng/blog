@@ -1,0 +1,77 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { SITE } from '../../../consts';
+import { essaysOf, slugOf } from '../../../lib/articles';
+
+const essays = essaysOf(await getCollection('articles'), 'en');
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Essays · ' + SITE.name,
+  description: 'Standalone long-form essays: workflows, architecture post-mortems and engineering practice.',
+  url: new URL(SITE.base + '/en/essays/', Astro.site).toString(),
+  inLanguage: 'en',
+  author: { '@type': 'Person', name: SITE.author, url: SITE.personalSite },
+};
+---
+
+<BaseLayout
+  title="Essays"
+  description="Standalone long-form essays: workflows, architecture post-mortems and engineering practice."
+  structuredData={structuredData}
+>
+  <section class="shell blog-hero">
+    <p class="label">Essays / {essays.length}</p>
+    <h1>Essays</h1>
+    <p class="blog-intro">
+      Standalone pieces that sit outside the series. Each one tries to settle a single question:
+      a real workflow, an architecture call, or an engineering post-mortem.
+    </p>
+    <div class="blog-meta">
+      <span>{essays.length} essays</span>
+      <span>{essays.reduce((sum, essay) => sum + essay.data.readingTime, 0)} min</span>
+      <a href={SITE.base + '/en/'}>← All writing</a>
+    </div>
+  </section>
+
+  <section class="shell blog-section">
+    <div class="post-list">
+      {essays.map((essay, index) => (
+        <a class="post-row" href={SITE.base + '/en/essays/' + slugOf(essay) + '/'}>
+          <span class="pr-num">{String(index + 1).padStart(2, '0')}</span>
+          <span class="pr-main">
+            <span class="pr-title">{essay.data.title}</span>
+            <span class="pr-desc">{essay.data.description}</span>
+          </span>
+          <span class="pr-meta">
+            <span>{essay.data.date?.replaceAll('-', '.')}</span>
+            <span>{essay.data.readingTime} min</span>
+          </span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="shell blog-about">
+    <div class="about-grid">
+      <div class="about-copy">
+        <p class="about-statement">The next piece is being written.</p>
+        <p>
+          Essays are not built as a structured series; the only goal is to settle one thing properly.
+          If there is a topic you want covered, email me.
+        </p>
+        <div class="contact-line">
+          <a href={'mailto:' + SITE.email}>Email</a>
+          <a href={SITE.personalSite}>Home ↗</a>
+          <a href={SITE.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+        </div>
+      </div>
+      <div class="about-mark" aria-hidden="true">
+        <span class="monogram">AS</span>
+        <span class="mark-label">ESSAYS · 2026</span>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

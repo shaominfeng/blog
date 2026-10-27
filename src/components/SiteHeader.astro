@@ -1,33 +1,54 @@
 ---
 import { SITE } from '../consts';
+import { BLOG_UI, basePath, type Lang } from '../i18n';
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = 'zh' } = Astro.props;
+const t = BLOG_UI[lang];
+const base = basePath(lang);
 
 const path = Astro.url.pathname;
-const isIndex = path === SITE.base + '/' || path === SITE.base;
-const isEssays = path.startsWith(SITE.base + '/essays/');
+const isIndex = path === base + '/' || path === base;
+const isEssays = path.startsWith(base + '/essays/');
 const isCollection = isIndex || isEssays;
-const isSeries = path.startsWith(SITE.base + '/ai-evolution/');
-const isAbout = path === SITE.base + '/about/' || path === SITE.base + '/about';
+const isSeries = path.startsWith(base + '/ai-evolution/');
+const isAbout = path === base + '/about/' || path === base + '/about';
+
+// 语言切换：保留当前页在另一语言下的等价路径
+const inner = path.startsWith(SITE.base + '/en')
+  ? path.slice((SITE.base + '/en').length)
+  : path.slice(SITE.base.length);
+const altPath = (lang === 'en' ? SITE.base : SITE.base + '/en') + (inner || '/');
 ---
 
 <header class="site-header">
   <div class="shell header-inner">
-    <a class="brand" href={SITE.base + '/'}>
+    <a class="brand" href={base + '/'}>
       <span class="seal" aria-hidden="true">AS</span>
       <span class="brand-copy">
-        <strong>{SITE.name} · 文章集</strong>
+        <strong>{SITE.name} · {t.nav.home}</strong>
         <span>Writing & Notes</span>
       </span>
     </a>
 
-    <nav class="site-nav" aria-label="主导航">
-      <a class="nav-text" href={SITE.base + '/'} aria-current={isCollection ? 'page' : undefined}>文章集</a>
-      <a class="nav-text" href={SITE.base + '/essays/'} aria-current={isEssays ? 'page' : undefined}>单篇</a>
-      <a class="nav-text" href={SITE.base + '/ai-evolution/'} aria-current={isSeries ? 'page' : undefined}>从对话到协作</a>
-      <a class="nav-text" href={SITE.base + '/about/'} aria-current={isAbout ? 'page' : undefined}>关于</a>
-      <a class="nav-ext" href={SITE.personalSite}>个人主页 ↗</a>
+    <nav class="site-nav" aria-label={t.nav.label}>
+      <a class="nav-text" href={base + '/'} aria-current={isCollection ? 'page' : undefined}>{t.nav.home}</a>
+      <a class="nav-text" href={base + '/essays/'} aria-current={isEssays ? 'page' : undefined}>{t.nav.essays}</a>
+      <a class="nav-text" href={base + '/ai-evolution/'} aria-current={isSeries ? 'page' : undefined}>{t.nav.series}</a>
+      <a class="nav-text" href={base + '/about/'} aria-current={isAbout ? 'page' : undefined}>{t.nav.about}</a>
+      <a
+        class="lang-switch"
+        href={altPath}
+        hreflang={lang === 'en' ? 'zh-CN' : 'en'}
+        aria-label={t.nav.switchLabel}
+        title={t.nav.switchLabel}>{t.nav.switchText}</a>
+      <a class="nav-ext" href={SITE.personalSite}>{t.nav.personal}</a>
       <a class="nav-ext" href={SITE.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a>
       {!isSeries && !isEssays && (
-        <a class="nav-cta" href={SITE.base + '/ai-evolution/overview/'}>开始阅读 <span aria-hidden="true">→</span></a>
+        <a class="nav-cta" href={base + '/ai-evolution/overview/'}>{t.nav.cta} <span aria-hidden="true">→</span></a>
       )}
     </nav>
   </div>

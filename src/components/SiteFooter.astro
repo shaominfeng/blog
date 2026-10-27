@@ -1,5 +1,14 @@
 ---
-import { SITE, SERIES } from '../consts';
+import { SITE } from '../consts';
+import { BLOG_UI, basePath, type Lang } from '../i18n';
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = 'zh' } = Astro.props;
+const t = BLOG_UI[lang];
+const base = basePath(lang);
 ---
 
 <footer class="site-footer">
@@ -8,23 +17,23 @@ import { SITE, SERIES } from '../consts';
       <div class="footer-brand">
         <span class="seal" aria-hidden="true">AS</span>
         <div>
-          <strong>{SITE.name} · {SITE.blogTitle}</strong>
-          <span>{SITE.blogSubtitle} · 持续更新</span>
+          <strong>{SITE.name} · {t.nav.home}</strong>
+          <span>{t.footer.tagline}</span>
         </div>
       </div>
       <div class="footer-links">
-        <a href={SITE.base + '/'}>文章集</a>
-        <a href={SITE.base + '/ai-evolution/'}>从对话到协作</a>
-        <a href={SITE.base + '/about/'}>关于</a>
+        <a href={base + '/'}>{t.footer.home}</a>
+        <a href={base + '/ai-evolution/'}>{t.footer.series}</a>
+        <a href={base + '/about/'}>{t.footer.about}</a>
         <a href={SITE.base + '/rss.xml'}>RSS</a>
-        <a href={SITE.personalSite}>个人主页 ↗</a>
+        <a href={SITE.personalSite}>{t.footer.personal}</a>
         <a href={SITE.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a>
       </div>
     </div>
     <div class="footer-bottom">
       <span>© 2026 {SITE.name}</span>
-      <span>文字以 {SERIES.license} 授权 · 转载注明出处</span>
-      <span>用 Astro 构建 · GitHub Pages</span>
+      <span>{t.footer.license}</span>
+      <span>{t.footer.built}</span>
     </div>
   </div>
 </footer>

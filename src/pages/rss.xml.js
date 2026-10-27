@@ -4,11 +4,11 @@ import { SITE, SERIES } from '../consts';
 
 export async function GET(context) {
   const articles = (await getCollection('articles'))
-    .filter((article) => article.data.series === SERIES.slug)
+    .filter((article) => article.data.lang !== 'en' && article.data.series === SERIES.slug)
     .sort((a, b) => a.data.order - b.data.order);
 
   const essays = (await getCollection('articles'))
-    .filter((article) => article.data.series === 'essays')
+    .filter((article) => article.data.lang !== 'en' && article.data.series === 'essays')
     .sort((a, b) => (b.data.date ?? '').localeCompare(a.data.date ?? ''));
 
   return rss({

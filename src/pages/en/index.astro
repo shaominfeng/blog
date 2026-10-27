@@ -1,0 +1,162 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE, SERIES } from '../../consts';
+import { SERIES_I18N } from '../../i18n';
+import { essaysOf, seriesOf, slugOf } from '../../lib/articles';
+
+const all = await getCollection('articles');
+const chapters = seriesOf(all, SERIES.slug, 'en');
+const essays = essaysOf(all, 'en');
+const series = SERIES_I18N.en;
+const totalMinutes = chapters.reduce((sum, chapter) => sum + chapter.data.readingTime, 0);
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Blog',
+  name: SITE.name + ' · Writing',
+  description:
+    'Essays on large language models, agent architecture, cloud security and shipping AI in the enterprise.',
+  url: new URL(SITE.base + '/en/', Astro.site).toString(),
+  inLanguage: 'en',
+  author: {
+    '@type': 'Person',
+    name: SITE.author,
+    alternateName: SITE.authorEn,
+    url: SITE.personalSite,
+  },
+};
+---
+
+<BaseLayout
+  title="Writing"
+  description="Essays on large language models, agent architecture, cloud security and shipping AI in the enterprise."
+  structuredData={structuredData}
+>
+  <section class="shell blog-hero">
+    <p class="label">Writing / 2026</p>
+    <h1>Writing</h1>
+    <p class="blog-intro">
+      Writing things down clearly is how I check whether I actually understand them.
+      Long-form pieces on how the technology works, the architectural calls behind it,
+      and what survives contact with a real enterprise.
+    </p>
+    <div class="blog-meta">
+      <span>1 series</span>
+      <span>{chapters.length} chapters</span>
+      <span>{essays.length} essays</span>
+      <span>{totalMinutes} min read</span>
+      <a href={SITE.base + '/rss.xml'}>RSS</a>
+    </div>
+  </section>
+
+  <section class="shell blog-section">
+    <div class="section-head">
+      <div class="section-head-left">
+        <span class="section-index">01</span>
+        <h2 class="section-title">Essays</h2>
+      </div>
+      <span class="section-note">{essays.length} standalone</span>
+    </div>
+
+    {essays.map((essay, index) => (
+      <a class="essay-feature" href={SITE.base + '/en/essays/' + slugOf(essay) + '/'}>
+        <div class="ef-copy">
+          <span class="project-index">Essay {String(index + 1).padStart(2, '0')} · {essay.data.date?.replaceAll('-', '.')} · {essay.data.readingTime} min</span>
+          <h3>{essay.data.title}</h3>
+          <p class="sf-sub">{essay.data.subtitle}</p>
+          <p class="sf-desc">{essay.data.description}</p>
+          <div class="sf-metrics">
+            {essay.data.metrics.map((metric) => (
+              <span><b>{metric.value}</b>{metric.label ? ' ' + metric.label : ''}</span>
+            ))}
+          </div>
+          <span class="text-link">Read →</span>
+        </div>
+        <div class="ef-panel" aria-hidden="true">
+          <span class="ef-time">{essay.data.panel?.time}</span>
+          <span class="ef-label" set:html={essay.data.panel?.label} />
+          <span class="ef-rule"></span>
+          <span class="ef-meta">{essay.data.panel?.meta}</span>
+        </div>
+      </a>
+    ))}
+  </section>
+
+  <section class="shell blog-section">
+    <div class="section-head">
+      <div class="section-head-left">
+        <span class="section-index">02</span>
+        <h2 class="section-title">Series</h2>
+      </div>
+      <span class="section-note">01 series</span>
+    </div>
+
+    <a class="series-feature" href={SITE.base + '/en/ai-evolution/'}>
+      <div class="sf-copy">
+        <span class="project-index">Series 01 · {SERIES.start}—{SERIES.end} · complete</span>
+        <h3>{series.title}</h3>
+        <p class="sf-sub">{series.subtitle}</p>
+        <p class="sf-desc">{series.description}</p>
+        <div class="sf-metrics">
+          <span><b>{chapters.length}</b> chapters</span>
+          <span><b>{SERIES.sources}</b> sources</span>
+          <span><b>{totalMinutes}</b> min</span>
+        </div>
+        <span class="text-link">Open the series →</span>
+      </div>
+      <div class="sf-cover">
+        <img src={SITE.base + SERIES.cover} alt="The evolution of AI capability: from conversational to collaborative" width="1400" height="764" loading="eager" />
+        <span>Updated {SERIES.updated}</span>
+      </div>
+    </a>
+  </section>
+
+  <section class="shell blog-section">
+    <div class="section-head">
+      <div class="section-head-left">
+        <span class="section-index">03</span>
+        <h2 class="section-title">All chapters</h2>
+      </div>
+      <span class="section-note">{chapters.length} chapters</span>
+    </div>
+
+    <div class="post-list">
+      {chapters.map((chapter) => (
+        <a class="post-row" href={SITE.base + '/en/ai-evolution/' + slugOf(chapter) + '/'}>
+          <span class="pr-num">{String(chapter.data.num).padStart(2, '0')}</span>
+          <span class="pr-main">
+            <span class="pr-title">{chapter.data.title}</span>
+            <span class="pr-desc">{chapter.data.description}</span>
+          </span>
+          <span class="pr-meta">
+            <span>{series.parts[chapter.data.part as keyof typeof series.parts] ?? chapter.data.part}</span>
+            <span>{chapter.data.readingTime} min</span>
+          </span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="shell blog-about">
+    <div class="about-grid">
+      <div class="about-copy">
+        <p class="about-statement">The next piece is being written.</p>
+        <p>
+          This collection keeps growing: alongside the series there are standalone notes,
+          architecture post-mortems and tooling write-ups. If there is a topic you want covered,
+          email me.
+        </p>
+        <div class="contact-line">
+          <a href={'mailto:' + SITE.email}>Email</a>
+          <a href={SITE.personalSite}>Home ↗</a>
+          <a href={SITE.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+        </div>
+      </div>
+      <div class="about-mark" aria-hidden="true">
+        <span class="monogram">AS</span>
+        <span class="mark-label">WRITING · 2026</span>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

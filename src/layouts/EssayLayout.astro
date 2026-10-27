@@ -3,7 +3,8 @@ import type { CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
 import EssayNav from '../components/EssayNav.astro';
 import Toc from '../components/Toc.astro';
-import { SITE, SERIES } from '../consts';
+import { SITE } from '../consts';
+import { BLOG_UI, basePath, type Lang } from '../i18n';
 
 interface Props {
   entry: CollectionEntry<'articles'>;
@@ -15,8 +16,11 @@ interface Props {
 
 const { entry, headings, essays, prev, next } = Astro.props;
 const { data } = entry;
+const lang: Lang = data.lang === 'en' ? 'en' : 'zh';
+const t = BLOG_UI[lang];
+const base = basePath(lang);
 const slug = entry.id.split('/').pop();
-const canonical = new URL(SITE.base + '/essays/' + slug + '/', Astro.site).toString();
+const canonical = new URL(base + '/essays/' + slug + '/', Astro.site).toString();
 const dateLabel = data.date ? data.date.replaceAll('-', '.') : '';
 const ogImage = data.cover ? SITE.base + data.cover : SITE.base + '/og-agentic-coding.png';
 
@@ -28,7 +32,7 @@ const structuredData = {
   '@type': 'Article',
   headline: data.title,
   description: data.description,
-  inLanguage: 'zh-CN',
+  inLanguage: t.htmlLang,
   datePublished: data.date,
   dateModified: data.updated ?? data.date,
   author: {
@@ -41,29 +45,29 @@ const structuredData = {
   mainEntityOfPage: canonical,
   isPartOf: {
     '@type': 'Blog',
-    name: SITE.name + ' · ' + SITE.blogTitle,
-    url: new URL(SITE.base + '/', Astro.site).toString(),
+    name: SITE.name + ' · ' + t.nav.home,
+    url: new URL(base + '/', Astro.site).toString(),
   },
 };
 ---
 
-<BaseLayout title={data.title} description={data.description} type="article" image={ogImage} structuredData={structuredData}>
+<BaseLayout title={data.title} description={data.description} type="article" lang={lang} image={ogImage} structuredData={structuredData}>
   <div class="progress" aria-hidden="true"></div>
 
   <div class="shell article-grid">
-    <EssayNav essays={essays} currentId={entry.id} />
+    <EssayNav essays={essays} currentId={entry.id} lang={lang} />
 
     <div class="article-body">
       <header class="article-hero">
-        <nav class="crumbs" aria-label="面包屑">
-          <a href={SITE.base + '/'}>文章集</a>
+        <nav class="crumbs" aria-label="breadcrumb">
+          <a href={base + '/'}>{t.article.crumbsHome}</a>
           <span class="sep">/</span>
-          <a href={SITE.base + '/essays/'}>单篇</a>
+          <a href={base + '/essays/'}>{t.nav.essays}</a>
           <span class="sep">/</span>
-          <span>Essay {String(index).padStart(2, '0')}</span>
+          <span>{t.article.essayLabel} {String(index).padStart(2, '0')}</span>
         </nav>
 
-        <span class="tag tag-hot" style="margin-bottom:14px;display:inline-block">单篇长文</span>
+        <span class="tag tag-hot" style="margin-bottom:14px;display:inline-block">{t.article.essayTag}</span>
 
         <h1>{data.title}</h1>
         <p class="article-sub">{data.subtitle}</p>
@@ -72,18 +76,18 @@ const structuredData = {
         <div class="article-meta">
           <span>{SITE.author}</span>
           <span class="dot" aria-hidden="true"></span>
-          <span>写于 {dateLabel}</span>
+          <span>{t.article.wroteOn(dateLabel)}</span>
           <span class="dot" aria-hidden="true"></span>
-          <span>{data.readingTime} 分钟</span>
+          <span>{t.article.minutes(data.readingTime)}</span>
           <span class="dot" aria-hidden="true"></span>
           <span>{data.part}</span>
         </div>
       </header>
 
       <details class="mobile-toc">
-        <summary>单篇目录</summary>
+        <summary>{t.article.essayToc}</summary>
         <div class="mobile-nav">
-          <EssayNav essays={essays} currentId={entry.id} />
+          <EssayNav essays={essays} currentId={entry.id} lang={lang} />
         </div>
       </details>
 
@@ -92,28 +96,28 @@ const structuredData = {
       </article>
 
       <div class="article-end">
-        <span class="article-end-label">Continue reading</span>
+        <span class="article-end-label">{t.article.continueReading}</span>
         <div class="prev-next">
           {prev ? (
-            <a class="pn-card" href={SITE.base + '/essays/' + prev.id.split('/').pop() + '/'}>
-              <small>← 上一篇</small>
+            <a class="pn-card" href={base + '/essays/' + prev.id.split('/').pop() + '/'}>
+              <small>{t.article.prevEssay}</small>
               <strong>{prev.data.title}</strong>
             </a>
           ) : (
-            <a class="pn-card" href={SITE.base + '/'}>
-              <small>← 回到</small>
-              <strong>文章集</strong>
+            <a class="pn-card" href={base + '/'}>
+              <small>{t.article.back}</small>
+              <strong>{t.article.backToCollection}</strong>
             </a>
           )}
           {next ? (
-            <a class="pn-card next" href={SITE.base + '/essays/' + next.id.split('/').pop() + '/'}>
-              <small>下一篇 →</small>
+            <a class="pn-card next" href={base + '/essays/' + next.id.split('/').pop() + '/'}>
+              <small>{t.article.nextEssay}</small>
               <strong>{next.data.title}</strong>
             </a>
           ) : (
-            <a class="pn-card next" href={SITE.base + '/essays/'}>
-              <small>更多 →</small>
-              <strong>全部单篇</strong>
+            <a class="pn-card next" href={base + '/essays/'}>
+              <small>{t.article.more}</small>
+              <strong>{t.article.allEssays}</strong>
             </a>
           )}
         </div>
@@ -122,18 +126,18 @@ const structuredData = {
           <span class="seal" aria-hidden="true">AS</span>
           <p>
             <strong>{SITE.author}</strong>
-            全栈工程师，关注 AI Agent、云安全与开发者体验。把公开信息放回时间线，也把自己踩过的坑写下来。
-            <a href={SITE.personalSite} style="color:var(--accent-2);text-decoration:underline;text-underline-offset:3px">个人主页 ↗</a>
+            {t.article.bio}
+            <a href={SITE.personalSite} style="color:var(--accent-2);text-decoration:underline;text-underline-offset:3px">{t.article.bioLink}</a>
           </p>
         </div>
 
         <p class="article-license">
-          本文以 {SERIES.license} 授权，转载请注明作者与出处。文中观点为个人观察，不代表任职机构。
+          {t.article.license}
         </p>
       </div>
     </div>
 
-    <Toc headings={headings} />
+    <Toc headings={headings} lang={lang} />
   </div>
 
   <script is:inline>

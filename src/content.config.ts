@@ -4,6 +4,11 @@ import { glob } from 'astro/loaders';
 const articles = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/articles' }),
   schema: z.object({
+    /**
+     * 文章语言。英文译文放在 src/content/articles/en/ 下，id 形如
+     * `en/essays/foo`；中文原文保持默认 zh。
+     */
+    lang: z.enum(['zh', 'en']).default('zh'),
     series: z.string(),
     title: z.string(),
     subtitle: z.string().optional(),
