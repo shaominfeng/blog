@@ -8,7 +8,6 @@ import {
   byDateDesc,
   byOrder,
   inSeries,
-  partLabel,
   seriesUrl,
   totalMinutes,
   wordTotal,
@@ -30,7 +29,6 @@ const essays = essaysMeta ? byDateDesc(inSeries(all, essaysMeta.id, lang)) : [];
 const [leadEssay, ...restEssays] = essays;
 
 const allChapters = seriesBlocks.flatMap((block) => block.chapters);
-const words = wordTotal([...allChapters, ...essays]);
 
 const PREVIEW = 5;
 
@@ -77,13 +75,6 @@ const structuredData = {
       Long-form pieces on how the technology works, the architectural calls behind it,
       and what survives contact with a real enterprise.
     </p>
-    <div class="blog-meta">
-      <span>{seriesBlocks.length} series</span>
-      <span>{allChapters.length} chapters</span>
-      <span>{essays.length} essays</span>
-      <span>{totalMinutes([...allChapters, ...essays])} min read</span>
-      <a href={SITE.base + '/rss.xml'}>RSS</a>
-    </div>
   </section>
 
   <section class="shell blog-section">
@@ -92,13 +83,13 @@ const structuredData = {
         <span class="section-index">01</span>
         <h2 class="section-title">Essays</h2>
       </div>
-      <span class="section-note">Newest first</span>
+      <span class="section-note">{essays.length} essays</span>
     </div>
 
     {leadEssay && (
       <a class="essay-feature" href={articleUrl(leadEssay)}>
         <div class="ef-copy">
-          <span class="project-index">Essay 01 · {leadEssay.data.date?.replaceAll('-', '.')} · {leadEssay.data.readingTime} min</span>
+          <span class="project-index">{leadEssay.data.date?.replaceAll('-', '.')} · {leadEssay.data.readingTime} min</span>
           <h3>{leadEssay.data.title}</h3>
           <p class="sf-sub">{leadEssay.data.subtitle}</p>
           <p class="sf-desc">{leadEssay.data.description}</p>
@@ -122,8 +113,7 @@ const structuredData = {
       <>
         <div class="post-list" style="margin-top: 18px;">
           {restEssays.map((essay, index) => (
-            <a class="post-row" href={articleUrl(essay)}>
-              <span class="pr-num">{String(index + 2).padStart(2, '0')}</span>
+            <a class="post-row no-num" href={articleUrl(essay)}>
               <span class="pr-main">
                 <span class="pr-title">{essay.data.title}</span>
                 <span class="pr-desc">{essay.data.description}</span>
@@ -148,14 +138,14 @@ const structuredData = {
         <span class="section-index">02</span>
         <h2 class="section-title">Series</h2>
       </div>
-      <span class="section-note">Long-form serial</span>
+      <span class="section-note">{allChapters.length} chapters</span>
     </div>
 
     {seriesBlocks.map(({ entry, meta, chapters }) => (
       <article class="series-block">
         <a class="series-feature" href={seriesUrl(entry.id, lang)}>
           <div class="sf-copy">
-            <span class="project-index">{meta.label} · {entry.data.start}—{entry.data.end} · complete</span>
+            <span class="project-index">{meta.label} · complete</span>
             <h3>{meta.title}</h3>
             <p class="sf-sub">{meta.subtitle}</p>
             <p class="sf-desc">{meta.description}</p>
@@ -169,7 +159,6 @@ const structuredData = {
           {entry.data.cover && (
             <div class="sf-cover">
               <img src={SITE.base + entry.data.cover} alt={meta.title} width="1400" height="764" loading="eager" />
-              <span>Updated {entry.data.updated}</span>
             </div>
           )}
         </a>
@@ -188,7 +177,6 @@ const structuredData = {
                   <span class="pr-desc">{chapter.data.description}</span>
                 </span>
                 <span class="pr-meta">
-                  <span>{chapter.data.part ? partLabel(entry, chapter.data.part, lang) : ''}</span>
                   <span>{chapter.data.readingTime} min</span>
                 </span>
               </a>
