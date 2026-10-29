@@ -5,6 +5,7 @@
 - 系列 [《从对话到协作》](https://shaominfeng.github.io/blog/ai-evolution/)：AI 大模型三年演进全记录（2022.11—2026.01），14 章、约 1.8 万字
 - 单篇 [《工程师 Agentic Coding 的一天》](https://shaominfeng.github.io/blog/essays/a-day-of-agentic-coding/)：从 09:00 晨报到 18:00 巡检的一天真实工作流
 - 单篇 [《AI 编码成本优化》](https://shaominfeng.github.io/blog/essays/ai-coding-cost/)：三个月真实账单拆解，日均花费 $47.56 → $2.21，别只盯单价，盯单任务成本
+- 单篇 [《RD 的运维副业：从 Redis 到全线监控》](https://shaominfeng.github.io/blog/essays/sp-ops-agent-ops/)：用 Agent 把 5 个站点的 39 个 dashboard 做成巡检工具，14 天从一条告警追到根因修复
 
 ## 结构
 
@@ -19,7 +20,8 @@ src/
 │   │   └── ...
 │   ├── essays/             # 不进入连载的单篇
 │   │   ├── a-day-of-agentic-coding.md
-│   │   └── ai-coding-cost.md
+│   │   ├── ai-coding-cost.md
+│   │   └── sp-ops-agent-ops.md
 │   └── en/                 # 英文译文，目录结构与上面一一对应
 │       ├── ai-evolution/*.md
 │       └── essays/*.md
