@@ -1,6 +1,6 @@
 ---
 title: "An RD's side quest into ops: from Redis to fleet-wide monitoring"
-subtitle: "A dozen-plus sessions, four kinds of mistakes, and one evidence chain that holds up"
+subtitle: "Inside one real task: how the question was framed, how the plan changed, and who made the calls"
 description: "It began with one misread Grafana data source. With an agent, 39 dashboards across 5 sites turned into an inspection tool — how the docs were made to match the real environment, how severity was redefined, and how a single throttling alert was traced upstream."
 readingTime: 18
 tags: ["Agent collaboration", "operations", "observability", "engineering practice"]
