@@ -21,9 +21,7 @@ panel:
 
 ## Before we start
 
-This is a record of how I recently used an agent to build SP-OPS operations tooling. It is not a "the AI got it right the first time" story. Most of the time I pointed at something that was off, the agent went and checked, fixed it, and then I looked for the next problem. Rather than how good the result turned out, what I want to describe is how that back-and-forth actually went. Drop it into another project and the approach probably still applies.
-
-The work spans 2026-10-21 to 10-29, across a dozen-plus sessions. What follows comes from session logs and git history; internal domains, IPs, data source IDs and credentials have been stripped out.
+In the AI era, what matters most is often not which problem you solved, but how you framed it — and how you used AI to push the solution forward, round after round. Specific answers go stale fast; the way you ask, and the standards you judge by, are what stay. This piece is a record of how that played out inside one real task: how the question got framed, how the agent went off to check, where I made the call, and where it corrected me.
 
 ## 1. Finding the problem: the docs didn't match the real environment
 
