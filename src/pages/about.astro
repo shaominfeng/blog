@@ -10,12 +10,14 @@ const primary = seriesList.find((entry) => entry.data.kind === 'chapters');
 const chapters = primary ? byOrder(inSeries(all, primary.id, lang)) : [];
 const essays = all.filter((entry) => entry.id.startsWith(lang + '/') && entry.id.split('/')[1] !== primary?.id);
 const words = wanWords([...chapters, ...essays]);
+// 只数章节型系列；essays 是一个复用同一套路由的伪系列，不算“系列”
+const seriesCount = seriesList.filter((entry) => entry.data.kind === 'chapters').length;
 
 const structuredData = {
   '@context': 'https://schema.org',
   '@type': 'AboutPage',
-  name: '关于 Allen Shao 的文章集',
-  description: '这个文章集的写作方法、数据边界、更新日志与授权说明。',
+  name: '关于 Allen Shao 的写作',
+  description: '这个写作空间的写作方法、数据边界、更新日志与授权说明。',
   url: new URL(SITE.base + '/about/', Astro.site).toString(),
   author: {
     '@type': 'Person',
@@ -26,10 +28,10 @@ const structuredData = {
 };
 ---
 
-<BaseLayout title="关于这个文章集" description="这个文章集的写作方法、数据边界、更新日志与授权说明。" structuredData={structuredData}>
+<BaseLayout title="关于写作" description="这个写作空间的写作方法、数据边界、更新日志与授权说明。" structuredData={structuredData}>
   <div class="shell page-hero">
     <p class="label">About / Methodology</p>
-    <h1>关于这个文章集</h1>
+    <h1>关于写作</h1>
     <p>
       一个工程师的写作空间：以时间线和技术问题为线索，把做过的事、读到的信息和踩过的坑写清楚。
       这里是它的写作方法、数据边界与更新记录。
@@ -40,7 +42,7 @@ const structuredData = {
     <aside class="about-side">
       <ul class="info-list">
         <li><dt>作者</dt><dd>{SITE.author}</dd></li>
-        <li><dt>结构</dt><dd>{seriesList.length} 个系列 + {essays.length} 篇单篇</dd></li>
+        <li><dt>结构</dt><dd>{seriesCount} 个系列 + {essays.length} 篇单篇</dd></li>
         <li><dt>章节</dt><dd>{chapters.length} 章</dd></li>
         <li><dt>时间跨度</dt><dd>{primary?.data.start} — {primary?.data.end}</dd></li>
         <li><dt>篇幅</dt><dd>约 {words} 万字</dd></li>
@@ -56,7 +58,7 @@ const structuredData = {
         甚至开始以「数字同事」的身份进入工作流。变化太快，讨论很容易变成参数对比和产品站队。
       </p>
       <p>
-        这个文章集想做的，是把技术放回它出现的那一刻：它当时解决了什么具体问题？为什么是这个方案？
+        这里想做的，是把技术放回它出现的那一刻：它当时解决了什么具体问题？为什么是这个方案？
         代价是什么？下一个瓶颈又在哪里？当这些线索连起来，趋势就不再是新闻标题，而是一条可以理解的因果链。
       </p>
 
@@ -82,7 +84,7 @@ const structuredData = {
 
       <h2>接下来</h2>
       <p>
-        这个文章集会持续更新：除了《从对话到协作》，还会加入单篇的技术笔记、架构复盘和工具实践。
+        这里会持续更新：除了《从对话到协作》，还会加入单篇的技术笔记、架构复盘和工具实践。
         下一个系列正在准备中。
       </p>
 
@@ -90,7 +92,7 @@ const structuredData = {
       <ul class="update-list">
         <li><time>2026.10.26</time>新增单篇《AI 编码成本优化：别只盯单价，盯单任务成本》，把三个月的用量账本与成本公式放在一起。</li>
         <li><time>2026.10.25</time>序章去掉与后续章节重复的内容，重写为总纲；补齐 MCP 与 Prompt 工程两章；全书参考资料集中到本页。</li>
-        <li><time>2026.10.23</time>文章集上线，从单篇报告迁移为可扩展的文章结构。</li>
+        <li><time>2026.10.23</time>写作站上线，从单篇报告迁移为可扩展的文章结构。</li>
         <li><time>2026.06.26</time>新增单篇《工程师 Agentic Coding 的一天》，记录一天真实的 AI 工作流。</li>
         <li><time>2026.02.24</time>《从对话到协作》模块化重构，新增餐厅类比导读与双轨对照。</li>
         <li><time>2026.01.27</time>初稿完成，覆盖 2022.11—2026.01 的时间线与技术演进。</li>

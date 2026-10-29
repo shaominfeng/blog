@@ -11,15 +11,14 @@ const { lang = 'zh' } = Astro.props;
 const t = BLOG_UI[lang];
 const base = basePath(lang);
 
-// 页头的“系列”入口指向主系列，标签用系列自己的标题
+// 页头的“系列”入口指向主系列，标签统一用分类名，与“单篇”保持同级
 const primary = await primarySeries();
 const primaryKey = primary?.id ?? 'ai-evolution';
-const primaryTitle = primary ? primary.data[lang].title : t.nav.series;
+const seriesLabel = t.nav.series;
 
 const path = Astro.url.pathname;
 const isIndex = path === base + '/' || path === base;
 const isEssays = path.startsWith(base + '/essays/');
-const isCollection = isIndex || isEssays;
 const isSeries = path.startsWith(base + '/' + primaryKey + '/');
 const isAbout = path === base + '/about/' || path === base + '/about';
 
@@ -41,9 +40,9 @@ const altPath = (lang === 'en' ? SITE.base : SITE.base + '/en') + (inner || '/')
     </a>
 
     <nav class="site-nav" aria-label={t.nav.label}>
-      <a class="nav-text" href={base + '/'} aria-current={isCollection ? 'page' : undefined}>{t.nav.home}</a>
+      <a class="nav-text" href={base + '/'} aria-current={isIndex ? 'page' : undefined}>{t.nav.home}</a>
       <a class="nav-text" href={base + '/essays/'} aria-current={isEssays ? 'page' : undefined}>{t.nav.essays}</a>
-      <a class="nav-text" href={base + '/' + primaryKey + '/'} aria-current={isSeries ? 'page' : undefined}>{primaryTitle}</a>
+      <a class="nav-text" href={base + '/' + primaryKey + '/'} aria-current={isSeries ? 'page' : undefined}>{seriesLabel}</a>
       <a class="nav-text" href={base + '/about/'} aria-current={isAbout ? 'page' : undefined}>{t.nav.about}</a>
       <a
         class="lang-switch"

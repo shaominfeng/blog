@@ -1,4 +1,4 @@
-# Allen Shao · 文章集
+# Allen Shao · 写作
 
 技术长文与系列连载：<https://shaominfeng.github.io/blog/>
 
@@ -11,7 +11,7 @@
 
 ## 结构
 
-这是一个**文章集**，不是一个报告仓库。核心约定只有一条：**路径即索引**——语言、系列、slug 全部从目录推导，frontmatter 只放内容本身。
+这是**写作**站的内容仓库，不是一个报告仓库。核心约定只有一条：**路径即索引**——语言、系列、slug 全部从目录推导，frontmatter 只放内容本身。
 
 ```
 src/
@@ -30,7 +30,7 @@ src/
 │       ├── ai-evolution.md        # kind: chapters
 │       └── essays.md              # kind: essays
 ├── pages/
-│   ├── index.astro                # /blog/ 文章集首页
+│   ├── index.astro                # /blog/ 写作首页
 │   ├── [series]/
 │   │   ├── index.astro            # /blog/<series>/ 系列首页（按 kind 选版式）
 │   │   └── [...slug].astro        # /blog/<series>/<slug>/ 章节 / 单篇
@@ -128,6 +128,16 @@ npm run verify          # 上面两个一起跑
 ```
 
 缺英文译文只会提示，不阻断；`part` 指向不存在的分卷、slug 重复会直接失败。
+
+## 与个人主页的关系：只有链接
+
+个人主页（`shaominfeng/shaominfeng.github.io`）是本仓库的上级站点，两个仓库**独立构建、独立部署、互不读取**，共用同一个域名：主页在 `/`，本仓库在 `/blog/`。
+
+- 主页只放指向本仓库的链接（写作首页、系列、单篇），不展示文章清单，也不读本仓库的任何构建产物
+- 本仓库**不输出**给主页用的数据文件，不通知主页重建，不需要任何令牌
+- 所以新增文章、章节、系列都只改本仓库；两边唯一的约定是 URL 前缀 `/blog/` 与路由形态 `/blog/[series]/[slug]/`
+
+国内部署时由主页的 `npm run build:all` 把本仓库的 `dist/` 拼进 `dist/blog/`，那只是产物合并，不构成源码依赖。
 
 ## 技术栈
 

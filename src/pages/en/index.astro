@@ -17,15 +17,18 @@ import {
 const lang = 'en' as const;
 const [seriesList, all] = await Promise.all([allSeries(), getCollection('articles')]);
 
-const primary = seriesList.find((entry) => entry.data.kind === 'chapters');
+const chapterSeries = seriesList.filter((entry) => entry.data.kind === 'chapters');
 const essaysMeta = seriesList.find((entry) => entry.data.kind === 'essays');
 
-const chapters = primary ? byOrder(inSeries(all, primary.id, lang)) : [];
-const essays = essaysMeta ? byDateDesc(inSeries(all, essaysMeta.id, lang)) : [];
+const seriesBlocks = chapterSeries.map((entry) => ({
+  entry,
+  meta: entry.data.en,
+  chapters: byOrder(inSeries(all, entry.id, lang)),
+}));
 
-const primaryMeta = primary?.data.en;
-const seriesMinutes = totalMinutes(chapters);
-const words = wordTotal([...chapters, ...essays]);
+const essays = essaysMeta ? byDateDesc(inSeries(all, essaysMeta.id, lang)) : [];
+const allChapters = seriesBlocks.flatMap((block) => block.chapters);
+const words = wordTotal([...allChapters, ...essays]);
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -42,7 +45,7 @@ const structuredData = {
     url: SITE.personalSite,
   },
   blogPost: [
-    ...chapters.map((article) => ({
+    ...allChapters.map((article) => ({
       '@type': 'BlogPosting',
       headline: article.data.title,
       url: new URL(articleUrl(article), Astro.site).toString(),
@@ -71,10 +74,10 @@ const structuredData = {
       and what survives contact with a real enterprise.
     </p>
     <div class="blog-meta">
-      <span>{seriesList.length} series</span>
-      <span>{chapters.length} chapters</span>
+      <span>{seriesBlocks.length} series</span>
+      <span>{allChapters.length} chapters</span>
       <span>{essays.length} essays</span>
-      <span>{totalMinutes([...chapters, ...essays])} min read</span>
+      <span>{totalMinutes([...allChapters, ...essays])} min read</span>
       <a href={SITE.base + '/rss.xml'}>RSS</a>
     </div>
   </section>
@@ -112,63 +115,61 @@ const structuredData = {
     ))}
   </section>
 
-  {primary && primaryMeta && (
-    <section class="shell blog-section">
-      <div class="section-head">
-        <div class="section-head-left">
-          <span class="section-index">02</span>
-          <h2 class="section-title">Series</h2>
-        </div>
-        <span class="section-note">{String(seriesList.filter((entry) => entry.data.kind === 'chapters').length).padStart(2, '0')} series</span>
-      </div>
-
-      <a class="series-feature" href={seriesUrl(primary.id, lang)}>
-        <div class="sf-copy">
-          <span class="project-index">{primaryMeta.label} · {primary.data.start}—{primary.data.end} · complete</span>
-          <h3>{primaryMeta.title}</h3>
-          <p class="sf-sub">{primaryMeta.subtitle}</p>
-          <p class="sf-desc">{primaryMeta.description}</p>
-          <div class="sf-metrics">
-            <span><b>{chapters.length}</b> chapters</span>
-            {primary.data.sources && <span><b>{primary.data.sources}</b> sources</span>}
-            <span><b>{seriesMinutes}</b> min</span>
-          </div>
-          <span class="text-link">Open the series →</span>
-        </div>
-        {primary.data.cover && (
-          <div class="sf-cover">
-            <img src={SITE.base + primary.data.cover} alt={primaryMeta.title} width="1400" height="764" loading="eager" />
-            <span>Updated {primary.data.updated}</span>
-          </div>
-        )}
-      </a>
-    </section>
-  )}
-
   <section class="shell blog-section">
     <div class="section-head">
       <div class="section-head-left">
-        <span class="section-index">03</span>
-        <h2 class="section-title">All chapters</h2>
+        <span class="section-index">02</span>
+        <h2 class="section-title">Series</h2>
       </div>
-      <span class="section-note">{chapters.length} chapters</span>
+      <span class="section-note">{String(seriesBlocks.length).padStart(2, '0')} series</span>
     </div>
 
-    <div class="post-list">
-      {chapters.map((chapter, index) => (
-        <a class="post-row" href={articleUrl(chapter)}>
-          <span class="pr-num">{String(index + 1).padStart(2, '0')}</span>
-          <span class="pr-main">
-            <span class="pr-title">{chapter.data.title}</span>
-            <span class="pr-desc">{chapter.data.description}</span>
-          </span>
-          <span class="pr-meta">
-            <span>{primary && chapter.data.part ? partLabel(primary, chapter.data.part, lang) : ''}</span>
-            <span>{chapter.data.readingTime} min</span>
-          </span>
+    {seriesBlocks.map(({ entry, meta, chapters }) => (
+      <article class="series-block">
+        <a class="series-feature" href={seriesUrl(entry.id, lang)}>
+          <div class="sf-copy">
+            <span class="project-index">{meta.label} · {entry.data.start}—{entry.data.end} · complete</span>
+            <h3>{meta.title}</h3>
+            <p class="sf-sub">{meta.subtitle}</p>
+            <p class="sf-desc">{meta.description}</p>
+            <div class="sf-metrics">
+              <span><b>{chapters.length}</b> chapters</span>
+              {entry.data.sources && <span><b>{entry.data.sources}</b> sources</span>}
+              <span><b>{totalMinutes(chapters)}</b> min</span>
+            </div>
+            <span class="text-link">Open the series →</span>
+          </div>
+          {entry.data.cover && (
+            <div class="sf-cover">
+              <img src={SITE.base + entry.data.cover} alt={meta.title} width="1400" height="764" loading="eager" />
+              <span>Updated {entry.data.updated}</span>
+            </div>
+          )}
         </a>
-      ))}
-    </div>
+
+        <div class="catalog">
+          <div class="catalog-head">
+            <span>Contents</span>
+            <span>{chapters.length} chapters · {totalMinutes(chapters)} min</span>
+          </div>
+          <div class="post-list">
+            {chapters.map((chapter, index) => (
+              <a class="post-row" href={articleUrl(chapter)}>
+                <span class="pr-num">{String(index + 1).padStart(2, '0')}</span>
+                <span class="pr-main">
+                  <span class="pr-title">{chapter.data.title}</span>
+                  <span class="pr-desc">{chapter.data.description}</span>
+                </span>
+                <span class="pr-meta">
+                  <span>{chapter.data.part ? partLabel(entry, chapter.data.part, lang) : ''}</span>
+                  <span>{chapter.data.readingTime} min</span>
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </article>
+    ))}
   </section>
 
   <section class="shell blog-about">
@@ -176,7 +177,7 @@ const structuredData = {
       <div class="about-copy">
         <p class="about-statement">The next piece is being written.</p>
         <p>
-          This collection keeps growing: alongside the series there are standalone notes,
+          This space keeps growing: alongside the series there are standalone notes,
           architecture post-mortems and tooling write-ups. If there is a topic you want covered,
           email me.
         </p>

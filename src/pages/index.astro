@@ -17,15 +17,19 @@ import {
 const lang = 'zh' as const;
 const [seriesList, all] = await Promise.all([allSeries(), getCollection('articles')]);
 
-const primary = seriesList.find((entry) => entry.data.kind === 'chapters');
+// 章节型系列（可以多个）+ 单篇集合
+const chapterSeries = seriesList.filter((entry) => entry.data.kind === 'chapters');
 const essaysMeta = seriesList.find((entry) => entry.data.kind === 'essays');
 
-const chapters = primary ? byOrder(inSeries(all, primary.id, lang)) : [];
-const essays = essaysMeta ? byDateDesc(inSeries(all, essaysMeta.id, lang)) : [];
+const seriesBlocks = chapterSeries.map((entry) => ({
+  entry,
+  meta: entry.data.zh,
+  chapters: byOrder(inSeries(all, entry.id, lang)),
+}));
 
-const primaryMeta = primary?.data.zh;
-const seriesMinutes = totalMinutes(chapters);
-const words = wanWords([...chapters, ...essays]);
+const essays = essaysMeta ? byDateDesc(inSeries(all, essaysMeta.id, lang)) : [];
+const allChapters = seriesBlocks.flatMap((block) => block.chapters);
+const words = wanWords([...allChapters, ...essays]);
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -40,7 +44,7 @@ const structuredData = {
     url: SITE.personalSite,
   },
   blogPost: [
-    ...chapters.map((article) => ({
+    ...allChapters.map((article) => ({
       '@type': 'BlogPosting',
       headline: article.data.title,
       url: new URL(articleUrl(article), Astro.site).toString(),
@@ -57,17 +61,16 @@ const structuredData = {
 <BaseLayout title={SITE.blogTitle} description={SITE.description} structuredData={structuredData}>
   <section class="shell blog-hero">
     <p class="label">Writing / 2026</p>
-    <h1>文章集</h1>
+    <h1>写作</h1>
     <p class="blog-intro">
       把做过的事写清楚，是我检验自己是否真的理解的方式。
       这里放长文：技术原理、架构判断，以及从企业实践里带回来的经验。
     </p>
     <div class="blog-meta">
-      <span>{seriesList.length} 个系列</span>
-      <span>{chapters.length} 章</span>
+      <span>{seriesBlocks.length} 个系列</span>
+      <span>{allChapters.length} 章</span>
       <span>{essays.length} 篇单篇</span>
       <span>约 {words} 万字</span>
-      {primary?.data.sources && <span>{primary.data.sources} 份参考</span>}
       <a href={SITE.base + '/rss.xml'}>RSS</a>
     </div>
   </section>
@@ -105,64 +108,62 @@ const structuredData = {
     ))}
   </section>
 
-  {primary && primaryMeta && (
-    <section class="shell blog-section">
-      <div class="section-head">
-        <div class="section-head-left">
-          <span class="section-index">02</span>
-          <h2 class="section-title">系列</h2>
-        </div>
-        <span class="section-note">{String(seriesList.filter((entry) => entry.data.kind === 'chapters').length).padStart(2, '0')} series</span>
-      </div>
-
-      <a class="series-feature" href={seriesUrl(primary.id, lang)}>
-        <div class="sf-copy">
-          <span class="project-index">{primaryMeta.label} · 写于 {primary.data.written} · 已完结</span>
-          <h3>{primaryMeta.title}</h3>
-          <p class="sf-sub">{primaryMeta.subtitle}</p>
-          <p class="sf-desc">{primaryMeta.description}</p>
-          <div class="sf-metrics">
-            <span><b>{chapters.length}</b> 章</span>
-            <span><b>{wanWords(chapters)}</b> 万字</span>
-            {primary.data.sources && <span><b>{primary.data.sources}</b> 份参考</span>}
-            <span><b>{seriesMinutes}</b> 分钟</span>
-          </div>
-          <span class="text-link">进入系列 →</span>
-        </div>
-        {primary.data.cover && (
-          <div class="sf-cover">
-            <img src={SITE.base + primary.data.cover} alt={primaryMeta.title} width="1400" height="764" loading="eager" />
-            <span>{primary.data.updated} 更新</span>
-          </div>
-        )}
-      </a>
-    </section>
-  )}
-
   <section class="shell blog-section">
     <div class="section-head">
       <div class="section-head-left">
-        <span class="section-index">03</span>
-        <h2 class="section-title">全部章节</h2>
+        <span class="section-index">02</span>
+        <h2 class="section-title">系列</h2>
       </div>
-      <span class="section-note">{chapters.length} chapters</span>
+      <span class="section-note">{String(seriesBlocks.length).padStart(2, '0')} series</span>
     </div>
 
-    <div class="post-list">
-      {chapters.map((article, index) => (
-        <a class="post-row" href={articleUrl(article)}>
-          <span class="pr-num">{String(index + 1).padStart(2, '0')}</span>
-          <span class="pr-main">
-            <span class="pr-title">{article.data.title}</span>
-            <span class="pr-desc">{article.data.description}</span>
-          </span>
-          <span class="pr-meta">
-            <span>{primary && article.data.part ? partLabel(primary, article.data.part, lang) : ''}</span>
-            <span>{article.data.readingTime} min</span>
-          </span>
+    {seriesBlocks.map(({ entry, meta, chapters }) => (
+      <article class="series-block">
+        <a class="series-feature" href={seriesUrl(entry.id, lang)}>
+          <div class="sf-copy">
+            <span class="project-index">{meta.label} · 写于 {entry.data.written} · 已完结</span>
+            <h3>{meta.title}</h3>
+            <p class="sf-sub">{meta.subtitle}</p>
+            <p class="sf-desc">{meta.description}</p>
+            <div class="sf-metrics">
+              <span><b>{chapters.length}</b> 章</span>
+              <span><b>{wanWords(chapters)}</b> 万字</span>
+              {entry.data.sources && <span><b>{entry.data.sources}</b> 份参考</span>}
+              <span><b>{totalMinutes(chapters)}</b> 分钟</span>
+            </div>
+            <span class="text-link">进入系列 →</span>
+          </div>
+          {entry.data.cover && (
+            <div class="sf-cover">
+              <img src={SITE.base + entry.data.cover} alt={meta.title} width="1400" height="764" loading="eager" />
+              <span>{entry.data.updated} 更新</span>
+            </div>
+          )}
         </a>
-      ))}
-    </div>
+
+        <div class="catalog">
+          <div class="catalog-head">
+            <span>目录</span>
+            <span>{chapters.length} 章 · 约 {totalMinutes(chapters)} 分钟</span>
+          </div>
+          <div class="post-list">
+            {chapters.map((article, index) => (
+              <a class="post-row" href={articleUrl(article)}>
+                <span class="pr-num">{String(index + 1).padStart(2, '0')}</span>
+                <span class="pr-main">
+                  <span class="pr-title">{article.data.title}</span>
+                  <span class="pr-desc">{article.data.description}</span>
+                </span>
+                <span class="pr-meta">
+                  <span>{article.data.part ? partLabel(entry, article.data.part, lang) : ''}</span>
+                  <span>{article.data.readingTime} min</span>
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </article>
+    ))}
   </section>
 
   <section class="shell blog-about">
@@ -170,7 +171,7 @@ const structuredData = {
       <div class="about-copy">
         <p class="about-statement">下一篇文章，正在写。</p>
         <p>
-          这个文章集会持续更新：除了《从对话到协作》，还有单篇的技术笔记、架构复盘和工具实践。
+          这里会持续更新：除了《从对话到协作》，还有单篇的技术笔记、架构复盘和工具实践。
           如果你有想看的主题，欢迎来信。
         </p>
         <div class="contact-line">

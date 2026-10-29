@@ -20,9 +20,9 @@ const zh = {
   skipLink: '跳到正文',
   nav: {
     label: '主导航',
-    home: '文章集',
+    home: '写作',
     essays: '单篇',
-    /** 兜底文案；有章节型系列时由 SiteHeader 用系列标题覆盖 */
+    /** 导航里的分类名。只有一个章节型系列时指向该系列；多于一个时应改为 /series/ 索引页 */
     series: '系列',
     about: '关于',
     personal: '个人主页 ↗',
@@ -32,7 +32,7 @@ const zh = {
   },
   footer: {
     tagline: SITE.blogSubtitle + ' · 持续更新',
-    home: '文章集',
+    home: '写作',
     series: '系列',
     about: '关于',
     personal: '个人主页 ↗',
@@ -40,7 +40,7 @@ const zh = {
     built: '用 Astro 构建 · GitHub Pages',
   },
   article: {
-    crumbsHome: '文章集',
+    crumbsHome: '写作',
     chapter: (n: string) => '第 ' + n + ' 章',
     essayLabel: 'Essay',
     quickTag: '本章为要点速览',
@@ -55,7 +55,7 @@ const zh = {
     nextChapter: (n: string) => '下一章 · ' + n + ' →',
     backToSeries: '← 回到系列',
     finished: '读完了 →',
-    backToCollection: '回到文章集',
+    backToCollection: '回到全部写作',
     prevEssay: '← 上一篇',
     nextEssay: '下一篇 →',
     back: '← 回到',
@@ -67,7 +67,7 @@ const zh = {
       '本文以 ' + LICENSE + ' 授权，转载请注明作者与出处。文中观点为个人观察，不代表任职机构。',
   },
   series: {
-    allWriting: '← 文章集',
+    allWriting: '← 全部写作',
     chapterUnit: '章',
     chapterCount: (n: number) => n + ' 章',
     chapterCountNote: (n: number) => String(n).padStart(2, '0') + ' chapters',
@@ -94,7 +94,7 @@ const zh = {
   side: {
     chapterNavLabel: '章节目录',
     essayNavLabel: '单篇目录',
-    back: '← 文章集',
+    back: '← 全部写作',
     essays: '单篇长文',
     seriesLabel: '系列',
   },

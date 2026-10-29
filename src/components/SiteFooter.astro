@@ -13,7 +13,6 @@ const base = basePath(lang);
 
 const primary = await primarySeries();
 const primaryKey = primary?.id ?? 'ai-evolution';
-const primaryTitle = primary ? primary.data[lang].title : t.footer.series;
 ---
 
 <footer class="site-footer">
@@ -28,7 +27,7 @@ const primaryTitle = primary ? primary.data[lang].title : t.footer.series;
       </div>
       <div class="footer-links">
         <a href={base + '/'}>{t.footer.home}</a>
-        <a href={base + '/' + primaryKey + '/'}>{primaryTitle}</a>
+        <a href={base + '/' + primaryKey + '/'}>{t.footer.series}</a>
         <a href={base + '/about/'}>{t.footer.about}</a>
         <a href={SITE.base + '/rss.xml'}>RSS</a>
         <a href={SITE.personalSite}>{t.footer.personal}</a>
