@@ -1,16 +1,10 @@
 ---
-lang: "en"
-series: "ai-evolution"
 title: "MCP: From Hype to Reality"
 subtitle: "After eight million downloads"
 description: "MCP solved “what AI can connect to.” Token efficiency, security boundaries, and enterprise governance are still open problems. It is a capability layer, not an intelligence layer."
-part: "Deep dive"
-partOrder: 3
+part: "deep-dive"
 order: 9
-num: 10
 readingTime: 4
-featured: false
-kind: "essay"
 date: "2026-01-29"
 tags: []
 ---

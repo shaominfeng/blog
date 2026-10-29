@@ -1,47 +1,53 @@
 ---
-import type { CollectionEntry } from 'astro:content';
-import { BLOG_UI, SERIES_I18N, basePath, type Lang } from '../i18n';
-import { slugOf } from '../lib/articles';
+import { BLOG_UI, basePath, type Lang } from '../i18n';
+import {
+  articleUrl,
+  byOrder,
+  groupByPart,
+  partLabel,
+  seriesUrl,
+  type ArticleEntry,
+  type SeriesEntry,
+} from '../lib/articles';
 
 interface Props {
-  articles: CollectionEntry<'articles'>[];
+  series: SeriesEntry;
+  articles: ArticleEntry[];
   currentId?: string;
   lang?: Lang;
 }
 
-const { articles, currentId, lang = 'zh' } = Astro.props;
+const { series, articles, currentId, lang = 'zh' } = Astro.props;
 const t = BLOG_UI[lang];
-const series = SERIES_I18N[lang];
 const base = basePath(lang);
-const sorted = [...articles].sort((a, b) => a.data.order - b.data.order);
+const meta = series.data[lang];
 
-const groups: { part: string; items: CollectionEntry<'articles'>[] }[] = [];
-for (const article of sorted) {
-  const last = groups[groups.length - 1];
-  if (!last || last.part !== article.data.part) {
-    groups.push({ part: article.data.part, items: [article] });
-  } else {
-    last.items.push(article);
-  }
-}
+const sorted = byOrder(articles);
+const numberOf = (id: string) => String(sorted.findIndex((item) => item.id === id) + 1).padStart(2, '0');
+const groups = groupByPart(sorted);
 ---
 
 <nav class="side-nav" aria-label={t.side.chapterNavLabel}>
   <a class="side-back" href={base + '/'}>{t.side.back}</a>
-  <a class="side-brand" href={base + '/ai-evolution/'}>
-    {series.title}
-    <small>{t.side.chapterCount}</small>
+  <a class="side-brand" href={seriesUrl(series.id, lang)}>
+    {meta.title}
+    <small>
+      {t.series.chapterCount(sorted.length)}
+      {series.data.start && series.data.end ? ' · ' + series.data.start + '—' + series.data.end : ''}
+    </small>
   </a>
   {groups.map((group) => (
     <div class="side-part">
-      <span class="side-part-label">{series.parts[group.part as keyof typeof series.parts] ?? group.part} / {String(group.items.length).padStart(2, '0')}</span>
+      <span class="side-part-label">
+        {partLabel(series, group.part, lang)} / {String(group.items.length).padStart(2, '0')}
+      </span>
       {group.items.map((article) => (
         <a
-          href={base + '/ai-evolution/' + slugOf(article) + '/'}
+          href={articleUrl(article)}
           class={article.id === currentId ? 'active' : undefined}
           aria-current={article.id === currentId ? 'page' : undefined}
         >
-          <span class="side-num">{String(article.data.num).padStart(2, '0')}</span>
+          <span class="side-num">{numberOf(article.id)}</span>
           {article.data.title}
         </a>
       ))}

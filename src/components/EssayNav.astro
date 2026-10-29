@@ -1,33 +1,33 @@
 ---
-import type { CollectionEntry } from 'astro:content';
-import { SERIES } from '../consts';
-import { BLOG_UI, SERIES_I18N, basePath, type Lang } from '../i18n';
-import { slugOf } from '../lib/articles';
+import { BLOG_UI, basePath, type Lang } from '../i18n';
+import { articleUrl, byDateDesc, seriesUrl, type ArticleEntry, type SeriesEntry } from '../lib/articles';
 
 interface Props {
-  essays: CollectionEntry<'articles'>[];
+  essays: ArticleEntry[];
   currentId?: string;
   lang?: Lang;
+  /** 侧栏底部指向主系列的入口，可选 */
+  primary?: { series: SeriesEntry; count: number };
 }
 
-const { essays, currentId, lang = 'zh' } = Astro.props;
+const { essays, currentId, lang = 'zh', primary } = Astro.props;
 const t = BLOG_UI[lang];
-const series = SERIES_I18N[lang];
 const base = basePath(lang);
-const sorted = [...essays].sort((a, b) => (b.data.date ?? '').localeCompare(a.data.date ?? ''));
+
+const sorted = byDateDesc(essays);
 ---
 
 <nav class="side-nav" aria-label={t.side.essayNavLabel}>
   <a class="side-back" href={base + '/'}>{t.side.back}</a>
   <a class="side-brand" href={base + '/essays/'}>
     {t.side.essays}
-    <small>{sorted.length}{t.side.essayCount}</small>
+    <small>{sorted.length}{t.series.essaysNote}</small>
   </a>
   <div class="side-part">
-    <span class="side-part-label">Essays / {String(sorted.length).padStart(2, '0')}</span>
+    <span class="side-part-label">{t.nav.essays} / {String(sorted.length).padStart(2, '0')}</span>
     {sorted.map((essay) => (
       <a
-        href={base + '/essays/' + slugOf(essay) + '/'}
+        href={articleUrl(essay)}
         class={essay.id === currentId ? 'active' : undefined}
         aria-current={essay.id === currentId ? 'page' : undefined}
       >
@@ -36,11 +36,13 @@ const sorted = [...essays].sort((a, b) => (b.data.date ?? '').localeCompare(a.da
       </a>
     ))}
   </div>
-  <div class="side-part">
-    <span class="side-part-label">{t.side.seriesLabel}</span>
-    <a href={base + '/ai-evolution/'}>
-      <span class="side-num">{SERIES.chapterCount}</span>
-      {series.title}
-    </a>
-  </div>
+  {primary && (
+    <div class="side-part">
+      <span class="side-part-label">{t.side.seriesLabel}</span>
+      <a href={seriesUrl(primary.series.id, lang)}>
+        <span class="side-num">{primary.count}</span>
+        {primary.series.data[lang].title}
+      </a>
+    </div>
+  )}
 </nav>

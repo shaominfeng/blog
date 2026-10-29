@@ -1,0 +1,69 @@
+---
+import { getCollection, render } from 'astro:content';
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import EssayLayout from '../../layouts/EssayLayout.astro';
+import { allSeries, byDateDesc, byOrder, inSeries, primarySeries, slugOf } from '../../lib/articles';
+
+export async function getStaticPaths() {
+  const lang = 'zh' as const;
+  const [series, all] = await Promise.all([allSeries(), getCollection('articles')]);
+
+  return series.flatMap((entry) => {
+    const list =
+      entry.data.kind === 'essays'
+        ? byDateDesc(inSeries(all, entry.id, lang))
+        : byOrder(inSeries(all, entry.id, lang));
+
+    return list.map((article, index) => ({
+      params: { series: entry.id, slug: slugOf(article) },
+      props: {
+        article,
+        series: entry,
+        list,
+        index,
+        prev: list[index - 1],
+        next: list[index + 1],
+      },
+    }));
+  });
+}
+
+const { article, series, list, index, prev, next } = Astro.props;
+const lang = 'zh' as const;
+const { Content, headings } = await render(article);
+
+const primary = await primarySeries();
+const primaryBlock =
+  primary && primary.id !== series.id
+    ? { series: primary, count: inSeries(await getCollection('articles'), primary.id, lang).length }
+    : undefined;
+---
+
+{series.data.kind === 'essays' ? (
+  <EssayLayout
+    entry={article}
+    series={series}
+    essays={list}
+    headings={headings}
+    number={index + 1}
+    lang={lang}
+    prev={prev}
+    next={next}
+    primary={primaryBlock}
+  >
+    <Content />
+  </EssayLayout>
+) : (
+  <ArticleLayout
+    entry={article}
+    series={series}
+    articles={list}
+    headings={headings}
+    number={index + 1}
+    lang={lang}
+    prev={prev}
+    next={next}
+  >
+    <Content />
+  </ArticleLayout>
+)}

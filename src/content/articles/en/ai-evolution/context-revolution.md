@@ -1,16 +1,10 @@
 ---
-lang: "en"
-series: "ai-evolution"
 title: "The Context Revolution: From 4K to 2M"
 subtitle: "After 500x growth, cost is the next battleground"
 description: "500x in three years. Long context solved forgetting, and pushed cost, latency, and information noise to a new order of magnitude — which is what produced three optimization paths: cache, compression, retrieval."
-part: "Deep dive"
-partOrder: 3
+part: "deep-dive"
 order: 7
-num: 8
 readingTime: 3
-featured: true
-kind: "essay"
 date: "2026-01-29"
 tags: ["Deep dive"]
 ---

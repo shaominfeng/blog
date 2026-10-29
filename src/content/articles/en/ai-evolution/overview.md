@@ -1,16 +1,10 @@
 ---
-lang: "en"
-series: "ai-evolution"
 title: "Overview: From Conversation to Collaboration"
 subtitle: "Three years, five stages, one throughline"
 description: "A single timeline for the models, protocols and products from 2022.11 to 2026.01 — what each capability jump solved, and what new problem it left behind."
-part: "Prologue"
-partOrder: 0
+part: "prologue"
 order: 0
-num: 1
 readingTime: 5
-featured: false
-kind: "chapter"
 tags: []
 cover: "/images/evolution-ai-capability.webp"
 date: "2026-01-27"

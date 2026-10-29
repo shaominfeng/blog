@@ -1,6 +1,15 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { SITE, SERIES } from '../consts';
+import { LICENSE, SITE } from '../consts';
+import { allSeries, byOrder, inSeries, wanWords } from '../lib/articles';
+
+const lang = 'zh' as const;
+const [seriesList, all] = await Promise.all([allSeries(), getCollection('articles')]);
+const primary = seriesList.find((entry) => entry.data.kind === 'chapters');
+const chapters = primary ? byOrder(inSeries(all, primary.id, lang)) : [];
+const essays = all.filter((entry) => entry.id.startsWith(lang + '/') && entry.id.split('/')[1] !== primary?.id);
+const words = wanWords([...chapters, ...essays]);
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -31,12 +40,12 @@ const structuredData = {
     <aside class="about-side">
       <ul class="info-list">
         <li><dt>作者</dt><dd>{SITE.author}</dd></li>
-        <li><dt>结构</dt><dd>1 个系列 + 2 篇单篇</dd></li>
-        <li><dt>章节</dt><dd>{SERIES.chapterCount} 章</dd></li>
-        <li><dt>时间跨度</dt><dd>{SERIES.start} — {SERIES.end}</dd></li>
-        <li><dt>篇幅</dt><dd>约 2.8 万字</dd></li>
+        <li><dt>结构</dt><dd>{seriesList.length} 个系列 + {essays.length} 篇单篇</dd></li>
+        <li><dt>章节</dt><dd>{chapters.length} 章</dd></li>
+        <li><dt>时间跨度</dt><dd>{primary?.data.start} — {primary?.data.end}</dd></li>
+        <li><dt>篇幅</dt><dd>约 {words} 万字</dd></li>
         <li><dt>最后更新</dt><dd>2026.10.26</dd></li>
-        <li><dt>授权</dt><dd>{SERIES.license}</dd></li>
+        <li><dt>授权</dt><dd>{LICENSE}</dd></li>
       </ul>
     </aside>
 
@@ -172,7 +181,7 @@ const structuredData = {
 
       <h2>授权与联系</h2>
       <p>
-        文字以 <strong>{SERIES.license}</strong> 授权，可自由阅读与非商业转载，转载请注明作者与原文链接。
+        文字以 <strong>{LICENSE}</strong> 授权，可自由阅读与非商业转载，转载请注明作者与原文链接。
         图片为作者自制，同样适用该授权。
       </p>
       <p>

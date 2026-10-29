@@ -356,6 +356,20 @@ button {
   letter-spacing: -0.02em;
 }
 
+/* 英文标题词更长，字号收一档，避免越过栅格压到封面 */
+html[lang='en'] .hero h1 {
+  font-size: clamp(44px, 6.4vw, 84px);
+  max-width: 9.5em;
+  line-height: 1.02;
+}
+
+/* 英文标题词更长，字号收一档，避免越过栅格压到封面 */
+html[lang='en'] .hero h1 {
+  font-size: clamp(44px, 6.4vw, 84px);
+  max-width: 9.5em;
+  line-height: 1.02;
+}
+
 .hero h1 .accent {
   position: relative;
   display: inline-block;

@@ -1,16 +1,8 @@
 ---
-lang: "en"
-series: "essays"
 title: "AI coding cost optimisation: don't watch the unit price, watch cost per task"
 subtitle: "A real $1,412.92 bill, opened up over three months"
 description: "Opening the Q3 2026 coding agent ledger: daily spend fell from $47.56 to $2.21, and 89% of that drop came from model mix. Caching and usage are not the protagonists. Includes a reusable cost formula and a checklist you can copy."
-part: "Standalone"
-partOrder: 0
-order: 1
-num: 2
 readingTime: 17
-featured: true
-kind: "essay"
 tags: ["AI cost", "Claude Code", "model routing", "engineering practice"]
 date: "2026-09-18"
 updated: "2026-10-26"

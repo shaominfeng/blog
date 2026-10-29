@@ -1,0 +1,68 @@
+---
+import { SITE } from '../consts';
+import { BLOG_UI, basePath, type Lang } from '../i18n';
+import { articleUrl, byDateDesc, totalMinutes, type ArticleEntry, type SeriesEntry } from '../lib/articles';
+
+interface Props {
+  series: SeriesEntry;
+  essays: ArticleEntry[];
+  lang: Lang;
+}
+
+const { series, essays, lang } = Astro.props;
+const t = BLOG_UI[lang];
+const base = basePath(lang);
+const meta = series.data[lang];
+
+const sorted = byDateDesc(essays);
+const minutes = totalMinutes(sorted);
+---
+
+<section class="shell blog-hero">
+  <p class="label">{meta.label} / {sorted.length}</p>
+  <h1>{meta.title}</h1>
+  <p class="blog-intro">{meta.description}</p>
+  <div class="blog-meta">
+    <span>{t.series.essayCount(sorted.length)}</span>
+    <span>{minutes} {lang === 'en' ? 'min' : '分钟'}</span>
+    <a href={base + '/'}>{t.series.allWriting}</a>
+  </div>
+</section>
+
+<section class="shell blog-section">
+  <div class="post-list">
+    {sorted.map((essay, index) => (
+      <a class="post-row" href={articleUrl(essay)}>
+        <span class="pr-num">{String(index + 1).padStart(2, '0')}</span>
+        <span class="pr-main">
+          <span class="pr-title">{essay.data.title}</span>
+          <span class="pr-desc">{essay.data.description}</span>
+        </span>
+        <span class="pr-meta">
+          <span>{essay.data.date?.replaceAll('-', '.')}</span>
+          <span>{essay.data.readingTime} min</span>
+        </span>
+      </a>
+    ))}
+  </div>
+</section>
+
+{(meta.outroTitle || meta.outro) && (
+  <section class="shell blog-about">
+    <div class="about-grid">
+      <div class="about-copy">
+        {meta.outroTitle && <p class="about-statement">{meta.outroTitle}</p>}
+        {meta.outro && <p>{meta.outro}</p>}
+        <div class="contact-line">
+          <a href={'mailto:' + SITE.email}>Email</a>
+          <a href={SITE.personalSite}>{t.nav.personal}</a>
+          <a href={SITE.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+        </div>
+      </div>
+      <div class="about-mark" aria-hidden="true">
+        <span class="monogram">AS</span>
+        <span class="mark-label">{series.id.replaceAll('-', ' ').toUpperCase()} · 2026</span>
+      </div>
+    </div>
+  </section>
+)}

@@ -1,16 +1,8 @@
 ---
-lang: "en"
-series: "essays"
 title: "One engineer's day of Agentic Coding"
 subtitle: "When AI stops being a tool you open and becomes a colleague that keeps running"
 description: "From the 09:00 automatic morning brief to the last patrol at 18:00: how one engineer folds AI into tickets, debugging, development, retrospectives and tool improvement, so time stops queuing and starts overlapping."
-part: "Standalone"
-partOrder: 0
-order: 0
-num: 1
 readingTime: 19
-featured: true
-kind: "essay"
 tags: ["Agentic Coding", "AI workflow", "engineering practice"]
 date: "2026-06-26"
 metrics:

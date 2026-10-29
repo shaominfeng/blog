@@ -1,16 +1,8 @@
 ---
-lang: "en"
-series: "essays"
 title: "An RD's side quest into ops: from Redis to fleet-wide monitoring"
 subtitle: "A dozen-plus sessions, four kinds of mistakes, and one evidence chain that holds up"
 description: "It began with one misread Grafana data source. With an agent, 39 dashboards across 5 sites turned into an inspection tool — how the docs were made to match the real environment, how severity was redefined, and how a single throttling alert was traced upstream."
-part: "Standalone"
-partOrder: 0
-order: 2
-num: 3
 readingTime: 18
-featured: false
-kind: "essay"
 tags: ["Agent collaboration", "operations", "observability", "engineering practice"]
 date: "2026-10-29"
 cover: "/og-sp-ops.png"

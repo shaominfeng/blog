@@ -1,6 +1,15 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { SITE, SERIES } from '../../consts';
+import { LICENSE, SITE } from '../../consts';
+import { allSeries, byOrder, inSeries, wordTotal } from '../../lib/articles';
+
+const lang = 'en' as const;
+const [seriesList, all] = await Promise.all([allSeries(), getCollection('articles')]);
+const primary = seriesList.find((entry) => entry.data.kind === 'chapters');
+const chapters = primary ? byOrder(inSeries(all, primary.id, lang)) : [];
+const essays = all.filter((entry) => entry.id.startsWith(lang + '/') && entry.id.split('/')[1] !== primary?.id);
+const words = wordTotal([...chapters, ...essays]);
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -37,11 +46,11 @@ const structuredData = {
     <aside class="about-side">
       <ul class="info-list">
         <li><dt>Author</dt><dd>{SITE.author}</dd></li>
-        <li><dt>Structure</dt><dd>1 series + 2 essays</dd></li>
-        <li><dt>Chapters</dt><dd>{SERIES.chapterCount}</dd></li>
-        <li><dt>Span</dt><dd>{SERIES.start} — {SERIES.end}</dd></li>
+        <li><dt>Structure</dt><dd>{seriesList.length} series + {essays.length} essays</dd></li>
+        <li><dt>Chapters</dt><dd>{chapters.length}</dd></li>
+        <li><dt>Span</dt><dd>{primary?.data.start} — {primary?.data.end}</dd></li>
         <li><dt>Last update</dt><dd>2026.10.27</dd></li>
-        <li><dt>Licence</dt><dd>{SERIES.license}</dd></li>
+        <li><dt>Licence</dt><dd>{LICENSE}</dd></li>
       </ul>
     </aside>
 
@@ -101,7 +110,7 @@ const structuredData = {
 
       <h2>Licence and contact</h2>
       <p>
-        Text is licensed under <strong>{SERIES.license}</strong>: read and repost freely for
+        Text is licensed under <strong>{LICENSE}</strong>: read and repost freely for
         non-commercial use, with credit and a link back. Images are my own and share the same licence.
       </p>
       <p>

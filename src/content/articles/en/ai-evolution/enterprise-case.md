@@ -1,16 +1,10 @@
 ---
-lang: "en"
-series: "ai-evolution"
 title: "A Corporate AI Platform, 2023–2026"
 subtitle: "From POC to 4000+ users"
 description: "One corporate AI platform from POC to 4000+ users: fast follow, private models, incremental evolution, and cost governance add up to a rollout path worth reusing."
-part: "Practice"
-partOrder: 5
+part: "practice"
 order: 12
-num: 13
 readingTime: 1
-featured: false
-kind: "case"
 date: "2026-01-29"
 tags: []
 ---

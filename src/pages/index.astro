@@ -1,17 +1,31 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { SITE, SERIES } from '../consts';
+import { SITE } from '../consts';
+import {
+  allSeries,
+  articleUrl,
+  byDateDesc,
+  byOrder,
+  inSeries,
+  partLabel,
+  seriesUrl,
+  totalMinutes,
+  wanWords,
+} from '../lib/articles';
 
-const articles = (await getCollection('articles'))
-  .filter((article) => article.data.lang !== 'en' && article.data.series === SERIES.slug)
-  .sort((a, b) => a.data.order - b.data.order);
+const lang = 'zh' as const;
+const [seriesList, all] = await Promise.all([allSeries(), getCollection('articles')]);
 
-const totalMinutes = articles.reduce((sum, article) => sum + article.data.readingTime, 0);
+const primary = seriesList.find((entry) => entry.data.kind === 'chapters');
+const essaysMeta = seriesList.find((entry) => entry.data.kind === 'essays');
 
-const essays = (await getCollection('articles'))
-  .filter((article) => article.data.lang !== 'en' && article.data.series === 'essays')
-  .sort((a, b) => (b.data.date ?? '').localeCompare(a.data.date ?? ''));
+const chapters = primary ? byOrder(inSeries(all, primary.id, lang)) : [];
+const essays = essaysMeta ? byDateDesc(inSeries(all, essaysMeta.id, lang)) : [];
+
+const primaryMeta = primary?.data.zh;
+const seriesMinutes = totalMinutes(chapters);
+const words = wanWords([...chapters, ...essays]);
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -26,15 +40,15 @@ const structuredData = {
     url: SITE.personalSite,
   },
   blogPost: [
-    ...articles.map((article) => ({
+    ...chapters.map((article) => ({
       '@type': 'BlogPosting',
       headline: article.data.title,
-      url: new URL(SITE.base + '/ai-evolution/' + article.id.split('/').pop() + '/', Astro.site).toString(),
+      url: new URL(articleUrl(article), Astro.site).toString(),
     })),
     ...essays.map((essay) => ({
       '@type': 'BlogPosting',
       headline: essay.data.title,
-      url: new URL(SITE.base + '/essays/' + essay.id.split('/').pop() + '/', Astro.site).toString(),
+      url: new URL(articleUrl(essay), Astro.site).toString(),
     })),
   ],
 };
@@ -49,11 +63,11 @@ const structuredData = {
       这里放长文：技术原理、架构判断，以及从企业实践里带回来的经验。
     </p>
     <div class="blog-meta">
-      <span>1 个系列</span>
-      <span>{SERIES.chapterCount} 章</span>
+      <span>{seriesList.length} 个系列</span>
+      <span>{chapters.length} 章</span>
       <span>{essays.length} 篇单篇</span>
-      <span>约 3.4 万字</span>
-      <span>{SERIES.sources} 份参考</span>
+      <span>约 {words} 万字</span>
+      {primary?.data.sources && <span>{primary.data.sources} 份参考</span>}
       <a href={SITE.base + '/rss.xml'}>RSS</a>
     </div>
   </section>
@@ -68,7 +82,7 @@ const structuredData = {
     </div>
 
     {essays.map((essay, index) => (
-      <a class="essay-feature" href={SITE.base + '/essays/' + essay.id.split('/').pop() + '/'}>
+      <a class="essay-feature" href={articleUrl(essay)}>
         <div class="ef-copy">
           <span class="project-index">Essay {String(index + 1).padStart(2, '0')} · 写于 {essay.data.date?.replaceAll('-', '.')} · {essay.data.readingTime} 分钟</span>
           <h3>{essay.data.title}</h3>
@@ -91,35 +105,39 @@ const structuredData = {
     ))}
   </section>
 
-  <section class="shell blog-section">
-    <div class="section-head">
-      <div class="section-head-left">
-        <span class="section-index">02</span>
-        <h2 class="section-title">系列</h2>
-      </div>
-      <span class="section-note">01 series</span>
-    </div>
-
-    <a class="series-feature" href={SITE.base + '/ai-evolution/'}>
-      <div class="sf-copy">
-        <span class="project-index">Series 01 · 写于 {SERIES.written} · 已完结</span>
-        <h3>{SERIES.title}</h3>
-        <p class="sf-sub">{SERIES.subtitle}</p>
-        <p class="sf-desc">{SERIES.description}</p>
-        <div class="sf-metrics">
-          <span><b>{SERIES.chapterCount}</b> 章</span>
-          <span><b>{SERIES.words}</b> 字</span>
-          <span><b>{SERIES.sources}</b> 份参考</span>
-          <span><b>{totalMinutes}</b> 分钟</span>
+  {primary && primaryMeta && (
+    <section class="shell blog-section">
+      <div class="section-head">
+        <div class="section-head-left">
+          <span class="section-index">02</span>
+          <h2 class="section-title">系列</h2>
         </div>
-        <span class="text-link">进入系列 →</span>
+        <span class="section-note">{String(seriesList.filter((entry) => entry.data.kind === 'chapters').length).padStart(2, '0')} series</span>
       </div>
-      <div class="sf-cover">
-        <img src={SITE.base + SERIES.cover} alt="AI 能力演进：从对话 AI 到协作 AI" width="1400" height="764" loading="eager" />
-        <span>{SERIES.updated} 更新</span>
-      </div>
-    </a>
-  </section>
+
+      <a class="series-feature" href={seriesUrl(primary.id, lang)}>
+        <div class="sf-copy">
+          <span class="project-index">{primaryMeta.label} · 写于 {primary.data.written} · 已完结</span>
+          <h3>{primaryMeta.title}</h3>
+          <p class="sf-sub">{primaryMeta.subtitle}</p>
+          <p class="sf-desc">{primaryMeta.description}</p>
+          <div class="sf-metrics">
+            <span><b>{chapters.length}</b> 章</span>
+            <span><b>{wanWords(chapters)}</b> 万字</span>
+            {primary.data.sources && <span><b>{primary.data.sources}</b> 份参考</span>}
+            <span><b>{seriesMinutes}</b> 分钟</span>
+          </div>
+          <span class="text-link">进入系列 →</span>
+        </div>
+        {primary.data.cover && (
+          <div class="sf-cover">
+            <img src={SITE.base + primary.data.cover} alt={primaryMeta.title} width="1400" height="764" loading="eager" />
+            <span>{primary.data.updated} 更新</span>
+          </div>
+        )}
+      </a>
+    </section>
+  )}
 
   <section class="shell blog-section">
     <div class="section-head">
@@ -127,19 +145,19 @@ const structuredData = {
         <span class="section-index">03</span>
         <h2 class="section-title">全部章节</h2>
       </div>
-      <span class="section-note">{SERIES.chapterCount} chapters</span>
+      <span class="section-note">{chapters.length} chapters</span>
     </div>
 
     <div class="post-list">
-      {articles.map((article) => (
-        <a class="post-row" href={SITE.base + '/ai-evolution/' + article.id.split('/').pop() + '/'}>
-          <span class="pr-num">{String(article.data.num).padStart(2, '0')}</span>
+      {chapters.map((article, index) => (
+        <a class="post-row" href={articleUrl(article)}>
+          <span class="pr-num">{String(index + 1).padStart(2, '0')}</span>
           <span class="pr-main">
             <span class="pr-title">{article.data.title}</span>
             <span class="pr-desc">{article.data.description}</span>
           </span>
           <span class="pr-meta">
-            <span>{article.data.part}</span>
+            <span>{primary && article.data.part ? partLabel(primary, article.data.part, lang) : ''}</span>
             <span>{article.data.readingTime} min</span>
           </span>
         </a>

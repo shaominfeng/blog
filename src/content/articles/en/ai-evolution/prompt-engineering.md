@@ -1,16 +1,10 @@
 ---
-lang: "en"
-series: "ai-evolution"
 title: "The Rise and Fall of Prompt Engineering"
 subtitle: "It didn't die. It sank."
 description: "From $200,000 salaries to a 70% drop in postings, prompt engineering sank from the user side into the system: system prompts, tool descriptions, and Skills became the new carriers."
-part: "Deep dive"
-partOrder: 3
+part: "deep-dive"
 order: 8
-num: 9
 readingTime: 4
-featured: false
-kind: "essay"
 date: "2026-01-29"
 tags: []
 ---

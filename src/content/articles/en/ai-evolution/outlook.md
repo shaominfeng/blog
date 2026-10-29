@@ -1,16 +1,10 @@
 ---
-lang: "en"
-series: "ai-evolution"
 title: "Future Outlook and Conclusions"
 subtitle: "Five predictions for the next three years"
 description: "Skills ecosystems, the cloud-local split, small models, open source catching up, autonomous Agents: what the pattern of evolution says about the next three years, plus an action list."
-part: "Outlook"
-partOrder: 6
+part: "outlook"
 order: 13
-num: 14
 readingTime: 2
-featured: false
-kind: "chapter"
 date: "2026-01-29"
 tags: []
 ---

@@ -1,16 +1,10 @@
 ---
-lang: "en"
-series: "ai-evolution"
 title: "Understanding AI Systems Through a Restaurant"
 subtitle: "The model is the head chef, the inference layer is the head waiter"
 description: "A four-layer breakdown of an AI system using an “intelligent restaurant”: the customer, the service team, the kitchen, and the tool layer. And why the inference layer is where the real difference lives."
-part: "Primer"
-partOrder: 1
+part: "primer"
 order: 1
-num: 2
 readingTime: 24
-featured: false
-kind: "chapter"
 date: "2026-01-29"
 tags: []
 cover: "/images/restaurant-architecture.webp"

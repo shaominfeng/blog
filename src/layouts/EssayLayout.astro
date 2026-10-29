@@ -1,31 +1,33 @@
 ---
-import type { CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
 import EssayNav from '../components/EssayNav.astro';
 import Toc from '../components/Toc.astro';
 import { SITE } from '../consts';
 import { BLOG_UI, basePath, type Lang } from '../i18n';
+import { articleUrl, type ArticleEntry, type SeriesEntry } from '../lib/articles';
 
 interface Props {
-  entry: CollectionEntry<'articles'>;
+  entry: ArticleEntry;
+  series: SeriesEntry;
+  essays: ArticleEntry[];
   headings: { depth: number; slug: string; text: string }[];
-  essays: CollectionEntry<'articles'>[];
-  prev?: CollectionEntry<'articles'>;
-  next?: CollectionEntry<'articles'>;
+  /** 在单篇集合内的序号（按日期倒序），从 1 开始 */
+  number: number;
+  lang: Lang;
+  prev?: ArticleEntry;
+  next?: ArticleEntry;
+  /** 侧栏底部指向主系列的入口 */
+  primary?: { series: SeriesEntry; count: number };
 }
 
-const { entry, headings, essays, prev, next } = Astro.props;
+const { entry, series, essays, headings, number, lang, prev, next, primary } = Astro.props;
 const { data } = entry;
-const lang: Lang = data.lang === 'en' ? 'en' : 'zh';
 const t = BLOG_UI[lang];
+const meta = series.data[lang];
 const base = basePath(lang);
-const slug = entry.id.split('/').pop();
-const canonical = new URL(base + '/essays/' + slug + '/', Astro.site).toString();
+const canonical = new URL(articleUrl(entry), Astro.site).toString();
 const dateLabel = data.date ? data.date.replaceAll('-', '.') : '';
 const ogImage = data.cover ? SITE.base + data.cover : SITE.base + '/og-agentic-coding.png';
-
-const sorted = [...essays].sort((a, b) => (b.data.date ?? '').localeCompare(a.data.date ?? ''));
-const index = sorted.findIndex((essay) => essay.id === entry.id) + 1;
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -55,7 +57,7 @@ const structuredData = {
   <div class="progress" aria-hidden="true"></div>
 
   <div class="shell article-grid">
-    <EssayNav essays={essays} currentId={entry.id} lang={lang} />
+    <EssayNav essays={essays} currentId={entry.id} lang={lang} primary={primary} />
 
     <div class="article-body">
       <header class="article-hero">
@@ -64,7 +66,7 @@ const structuredData = {
           <span class="sep">/</span>
           <a href={base + '/essays/'}>{t.nav.essays}</a>
           <span class="sep">/</span>
-          <span>{t.article.essayLabel} {String(index).padStart(2, '0')}</span>
+          <span>{t.article.essayLabel} {String(number).padStart(2, '0')}</span>
         </nav>
 
         <span class="tag tag-hot" style="margin-bottom:14px;display:inline-block">{t.article.essayTag}</span>
@@ -80,14 +82,14 @@ const structuredData = {
           <span class="dot" aria-hidden="true"></span>
           <span>{t.article.minutes(data.readingTime)}</span>
           <span class="dot" aria-hidden="true"></span>
-          <span>{data.part}</span>
+          <span>{meta.label}</span>
         </div>
       </header>
 
       <details class="mobile-toc">
         <summary>{t.article.essayToc}</summary>
         <div class="mobile-nav">
-          <EssayNav essays={essays} currentId={entry.id} lang={lang} />
+          <EssayNav essays={essays} currentId={entry.id} lang={lang} primary={primary} />
         </div>
       </details>
 
@@ -99,7 +101,7 @@ const structuredData = {
         <span class="article-end-label">{t.article.continueReading}</span>
         <div class="prev-next">
           {prev ? (
-            <a class="pn-card" href={base + '/essays/' + prev.id.split('/').pop() + '/'}>
+            <a class="pn-card" href={articleUrl(prev)}>
               <small>{t.article.prevEssay}</small>
               <strong>{prev.data.title}</strong>
             </a>
@@ -110,7 +112,7 @@ const structuredData = {
             </a>
           )}
           {next ? (
-            <a class="pn-card next" href={base + '/essays/' + next.id.split('/').pop() + '/'}>
+            <a class="pn-card next" href={articleUrl(next)}>
               <small>{t.article.nextEssay}</small>
               <strong>{next.data.title}</strong>
             </a>

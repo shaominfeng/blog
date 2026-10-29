@@ -1,16 +1,10 @@
 ---
-lang: "en"
-series: "ai-evolution"
 title: "The New Paradigm of AI Evolution: The Inference Layer Is the Core"
 subtitle: "Same model, different serving team"
 description: "Parameters are not the only moat. The inference layer decides how a model is scheduled, constrained and optimized, and it decides the cost, reliability and experience gap at equal capability."
-part: "Insight"
-partOrder: 4
+part: "insight"
 order: 11
-num: 12
 readingTime: 4
-featured: true
-kind: "essay"
 date: "2026-01-29"
 tags: ["Deep dive"]
 ---

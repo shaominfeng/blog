@@ -1,0 +1,43 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SeriesLanding from '../../../components/SeriesLanding.astro';
+import EssaySeriesIndex from '../../../components/EssaySeriesIndex.astro';
+import { SITE } from '../../../consts';
+import { basePath } from '../../../i18n';
+import { allSeries, byDateDesc, byOrder, inSeries, seriesUrl } from '../../../lib/articles';
+
+export async function getStaticPaths() {
+  const series = await allSeries();
+  return series.map((entry) => ({ params: { series: entry.id }, props: { series: entry } }));
+}
+
+const { series } = Astro.props;
+const lang = 'en' as const;
+const meta = series.data.en;
+const base = basePath(lang);
+
+const all = await getCollection('articles');
+const entries = inSeries(all, series.id, lang);
+const isEssays = series.data.kind === 'essays';
+const chapters = isEssays ? [] : byOrder(entries);
+const essays = isEssays ? byDateDesc(entries) : [];
+
+const structuredData = isEssays
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      name: meta.title + ' · ' + SITE.name,
+      description: meta.description,
+      url: new URL(seriesUrl(series.id, lang), Astro.site).toString(),
+      inLanguage: 'en',
+      author: { '@type': 'Person', name: SITE.author, url: SITE.personalSite },
+    }
+  : undefined;
+---
+
+<BaseLayout title={meta.title} description={meta.description} lang={lang} structuredData={structuredData}>
+  {isEssays
+    ? <EssaySeriesIndex series={series} essays={essays} lang={lang} />
+    : <SeriesLanding series={series} chapters={chapters} lang={lang} />}
+</BaseLayout>

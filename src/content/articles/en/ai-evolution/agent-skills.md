@@ -1,16 +1,10 @@
 ---
-lang: "en"
-series: "ai-evolution"
 title: "Agent Skills: The Innovation That Matters More Than MCP"
 subtitle: "Turning domain knowledge into an installable asset"
 description: "Skills don't fix model capability. They fix architecture: team best practices captured as reusable, versionable knowledge packs. Less token spend, cleaner boundaries."
-part: "Deep dive"
-partOrder: 3
+part: "deep-dive"
 order: 10
-num: 11
 readingTime: 4
-featured: true
-kind: "essay"
 date: "2026-01-29"
 tags: ["Deep dive"]
 ---

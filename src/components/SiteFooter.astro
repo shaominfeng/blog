@@ -1,6 +1,7 @@
 ---
 import { SITE } from '../consts';
 import { BLOG_UI, basePath, type Lang } from '../i18n';
+import { primarySeries } from '../lib/articles';
 
 interface Props {
   lang?: Lang;
@@ -9,6 +10,10 @@ interface Props {
 const { lang = 'zh' } = Astro.props;
 const t = BLOG_UI[lang];
 const base = basePath(lang);
+
+const primary = await primarySeries();
+const primaryKey = primary?.id ?? 'ai-evolution';
+const primaryTitle = primary ? primary.data[lang].title : t.footer.series;
 ---
 
 <footer class="site-footer">
@@ -23,7 +28,7 @@ const base = basePath(lang);
       </div>
       <div class="footer-links">
         <a href={base + '/'}>{t.footer.home}</a>
-        <a href={base + '/ai-evolution/'}>{t.footer.series}</a>
+        <a href={base + '/' + primaryKey + '/'}>{primaryTitle}</a>
         <a href={base + '/about/'}>{t.footer.about}</a>
         <a href={SITE.base + '/rss.xml'}>RSS</a>
         <a href={SITE.personalSite}>{t.footer.personal}</a>

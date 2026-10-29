@@ -1,0 +1,257 @@
+---
+import { SITE } from '../consts';
+import { BLOG_UI, basePath, type Lang } from '../i18n';
+import {
+  articleUrl,
+  byOrder,
+  fill,
+  groupByPart,
+  partLabel,
+  seriesUrl,
+  slugOf,
+  totalMinutes,
+  wanWords,
+  wordTotal,
+  type ArticleEntry,
+  type SeriesEntry,
+} from '../lib/articles';
+
+interface Props {
+  series: SeriesEntry;
+  chapters: ArticleEntry[];
+  lang: Lang;
+}
+
+const { series, chapters, lang } = Astro.props;
+const t = BLOG_UI[lang];
+const base = basePath(lang);
+const meta = series.data[lang];
+
+const sorted = byOrder(chapters);
+const groups = groupByPart(sorted);
+const bySlug = new Map(sorted.map((entry) => [slugOf(entry), entry]));
+const numberOf = (entry: ArticleEntry) => String(sorted.indexOf(entry) + 1).padStart(2, '0');
+
+const minutes = totalMinutes(sorted);
+const words = lang === 'en' ? wordTotal(sorted) : wanWords(sorted);
+const vars = {
+  chapters: sorted.length,
+  words,
+  minutes,
+  sources: series.data.sources ?? 0,
+  written: series.data.written ?? '',
+};
+const fillText = (template: string) => fill(template, vars);
+
+const first = sorted[0];
+const startHref = first ? articleUrl(first) : seriesUrl(series.id, lang);
+const range = [series.data.start, series.data.end].filter(Boolean).join(' — ');
+---
+
+<div class="shell series-crumb">
+  <a href={base + '/'}>{t.article.crumbsHome}</a><span class="sep">/</span><span>{meta.title}</span>
+</div>
+
+<section class="shell hero">
+  <div class="hero-copy">
+    <p class="kicker">{meta.kicker ?? meta.label}</p>
+    <h1 class="display">
+      {meta.heroTitle ?? meta.title}
+      {meta.heroAccent && <><br /><span class="accent">{meta.heroAccent}</span></>}
+    </h1>
+    {meta.subtitle && <p class="hero-sub">{meta.subtitle}</p>}
+    <p class="hero-desc">{meta.heroDesc ?? meta.description}</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href={startHref}>{meta.cta ?? t.nav.cta} <span aria-hidden="true">→</span></a>
+      {groups.length > 0 && <a class="btn btn-ghost" href="#catalog">{t.series.catalogCta}</a>}
+    </div>
+    {meta.note.length > 0 && (
+      <p class="hero-note">
+        {meta.note.map((line) => <span>{fillText(line)}</span>)}
+      </p>
+    )}
+  </div>
+
+  {series.data.cover && (
+    <div class="hero-visual">
+      <figure class="cover-card">
+        <img
+          src={SITE.base + series.data.cover}
+          alt={meta.title}
+          width="1408"
+          height="768"
+          fetchpriority="high"
+        />
+        <figcaption>
+          <span>{meta.figLabel ?? meta.label}</span>
+          <span>{meta.figRange ?? range}</span>
+        </figcaption>
+      </figure>
+      {meta.floatValue && (
+        <div class="float-stat" aria-hidden="true">
+          <strong>{meta.floatValue}</strong>
+          <span>{meta.floatLabel}</span>
+        </div>
+      )}
+      {meta.stamp && <div class="stamp" aria-hidden="true">{meta.stamp}</div>}
+    </div>
+  )}
+</section>
+
+<div class="shell">
+  <dl class="meta-strip">
+    <div>
+      <dt>{t.series.metaAuthor}</dt>
+      <dd>{SITE.author}</dd>
+    </div>
+    <div>
+      <dt>{t.series.metaChapters}</dt>
+      <dd>{t.series.chapterCount(sorted.length)} · {t.series.minutes(minutes)}</dd>
+    </div>
+    <div>
+      <dt>{t.series.metaScope}</dt>
+      <dd>{range}</dd>
+    </div>
+    <div>
+      <dt>{t.series.metaWritten}</dt>
+      <dd>{series.data.written}</dd>
+    </div>
+  </dl>
+</div>
+
+{meta.tldr.length > 0 && (
+  <section class="shell section" aria-labelledby="tldr-title">
+    <div class="section-head">
+      <div class="section-head-left">
+        <span class="section-index">01</span>
+        <h2 class="section-title" id="tldr-title">{t.series.tldrTitle}</h2>
+      </div>
+      <span class="section-note">{t.series.tldrNote}</span>
+    </div>
+    <div class="tldr-grid">
+      {meta.tldr.map((item) => (
+        <div class="tldr-item">
+          <span class="num">{item.label}</span>
+          <p><strong>{item.title}</strong>{lang === 'en' ? ' ' : ''}{item.body}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+)}
+
+{meta.paths.length > 0 && (
+  <section class="shell section" id="paths" aria-labelledby="paths-title">
+    <div class="section-head">
+      <div class="section-head-left">
+        <span class="section-index">02</span>
+        <h2 class="section-title" id="paths-title">{t.series.pathsTitle}</h2>
+      </div>
+      <span class="section-note">{t.series.totalMinutes(minutes)}</span>
+    </div>
+    <div class="paths-grid">
+      {meta.paths.map((path) => (
+        <div class="path-card">
+          <div class="path-time">{path.items.length}<small>{t.series.chapterUnit}</small></div>
+          <h3>{path.title}</h3>
+          <p>{path.desc}</p>
+          <ul class="path-list">
+            {path.items.map((slug) => {
+              const entry = bySlug.get(slug);
+              return <li>{entry ? <a href={articleUrl(entry)}>{entry.data.title}</a> : <span>{slug}</span>}</li>;
+            })}
+          </ul>
+          <span class="path-meta">
+            {t.series.minutes(
+              path.items.reduce((sum, slug) => sum + (bySlug.get(slug)?.data.readingTime ?? 0), 0)
+            )}
+          </span>
+        </div>
+      ))}
+    </div>
+  </section>
+)}
+
+{groups.length > 0 && (
+  <section class="shell section" id="catalog" aria-labelledby="catalog-title">
+    <div class="section-head">
+      <div class="section-head-left">
+        <span class="section-index">03</span>
+        <h2 class="section-title" id="catalog-title">{t.series.catalogTitle}</h2>
+      </div>
+      <span class="section-note">{t.series.catalogNote(sorted.length, words)}</span>
+    </div>
+
+    <div class="catalog">
+      {groups.map((group) => (
+        <div class="catalog-part">
+          <div class="part-head">
+            <h3 class="part-name">
+              {partLabel(series, group.part, lang)} <span>{numberOf(group.items[0])}</span>
+            </h3>
+            <p class="part-note">{t.series.chapterCountNote(group.items.length)}</p>
+          </div>
+          <div class="chapter-list">
+            {group.items.map((chapter) => (
+              <a class="chapter-row" href={articleUrl(chapter)}>
+                <span class="row-num">{numberOf(chapter)}</span>
+                <span class="row-main">
+                  <span class="row-title">{chapter.data.title}</span>
+                  <span class="row-desc">{chapter.data.description}</span>
+                </span>
+                <span class="row-tags">
+                  {chapter.data.tags.map((tag) => (
+                    <span class={'tag' + (tag === '深度' ? ' tag-hot' : '')}>{tag}</span>
+                  ))}
+                </span>
+                <span class="row-time">{chapter.data.readingTime} min</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+)}
+
+{meta.stats.length > 0 && (
+  <section class="stats-band" aria-label={t.series.statsLabel}>
+    <div class="shell stats-inner">
+      {meta.stats.map((stat) => (
+        <div class="stat">
+          <strong>
+            {fillText(stat.value)}
+            {stat.unit && <em>{stat.unit}</em>}
+          </strong>
+          <span>{fillText(stat.label)}</span>
+        </div>
+      ))}
+    </div>
+  </section>
+)}
+
+{meta.about.length > 0 && (
+  <section class="shell section" aria-labelledby="about-title">
+    <div class="section-head">
+      <div class="section-head-left">
+        <span class="section-index">04</span>
+        <h2 class="section-title" id="about-title">{t.series.aboutTitle}</h2>
+      </div>
+      <a class="section-note" href={base + '/about/'}>{t.series.aboutLink}</a>
+    </div>
+    <div class="about-grid">
+      <div class="about-mark" aria-hidden="true">
+        <span class="monogram">AS</span>
+        <span class="mark-label">ALLEN SHAO</span>
+      </div>
+      <div class="about-copy">
+        {meta.about.map((paragraph) => <p>{paragraph}</p>)}
+        <div class="about-links">
+          <a href={SITE.personalSite}>{t.nav.personal}</a>
+          <a href={'mailto:' + SITE.email}>Email</a>
+          <a href={SITE.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+          <a href={SITE.base + '/rss.xml'}>RSS</a>
+        </div>
+      </div>
+    </div>
+  </section>
+)}

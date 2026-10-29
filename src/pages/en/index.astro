@@ -1,15 +1,31 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { SITE, SERIES } from '../../consts';
-import { SERIES_I18N } from '../../i18n';
-import { essaysOf, seriesOf, slugOf } from '../../lib/articles';
+import { SITE } from '../../consts';
+import {
+  allSeries,
+  articleUrl,
+  byDateDesc,
+  byOrder,
+  inSeries,
+  partLabel,
+  seriesUrl,
+  totalMinutes,
+  wordTotal,
+} from '../../lib/articles';
 
-const all = await getCollection('articles');
-const chapters = seriesOf(all, SERIES.slug, 'en');
-const essays = essaysOf(all, 'en');
-const series = SERIES_I18N.en;
-const totalMinutes = chapters.reduce((sum, chapter) => sum + chapter.data.readingTime, 0);
+const lang = 'en' as const;
+const [seriesList, all] = await Promise.all([allSeries(), getCollection('articles')]);
+
+const primary = seriesList.find((entry) => entry.data.kind === 'chapters');
+const essaysMeta = seriesList.find((entry) => entry.data.kind === 'essays');
+
+const chapters = primary ? byOrder(inSeries(all, primary.id, lang)) : [];
+const essays = essaysMeta ? byDateDesc(inSeries(all, essaysMeta.id, lang)) : [];
+
+const primaryMeta = primary?.data.en;
+const seriesMinutes = totalMinutes(chapters);
+const words = wordTotal([...chapters, ...essays]);
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -25,12 +41,25 @@ const structuredData = {
     alternateName: SITE.authorEn,
     url: SITE.personalSite,
   },
+  blogPost: [
+    ...chapters.map((article) => ({
+      '@type': 'BlogPosting',
+      headline: article.data.title,
+      url: new URL(articleUrl(article), Astro.site).toString(),
+    })),
+    ...essays.map((essay) => ({
+      '@type': 'BlogPosting',
+      headline: essay.data.title,
+      url: new URL(articleUrl(essay), Astro.site).toString(),
+    })),
+  ],
 };
 ---
 
 <BaseLayout
   title="Writing"
   description="Essays on large language models, agent architecture, cloud security and shipping AI in the enterprise."
+  lang={lang}
   structuredData={structuredData}
 >
   <section class="shell blog-hero">
@@ -42,10 +71,10 @@ const structuredData = {
       and what survives contact with a real enterprise.
     </p>
     <div class="blog-meta">
-      <span>1 series</span>
+      <span>{seriesList.length} series</span>
       <span>{chapters.length} chapters</span>
       <span>{essays.length} essays</span>
-      <span>{totalMinutes} min read</span>
+      <span>{totalMinutes([...chapters, ...essays])} min read</span>
       <a href={SITE.base + '/rss.xml'}>RSS</a>
     </div>
   </section>
@@ -60,7 +89,7 @@ const structuredData = {
     </div>
 
     {essays.map((essay, index) => (
-      <a class="essay-feature" href={SITE.base + '/en/essays/' + slugOf(essay) + '/'}>
+      <a class="essay-feature" href={articleUrl(essay)}>
         <div class="ef-copy">
           <span class="project-index">Essay {String(index + 1).padStart(2, '0')} · {essay.data.date?.replaceAll('-', '.')} · {essay.data.readingTime} min</span>
           <h3>{essay.data.title}</h3>
@@ -83,34 +112,38 @@ const structuredData = {
     ))}
   </section>
 
-  <section class="shell blog-section">
-    <div class="section-head">
-      <div class="section-head-left">
-        <span class="section-index">02</span>
-        <h2 class="section-title">Series</h2>
-      </div>
-      <span class="section-note">01 series</span>
-    </div>
-
-    <a class="series-feature" href={SITE.base + '/en/ai-evolution/'}>
-      <div class="sf-copy">
-        <span class="project-index">Series 01 · {SERIES.start}—{SERIES.end} · complete</span>
-        <h3>{series.title}</h3>
-        <p class="sf-sub">{series.subtitle}</p>
-        <p class="sf-desc">{series.description}</p>
-        <div class="sf-metrics">
-          <span><b>{chapters.length}</b> chapters</span>
-          <span><b>{SERIES.sources}</b> sources</span>
-          <span><b>{totalMinutes}</b> min</span>
+  {primary && primaryMeta && (
+    <section class="shell blog-section">
+      <div class="section-head">
+        <div class="section-head-left">
+          <span class="section-index">02</span>
+          <h2 class="section-title">Series</h2>
         </div>
-        <span class="text-link">Open the series →</span>
+        <span class="section-note">{String(seriesList.filter((entry) => entry.data.kind === 'chapters').length).padStart(2, '0')} series</span>
       </div>
-      <div class="sf-cover">
-        <img src={SITE.base + SERIES.cover} alt="The evolution of AI capability: from conversational to collaborative" width="1400" height="764" loading="eager" />
-        <span>Updated {SERIES.updated}</span>
-      </div>
-    </a>
-  </section>
+
+      <a class="series-feature" href={seriesUrl(primary.id, lang)}>
+        <div class="sf-copy">
+          <span class="project-index">{primaryMeta.label} · {primary.data.start}—{primary.data.end} · complete</span>
+          <h3>{primaryMeta.title}</h3>
+          <p class="sf-sub">{primaryMeta.subtitle}</p>
+          <p class="sf-desc">{primaryMeta.description}</p>
+          <div class="sf-metrics">
+            <span><b>{chapters.length}</b> chapters</span>
+            {primary.data.sources && <span><b>{primary.data.sources}</b> sources</span>}
+            <span><b>{seriesMinutes}</b> min</span>
+          </div>
+          <span class="text-link">Open the series →</span>
+        </div>
+        {primary.data.cover && (
+          <div class="sf-cover">
+            <img src={SITE.base + primary.data.cover} alt={primaryMeta.title} width="1400" height="764" loading="eager" />
+            <span>Updated {primary.data.updated}</span>
+          </div>
+        )}
+      </a>
+    </section>
+  )}
 
   <section class="shell blog-section">
     <div class="section-head">
@@ -122,15 +155,15 @@ const structuredData = {
     </div>
 
     <div class="post-list">
-      {chapters.map((chapter) => (
-        <a class="post-row" href={SITE.base + '/en/ai-evolution/' + slugOf(chapter) + '/'}>
-          <span class="pr-num">{String(chapter.data.num).padStart(2, '0')}</span>
+      {chapters.map((chapter, index) => (
+        <a class="post-row" href={articleUrl(chapter)}>
+          <span class="pr-num">{String(index + 1).padStart(2, '0')}</span>
           <span class="pr-main">
             <span class="pr-title">{chapter.data.title}</span>
             <span class="pr-desc">{chapter.data.description}</span>
           </span>
           <span class="pr-meta">
-            <span>{series.parts[chapter.data.part as keyof typeof series.parts] ?? chapter.data.part}</span>
+            <span>{primary && chapter.data.part ? partLabel(primary, chapter.data.part, lang) : ''}</span>
             <span>{chapter.data.readingTime} min</span>
           </span>
         </a>

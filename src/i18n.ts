@@ -1,4 +1,4 @@
-import { SERIES, SITE } from './consts';
+import { LICENSE, SITE } from './consts';
 
 export type Lang = 'zh' | 'en';
 
@@ -9,39 +9,10 @@ export const basePath = (lang: Lang) => (lang === 'en' ? SITE.base + '/en' : SIT
 export const langFromPath = (pathname: string): Lang =>
   pathname.startsWith(SITE.base + '/en/') || pathname === SITE.base + '/en' ? 'en' : 'zh';
 
-/** 系列名与分卷名（中英） */
-export const SERIES_I18N = {
-  zh: {
-    title: SERIES.title,
-    subtitle: SERIES.subtitle,
-    description: SERIES.description,
-    parts: {
-      序章: '序章',
-      导读: '导读',
-      时间线: '时间线',
-      技术深潜: '技术深潜',
-      洞察: '洞察',
-      实践: '实践',
-      展望: '展望',
-    },
-  },
-  en: {
-    title: 'From Conversation to Collaboration',
-    subtitle: 'Three years of LLM evolution, 2022—2026',
-    description:
-      'Fourteen chapters on how large language models moved from conversation to collaboration — the timeline, the architecture, and what it takes to ship in an enterprise.',
-    parts: {
-      序章: 'Prologue',
-      导读: 'Primer',
-      时间线: 'Timeline',
-      技术深潜: 'Deep dive',
-      洞察: 'Insight',
-      实践: 'Practice',
-      展望: 'Outlook',
-    },
-  },
-} as const;
-
+/**
+ * 站点级界面文案。
+ * 系列名、章节数、分卷名这类"内容"不在这里 —— 它们在 src/content/series/*.md。
+ */
 const zh = {
   htmlLang: 'zh-CN',
   ogLocale: 'zh_CN',
@@ -51,7 +22,8 @@ const zh = {
     label: '主导航',
     home: '文章集',
     essays: '单篇',
-    series: SERIES.title,
+    /** 兜底文案；有章节型系列时由 SiteHeader 用系列标题覆盖 */
+    series: '系列',
     about: '关于',
     personal: '个人主页 ↗',
     cta: '开始阅读',
@@ -61,10 +33,10 @@ const zh = {
   footer: {
     tagline: SITE.blogSubtitle + ' · 持续更新',
     home: '文章集',
-    series: SERIES.title,
+    series: '系列',
     about: '关于',
     personal: '个人主页 ↗',
-    license: '文字以 ' + SERIES.license + ' 授权 · 转载注明出处',
+    license: '文字以 ' + LICENSE + ' 授权 · 转载注明出处',
     built: '用 Astro 构建 · GitHub Pages',
   },
   article: {
@@ -92,17 +64,39 @@ const zh = {
     bio: '全栈工程师，关注 AI Agent、云安全与开发者体验。把公开信息放回时间线，也把自己踩过的坑写下来。',
     bioLink: '个人主页 ↗',
     license:
-      '本文以 ' + SERIES.license + ' 授权，转载请注明作者与出处。文中观点为个人观察，不代表任职机构。',
+      '本文以 ' + LICENSE + ' 授权，转载请注明作者与出处。文中观点为个人观察，不代表任职机构。',
+  },
+  series: {
+    allWriting: '← 文章集',
+    chapterUnit: '章',
+    chapterCount: (n: number) => n + ' 章',
+    chapterCountNote: (n: number) => String(n).padStart(2, '0') + ' chapters',
+    words: (w: string) => '约 ' + w + ' 字',
+    sources: (n: number) => n + ' 份参考资料',
+    minutes: (n: number) => '约 ' + n + ' 分钟',
+    totalMinutes: (n: number) => '全书 ' + n + ' 分钟',
+    catalogNote: (c: number, w: string) => c + ' chapters · ' + w + ' 万字',
+    tldrTitle: '三句话读完',
+    tldrNote: 'The short version',
+    pathsTitle: '选一条阅读路径',
+    catalogTitle: '目录',
+    aboutTitle: '关于这个系列',
+    aboutLink: '方法论与更新日志 →',
+    catalogCta: '查看目录',
+    metaAuthor: 'Author',
+    metaChapters: 'Chapters',
+    metaScope: 'Scope',
+    metaWritten: 'Written',
+    statsLabel: '报告数据',
+    essayCount: (n: number) => n + ' 篇',
+    essaysNote: '篇 · 持续更新',
   },
   side: {
     chapterNavLabel: '章节目录',
     essayNavLabel: '单篇目录',
     back: '← 文章集',
-    chapterCount: SERIES.chapterCount + ' 章 · ' + SERIES.start + '—' + SERIES.end,
-    essayCount: '篇 · 持续更新',
     essays: '单篇长文',
-    seriesLabel: 'Series / 01',
-    chapterUnit: (n: number) => n + ' 章',
+    seriesLabel: '系列',
   },
   tocLabel: '本页目录',
 } as const;
@@ -116,7 +110,7 @@ const en = {
     label: 'Main navigation',
     home: 'Writing',
     essays: 'Essays',
-    series: 'The Series',
+    series: 'Series',
     about: 'About',
     personal: 'Home ↗',
     cta: 'Start reading',
@@ -126,10 +120,10 @@ const en = {
   footer: {
     tagline: 'Writing & Notes · updated regularly',
     home: 'Writing',
-    series: SERIES_I18N.en.title,
+    series: 'Series',
     about: 'About',
     personal: 'Home ↗',
-    license: 'Text licensed under ' + SERIES.license + ' · credit the author on reposts',
+    license: 'Text licensed under ' + LICENSE + ' · credit the author on reposts',
     built: 'Built with Astro · GitHub Pages',
   },
   article: {
@@ -157,17 +151,39 @@ const en = {
     bio: 'Full-stack engineer working on AI agents, cloud security and developer experience. I put public information back on a timeline, and write down the potholes I hit myself.',
     bioLink: 'Personal site ↗',
     license:
-      'Licensed under ' + SERIES.license + '. Please credit the author and link back when reposting. Views here are personal and do not represent my employer.',
+      'Licensed under ' + LICENSE + '. Please credit the author and link back when reposting. Views here are personal and do not represent my employer.',
+  },
+  series: {
+    allWriting: '← All writing',
+    chapterUnit: 'chapters',
+    chapterCount: (n: number) => n + ' chapters',
+    chapterCountNote: (n: number) => String(n).padStart(2, '0') + ' chapters',
+    words: (w: string) => '~' + w + ' words',
+    sources: (n: number) => n + ' sources',
+    minutes: (n: number) => 'About ' + n + ' min',
+    totalMinutes: (n: number) => n + ' min in total',
+    catalogNote: (c: number, w: string) => c + ' chapters · ' + w + ' words',
+    tldrTitle: 'Three sentences',
+    tldrNote: 'The short version',
+    pathsTitle: 'Pick a reading path',
+    catalogTitle: 'Contents',
+    aboutTitle: 'About this series',
+    aboutLink: 'Method and changelog →',
+    catalogCta: 'See contents',
+    metaAuthor: 'Author',
+    metaChapters: 'Chapters',
+    metaScope: 'Scope',
+    metaWritten: 'Written',
+    statsLabel: 'Report figures',
+    essayCount: (n: number) => n + ' essays',
+    essaysNote: ' essays · ongoing',
   },
   side: {
     chapterNavLabel: 'Chapter list',
     essayNavLabel: 'Essay list',
     back: '← Writing',
-    chapterCount: SERIES.chapterCount + ' chapters · ' + SERIES.start + '—' + SERIES.end,
-    essayCount: ' essays · ongoing',
     essays: 'Standalone essays',
-    seriesLabel: 'Series / 01',
-    chapterUnit: (n: number) => n + ' chapters',
+    seriesLabel: 'Series',
   },
   tocLabel: 'On this page',
 } as const;
