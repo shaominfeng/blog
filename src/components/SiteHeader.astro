@@ -55,6 +55,21 @@ const altPath = (lang === 'en' ? SITE.base : SITE.base + '/en') + (inner || '/')
       {!isSeries && !isEssays && (
         <a class="nav-cta" href={base + '/' + primaryKey + '/'}>{t.nav.cta} <span aria-hidden="true">→</span></a>
       )}
+
+      {/* ≤460px 时上面的文字导航会全部隐藏，由这个折叠菜单接替，否则手机上无法进入二级页 */}
+      <details class="nav-compact">
+        <summary aria-label={t.nav.label}>
+          <span class="bars" aria-hidden="true"></span>
+        </summary>
+        <div class="nav-compact-panel">
+          <a href={base + '/'}>{t.nav.home}</a>
+          <a href={base + '/essays/'}>{t.nav.essays}</a>
+          <a href={base + '/' + primaryKey + '/'}>{seriesLabel}</a>
+          <a href={base + '/about/'}>{t.nav.about}</a>
+          <a class="ext" href={SITE.personalSite}>{t.nav.personal}</a>
+          <a class="ext" href={SITE.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+        </div>
+      </details>
     </nav>
   </div>
 </header>

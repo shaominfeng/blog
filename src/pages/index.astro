@@ -28,8 +28,13 @@ const seriesBlocks = chapterSeries.map((entry) => ({
 }));
 
 const essays = essaysMeta ? byDateDesc(inSeries(all, essaysMeta.id, lang)) : [];
+const [leadEssay, ...restEssays] = essays;
+
 const allChapters = seriesBlocks.flatMap((block) => block.chapters);
 const words = wanWords([...allChapters, ...essays]);
+
+/** 首页只预览每部系列的前 5 章，完整目录在系列页 */
+const PREVIEW = 5;
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -81,31 +86,54 @@ const structuredData = {
         <span class="section-index">01</span>
         <h2 class="section-title">单篇</h2>
       </div>
-      <span class="section-note">{essays.length} essay</span>
+      <span class="section-note">按发布时间排列</span>
     </div>
 
-    {essays.map((essay, index) => (
-      <a class="essay-feature" href={articleUrl(essay)}>
+    {leadEssay && (
+      <a class="essay-feature" href={articleUrl(leadEssay)}>
         <div class="ef-copy">
-          <span class="project-index">Essay {String(index + 1).padStart(2, '0')} · 写于 {essay.data.date?.replaceAll('-', '.')} · {essay.data.readingTime} 分钟</span>
-          <h3>{essay.data.title}</h3>
-          <p class="sf-sub">{essay.data.subtitle}</p>
-          <p class="sf-desc">{essay.data.description}</p>
+          <span class="project-index">Essay 01 · 写于 {leadEssay.data.date?.replaceAll('-', '.')} · {leadEssay.data.readingTime} 分钟</span>
+          <h3>{leadEssay.data.title}</h3>
+          <p class="sf-sub">{leadEssay.data.subtitle}</p>
+          <p class="sf-desc">{leadEssay.data.description}</p>
           <div class="sf-metrics">
-            {essay.data.metrics.map((metric) => (
+            {leadEssay.data.metrics.map((metric) => (
               <span><b>{metric.value}</b>{metric.label ? ' ' + metric.label : ''}</span>
             ))}
           </div>
           <span class="text-link">阅读全文 →</span>
         </div>
         <div class="ef-panel" aria-hidden="true">
-          <span class="ef-time">{essay.data.panel?.time}</span>
-          <span class="ef-label" set:html={essay.data.panel?.label} />
+          <span class="ef-time">{leadEssay.data.panel?.time}</span>
+          <span class="ef-label" set:html={leadEssay.data.panel?.label} />
           <span class="ef-rule"></span>
-          <span class="ef-meta">{essay.data.panel?.meta}</span>
+          <span class="ef-meta">{leadEssay.data.panel?.meta}</span>
         </div>
       </a>
-    ))}
+    )}
+
+    {restEssays.length > 0 && (
+      <>
+        <div class="post-list" style="margin-top: 18px;">
+          {restEssays.map((essay, index) => (
+            <a class="post-row" href={articleUrl(essay)}>
+              <span class="pr-num">{String(index + 2).padStart(2, '0')}</span>
+              <span class="pr-main">
+                <span class="pr-title">{essay.data.title}</span>
+                <span class="pr-desc">{essay.data.description}</span>
+              </span>
+              <span class="pr-meta">
+                <span>{essay.data.date?.replaceAll('-', '.')}</span>
+                <span>{essay.data.readingTime} min</span>
+              </span>
+            </a>
+          ))}
+        </div>
+        <div class="rows-more">
+          <a href={SITE.base + '/essays/'}>全部单篇 →</a>
+        </div>
+      </>
+    )}
   </section>
 
   <section class="shell blog-section">
@@ -114,7 +142,7 @@ const structuredData = {
         <span class="section-index">02</span>
         <h2 class="section-title">系列</h2>
       </div>
-      <span class="section-note">{String(seriesBlocks.length).padStart(2, '0')} series</span>
+      <span class="section-note">长篇连载</span>
     </div>
 
     {seriesBlocks.map(({ entry, meta, chapters }) => (
@@ -144,10 +172,10 @@ const structuredData = {
         <div class="catalog">
           <div class="catalog-head">
             <span>目录</span>
-            <span>{chapters.length} 章 · 约 {totalMinutes(chapters)} 分钟</span>
+            <span>共 {chapters.length} 章 · 约 {totalMinutes(chapters)} 分钟</span>
           </div>
           <div class="post-list">
-            {chapters.map((article, index) => (
+            {chapters.slice(0, PREVIEW).map((article, index) => (
               <a class="post-row" href={articleUrl(article)}>
                 <span class="pr-num">{String(index + 1).padStart(2, '0')}</span>
                 <span class="pr-main">
@@ -161,6 +189,11 @@ const structuredData = {
               </a>
             ))}
           </div>
+          {chapters.length > PREVIEW && (
+            <div class="rows-more">
+              <a href={seriesUrl(entry.id, lang)}>查看完整目录（{chapters.length} 章）→</a>
+            </div>
+          )}
         </div>
       </article>
     ))}
