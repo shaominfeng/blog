@@ -7,17 +7,6 @@ tags: ["AI cost", "Claude Code", "model routing", "engineering practice"]
 date: "2026-09-18"
 updated: "2026-10-26"
 cover: "/og-ai-coding-cost.png"
-metrics:
-  - value: "95.4%"
-    label: "Drop in daily spend"
-  - value: "9.3×"
-    label: "Rate gap"
-  - value: "3.33B"
-    label: "Tokens sampled"
-panel:
-  time: "47→2"
-  label: "AI CODING<br />COST AUDIT"
-  meta: "3 MONTHS / 4 HARNESSES"
 ---
 
 > The classic mistake in cost cutting is optimising the price sheet instead of the bill.

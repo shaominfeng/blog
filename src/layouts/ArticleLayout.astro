@@ -2,7 +2,7 @@
 import BaseLayout from './BaseLayout.astro';
 import ChapterNav from '../components/ChapterNav.astro';
 import Toc from '../components/Toc.astro';
-import { SITE } from '../consts';
+import { SITE, TAG } from '../consts';
 import { BLOG_UI, basePath, type Lang } from '../i18n';
 import {
   articleUrl,
@@ -15,7 +15,7 @@ import {
 interface Props {
   entry: ArticleEntry;
   series: SeriesEntry;
-  /** 系列内的全部文章（阅读顺序），章节型系列用于侧边目录 */
+  /** 系列内的全部文章（阅读顺序），章节型系列用于左侧章节导航 */
   articles: ArticleEntry[];
   headings: { depth: number; slug: string; text: string }[];
   /** 在系列内的序号，从 1 开始 */
@@ -34,6 +34,9 @@ const isEssay = series.data.kind === 'essays';
 const canonical = new URL(articleUrl(entry), Astro.site).toString();
 const pad = (n: number) => String(n).padStart(2, '0');
 const ogImage = isEssay ? SITE.base + (data.cover ?? '/og-agentic-coding.png') : undefined;
+// 单篇只有在标题够多时才有目录；没有目录就收成一列，不留空的左栏
+const essayToc = headings.filter((heading) => heading.depth === 2).length >= 3;
+const hasSide = !isEssay || essayToc;
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -88,8 +91,14 @@ const nextCard = next
 <BaseLayout title={data.title} description={data.description} type="article" lang={lang} image={ogImage} structuredData={structuredData}>
   <div class="progress" aria-hidden="true"></div>
 
-  <div class={'shell article-grid' + (isEssay ? ' essay-grid' : '')}>
-    {!isEssay && <ChapterNav series={series} articles={articles} currentId={entry.id} lang={lang} />}
+  <div class:list={['shell article-grid', { 'is-single': !hasSide }]}>
+    {!isEssay && <ChapterNav series={series} articles={articles} currentId={entry.id} headings={headings} lang={lang} />}
+    {isEssay && essayToc && (
+      <nav class="side-nav" aria-label={BLOG_UI[lang].tocLabel}>
+        <span class="side-part-label">{BLOG_UI[lang].tocLabel}</span>
+        <Toc headings={headings} lang={lang} />
+      </nav>
+    )}
 
     <div class="article-body">
       <header class="article-hero">
@@ -107,8 +116,8 @@ const nextCard = next
           )}
         </nav>
 
-        {!isEssay && data.tags.includes('速览') && (
-          <span class="tag tag-hot" style="margin-bottom:14px;display:inline-block">{t.article.quickTag}</span>
+        {!isEssay && data.tags.includes(TAG.quick) && (
+          <span class="tag tag-hot tag-quick">{t.article.quickTag}</span>
         )}
 
         <h1>{data.title}</h1>
@@ -131,7 +140,15 @@ const nextCard = next
         <details class="mobile-toc">
           <summary>{t.article.chapterToc(pad(number))}</summary>
           <div class="mobile-nav">
-            <ChapterNav series={series} articles={articles} currentId={entry.id} lang={lang} />
+            <ChapterNav series={series} articles={articles} currentId={entry.id} headings={headings} lang={lang} />
+          </div>
+        </details>
+      )}
+      {isEssay && essayToc && (
+        <details class="mobile-toc">
+          <summary>{BLOG_UI[lang].tocLabel}</summary>
+          <div class="mobile-nav">
+            <Toc headings={headings} lang={lang} />
           </div>
         </details>
       )}
@@ -154,11 +171,10 @@ const nextCard = next
         </div>
 
         <div class="author-card">
-          <span class="seal" aria-hidden="true">AS</span>
           <p>
             <strong>{SITE.author}</strong>
             {t.article.bio}
-            <a href={SITE.personalSite} style="color:var(--accent-2);text-decoration:underline;text-underline-offset:3px">{t.article.bioLink}</a>
+            <a href={SITE.personalSite}>{t.article.bioLink}</a>
           </p>
         </div>
 
@@ -167,8 +183,6 @@ const nextCard = next
         </p>
       </div>
     </div>
-
-    <Toc headings={headings} lang={lang} />
   </div>
 
   <script is:inline>
@@ -194,19 +208,20 @@ const nextCard = next
 
   <script is:inline>
     (() => {
-      const links = Array.from(document.querySelectorAll('.toc a'));
+      const links = Array.from(document.querySelectorAll('.article-toc a'));
       if (!links.length) return;
       const targets = links
         .map((link) => {
           const href = link.getAttribute('href') || '';
           const id = decodeURIComponent(href.replace('#', ''));
-          return { link, target: document.getElementById(id) };
+          return { href, target: document.getElementById(id) };
         })
         .filter((item) => item.target);
       if (!targets.length) return;
 
-      const setActive = (active) => {
-        links.forEach((link) => link.classList.toggle('active', link === active));
+      // 桌面与手机各有一份目录，高亮要同时点亮同一标题的两个链接
+      const setActive = (href) => {
+        links.forEach((link) => link.classList.toggle('active', link.getAttribute('href') === href));
       };
 
       const observer = new IntersectionObserver(
@@ -216,7 +231,7 @@ const nextCard = next
             .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
           if (visible.length) {
             const match = targets.find((item) => item.target === visible[0].target);
-            if (match) setActive(match.link);
+            if (match) setActive(match.href);
           }
         },
         { rootMargin: '-90px 0px -70% 0px', threshold: 0 }

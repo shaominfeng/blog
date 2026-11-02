@@ -38,16 +38,13 @@ zh:
   title: 从对话到协作
   subtitle: AI 大模型三年演进全记录
   description: 2022.11—2026.01，AI 大模型三年演进全记录。14 章、约 1.8 万字，从时间线、技术架构与企业实践三个视角，理解 AI 如何从对话走向协作。
-  kicker: Research note · 2022.11 — 2026.01
+  kicker: 研究笔记 · 2022.11 — 2026.01
   heroTitle: 从对话
   heroAccent: 到协作
   heroDesc: 三年，上下文放大 500 倍，交互从「写提示词」变成「说目标」，AI 从工具变成同事。这份报告把模型、协议与产品放回同一条时间线，解释每一次跃迁解决了什么，又留下了什么。
   cta: 开始阅读
-  figLabel: Fig. 01 / AI capability
+  figLabel: 图 01 · AI 能力演进
   figRange: 2022 → 2026
-  floatValue: 500×
-  floatLabel: context growth
-  stamp: 三年
   note:
     - "{chapters} 章"
     - "约 {words} 万字"
@@ -102,9 +99,6 @@ en:
   cta: Start reading
   figLabel: Fig. 01 / AI capability
   figRange: 2022 → 2026
-  floatValue: 500×
-  floatLabel: context growth
-  stamp: 3Y
   note:
     - "{chapters} chapters"
     - "~{words} words"

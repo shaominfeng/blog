@@ -6,17 +6,6 @@ readingTime: 18
 tags: ["Agent collaboration", "operations", "observability", "engineering practice"]
 date: "2026-10-29"
 cover: "/og-sp-ops.png"
-metrics:
-  - value: "39"
-    label: "dashboards archived"
-  - value: "5"
-    label: "sites inspected"
-  - value: "14"
-    label: "days from alert to fix"
-panel:
-  time: "39"
-  label: "SP-OPS<br />OPS TOOLING"
-  meta: "5 SITES / 1 COMMAND"
 ---
 
 ## Before we start

@@ -7,17 +7,6 @@ tags: ["AI 成本", "Claude Code", "模型路由", "工程实践"]
 date: "2026-09-18"
 updated: "2026-10-26"
 cover: "/og-ai-coding-cost.png"
-metrics:
-  - value: "95.4%"
-    label: "日均花费降幅"
-  - value: "9.3×"
-    label: "费率差"
-  - value: "3.33B"
-    label: "token 样本"
-panel:
-  time: "47→2"
-  label: "AI CODING<br />COST AUDIT"
-  meta: "3 MONTHS / 4 HARNESSES"
 ---
 
 > 省钱这件事，最容易犯的错是盯着价目表砍单价，而不是盯着账单砍单任务成本。

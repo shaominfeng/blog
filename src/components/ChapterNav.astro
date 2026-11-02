@@ -1,4 +1,5 @@
 ---
+import Toc from './Toc.astro';
 import { BLOG_UI, basePath, type Lang } from '../i18n';
 import {
   articleUrl,
@@ -10,16 +11,23 @@ import {
   type SeriesEntry,
 } from '../lib/articles';
 
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
 interface Props {
   series: SeriesEntry;
   articles: ArticleEntry[];
   currentId?: string;
+  /** 当前章的标题，挂在它的链接下面 */
+  headings: Heading[];
   lang?: Lang;
 }
 
-const { series, articles, currentId, lang = 'zh' } = Astro.props;
+const { series, articles, currentId, headings, lang = 'zh' } = Astro.props;
 const t = BLOG_UI[lang];
-const base = basePath(lang);
 const meta = series.data[lang];
 
 const sorted = byOrder(articles);
@@ -28,7 +36,6 @@ const groups = groupByPart(sorted);
 ---
 
 <nav class="side-nav" aria-label={t.side.chapterNavLabel}>
-  <a class="side-back" href={base + '/'}>{t.side.back}</a>
   <a class="side-brand" href={seriesUrl(series.id, lang)}>
     {meta.title}
     <small>{t.series.chapterCount(sorted.length)}</small>
@@ -39,14 +46,17 @@ const groups = groupByPart(sorted);
         {partLabel(series, group.part, lang)}
       </span>
       {group.items.map((article) => (
-        <a
-          href={articleUrl(article)}
-          class={article.id === currentId ? 'active' : undefined}
-          aria-current={article.id === currentId ? 'page' : undefined}
-        >
-          <span class="side-num">{numberOf(article.id)}</span>
-          {article.data.title}
-        </a>
+        <>
+          <a
+            href={articleUrl(article)}
+            class={article.id === currentId ? 'active' : undefined}
+            aria-current={article.id === currentId ? 'page' : undefined}
+          >
+            <span class="side-num">{numberOf(article.id)}</span>
+            {article.data.title}
+          </a>
+          {article.id === currentId && <Toc headings={headings} lang={lang} />}
+        </>
       ))}
     </div>
   ))}

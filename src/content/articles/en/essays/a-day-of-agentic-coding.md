@@ -5,17 +5,6 @@ description: "From the 09:00 automatic morning brief to the last patrol at 18:00
 readingTime: 19
 tags: ["Agentic Coding", "AI workflow", "engineering practice"]
 date: "2026-06-26"
-metrics:
-  - value: "09:00 → 18:00"
-    label: ""
-  - value: "5"
-    label: "layers of collaboration"
-  - value: "1"
-    label: "real workday"
-panel:
-  time: "09—18"
-  label: "A DAY OF<br />AGENTIC CODING"
-  meta: "ALLEN SHAO / 2026"
 ---
 
 > AI used to be a tool I opened to use. Now it's a colleague that keeps running inside my workflow.

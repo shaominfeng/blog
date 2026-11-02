@@ -4,7 +4,6 @@ export const SITE = {
   name: 'Allen Shao',
   en: 'Allen Shao',
   blogTitle: '写作',
-  blogSubtitle: 'Writing & Notes',
   description:
     'Allen Shao 的技术写作：AI 大模型、Agent 架构、云安全与企业实践。包括连载系列与单篇长文。',
   author: 'Allen Shao',
@@ -19,3 +18,6 @@ export const SITE = {
 
 /** 授权协议，站点级默认值；系列可在 src/content/series/*.md 里覆盖 */
 export const LICENSE = 'CC BY-NC-SA 4.0';
+
+/** 正文标签里带特殊样式的两个值：速览卡片与深度标记 */
+export const TAG = { quick: '速览', deep: '深度' } as const;

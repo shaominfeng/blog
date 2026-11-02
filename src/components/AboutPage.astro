@@ -41,22 +41,22 @@ const structuredData = {
 ---
 
 <BaseLayout title={t.about.title} description={t.about.description} lang={lang} structuredData={structuredData}>
-  <div class="shell page-hero">
+  <header class="shell page-head">
     <p class="label">{t.about.label}</p>
     <h1>{t.about.title}</h1>
-    <p>{t.about.intro}</p>
-  </div>
+    <p class="page-intro">{t.about.intro}</p>
+  </header>
 
   <div class="shell about-page-grid">
     <aside class="about-side">
-      <ul class="info-list">
-        <li><dt>{t.about.info.author}</dt><dd>{SITE.author}</dd></li>
-        <li><dt>{t.about.info.structure}</dt><dd>{t.about.info.structureOf(seriesCount, essays.length)}</dd></li>
-        <li><dt>{t.about.info.chapters}</dt><dd>{t.about.info.chaptersOf(chapters.length)}</dd></li>
-        <li><dt>{t.about.info.span}</dt><dd>{primary?.data.start} — {primary?.data.end}</dd></li>
-        <li><dt>{t.about.info.length}</dt><dd>{t.about.info.lengthOf(words)}</dd></li>
-        <li><dt>{t.about.info.license}</dt><dd>{LICENSE}</dd></li>
-      </ul>
+      <dl class="info-list">
+        <div><dt>{t.about.info.author}</dt><dd>{SITE.author}</dd></div>
+        <div><dt>{t.about.info.structure}</dt><dd>{t.about.info.structureOf(seriesCount, essays.length)}</dd></div>
+        <div><dt>{t.about.info.chapters}</dt><dd>{t.about.info.chaptersOf(chapters.length)}</dd></div>
+        <div><dt>{t.about.info.span}</dt><dd>{primary?.data.start} — {primary?.data.end}</dd></div>
+        <div><dt>{t.about.info.length}</dt><dd>{t.about.info.lengthOf(words)}</dd></div>
+        <div><dt>{t.about.info.license}</dt><dd>{LICENSE}</dd></div>
+      </dl>
     </aside>
 
     <div class="about-prose">

@@ -6,17 +6,6 @@ readingTime: 18
 tags: ["Agent 协作", "运维", "可观测性", "工程实践"]
 date: "2026-10-29"
 cover: "/og-sp-ops.png"
-metrics:
-  - value: "39"
-    label: "个 dashboard 归档"
-  - value: "5"
-    label: "个站点巡检"
-  - value: "14"
-    label: "天从告警到修复"
-panel:
-  time: "39"
-  label: "SP-OPS<br />OPS TOOLING"
-  meta: "5 SITES / 1 COMMAND"
 ---
 
 ## 写在前面

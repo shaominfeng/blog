@@ -24,12 +24,9 @@ const localized = z.object({
   heroAccent: z.string().optional(),
   heroDesc: z.string().optional(),
   cta: z.string().optional(),
-  /** 封面图注与角标，纯装饰 */
+  /** 封面图注 */
   figLabel: z.string().optional(),
   figRange: z.string().optional(),
-  floatValue: z.string().optional(),
-  floatLabel: z.string().optional(),
-  stamp: z.string().optional(),
   /** 允许 {chapters} {words} {minutes} {sources} {written} 占位符 */
   note: z.array(z.string()).default([]),
   tldr: z.array(z.object({ label: z.string(), title: z.string(), body: z.string() })).default([]),
@@ -92,16 +89,6 @@ const articles = defineCollection({
     date: z.string().regex(isoDate, '日期须为 YYYY-MM-DD'),
     updated: z.string().regex(isoDate, '日期须为 YYYY-MM-DD').optional(),
     cover: z.string().optional(),
-    metrics: z
-      .array(z.object({ value: z.string(), label: z.string().default('') }))
-      .default([]),
-    panel: z
-      .object({
-        time: z.string(),
-        label: z.string(),
-        meta: z.string().default('ALLEN SHAO / 2026'),
-      })
-      .optional(),
   }),
 });
 

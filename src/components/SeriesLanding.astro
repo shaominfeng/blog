@@ -1,5 +1,5 @@
 ---
-import { SITE } from '../consts';
+import { SITE, TAG } from '../consts';
 import { BLOG_UI, basePath, type Lang } from '../i18n';
 import {
   articleUrl,
@@ -53,51 +53,40 @@ const range = [series.data.start, series.data.end].filter(Boolean).join(' — ')
   <a href={base + '/'}>{t.article.crumbsHome}</a><span class="sep">/</span><span>{meta.title}</span>
 </div>
 
-<section class="shell hero">
-  <div class="hero-copy">
-    <p class="kicker">{meta.kicker ?? meta.label}</p>
-    <h1 class="display">
-      {meta.heroTitle ?? meta.title}
-      {meta.heroAccent && <><br /><span class="accent">{meta.heroAccent}</span></>}
-    </h1>
-    {meta.subtitle && <p class="hero-sub">{meta.subtitle}</p>}
-    <p class="hero-desc">{meta.heroDesc ?? meta.description}</p>
-    <div class="hero-actions">
-      <a class="btn btn-primary" href={startHref}>{meta.cta ?? t.nav.cta} <span aria-hidden="true">→</span></a>
-      {groups.length > 0 && <a class="btn btn-ghost" href="#catalog">{t.series.catalogCta}</a>}
-    </div>
-    {meta.note.length > 0 && (
-      <p class="hero-note">
-        {meta.note.map((line) => <span>{fillText(line)}</span>)}
-      </p>
-    )}
+<header class="shell page-head">
+  <p class="label">{meta.kicker ?? meta.label}</p>
+  <h1>
+    {meta.heroTitle ?? meta.title}
+    {meta.heroAccent && <><br /><span class="accent">{meta.heroAccent}</span></>}
+  </h1>
+  {meta.subtitle && <p class="page-sub">{meta.subtitle}</p>}
+  <p class="page-intro">{meta.heroDesc ?? meta.description}</p>
+  <div class="page-actions">
+    <a class="btn btn-primary" href={startHref}>{meta.cta ?? t.series.openSeries} <span aria-hidden="true">→</span></a>
+    {groups.length > 0 && <a class="btn btn-ghost" href="#catalog">{t.series.catalogCta}</a>}
   </div>
+  {meta.note.length > 0 && (
+    <p class="page-note">
+      {meta.note.map((line) => <span>{fillText(line)}</span>)}
+    </p>
+  )}
 
   {series.data.cover && (
-    <div class="hero-visual">
-      <figure class="cover-card">
-        <img
-          src={SITE.base + series.data.cover}
-          alt={meta.title}
-          width="1408"
-          height="768"
-          fetchpriority="high"
-        />
-        <figcaption>
-          <span>{meta.figLabel ?? meta.label}</span>
-          <span>{meta.figRange ?? range}</span>
-        </figcaption>
-      </figure>
-      {meta.floatValue && (
-        <div class="float-stat" aria-hidden="true">
-          <strong>{meta.floatValue}</strong>
-          <span>{meta.floatLabel}</span>
-        </div>
-      )}
-      {meta.stamp && <div class="stamp" aria-hidden="true">{meta.stamp}</div>}
-    </div>
+    <figure class="page-cover">
+      <img
+        src={SITE.base + series.data.cover}
+        alt={meta.title}
+        width="1408"
+        height="768"
+        fetchpriority="high"
+      />
+      <figcaption>
+        <span>{meta.figLabel ?? meta.label}</span>
+        <span>{meta.figRange ?? range}</span>
+      </figcaption>
+    </figure>
   )}
-</section>
+</header>
 
 <div class="shell">
   <dl class="meta-strip">
@@ -123,10 +112,7 @@ const range = [series.data.start, series.data.end].filter(Boolean).join(' — ')
 {meta.tldr.length > 0 && (
   <section class="shell section" aria-labelledby="tldr-title">
     <div class="section-head">
-      <div class="section-head-left">
-        <span class="section-index">01</span>
-        <h2 class="section-title" id="tldr-title">{t.series.tldrTitle}</h2>
-      </div>
+      <h2 class="section-title" id="tldr-title">{t.series.tldrTitle}</h2>
       <span class="section-note">{t.series.tldrNote}</span>
     </div>
     <div class="tldr-grid">
@@ -143,10 +129,7 @@ const range = [series.data.start, series.data.end].filter(Boolean).join(' — ')
 {meta.paths.length > 0 && (
   <section class="shell section" id="paths" aria-labelledby="paths-title">
     <div class="section-head">
-      <div class="section-head-left">
-        <span class="section-index">02</span>
-        <h2 class="section-title" id="paths-title">{t.series.pathsTitle}</h2>
-      </div>
+      <h2 class="section-title" id="paths-title">{t.series.pathsTitle}</h2>
       <span class="section-note">{t.series.totalMinutes(minutes)}</span>
     </div>
     <div class="paths-grid">
@@ -178,10 +161,7 @@ const range = [series.data.start, series.data.end].filter(Boolean).join(' — ')
 {groups.length > 0 && (
   <section class="shell section" id="catalog" aria-labelledby="catalog-title">
     <div class="section-head">
-      <div class="section-head-left">
-        <span class="section-index">03</span>
-        <h2 class="section-title" id="catalog-title">{t.series.catalogTitle}</h2>
-      </div>
+      <h2 class="section-title" id="catalog-title">{t.series.catalogTitle}</h2>
       <span class="section-note">{t.series.catalogNote(sorted.length, words)}</span>
     </div>
 
@@ -204,10 +184,10 @@ const range = [series.data.start, series.data.end].filter(Boolean).join(' — ')
                 </span>
                 <span class="row-tags">
                   {chapter.data.tags.map((tag) => (
-                    <span class={'tag' + (tag === '深度' ? ' tag-hot' : '')}>{tag}</span>
+                    <span class={'tag' + (tag === TAG.deep ? ' tag-hot' : '')}>{tag}</span>
                   ))}
                 </span>
-                <span class="row-time">{minutesOf(chapter)} min</span>
+                <span class="row-time">{t.article.minutes(minutesOf(chapter))}</span>
               </a>
             ))}
           </div>
@@ -236,26 +216,11 @@ const range = [series.data.start, series.data.end].filter(Boolean).join(' — ')
 {meta.about.length > 0 && (
   <section class="shell section" aria-labelledby="about-title">
     <div class="section-head">
-      <div class="section-head-left">
-        <span class="section-index">04</span>
-        <h2 class="section-title" id="about-title">{t.series.aboutTitle}</h2>
-      </div>
+      <h2 class="section-title" id="about-title">{t.series.aboutTitle}</h2>
       <a class="section-note" href={base + '/about/'}>{t.series.aboutLink}</a>
     </div>
-    <div class="about-grid">
-      <div class="about-mark" aria-hidden="true">
-        <span class="monogram">AS</span>
-        <span class="mark-label">ALLEN SHAO</span>
-      </div>
-      <div class="about-copy">
-        {meta.about.map((paragraph) => <p>{paragraph}</p>)}
-        <div class="about-links">
-          <a href={SITE.personalSite}>{t.nav.personal}</a>
-          <a href={'mailto:' + SITE.email}>Email</a>
-          <a href={SITE.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a>
-          <a href={SITE.base + '/rss.xml'}>RSS</a>
-        </div>
-      </div>
+    <div class="about-copy">
+      {meta.about.map((paragraph) => <p>{paragraph}</p>)}
     </div>
   </section>
 )}

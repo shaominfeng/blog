@@ -13,19 +13,16 @@ interface Props {
 }
 
 const { headings, lang = 'zh' } = Astro.props;
-/** 只取二级标题：三级全部铺开会把目录变成一列密字，扫不出结构 */
+/** 只取二级标题：三级全部铺开会把目录变成一列密字，扫不出结构；少于 3 个时不值得单列 */
 const items = headings.filter((heading) => heading.depth === 2);
 ---
 
 {items.length >= 3 && (
-  <aside class="toc" aria-label={BLOG_UI[lang].tocLabel}>
-    <span class="toc-label">On this page</span>
-    <ul>
-      {items.map((heading) => (
-        <li class={'depth-' + heading.depth}>
-          <a href={'#' + heading.slug}>{heading.text.replace(/\s*#\s*$/, '')}</a>
-        </li>
-      ))}
-    </ul>
-  </aside>
+  <ul class="article-toc" aria-label={BLOG_UI[lang].tocLabel}>
+    {items.map((heading) => (
+      <li>
+        <a href={'#' + heading.slug}>{heading.text.replace(/\s*#\s*$/, '')}</a>
+      </li>
+    ))}
+  </ul>
 )}

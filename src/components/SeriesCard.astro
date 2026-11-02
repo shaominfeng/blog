@@ -15,14 +15,14 @@ const meta = series.data[lang];
 const words = lang === 'en' ? wordTotal(chapters) : wanWords(chapters);
 ---
 
-<a class:list={['series-card', { 'has-cover': series.data.cover }]} href={seriesUrl(series.id, lang)}>
+<a class="series-card" href={seriesUrl(series.id, lang)}>
   {series.data.cover && (
     <div class="sc-cover">
       <img src={SITE.base + series.data.cover} alt={meta.title} width="1400" height="764" loading="eager" />
     </div>
   )}
   <div class="sc-body">
-    <span class="project-index">{meta.label}{series.data.status && ' · ' + t.series.status[series.data.status]}</span>
+    <span class="label">{meta.label}{series.data.status && ' · ' + t.series.status[series.data.status]}</span>
     <h3>{meta.title}</h3>
     <p class="sf-sub">{meta.subtitle}</p>
     <div class="sf-metrics">

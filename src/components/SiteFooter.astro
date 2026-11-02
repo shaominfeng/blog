@@ -18,7 +18,6 @@ const seriesHref = await seriesEntryUrl(lang);
   <div class="shell">
     <div class="footer-top">
       <div class="footer-brand">
-        <span class="seal" aria-hidden="true">AS</span>
         <div>
           <strong>{SITE.name} · {t.nav.home}</strong>
           <span>{t.footer.tagline}</span>
@@ -28,6 +27,7 @@ const seriesHref = await seriesEntryUrl(lang);
         <a href={base + '/'}>{t.footer.home}</a>
         <a href={seriesHref}>{t.footer.series}</a>
         <a href={base + '/about/'}>{t.footer.about}</a>
+        <a href={'mailto:' + SITE.email}>Email</a>
         <a href={SITE.base + '/rss.xml'}>RSS</a>
         <a href={SITE.personalSite}>{t.footer.personal}</a>
         <a href={SITE.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a>

@@ -74,13 +74,6 @@ src/
    date: "2026-01-29"           # 必填
    updated: "2026-02-24"        # 可选
    cover: "/og-xxx.png"         # 可选：该篇的 OG 分享图
-   metrics:                     # 可选：首页单篇卡片底部的三条指标
-     - value: "39"
-       label: "个 dashboard"
-   panel:                       # 可选：首页单篇卡片右侧的深色面板
-     time: "39"
-     label: "SP-OPS<br />OPS TOOLING"
-     meta: "5 SITES / 1 COMMAND"
    ---
    ```
 
