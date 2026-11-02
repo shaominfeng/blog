@@ -1,29 +1,24 @@
 ---
 import BaseLayout from './BaseLayout.astro';
-import EssayNav from '../components/EssayNav.astro';
 import Toc from '../components/Toc.astro';
 import { SITE } from '../consts';
 import { BLOG_UI, basePath, type Lang } from '../i18n';
-import { articleUrl, type ArticleEntry, type SeriesEntry } from '../lib/articles';
+import { articleUrl, minutesOf, type ArticleEntry, type SeriesEntry } from '../lib/articles';
 
 interface Props {
   entry: ArticleEntry;
   series: SeriesEntry;
-  essays: ArticleEntry[];
   headings: { depth: number; slug: string; text: string }[];
   /** 在单篇集合内的序号（按日期倒序），从 1 开始 */
   number: number;
   lang: Lang;
   prev?: ArticleEntry;
   next?: ArticleEntry;
-  /** 侧栏底部指向主系列的入口 */
-  primary?: { series: SeriesEntry; count: number };
 }
 
-const { entry, series, essays, headings, number, lang, prev, next, primary } = Astro.props;
+const { entry, series, headings, number, lang, prev, next } = Astro.props;
 const { data } = entry;
 const t = BLOG_UI[lang];
-const meta = series.data[lang];
 const base = basePath(lang);
 const canonical = new URL(articleUrl(entry), Astro.site).toString();
 const dateLabel = data.date ? data.date.replaceAll('-', '.') : '';
@@ -56,42 +51,24 @@ const structuredData = {
 <BaseLayout title={data.title} description={data.description} type="article" lang={lang} image={ogImage} structuredData={structuredData}>
   <div class="progress" aria-hidden="true"></div>
 
-  <div class="shell article-grid">
-    <EssayNav essays={essays} currentId={entry.id} lang={lang} primary={primary} />
-
+  <div class="shell article-grid essay-grid">
     <div class="article-body">
       <header class="article-hero">
         <nav class="crumbs" aria-label="breadcrumb">
           <a href={base + '/'}>{t.article.crumbsHome}</a>
           <span class="sep">/</span>
           <a href={base + '/essays/'}>{t.nav.essays}</a>
-          <span class="sep">/</span>
-          <span>{t.article.essayLabel} {String(number).padStart(2, '0')}</span>
         </nav>
-
-        <span class="tag tag-hot" style="margin-bottom:14px;display:inline-block">{t.article.essayTag}</span>
 
         <h1>{data.title}</h1>
         <p class="article-sub">{data.subtitle}</p>
-        <p class="article-sub" style="font-size:15px;line-height:1.8;color:var(--ink-3)">{data.description}</p>
 
         <div class="article-meta">
-          <span>{SITE.author}</span>
+          <span>{dateLabel}</span>
           <span class="dot" aria-hidden="true"></span>
-          <span>{t.article.wroteOn(dateLabel)}</span>
-          <span class="dot" aria-hidden="true"></span>
-          <span>{t.article.minutes(data.readingTime)}</span>
-          <span class="dot" aria-hidden="true"></span>
-          <span>{meta.label}</span>
+          <span>{t.article.minutes(minutesOf(entry))}</span>
         </div>
       </header>
-
-      <details class="mobile-toc">
-        <summary>{t.article.essayToc}</summary>
-        <div class="mobile-nav">
-          <EssayNav essays={essays} currentId={entry.id} lang={lang} primary={primary} />
-        </div>
-      </details>
 
       <article class="prose">
         <slot />

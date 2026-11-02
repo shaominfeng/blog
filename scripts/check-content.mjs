@@ -10,7 +10,8 @@
  *   3. 文章所在的 series 目录必须有 src/content/series/<series>.md
  *   4. 同一语言 + 同一系列内 slug 不能重复
  *   5. 章节型（kind: chapters）的 part 必须能在系列 parts 里找到
- *   6. 必填字段齐全（title / description / readingTime）
+ *   6. 必填字段齐全（title / description / date）
+ *   7. 更新日志每条有 YYYY-MM-DD 格式的 date，以及 zh / en 文案
  */
 
 import fs from 'node:fs';
@@ -21,6 +22,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const ARTICLES = path.join(ROOT, 'src/content/articles');
 const SERIES_DIR = path.join(ROOT, 'src/content/series');
 const LANGS = ['zh', 'en'];
+const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
 
 const errors = [];
 const warnings = [];
@@ -74,7 +76,7 @@ for (const file of walk(ARTICLES)) {
     errors.push(`缺少系列元数据：src/content/series/${key}.md（被 ${path.relative(ROOT, file)} 引用）`);
   }
 
-  for (const required of ['title', 'description', 'readingTime']) {
+  for (const required of ['title', 'description', 'date']) {
     if (!data[required]) errors.push(`缺少必填字段 ${required}：${path.relative(ROOT, file)}`);
   }
 
@@ -110,6 +112,16 @@ for (const [id, pair] of pairs) {
   if (!pair.zh) warnings.push(`缺中文版：${id}（只有 en）`);
   if (!pair.en) warnings.push(`缺英文版：${id}（只有 zh）`);
 }
+
+/* ——— 更新日志：src/data/changelog.json ——— */
+const changelog = JSON.parse(fs.readFileSync(path.join(ROOT, 'src/data/changelog.json'), 'utf8'));
+changelog.forEach((item, index) => {
+  const where = `src/data/changelog.json 第 ${index + 1} 条`;
+  if (!ISO_DATE.test(item.date ?? '')) errors.push(`date 须为 YYYY-MM-DD：${where}`);
+  for (const lang of LANGS) {
+    if (!item[lang]) errors.push(`缺少 ${lang} 文案：${where}`);
+  }
+});
 
 /* ——— 输出 ——— */
 const rel = (file) => path.relative(ROOT, file);

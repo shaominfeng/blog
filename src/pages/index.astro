@@ -8,12 +8,15 @@ import {
   byDateDesc,
   byOrder,
   inSeries,
+  minutesOf,
   seriesUrl,
   totalMinutes,
   wanWords,
 } from '../lib/articles';
+import { BLOG_UI } from '../i18n';
 
 const lang = 'zh' as const;
+const t = BLOG_UI[lang];
 const [seriesList, all] = await Promise.all([allSeries(), getCollection('articles')]);
 
 // 章节型系列（可以多个）+ 单篇集合
@@ -83,10 +86,9 @@ const structuredData = {
     {leadEssay && (
       <a class="essay-feature" href={articleUrl(leadEssay)}>
         <div class="ef-copy">
-          <span class="project-index">写于 {leadEssay.data.date?.replaceAll('-', '.')} · {leadEssay.data.readingTime} 分钟</span>
+          <span class="project-index">写于 {leadEssay.data.date?.replaceAll('-', '.')} · {minutesOf(leadEssay)} 分钟</span>
           <h3>{leadEssay.data.title}</h3>
           <p class="sf-sub">{leadEssay.data.subtitle}</p>
-          <p class="sf-desc">{leadEssay.data.description}</p>
           <div class="sf-metrics">
             {leadEssay.data.metrics.map((metric) => (
               <span><b>{metric.value}</b>{metric.label ? ' ' + metric.label : ''}</span>
@@ -114,7 +116,7 @@ const structuredData = {
               </span>
               <span class="pr-meta">
                 <span>{essay.data.date?.replaceAll('-', '.')}</span>
-                <span>{essay.data.readingTime} min</span>
+                <span>{minutesOf(essay)} min</span>
               </span>
             </a>
           ))}
@@ -139,15 +141,12 @@ const structuredData = {
       <article class="series-block">
         <a class="series-feature" href={seriesUrl(entry.id, lang)}>
           <div class="sf-copy">
-            <span class="project-index">{meta.label} · 已完结</span>
+            <span class="project-index">{meta.label}{entry.data.status && ' · ' + t.series.status[entry.data.status]}</span>
             <h3>{meta.title}</h3>
             <p class="sf-sub">{meta.subtitle}</p>
-            <p class="sf-desc">{meta.description}</p>
             <div class="sf-metrics">
-              <span><b>{chapters.length}</b> 章</span>
               <span><b>{wanWords(chapters)}</b> 万字</span>
               {entry.data.sources && <span><b>{entry.data.sources}</b> 份参考</span>}
-              <span><b>{totalMinutes(chapters)}</b> 分钟</span>
             </div>
             <span class="text-link">进入系列 →</span>
           </div>
@@ -172,7 +171,7 @@ const structuredData = {
                   <span class="pr-desc">{article.data.description}</span>
                 </span>
                 <span class="pr-meta">
-                  <span>{article.data.readingTime} min</span>
+                  <span>{minutesOf(article)} min</span>
                 </span>
               </a>
             ))}
@@ -192,7 +191,7 @@ const structuredData = {
       <div class="about-copy">
         <p class="about-statement">下一篇文章，正在写。</p>
         <p>
-          这里会持续更新：除了《从对话到协作》，还有单篇的技术笔记、架构复盘和工具实践。
+          这里会持续更新：除了连载系列，还有单篇的技术笔记、架构复盘和工具实践。
           如果你有想看的主题，欢迎来信。
         </p>
         <div class="contact-line">

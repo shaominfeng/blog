@@ -1,0 +1,37 @@
+[
+  {
+    "date": "2026-10-27",
+    "zh": "英文版上线，覆盖全部文章；中文仍是原文。",
+    "en": "English editions added for the whole collection; Chinese remains the original."
+  },
+  {
+    "date": "2026-10-26",
+    "zh": "新增单篇《AI 编码成本优化：别只盯单价，盯单任务成本》，把三个月的用量账本与成本公式放在一起。",
+    "en": "New essay: AI coding cost optimisation — three months of usage data with the cost formula."
+  },
+  {
+    "date": "2026-10-25",
+    "zh": "序章去掉与后续章节重复的内容，重写为总纲；补齐 MCP 与 Prompt 工程两章；全书参考资料集中到本页。",
+    "en": "Prologue rewritten as a master outline; MCP and prompt-engineering chapters expanded; references consolidated here."
+  },
+  {
+    "date": "2026-10-23",
+    "zh": "写作站上线，从单篇报告迁移为可扩展的文章结构。",
+    "en": "The collection launched as a structured, extensible site."
+  },
+  {
+    "date": "2026-06-26",
+    "zh": "新增单篇《工程师 Agentic Coding 的一天》，记录一天真实的 AI 工作流。",
+    "en": "New essay: A Day of Agentic Coding."
+  },
+  {
+    "date": "2026-02-24",
+    "zh": "《从对话到协作》模块化重构，新增餐厅类比导读与双轨对照。",
+    "en": "The series was modularised; the restaurant analogy primer and dual-track comparison were added."
+  },
+  {
+    "date": "2026-01-27",
+    "zh": "初稿完成，覆盖 2022.11—2026.01 的时间线与技术演进。",
+    "en": "First draft completed, covering 2022.11—2026.01."
+  }
+]

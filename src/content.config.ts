@@ -55,6 +55,8 @@ const series = defineCollection({
   loader: glob({ pattern: '*.md', base: './src/content/series' }),
   schema: z.object({
     kind: z.enum(['chapters', 'essays']).default('chapters'),
+    /** 连载状态，缺省则不显示状态标签 */
+    status: z.enum(['ongoing', 'finished']).optional(),
     order: z.number().default(99),
     cover: z.string().optional(),
     start: z.string().optional(),
@@ -72,6 +74,8 @@ const series = defineCollection({
   }),
 });
 
+const isoDate = /^\d{4}-\d{2}-\d{2}$/;
+
 const articles = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/articles' }),
   schema: z.object({
@@ -82,10 +86,11 @@ const articles = defineCollection({
     part: z.string().optional(),
     /** 系列内阅读顺序 */
     order: z.number().default(0),
-    readingTime: z.number(),
+    /** 缺省时按正文字数估算，见 lib/articles.ts 的 minutesOf() */
+    readingTime: z.number().optional(),
     tags: z.array(z.string()).default([]),
-    date: z.string().optional(),
-    updated: z.string().optional(),
+    date: z.string().regex(isoDate, '日期须为 YYYY-MM-DD'),
+    updated: z.string().regex(isoDate, '日期须为 YYYY-MM-DD').optional(),
     cover: z.string().optional(),
     metrics: z
       .array(z.object({ value: z.string(), label: z.string().default('') }))

@@ -13,10 +13,11 @@ interface Props {
 }
 
 const { headings, lang = 'zh' } = Astro.props;
-const items = headings.filter((heading) => heading.depth === 2 || heading.depth === 3);
+/** 只取二级标题：三级全部铺开会把目录变成一列密字，扫不出结构 */
+const items = headings.filter((heading) => heading.depth === 2);
 ---
 
-{items.length > 2 && (
+{items.length >= 3 && (
   <aside class="toc" aria-label={BLOG_UI[lang].tocLabel}>
     <span class="toc-label">On this page</span>
     <ul>

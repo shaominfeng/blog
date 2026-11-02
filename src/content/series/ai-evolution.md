@@ -1,5 +1,6 @@
 ---
 kind: chapters
+status: finished
 order: 1
 cover: "/images/evolution-ai-capability.webp"
 start: "2022.11"

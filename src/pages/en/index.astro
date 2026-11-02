@@ -8,12 +8,15 @@ import {
   byDateDesc,
   byOrder,
   inSeries,
+  minutesOf,
   seriesUrl,
   totalMinutes,
   wordTotal,
 } from '../../lib/articles';
+import { BLOG_UI } from '../../i18n';
 
 const lang = 'en' as const;
+const t = BLOG_UI[lang];
 const [seriesList, all] = await Promise.all([allSeries(), getCollection('articles')]);
 
 const chapterSeries = seriesList.filter((entry) => entry.data.kind === 'chapters');
@@ -89,10 +92,9 @@ const structuredData = {
     {leadEssay && (
       <a class="essay-feature" href={articleUrl(leadEssay)}>
         <div class="ef-copy">
-          <span class="project-index">{leadEssay.data.date?.replaceAll('-', '.')} · {leadEssay.data.readingTime} min</span>
+          <span class="project-index">{leadEssay.data.date?.replaceAll('-', '.')} · {minutesOf(leadEssay)} min</span>
           <h3>{leadEssay.data.title}</h3>
           <p class="sf-sub">{leadEssay.data.subtitle}</p>
-          <p class="sf-desc">{leadEssay.data.description}</p>
           <div class="sf-metrics">
             {leadEssay.data.metrics.map((metric) => (
               <span><b>{metric.value}</b>{metric.label ? ' ' + metric.label : ''}</span>
@@ -120,7 +122,7 @@ const structuredData = {
               </span>
               <span class="pr-meta">
                 <span>{essay.data.date?.replaceAll('-', '.')}</span>
-                <span>{essay.data.readingTime} min</span>
+                <span>{minutesOf(essay)} min</span>
               </span>
             </a>
           ))}
@@ -145,14 +147,12 @@ const structuredData = {
       <article class="series-block">
         <a class="series-feature" href={seriesUrl(entry.id, lang)}>
           <div class="sf-copy">
-            <span class="project-index">{meta.label} · complete</span>
+            <span class="project-index">{meta.label}{entry.data.status && ' · ' + t.series.status[entry.data.status]}</span>
             <h3>{meta.title}</h3>
             <p class="sf-sub">{meta.subtitle}</p>
-            <p class="sf-desc">{meta.description}</p>
             <div class="sf-metrics">
-              <span><b>{chapters.length}</b> chapters</span>
+              <span><b>{wordTotal(chapters)}</b> words</span>
               {entry.data.sources && <span><b>{entry.data.sources}</b> sources</span>}
-              <span><b>{totalMinutes(chapters)}</b> min</span>
             </div>
             <span class="text-link">Open the series →</span>
           </div>
@@ -177,7 +177,7 @@ const structuredData = {
                   <span class="pr-desc">{chapter.data.description}</span>
                 </span>
                 <span class="pr-meta">
-                  <span>{chapter.data.readingTime} min</span>
+                  <span>{minutesOf(chapter)} min</span>
                 </span>
               </a>
             ))}

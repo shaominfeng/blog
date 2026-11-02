@@ -1,7 +1,7 @@
 ---
 import { SITE } from '../consts';
 import { BLOG_UI, basePath, type Lang } from '../i18n';
-import { articleUrl, byDateDesc, totalMinutes, type ArticleEntry, type SeriesEntry } from '../lib/articles';
+import { articleUrl, byDateDesc, minutesOf, totalMinutes, type ArticleEntry, type SeriesEntry } from '../lib/articles';
 
 interface Props {
   series: SeriesEntry;
@@ -40,7 +40,7 @@ const minutes = totalMinutes(sorted);
         </span>
         <span class="pr-meta">
           <span>{essay.data.date?.replaceAll('-', '.')}</span>
-          <span>{essay.data.readingTime} min</span>
+          <span>{minutesOf(essay)} min</span>
         </span>
       </a>
     ))}

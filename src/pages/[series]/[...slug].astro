@@ -2,7 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
 import EssayLayout from '../../layouts/EssayLayout.astro';
-import { allSeries, byDateDesc, byOrder, inSeries, primarySeries, slugOf } from '../../lib/articles';
+import { allSeries, byDateDesc, byOrder, inSeries, slugOf } from '../../lib/articles';
 
 export async function getStaticPaths() {
   const lang = 'zh' as const;
@@ -31,25 +31,17 @@ export async function getStaticPaths() {
 const { article, series, list, index, prev, next } = Astro.props;
 const lang = 'zh' as const;
 const { Content, headings } = await render(article);
-
-const primary = await primarySeries();
-const primaryBlock =
-  primary && primary.id !== series.id
-    ? { series: primary, count: inSeries(await getCollection('articles'), primary.id, lang).length }
-    : undefined;
 ---
 
 {series.data.kind === 'essays' ? (
   <EssayLayout
     entry={article}
     series={series}
-    essays={list}
     headings={headings}
     number={index + 1}
     lang={lang}
     prev={prev}
     next={next}
-    primary={primaryBlock}
   >
     <Content />
   </EssayLayout>

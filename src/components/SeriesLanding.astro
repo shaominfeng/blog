@@ -6,6 +6,7 @@ import {
   byOrder,
   fill,
   groupByPart,
+  minutesOf,
   partLabel,
   seriesUrl,
   slugOf,
@@ -162,7 +163,10 @@ const range = [series.data.start, series.data.end].filter(Boolean).join(' — ')
           </ul>
           <span class="path-meta">
             {t.series.minutes(
-              path.items.reduce((sum, slug) => sum + (bySlug.get(slug)?.data.readingTime ?? 0), 0)
+              path.items.reduce((sum, slug) => {
+                const entry = bySlug.get(slug);
+                return sum + (entry ? minutesOf(entry) : 0);
+              }, 0)
             )}
           </span>
         </div>
@@ -203,7 +207,7 @@ const range = [series.data.start, series.data.end].filter(Boolean).join(' — ')
                     <span class={'tag' + (tag === '深度' ? ' tag-hot' : '')}>{tag}</span>
                   ))}
                 </span>
-                <span class="row-time">{chapter.data.readingTime} min</span>
+                <span class="row-time">{minutesOf(chapter)} min</span>
               </a>
             ))}
           </div>

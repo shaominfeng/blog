@@ -67,9 +67,9 @@ src/
    description: "一句话摘要，用于列表与 meta"
    part: "deep-dive"            # 章节型必填：分卷 key，见系列文件的 parts
    order: 9                     # 章节型按它排序；单篇不用
-   readingTime: 4
+   readingTime: 4               # 可选：省略时按正文字数估算
    tags: ["MCP", "协议"]
-   date: "2026-01-29"
+   date: "2026-01-29"           # 必填
    updated: "2026-02-24"        # 可选
    cover: "/og-xxx.png"         # 可选：该篇的 OG 分享图
    metrics:                     # 可选：首页单篇卡片底部的三条指标
@@ -83,9 +83,10 @@ src/
    ```
 
 2. 在 `en/` 下放同名文件，正文不要留中文（构建前的检查会拦）。
-3. 跑 `npm run verify`（内容检查 + 构建）。
+3. （可选）在 `src/data/changelog.json` 顶部加一条更新日志，中英各一句。
+4. 跑 `npm run verify`（内容检查 + 构建）。
 
-章节序号、单篇序号、"14 章""约 1.8 万字"这类数字都由内容算出，不用手改。
+章节序号、单篇序号、"14 章""约 1.8 万字"这类数字都由内容算出，不用手改。关于页的「最后更新」取文章与更新日志中的最新日期，同样不用手改。
 
 ### 新增一个系列
 
@@ -95,6 +96,7 @@ src/
    ```yaml
    ---
    kind: chapters          # chapters = 章节型；essays = 按日期倒序的单篇集合
+   status: ongoing         # 可选：ongoing 连载中 / finished 已完结
    order: 3
    parts:                  # 章节型分卷；文章的 part 引用这里的 key
      - key: prologue
