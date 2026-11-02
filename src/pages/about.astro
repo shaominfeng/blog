@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { LICENSE, SITE } from '../consts';
 import changelog from '../data/changelog.json';
-import { allSeries, byOrder, inSeries, latestUpdate, seriesUrl, wanWords } from '../lib/articles';
+import { allSeries, byOrder, inSeries, seriesUrl, wanWords } from '../lib/articles';
 
 const lang = 'zh' as const;
 const [seriesList, all] = await Promise.all([allSeries(), getCollection('articles')]);
@@ -13,7 +13,6 @@ const essays = all.filter((entry) => entry.id.startsWith(lang + '/') && entry.id
 const words = wanWords([...chapters, ...essays]);
 // 只数章节型系列；essays 是一个复用同一套路由的伪系列，不算“系列”
 const seriesCount = seriesList.filter((entry) => entry.data.kind === 'chapters').length;
-const lastUpdate = latestUpdate(all, changelog.map((item) => item.date));
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -48,7 +47,6 @@ const structuredData = {
         <li><dt>章节</dt><dd>{chapters.length} 章</dd></li>
         <li><dt>时间跨度</dt><dd>{primary?.data.start} — {primary?.data.end}</dd></li>
         <li><dt>篇幅</dt><dd>约 {words} 万字</dd></li>
-        <li><dt>最后更新</dt><dd>{lastUpdate}</dd></li>
         <li><dt>授权</dt><dd>{LICENSE}</dd></li>
       </ul>
     </aside>

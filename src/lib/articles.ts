@@ -107,12 +107,6 @@ export const minutesOf = (entry: ArticleEntry): number => {
 export const totalMinutes = (entries: ArticleEntry[]): number =>
   entries.reduce((sum, entry) => sum + minutesOf(entry), 0);
 
-/** 最近更新：文章的 updated / date 与更新日志中的最大日期，格式 2026.10.26 */
-export const latestUpdate = (entries: ArticleEntry[], logDates: string[]): string => {
-  const dates = [...entries.map((entry) => entry.data.updated ?? entry.data.date), ...logDates].sort();
-  return (dates.at(-1) ?? '').replaceAll('-', '.');
-};
-
 /* ——————————————————————————————————————————————
    文案占位符：{chapters} {words} {minutes} {sources} {written}
    —————————————————————————————————————————————— */
