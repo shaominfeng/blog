@@ -6,7 +6,7 @@ import { SITE } from '../consts';
 import { BLOG_UI, basePath, type Lang } from '../i18n';
 import {
   articleUrl,
-  partLabel,
+  minutesOf,
   seriesUrl,
   slugOf,
   type ArticleEntry,
@@ -32,7 +32,6 @@ const meta = series.data[lang];
 const base = basePath(lang);
 const canonical = new URL(articleUrl(entry), Astro.site).toString();
 const chapterLabel = String(number).padStart(2, '0');
-const part = data.part ? partLabel(series, data.part, lang) : meta.label;
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -80,20 +79,11 @@ const structuredData = {
 
         <h1>{data.title}</h1>
         <p class="article-sub">{data.subtitle}</p>
-        <p class="article-sub" style="font-size:15px;line-height:1.8;color:var(--ink-3)">{data.description}</p>
 
         <div class="article-meta">
-          <span>{SITE.author}</span>
-          {data.date && (
-            <>
-              <span class="dot" aria-hidden="true"></span>
-              <span>{t.article.wroteOn(data.date.replaceAll('-', '.'))}</span>
-            </>
-          )}
+          {data.date && <span>{data.date.replaceAll('-', '.')}</span>}
           <span class="dot" aria-hidden="true"></span>
-          <span>{t.article.minutes(data.readingTime)}</span>
-          <span class="dot" aria-hidden="true"></span>
-          <span>{part}</span>
+          <span>{t.article.minutes(minutesOf(entry))}</span>
           {data.updated && (
             <>
               <span class="dot" aria-hidden="true"></span>

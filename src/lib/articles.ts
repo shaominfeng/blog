@@ -96,8 +96,22 @@ export const wanWords = (entries: ArticleEntry[]): string => {
 export const wordTotal = (entries: ArticleEntry[]): string =>
   entries.reduce((sum, entry) => sum + countWords(bodyOf(entry)), 0).toLocaleString('en-US');
 
+/** 阅读时长：frontmatter 写了 readingTime 就用它，否则按正文估算（中文约 260 字/分，英文约 200 词/分） */
+export const minutesOf = (entry: ArticleEntry): number => {
+  if (entry.data.readingTime) return entry.data.readingTime;
+  const body = bodyOf(entry);
+  const estimate = langOf(entry) === 'en' ? countWords(body) / 200 : countChars(body) / 260;
+  return Math.max(1, Math.round(estimate));
+};
+
 export const totalMinutes = (entries: ArticleEntry[]): number =>
-  entries.reduce((sum, entry) => sum + entry.data.readingTime, 0);
+  entries.reduce((sum, entry) => sum + minutesOf(entry), 0);
+
+/** 最近更新：文章的 updated / date 与更新日志中的最大日期，格式 2026.10.26 */
+export const latestUpdate = (entries: ArticleEntry[], logDates: string[]): string => {
+  const dates = [...entries.map((entry) => entry.data.updated ?? entry.data.date), ...logDates].sort();
+  return (dates.at(-1) ?? '').replaceAll('-', '.');
+};
 
 /* ——————————————————————————————————————————————
    文案占位符：{chapters} {words} {minutes} {sources} {written}

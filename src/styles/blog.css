@@ -122,14 +122,6 @@
   color: var(--ink-2);
 }
 
-.sf-desc {
-  max-width: 46ch;
-  margin: 16px 0 0;
-  font-size: 13.5px;
-  line-height: 1.8;
-  color: var(--ink-3);
-}
-
 .sf-metrics {
   display: flex;
   flex-wrap: wrap;
@@ -444,10 +436,6 @@
 
 .essay-feature:hover .ef-copy h3 {
   color: var(--accent);
-}
-
-.ef-copy .sf-desc {
-  max-width: 46em;
 }
 
 .ef-copy .text-link {

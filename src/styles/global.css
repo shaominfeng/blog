@@ -1117,20 +1117,21 @@ html[lang='en'] .hero h1 {
 }
 
 .article-hero h1 {
-  max-width: 20ch;
-  margin: 12px 0 14px;
+  max-width: 24ch;
+  margin: 10px 0 12px;
   font-family: var(--serif);
-  font-size: clamp(38px, 5.6vw, 72px);
+  font-size: clamp(34px, 4.2vw, 56px);
   font-weight: 400;
-  line-height: 1.06;
-  letter-spacing: -0.03em;
+  line-height: 1.12;
+  letter-spacing: -0.028em;
   text-wrap: balance;
 }
 
 .article-sub {
-  max-width: 34em;
-  margin: 0 0 8px;
-  font-size: clamp(16px, 1.8vw, 20px);
+  max-width: 30em;
+  margin: 0;
+  font-size: clamp(15px, 1.5vw, 18px);
+  line-height: 1.6;
   color: var(--ink-2);
 }
 
@@ -1138,9 +1139,9 @@ html[lang='en'] .hero h1 {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 10px 22px;
-  margin-top: 26px;
-  padding-top: 16px;
+  gap: 10px 16px;
+  margin-top: 22px;
+  padding-top: 14px;
   border-top: 1px solid var(--line);
   font-family: var(--mono);
   font-size: 9.5px;
@@ -1162,6 +1163,17 @@ html[lang='en'] .hero h1 {
   align-items: start;
   padding-top: clamp(36px, 5vw, 60px);
   padding-bottom: 40px;
+}
+
+/* 单篇没有章节要导航：省掉左栏，正文直接宽出约 200px */
+.article-grid.essay-grid {
+  grid-template-columns: minmax(0, 720px) 170px;
+  justify-content: space-between;
+  column-gap: 0;
+}
+
+.article-grid.essay-grid .article-body {
+  max-width: 720px;
 }
 
 .article-body {
@@ -1345,7 +1357,7 @@ html[lang='en'] .hero h1 {
 
 .prose {
   font-size: 17px;
-  line-height: 1.92;
+  line-height: 1.85;
   color: #2f2a22;
 }
 
@@ -1356,16 +1368,16 @@ html[lang='en'] .hero h1 {
 }
 
 .prose p {
-  margin: 0 0 21px;
+  margin: 0 0 18px;
 }
 
 .prose h2 {
   text-wrap: balance;
-  margin: 68px 0 20px;
-  padding-top: 26px;
+  margin: 52px 0 16px;
+  padding-top: 22px;
   border-top: 1px solid var(--line);
   font-family: var(--serif);
-  font-size: clamp(28px, 3.4vw, 38px);
+  font-size: clamp(26px, 3vw, 34px);
   font-weight: 400;
   line-height: 1.25;
   letter-spacing: -0.02em;
@@ -1373,17 +1385,28 @@ html[lang='en'] .hero h1 {
   scroll-margin-top: 96px;
 }
 
+/* 正文开局直接接在文章头之后：不需要再画一条分隔线 */
+.prose > :first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+}
+
+.prose > :first-child::before {
+  display: none;
+}
+
 .prose h2::before {
   content: "";
   display: block;
-  width: 26px;
-  height: 3px;
-  margin-bottom: 16px;
+  width: 22px;
+  height: 2px;
+  margin-bottom: 12px;
   background: var(--accent);
 }
 
 .prose h3 {
-  margin: 42px 0 12px;
+  margin: 36px 0 10px;
   font-size: 19px;
   font-weight: 700;
   line-height: 1.5;
@@ -1942,6 +1965,10 @@ html[lang='en'] .hero h1 {
 @media (max-width: 1180px) {
   .article-grid {
     grid-template-columns: 190px minmax(0, 1fr);
+  }
+
+  .article-grid.essay-grid {
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .toc {

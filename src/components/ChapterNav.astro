@@ -31,15 +31,12 @@ const groups = groupByPart(sorted);
   <a class="side-back" href={base + '/'}>{t.side.back}</a>
   <a class="side-brand" href={seriesUrl(series.id, lang)}>
     {meta.title}
-    <small>
-      {t.series.chapterCount(sorted.length)}
-      {series.data.start && series.data.end ? ' · ' + series.data.start + '—' + series.data.end : ''}
-    </small>
+    <small>{t.series.chapterCount(sorted.length)}</small>
   </a>
   {groups.map((group) => (
     <div class="side-part">
       <span class="side-part-label">
-        {partLabel(series, group.part, lang)} / {String(group.items.length).padStart(2, '0')}
+        {partLabel(series, group.part, lang)}
       </span>
       {group.items.map((article) => (
         <a
