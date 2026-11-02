@@ -1,0 +1,100 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AboutReferences from './AboutReferences.astro';
+import { LICENSE, SITE } from '../consts';
+import changelog from '../data/changelog.json';
+import { BLOG_UI, basePath, type Lang } from '../i18n';
+import { allSeries, inSeries, seriesUrl, wanWords, wordTotal } from '../lib/articles';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = BLOG_UI[lang];
+const base = basePath(lang);
+const [seriesList, all] = await Promise.all([allSeries(), getCollection('articles')]);
+const chapterSeries = seriesList.filter((entry) => entry.data.kind === 'chapters');
+// 时间跨度与主线引用取第一部连载；章节与字数汇总所有连载，单篇只取 essays 系列
+const primary = chapterSeries[0];
+const essaySeries = seriesList.find((entry) => entry.data.kind === 'essays');
+const chapters = chapterSeries.flatMap((entry) => inSeries(all, entry.id, lang));
+const essays = essaySeries ? inSeries(all, essaySeries.id, lang) : [];
+const words = lang === 'en' ? wordTotal([...chapters, ...essays]) : wanWords([...chapters, ...essays]);
+const seriesCount = chapterSeries.length;
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: t.about.seoName,
+  description: t.about.description,
+  url: new URL(base + '/about/', Astro.site).toString(),
+  inLanguage: t.htmlLang,
+  author: {
+    '@type': 'Person',
+    name: SITE.author,
+    alternateName: SITE.authorEn,
+    url: SITE.personalSite,
+  },
+};
+---
+
+<BaseLayout title={t.about.title} description={t.about.description} lang={lang} structuredData={structuredData}>
+  <div class="shell page-hero">
+    <p class="label">{t.about.label}</p>
+    <h1>{t.about.title}</h1>
+    <p>{t.about.intro}</p>
+  </div>
+
+  <div class="shell about-page-grid">
+    <aside class="about-side">
+      <ul class="info-list">
+        <li><dt>{t.about.info.author}</dt><dd>{SITE.author}</dd></li>
+        <li><dt>{t.about.info.structure}</dt><dd>{t.about.info.structureOf(seriesCount, essays.length)}</dd></li>
+        <li><dt>{t.about.info.chapters}</dt><dd>{t.about.info.chaptersOf(chapters.length)}</dd></li>
+        <li><dt>{t.about.info.span}</dt><dd>{primary?.data.start} — {primary?.data.end}</dd></li>
+        <li><dt>{t.about.info.length}</dt><dd>{t.about.info.lengthOf(words)}</dd></li>
+        <li><dt>{t.about.info.license}</dt><dd>{LICENSE}</dd></li>
+      </ul>
+    </aside>
+
+    <div class="about-prose">
+      <h2>{t.about.whyTitle}</h2>
+      {t.about.whyParagraphs.map((paragraph) => <p>{paragraph}</p>)}
+
+      <h2>{t.about.howTitle}</h2>
+      <ul>
+        {t.about.howItems.map((item) => (
+          <li><strong>{item.lead}</strong>{item.body}</li>
+        ))}
+      </ul>
+
+      <h2>{t.about.scopeTitle}</h2>
+      {t.about.scopeParagraphs(primary?.data[lang].title ?? '').map((paragraph) => <p>{paragraph}</p>)}
+
+      <h2>{t.about.nextTitle}</h2>
+      <p>{t.about.nextText}</p>
+
+      <h2>{t.about.changelogTitle}</h2>
+      <ul class="update-list">
+        {changelog.map((item) => (
+          <li><time>{item.date.replaceAll('-', '.')}</time>{item[lang]}</li>
+        ))}
+      </ul>
+
+      {lang === 'zh' && primary && <AboutReferences series={primary} />}
+
+      <h2>{t.about.licenseTitle}</h2>
+      <p>
+        {t.about.licenseLead}<strong>{LICENSE}</strong>{t.about.licenseTail}
+      </p>
+      <p>
+        {t.about.contactLead}<a href={'mailto:' + SITE.email}>{SITE.email}</a> ·
+        <a href={SITE.github} target="_blank" rel="noopener noreferrer">GitHub</a> ·
+        <a href={SITE.personalSite}>{t.about.homeLink}</a>
+        {primary && <> · <a href={seriesUrl(primary.id, lang)}>{primary.data[lang].title}</a></>}
+      </p>
+    </div>
+  </div>
+</BaseLayout>

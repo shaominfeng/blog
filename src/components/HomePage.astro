@@ -1,0 +1,160 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SeriesCard from './SeriesCard.astro';
+import { SITE } from '../consts';
+import { BLOG_UI, basePath, type Lang } from '../i18n';
+import { allSeries, articleUrl, byDateDesc, byOrder, inSeries, minutesOf } from '../lib/articles';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = BLOG_UI[lang];
+const base = basePath(lang);
+const [seriesList, all] = await Promise.all([allSeries(), getCollection('articles')]);
+
+// 章节型系列（可以多个）+ 单篇集合
+const chapterSeries = seriesList.filter((entry) => entry.data.kind === 'chapters');
+const essaysMeta = seriesList.find((entry) => entry.data.kind === 'essays');
+
+const seriesBlocks = chapterSeries.map((entry) => ({
+  entry,
+  chapters: byOrder(inSeries(all, entry.id, lang)),
+}));
+
+const essays = essaysMeta ? byDateDesc(inSeries(all, essaysMeta.id, lang)) : [];
+const [leadEssay, ...restEssays] = essays;
+
+const allChapters = seriesBlocks.flatMap((block) => block.chapters);
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Blog',
+  name: SITE.name + ' · ' + t.home.title,
+  description: t.home.description,
+  url: new URL(base + '/', Astro.site).toString(),
+  inLanguage: t.htmlLang,
+  author: {
+    '@type': 'Person',
+    name: SITE.author,
+    alternateName: SITE.authorEn,
+    url: SITE.personalSite,
+  },
+  blogPost: [
+    ...allChapters.map((article) => ({
+      '@type': 'BlogPosting',
+      headline: article.data.title,
+      url: new URL(articleUrl(article), Astro.site).toString(),
+    })),
+    ...essays.map((essay) => ({
+      '@type': 'BlogPosting',
+      headline: essay.data.title,
+      url: new URL(articleUrl(essay), Astro.site).toString(),
+    })),
+  ],
+};
+---
+
+<BaseLayout title={t.home.title} description={t.home.description} lang={lang} structuredData={structuredData}>
+  <section class="shell blog-hero">
+    <p class="label">{t.home.label}</p>
+    <h1>{t.home.title}</h1>
+    <p class="blog-intro">{t.home.intro}</p>
+  </section>
+
+  <section class="shell blog-section">
+    <div class="section-head">
+      <div class="section-head-left">
+        <span class="section-index">01</span>
+        <h2 class="section-title">{t.home.essaysTitle}</h2>
+      </div>
+      <span class="section-note">{t.home.essaysNote(essays.length)}</span>
+    </div>
+
+    {leadEssay && (
+      <a class="essay-feature" href={articleUrl(leadEssay)}>
+        <div class="ef-copy">
+          <span class="project-index">{t.home.essayMeta(leadEssay.data.date?.replaceAll('-', '.') ?? '', minutesOf(leadEssay))}</span>
+          <h3>{leadEssay.data.title}</h3>
+          <p class="sf-sub">{leadEssay.data.subtitle}</p>
+          <div class="sf-metrics">
+            {leadEssay.data.metrics.map((metric) => (
+              <span><b>{metric.value}</b>{metric.label ? ' ' + metric.label : ''}</span>
+            ))}
+          </div>
+          <span class="text-link">{t.home.readFull}</span>
+        </div>
+        <div class="ef-panel" aria-hidden="true">
+          <span class="ef-time">{leadEssay.data.panel?.time}</span>
+          <span class="ef-label" set:html={leadEssay.data.panel?.label} />
+          <span class="ef-rule"></span>
+          <span class="ef-meta">{leadEssay.data.panel?.meta}</span>
+        </div>
+      </a>
+    )}
+
+    {restEssays.length > 0 && (
+      <>
+        <div class="post-list" style="margin-top: 18px;">
+          {restEssays.map((essay) => (
+            <a class="post-row no-num" href={articleUrl(essay)}>
+              <span class="pr-main">
+                <span class="pr-title">{essay.data.title}</span>
+                <span class="pr-desc">{essay.data.description}</span>
+              </span>
+              <span class="pr-meta">
+                <span>{essay.data.date?.replaceAll('-', '.')}</span>
+                <span>{minutesOf(essay)} {t.home.rowUnit}</span>
+              </span>
+            </a>
+          ))}
+        </div>
+        <div class="rows-more">
+          <a href={base + '/essays/'}>{t.home.allEssays}</a>
+        </div>
+      </>
+    )}
+  </section>
+
+  <section class="shell blog-section">
+    <div class="section-head">
+      <div class="section-head-left">
+        <span class="section-index">02</span>
+        <h2 class="section-title">{t.home.seriesTitle}</h2>
+      </div>
+      <span class="section-note">{t.home.seriesNote(allChapters.length)}</span>
+    </div>
+
+    <div class="series-grid">
+      {seriesBlocks.map(({ entry, chapters }) => (
+        <SeriesCard series={entry} chapters={chapters} lang={lang} />
+      ))}
+    </div>
+
+    {seriesBlocks.length > 1 && (
+      <div class="rows-more">
+        <a href={base + '/series/'}>{t.home.allSeries}</a>
+      </div>
+    )}
+  </section>
+
+  <section class="shell blog-about">
+    <div class="about-grid">
+      <div class="about-copy">
+        <p class="about-statement">{t.home.aboutStatement}</p>
+        <p>{t.home.aboutText}</p>
+        <div class="contact-line">
+          <a href={'mailto:' + SITE.email}>Email</a>
+          <a href={SITE.personalSite}>{t.nav.personal}</a>
+          <a href={SITE.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+        </div>
+      </div>
+      <div class="about-mark" aria-hidden="true">
+        <span class="monogram">AS</span>
+        <span class="mark-label">WRITING · 2026</span>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

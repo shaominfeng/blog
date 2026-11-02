@@ -1,0 +1,93 @@
+---
+import type { SeriesEntry } from '../lib/articles';
+
+/** 中文版关于页独有的参考资料，英文版不展示 */
+interface Props {
+  series: SeriesEntry;
+}
+
+const { series } = Astro.props;
+---
+
+<h2>参考资料</h2>
+<p class="ref-note">
+  《{series.data.zh.title}》全书引用的公开资料，共 {series.data.sources} 条，按主题分组。括号内为原始发布时间。
+</p>
+
+<h3 class="ref-group">官方公告与博客</h3>
+<ul class="ref-list">
+  <li>
+    <a href="https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills" target="_blank" rel="noopener noreferrer">Anthropic Engineering Blog — Agent Skills</a>
+    <span>2025.10.16</span>
+  </li>
+  <li>
+    <a href="https://claude.com/blog/cowork-research-preview" target="_blank" rel="noopener noreferrer">Claude Cowork Research Preview</a>
+    <span>2026.01.12</span>
+  </li>
+  <li>
+    <a href="https://siliconangle.com/2025/12/18/anthropic-makes-agent-skills-open-standard/" target="_blank" rel="noopener noreferrer">Anthropic Makes Agent Skills Open Standard（SiliconANGLE）</a>
+    <span>2025.12.18</span>
+  </li>
+</ul>
+
+<h3 class="ref-group">OpenAI 关键技术</h3>
+<ul class="ref-list">
+  <li>
+    <a href="https://arxiv.org/abs/2203.02155" target="_blank" rel="noopener noreferrer">InstructGPT 论文 — Training language models to follow instructions with human feedback</a>
+    <span>2022.03</span>
+  </li>
+  <li>
+    <a href="https://openai.com/index/new-models-and-developer-products-announced-at-devday/" target="_blank" rel="noopener noreferrer">OpenAI DevDay 2023 — GPT-4 Turbo、Assistants API、Custom GPTs</a>
+    <span>2023.11.06</span>
+  </li>
+  <li>
+    <a href="https://openai.com/index/sora-is-here/" target="_blank" rel="noopener noreferrer">Sora is here — OpenAI</a>
+    <span>2024.12.09</span>
+  </li>
+</ul>
+
+<h3 class="ref-group">技术分析</h3>
+<ul class="ref-list">
+  <li>
+    <a href="https://www.blockchain-council.org/ai/openais-quiet-adoption-of-anthropics-skills/" target="_blank" rel="noopener noreferrer">OpenAI's Quiet Adoption of Anthropic's Skills</a>
+  </li>
+  <li>
+    <a href="https://www.globaltechcouncil.org/ai/openai-adopted-anthropics-skills/" target="_blank" rel="noopener noreferrer">Why OpenAI Adopted Anthropic's Skills</a>
+  </li>
+  <li>
+    <a href="https://www.salesforceben.com/prompt-engineering-jobs-are-obsolete-in-2025-heres-why/" target="_blank" rel="noopener noreferrer">Prompt Engineering Jobs Are Obsolete in 2025（SalesforceBen）</a>
+  </li>
+  <li>
+    <a href="https://spectrum.ieee.org/prompt-engineering-is-dead" target="_blank" rel="noopener noreferrer">Prompt Engineering Is Dead（IEEE Spectrum）</a>
+  </li>
+</ul>
+
+<h3 class="ref-group">Clawdbot 报道</h3>
+<ul class="ref-list">
+  <li>
+    <a href="https://github.com/clawdbot/clawdbot" target="_blank" rel="noopener noreferrer">Clawdbot GitHub Repository</a>
+  </li>
+  <li>
+    <a href="https://ucstrategies.com/news/what-is-clawdbot-and-why-everyone-is-suddenly-obsessed-with-it/" target="_blank" rel="noopener noreferrer">What is Clawdbot and Why Everyone is Obsessed With It</a>
+  </li>
+  <li>
+    <a href="https://www.filmogaz.com/118959" target="_blank" rel="noopener noreferrer">Clawdbot 详细报道（Filmogaz）</a>
+  </li>
+  <li>
+    <a href="https://eu.36kr.com/en/p/3656002519228805" target="_blank" rel="noopener noreferrer">Clawdbot 分析（36 氪）</a>
+  </li>
+  <li>
+    <a href="https://medium.com/@gemQueenx/clawdbot-ai-the-revolutionary-open-source-personal-assistant-transforming-productivity-in-2026-6ec5fdb3084f" target="_blank" rel="noopener noreferrer">Clawdbot: The Revolutionary Open-Source Personal Assistant（Medium）</a>
+  </li>
+</ul>
+
+<h3 class="ref-group">市场与趋势</h3>
+<ul class="ref-list">
+  <li>
+    <a href="https://fortune.com/2025/05/07/prompt-engineering-200k-six-figure-role-now-obsolete-thanks-to-ai/" target="_blank" rel="noopener noreferrer">Prompt Engineering: 200K Six-Figure Role Now Obsolete（Fortune）</a>
+    <span>2025.05.07</span>
+  </li>
+  <li>
+    <a href="https://www.investing.com/news/stock-market-news/why-cloudflare-is-surging-clawdbot-ai-agents-and-the-future-of-edge-computing-4465853" target="_blank" rel="noopener noreferrer">Cloudflare Surge Analysis — Clawdbot, AI Agents and the Future of Edge Computing</a>
+  </li>
+</ul>

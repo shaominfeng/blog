@@ -12,6 +12,7 @@
  *   5. 章节型（kind: chapters）的 part 必须能在系列 parts 里找到
  *   6. 必填字段齐全（title / description / date）
  *   7. 更新日志每条有 YYYY-MM-DD 格式的 date，以及 zh / en 文案
+ *   8. 系列 id 不能与站内固定路由重名（en / series / about）
  */
 
 import fs from 'node:fs';
@@ -54,6 +55,14 @@ for (const file of fs.readdirSync(SERIES_DIR).filter((name) => name.endsWith('.m
     (m) => m[1]
   );
   series.set(file.replace(/\.md$/, ''), { kind: data.kind ?? 'chapters', parts: keys });
+}
+
+/* ——— 保留 id：会与站内固定路由冲突 ——— */
+const RESERVED_SERIES = ['en', 'series', 'about'];
+for (const key of series.keys()) {
+  if (RESERVED_SERIES.includes(key)) {
+    errors.push(`系列 id "${key}" 与站内固定路由冲突：src/content/series/${key}.md`);
+  }
 }
 
 /* ——— 扫描文章 ——— */

@@ -29,17 +29,19 @@ src/
 │   └── series/                    # 系列元数据（标题、分卷、首页文案、阅读路径）
 │       ├── ai-evolution.md        # kind: chapters
 │       └── essays.md              # kind: essays
-├── pages/
+├── pages/                         # 只做路由：每个文件一两行，调用 components 里的页面
 │   ├── index.astro                # /blog/ 写作首页
+│   ├── series/index.astro         # /blog/series/ 系列索引（多于一部连载时才是页头入口）
 │   ├── [series]/
-│   │   ├── index.astro            # /blog/<series>/ 系列首页（按 kind 选版式）
+│   │   ├── index.astro            # /blog/<series>/ 系列页（按 kind 选版式）
 │   │   └── [...slug].astro        # /blog/<series>/<slug>/ 章节 / 单篇
-│   ├── en/                        # 英文版：结构与上面完全镜像
+│   ├── en/                        # 英文版：与上面一一对应，只多传一个 lang="en"
 │   │   ├── index.astro
+│   │   ├── series/index.astro
 │   │   └── [series]/…
 │   └── about.astro
-├── components/                    # 页头页脚、章节导航、系列首页、TOC
-├── layouts/                       # BaseLayout / ArticleLayout（章节）/ EssayLayout（单篇）
+├── components/                    # 页面模板（HomePage / SeriesPage / ArticlePage …）与页头页脚、卡片、章节导航、TOC
+├── layouts/                       # BaseLayout / ArticleLayout（章节与单篇共用，按 kind 切换）
 ├── lib/articles.ts                # 路径解析、查询排序、篇幅统计——唯一的读取入口
 ├── content.config.ts              # 内容 schema
 ├── i18n.ts                        # 界面文案与语言工具
@@ -115,7 +117,9 @@ src/
 
 3. 系列首页的编辑版式（`heroTitle` / `tldr` / `paths` / `stats` / `about`）都是可选字段，不写就自动降级成简洁列表。
 
-不需要改任何页面代码：路由、导航、首页卡片、RSS 与 sitemap 都按 `content/series/` 自动展开。
+不需要改任何页面代码：路由、导航、首页卡片、RSS 与 sitemap 都按 `content/series/` 自动展开。连载系列超过一部时，页头和页脚的“系列”会自动指向 `/series/` 索引页。
+
+界面文案（按钮、标题、单位）在 `src/i18n.ts`，中英文各一份；页面模板只读这里，不在页面里写死文字。
 
 ### 文案里的占位符
 

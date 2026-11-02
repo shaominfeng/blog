@@ -1,0 +1,46 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SeriesCard from './SeriesCard.astro';
+import { SITE } from '../consts';
+import { BLOG_UI, basePath, type Lang } from '../i18n';
+import { byOrder, chapterSeries, inSeries } from '../lib/articles';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = BLOG_UI[lang];
+const base = basePath(lang);
+const [series, all] = await Promise.all([chapterSeries(), getCollection('articles')]);
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: t.series.hubTitle + ' · ' + SITE.name,
+  description: t.series.hubIntro,
+  url: new URL(base + '/series/', Astro.site).toString(),
+  inLanguage: t.htmlLang,
+  author: { '@type': 'Person', name: SITE.author, url: SITE.personalSite },
+};
+---
+
+<BaseLayout title={t.series.hubTitle} description={t.series.hubIntro} lang={lang} structuredData={structuredData}>
+  <section class="shell blog-hero">
+    <p class="label">{t.series.hubLabel}</p>
+    <h1>{t.series.hubTitle}</h1>
+    <p class="blog-intro">{t.series.hubIntro}</p>
+    <div class="blog-meta">
+      <a href={base + '/'}>{t.series.allWriting}</a>
+    </div>
+  </section>
+
+  <section class="shell blog-section">
+    <div class="series-grid">
+      {series.map((entry) => (
+        <SeriesCard series={entry} chapters={byOrder(inSeries(all, entry.id, lang))} lang={lang} />
+      ))}
+    </div>
+  </section>
+</BaseLayout>

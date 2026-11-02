@@ -1,0 +1,32 @@
+---
+import { render } from 'astro:content';
+import ArticleLayout from '../layouts/ArticleLayout.astro';
+import type { Lang } from '../i18n';
+import type { ArticleEntry, SeriesEntry } from '../lib/articles';
+
+interface Props {
+  article: ArticleEntry;
+  series: SeriesEntry;
+  list: ArticleEntry[];
+  index: number;
+  prev?: ArticleEntry;
+  next?: ArticleEntry;
+  lang: Lang;
+}
+
+const { article, series, list, index, prev, next, lang } = Astro.props;
+const { Content, headings } = await render(article);
+---
+
+<ArticleLayout
+  entry={article}
+  series={series}
+  articles={list}
+  headings={headings}
+  number={index + 1}
+  lang={lang}
+  prev={prev}
+  next={next}
+>
+  <Content />
+</ArticleLayout>

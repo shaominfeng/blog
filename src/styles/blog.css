@@ -87,35 +87,6 @@
   padding-top: clamp(40px, 5vw, 64px);
 }
 
-.series-feature {
-  display: grid;
-  grid-template-columns: minmax(0, 1.06fr) minmax(0, 0.94fr);
-  border: 1px solid var(--line);
-  background: var(--paper-2);
-  text-decoration: none;
-  overflow: hidden;
-}
-
-.sf-copy {
-  display: flex;
-  flex-direction: column;
-  padding: clamp(26px, 4vw, 46px);
-}
-
-.sf-copy h3 {
-  margin: 16px 0 2px;
-  font-family: var(--serif);
-  font-size: clamp(36px, 4.4vw, 56px);
-  font-weight: 400;
-  line-height: 1.02;
-  letter-spacing: -0.025em;
-  color: var(--ink);
-}
-
-.series-feature:hover .sf-copy h3 {
-  color: var(--accent);
-}
-
 .sf-sub {
   margin: 0;
   font-size: 16px;
@@ -144,68 +115,86 @@
   margin-right: 4px;
 }
 
-.sf-copy .text-link {
-  align-self: flex-start;
-  margin-top: 24px;
+/* 系列卡片：首页与 /series/ 共用；只有一部时占满一行，多部时自动分栏 */
+
+.series-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+  gap: clamp(18px, 2.4vw, 28px);
 }
 
-.sf-cover {
-  position: relative;
+.series-card {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 10px;
-  padding: clamp(18px, 3vw, 34px);
-  background: var(--paper-3);
-  border-left: 1px solid var(--line);
+  border: 1px solid var(--line);
+  background: var(--paper-2);
+  text-decoration: none;
+  overflow: hidden;
+  transition: border-color 0.3s var(--ease);
 }
 
-.sf-cover img {
+.series-card:hover {
+  border-color: var(--ink-3);
+}
+
+.sc-cover {
+  background: var(--paper-3);
+  border-bottom: 1px solid var(--line);
+}
+
+.sc-cover img {
   display: block;
   width: 100%;
   height: auto;
-  background: #fff;
-  border: 1px solid rgba(23, 20, 15, 0.2);
-  box-shadow: 12px 14px 0 rgba(23, 20, 15, 0.06);
-  transform: rotate(1deg);
 }
 
-.sf-cover span {
-  font-family: var(--mono);
-  font-size: 10.5px;
-  letter-spacing: 0.07em;
-  color: var(--ink-3);
-  text-align: right;
-  text-transform: uppercase;
+.sc-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: clamp(22px, 3vw, 34px);
 }
 
-/* 首页：一个系列 = 卡片 + 该系列的目录，目录属于系列，不再与系列平级 */
+.sc-body h3 {
+  margin: 14px 0 6px;
+  font-family: var(--serif);
+  font-size: clamp(30px, 3.4vw, 40px);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
 
-.series-block + .series-block {
-  margin-top: clamp(48px, 6vw, 76px);
+.series-card:hover .sc-body h3 {
+  color: var(--accent);
+}
+
+.sc-body .sf-metrics {
+  margin-top: 22px;
+}
+
+.sc-body .text-link {
+  align-self: flex-start;
+  margin-top: 22px;
+}
+
+/* 只有一部连载时，卡片横排成首页的精选样式：文字在左，封面在右 */
+.series-grid > .series-card.has-cover:only-child {
+  display: grid;
+  grid-template-columns: minmax(0, 1.06fr) minmax(0, 0.94fr);
+}
+
+.series-grid > .series-card.has-cover:only-child .sc-cover {
+  order: 2;
+  display: flex;
+  align-items: center;
+  padding: clamp(18px, 3vw, 34px);
+  border-bottom: 0;
+  border-left: 1px solid var(--line);
 }
 
 .catalog {
   margin-top: 26px;
-}
-
-.catalog-head {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 18px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid var(--line-2);
-  font-family: var(--mono);
-  font-size: 11.5px;
-  letter-spacing: 0.02em;
-  color: var(--ink-3);
-  text-transform: uppercase;
-}
-
-.catalog-head span:first-child {
-  color: var(--ink-2);
-  letter-spacing: 0.04em;
 }
 
 .catalog .post-list {
@@ -345,11 +334,11 @@
 }
 
 @media (max-width: 900px) {
-  .series-feature {
+  .series-grid > .series-card.has-cover:only-child {
     grid-template-columns: 1fr;
   }
 
-  .sf-cover {
+  .series-grid > .series-card.has-cover:only-child .sc-cover {
     order: -1;
     border-left: 0;
     border-bottom: 1px solid var(--line);

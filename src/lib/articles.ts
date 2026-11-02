@@ -67,9 +67,15 @@ export const allSeries = async (): Promise<SeriesEntry[]> =>
 export const findSeries = async (key: string): Promise<SeriesEntry | undefined> =>
   (await allSeries()).find((entry) => entry.id === key);
 
-/** 站点的主系列：第一个章节型系列，用于页头导航与首页 */
-export const primarySeries = async (): Promise<SeriesEntry | undefined> =>
-  (await allSeries()).find((entry) => entry.data.kind === 'chapters');
+/** 章节型系列（连载） */
+export const chapterSeries = async (): Promise<SeriesEntry[]> =>
+  (await allSeries()).filter((entry) => entry.data.kind === 'chapters');
+
+/** 页头与页脚的“系列”入口：只有一部连载时直达它，多于一部时指向 /series/ 索引 */
+export const seriesEntryUrl = async (lang: Lang): Promise<string> => {
+  const series = await chapterSeries();
+  return series.length > 1 ? `${basePath(lang)}/series/` : seriesUrl(series[0]?.id ?? '', lang);
+};
 
 /** 单篇集合 */
 export const essaySeries = async (): Promise<SeriesEntry | undefined> =>
@@ -113,3 +119,34 @@ export const totalMinutes = (entries: ArticleEntry[]): number =>
 
 export const fill = (template: string, vars: Record<string, string | number>): string =>
   template.replace(/\{(\w+)\}/g, (_, key: string) => String(vars[key] ?? ''));
+
+/* ——————————————————————————————————————————————
+   静态路由的参数：中英文路由文件共用，只在这里生成
+   —————————————————————————————————————————————— */
+
+export const seriesPaths = async () =>
+  (await allSeries()).map((entry) => ({ params: { series: entry.id }, props: { series: entry } }));
+
+/** 章节按 order，单篇按日期倒序；prev / next 按这个顺序取 */
+export const articlePaths = async (lang: Lang) => {
+  const [series, all] = await Promise.all([allSeries(), getCollection('articles')]);
+
+  return series.flatMap((entry) => {
+    const list =
+      entry.data.kind === 'essays'
+        ? byDateDesc(inSeries(all, entry.id, lang))
+        : byOrder(inSeries(all, entry.id, lang));
+
+    return list.map((article, index) => ({
+      params: { series: entry.id, slug: slugOf(article) },
+      props: {
+        article,
+        series: entry,
+        list,
+        index,
+        prev: list[index - 1],
+        next: list[index + 1],
+      },
+    }));
+  });
+};

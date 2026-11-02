@@ -1,0 +1,35 @@
+---
+import { SITE } from '../consts';
+import { BLOG_UI, type Lang } from '../i18n';
+import { seriesUrl, wanWords, wordTotal, type ArticleEntry, type SeriesEntry } from '../lib/articles';
+
+interface Props {
+  series: SeriesEntry;
+  chapters: ArticleEntry[];
+  lang: Lang;
+}
+
+const { series, chapters, lang } = Astro.props;
+const t = BLOG_UI[lang];
+const meta = series.data[lang];
+const words = lang === 'en' ? wordTotal(chapters) : wanWords(chapters);
+---
+
+<a class:list={['series-card', { 'has-cover': series.data.cover }]} href={seriesUrl(series.id, lang)}>
+  {series.data.cover && (
+    <div class="sc-cover">
+      <img src={SITE.base + series.data.cover} alt={meta.title} width="1400" height="764" loading="eager" />
+    </div>
+  )}
+  <div class="sc-body">
+    <span class="project-index">{meta.label}{series.data.status && ' · ' + t.series.status[series.data.status]}</span>
+    <h3>{meta.title}</h3>
+    <p class="sf-sub">{meta.subtitle}</p>
+    <div class="sf-metrics">
+      <span><b>{chapters.length}</b> {t.series.chapterUnit}</span>
+      <span><b>{words}</b> {t.series.wordsUnit}</span>
+      {series.data.sources ? <span><b>{series.data.sources}</b> {t.series.sourcesUnit}</span> : null}
+    </div>
+    <span class="text-link">{t.series.openSeries}</span>
+  </div>
+</a>
