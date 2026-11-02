@@ -1,10 +1,10 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import SeriesCard from './SeriesCard.astro';
 import { SITE } from '../consts';
+import topics from '../data/topics.json';
 import { BLOG_UI, basePath, type Lang } from '../i18n';
-import { allSeries, articleUrl, byDateDesc, byOrder, inSeries, minutesOf } from '../lib/articles';
+import { allSeries, articleUrl, byDateDesc, byOrder, inSeries, minutesOf, seriesUrl } from '../lib/articles';
 
 interface Props {
   lang: Lang;
@@ -15,18 +15,50 @@ const t = BLOG_UI[lang];
 const base = basePath(lang);
 const [seriesList, all] = await Promise.all([allSeries(), getCollection('articles')]);
 
-// 章节型系列（可以多个）+ 单篇集合
+// 连载（章节型系列，整体算一条）+ 单篇集合（每篇一条）
 const chapterSeries = seriesList.filter((entry) => entry.data.kind === 'chapters');
 const essaysMeta = seriesList.find((entry) => entry.data.kind === 'essays');
-
-const seriesBlocks = chapterSeries.map((entry) => ({
-  entry,
-  chapters: byOrder(inSeries(all, entry.id, lang)),
-}));
-
 const essays = essaysMeta ? byDateDesc(inSeries(all, essaysMeta.id, lang)) : [];
 
-const allChapters = seriesBlocks.flatMap((block) => block.chapters);
+/** 首页的一行：连载和单篇结构相同，只在徽标与元信息上不同 */
+const rows = [
+  ...chapterSeries.map((entry) => ({
+    topic: entry.data.topic,
+    badge: t.home.badgeSeries,
+    title: entry.data[lang].title,
+    desc: entry.data[lang].subtitle ?? entry.data[lang].description,
+    href: seriesUrl(entry.id, lang),
+    meta: [t.series.chapterCount(inSeries(all, entry.id, lang).length)],
+  })),
+  ...essays.map((essay) => ({
+    topic: essay.data.topic,
+    badge: t.home.badgeEssay,
+    title: essay.data.title,
+    desc: essay.data.description,
+    href: articleUrl(essay),
+    meta: [essay.data.date.replaceAll('-', '.'), t.article.minutes(minutesOf(essay))],
+  })),
+];
+
+/**
+ * 没有 topic 的条目会在分组里找不到去处，直接让构建失败，
+ * 而不是让内容静默地从首页消失（部署流水线只跑 build）。
+ */
+const unassigned = rows.find((row) => !row.topic);
+if (unassigned) {
+  throw new Error(`缺少 topic，首页无法分组：${unassigned.href}（见 src/data/topics.json）`);
+}
+
+/** 按主题分组，顺序以 topics.json 为准；没有内容的主题不显示 */
+const groups = topics
+  .map((topic) => ({
+    key: topic.key,
+    label: topic[lang],
+    rows: rows.filter((row) => row.topic === topic.key),
+  }))
+  .filter((group) => group.rows.length > 0);
+
+const allChapters = chapterSeries.flatMap((entry) => byOrder(inSeries(all, entry.id, lang)));
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -63,40 +95,40 @@ const structuredData = {
     <p class="page-intro">{t.home.intro}</p>
   </header>
 
-  <section class="shell blog-section">
-    <div class="section-head">
-      <h2 class="section-title">{t.home.essaysTitle}</h2>
-      <span class="section-note">{t.home.essaysNote(essays.length)}</span>
-    </div>
+  {groups.length > 1 && (
+    <nav class="shell" aria-label={t.home.topicsLabel}>
+      <div class="topic-index">
+        {groups.map((group) => (
+          <a href={'#topic-' + group.key}>{group.label}</a>
+        ))}
+      </div>
+    </nav>
+  )}
 
-    <div class="post-list">
-      {essays.map((essay) => (
-        <a class="post-row" href={articleUrl(essay)}>
-          <span class="pr-main">
-            <span class="pr-title">{essay.data.title}</span>
-            <span class="pr-desc">{essay.data.description}</span>
-          </span>
-          <span class="pr-meta">
-            <span>{essay.data.date?.replaceAll('-', '.')}</span>
-            <span>{t.article.minutes(minutesOf(essay))}</span>
-          </span>
-        </a>
-      ))}
-    </div>
-  </section>
+  {groups.map((group) => (
+    <section class="shell blog-section" id={'topic-' + group.key}>
+      <div class="section-head">
+        <h2 class="section-title">{group.label}</h2>
+      </div>
 
-  <section class="shell blog-section">
-    <div class="section-head">
-      <h2 class="section-title">{t.home.seriesTitle}</h2>
-      <span class="section-note">{t.home.seriesNote(allChapters.length)}</span>
-    </div>
-
-    <div class="series-grid">
-      {seriesBlocks.map(({ entry, chapters }) => (
-        <SeriesCard series={entry} chapters={chapters} lang={lang} />
-      ))}
-    </div>
-  </section>
+      <div class="post-list">
+        {group.rows.map((row) => (
+          <a class="post-row" href={row.href}>
+            <span class="pr-main">
+              <span class="pr-title">{row.title}</span>
+              <span class="pr-desc">{row.desc}</span>
+            </span>
+            <span class="pr-meta">
+              <span>{row.badge}</span>
+              {row.meta.map((item) => (
+                <span>{item}</span>
+              ))}
+            </span>
+          </a>
+        ))}
+      </div>
+    </section>
+  ))}
 
   <section class="shell page-about">
     <p class="page-statement">{t.home.aboutStatement}</p>

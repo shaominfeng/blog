@@ -4,6 +4,7 @@ subtitle: "三个月 $1,412.92 的真实账单拆解"
 description: "把 2026 Q3 的编码 agent 用量账本摊开：日均花费从 $47.56 掉到 $2.21，89% 的降幅来自模型结构，缓存和用量都不是主角。附一条可复用的成本公式与落地清单。"
 readingTime: 17
 tags: ["AI 成本", "Claude Code", "模型路由", "工程实践"]
+topic: "cost"
 date: "2026-09-18"
 updated: "2026-10-26"
 cover: "/og-ai-coding-cost.png"

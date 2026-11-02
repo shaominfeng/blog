@@ -13,6 +13,7 @@
  *   6. 必填字段齐全（title / description / date）
  *   7. 更新日志每条有 YYYY-MM-DD 格式的 date，以及 zh / en 文案
  *   8. 系列 id 不能与站内固定路由重名（en / series / about）
+ *   9. 主题：连载与单篇必须有 topic，且须已登记在 src/data/topics.json（首页按它分组）
  */
 
 import fs from 'node:fs';
@@ -54,7 +55,7 @@ for (const file of fs.readdirSync(SERIES_DIR).filter((name) => name.endsWith('.m
   const keys = [...fs.readFileSync(path.join(SERIES_DIR, file), 'utf8').matchAll(/- key:\s*([\w-]+)/g)].map(
     (m) => m[1]
   );
-  series.set(file.replace(/\.md$/, ''), { kind: data.kind ?? 'chapters', parts: keys });
+  series.set(file.replace(/\.md$/, ''), { kind: data.kind ?? 'chapters', parts: keys, topic: data.topic });
 }
 
 /* ——— 保留 id：会与站内固定路由冲突 ——— */
@@ -62,6 +63,26 @@ const RESERVED_SERIES = ['en', 'series', 'about'];
 for (const key of series.keys()) {
   if (RESERVED_SERIES.includes(key)) {
     errors.push(`系列 id "${key}" 与站内固定路由冲突：src/content/series/${key}.md`);
+  }
+}
+
+/* ——— 主题：首页分组用，只能取 topics.json 里登记过的 key ——— */
+const topicList = JSON.parse(fs.readFileSync(path.join(ROOT, 'src/data/topics.json'), 'utf8'));
+const TOPIC_KEYS = new Set(topicList.map((topic) => topic.key));
+topicList.forEach((topic, index) => {
+  const where = `src/data/topics.json 第 ${index + 1} 条`;
+  if (!topic.key) errors.push(`缺少 key：${where}`);
+  if (topicList.filter((other) => other.key === topic.key).length > 1) errors.push(`key 重复 "${topic.key}"：${where}`);
+  for (const lang of LANGS) {
+    if (!topic[lang]) errors.push(`缺少 ${lang} 名称：${where}`);
+  }
+});
+for (const [key, meta] of series) {
+  if (meta.kind === 'chapters' && !meta.topic) {
+    errors.push(`连载缺少 topic：src/content/series/${key}.md`);
+  }
+  if (meta.topic && !TOPIC_KEYS.has(meta.topic)) {
+    errors.push(`topic "${meta.topic}" 未登记：src/content/series/${key}.md（见 src/data/topics.json）`);
   }
 }
 
@@ -100,6 +121,12 @@ for (const file of walk(ARTICLES)) {
   }
   if (meta?.kind === 'chapters' && data.part && !meta.parts.includes(data.part)) {
     errors.push(`part "${data.part}" 不在 ${key} 的分卷里：${path.relative(ROOT, file)}`);
+  }
+  if (meta?.kind === 'essays' && !data.topic) {
+    errors.push(`单篇缺少 topic：${path.relative(ROOT, file)}`);
+  }
+  if (data.topic && !TOPIC_KEYS.has(data.topic)) {
+    errors.push(`topic "${data.topic}" 未登记：${path.relative(ROOT, file)}（见 src/data/topics.json）`);
   }
 }
 

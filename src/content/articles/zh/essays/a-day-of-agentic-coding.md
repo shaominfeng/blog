@@ -4,6 +4,7 @@ subtitle: "当 AI 从「打开来用的工具」，变成「一直在跑的同�
 description: "从 09:00 的自动晨报到 18:00 的最后一轮巡检：一个工程师怎样把 AI 嵌进工单、调试、开发、复盘与工具改进，让时间从「排队」变成「重叠」。"
 readingTime: 19
 tags: ["Agentic Coding", "AI 工作流", "工程实践"]
+topic: "agent"
 date: "2026-06-26"
 ---
 

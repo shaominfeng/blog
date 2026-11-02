@@ -4,6 +4,7 @@ subtitle: "一个真实任务里，问题怎么提、方案怎么改、判断谁
 description: "从 Grafana 的一个数据源判断错起，用 Agent 把 5 个站点的 39 个 dashboard 摸成一套巡检工具：文档怎么和真实环境对上、严重程度的口径怎么改、一条限流告警怎么追到上游。"
 readingTime: 18
 tags: ["Agent 协作", "运维", "可观测性", "工程实践"]
+topic: "ops"
 date: "2026-10-29"
 cover: "/og-sp-ops.png"
 ---

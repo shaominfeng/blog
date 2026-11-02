@@ -4,6 +4,7 @@ subtitle: "When AI stops being a tool you open and becomes a colleague that keep
 description: "From the 09:00 automatic morning brief to the last patrol at 18:00: how one engineer folds AI into tickets, debugging, development, retrospectives and tool improvement, so time stops queuing and starts overlapping."
 readingTime: 19
 tags: ["Agentic Coding", "AI workflow", "engineering practice"]
+topic: "agent"
 date: "2026-06-26"
 ---
 

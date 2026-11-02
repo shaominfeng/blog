@@ -123,6 +123,31 @@
   padding-top: clamp(40px, 5vw, 64px);
 }
 
+/* 首页的主题目录：只是锚点跳转，不做筛选 */
+
+.topic-index {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+  margin-top: clamp(36px, 4.4vw, 52px);
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.topic-index a {
+  color: var(--ink-2);
+  text-decoration: none;
+  border-bottom: 1px solid var(--line-2);
+}
+
+.topic-index a:hover {
+  color: var(--accent);
+}
+
 .text-link {
   text-decoration: none;
   font-family: var(--mono);
@@ -160,7 +185,7 @@
   color: var(--ink);
 }
 
-/* 系列卡片：首页与 /series/ 共用，同一种样式 */
+/* 系列卡片：/series/ 索引页使用，同一种样式 */
 
 .series-grid {
   display: grid;

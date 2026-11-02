@@ -44,6 +44,7 @@ src/
 ├── layouts/                       # BaseLayout / ArticleLayout（章节与单篇共用，按 kind 切换）
 ├── lib/articles.ts                # 路径解析、查询排序、篇幅统计——唯一的读取入口
 ├── content.config.ts              # 内容 schema
+├── data/topics.json               # 主题登记表：首页按主题分组的唯一来源
 ├── i18n.ts                        # 界面文案与语言工具
 └── styles/                        # 编辑设计系统
 ```
@@ -58,6 +59,14 @@ src/
 
 页面上所有 URL 都走 `lib/articles.ts` 的 `articleUrl()`，不要在页面里手拼路径。
 
+### 主题
+
+首页按主题分组，读者找的是问题（成本、运维、工作流），不是体裁。
+
+- 主题登记在 `src/data/topics.json`，每个 key 配中英文名；顺序即首页的显示顺序，没有内容的主题不显示
+- 单篇 frontmatter 写 `topic`，连载在 `src/content/series/<series>.md` 里写 `topic`（连载整体算一条）
+- 一篇只归一个主题；`scripts/check-content.mjs` 会拦住缺失或未登记的 topic
+
 ### 新增一篇
 
 1. 在 `src/content/articles/zh/<series>/` 放 Markdown，frontmatter 只需内容字段：
@@ -71,6 +80,7 @@ src/
    order: 9                     # 章节型按它排序；单篇不用
    readingTime: 4               # 可选：省略时按正文字数估算
    tags: ["MCP", "协议"]
+   topic: "agent"               # 单篇必填：首页按主题分组，key 须登记在 data/topics.json
    date: "2026-01-29"           # 必填
    updated: "2026-02-24"        # 可选
    cover: "/og-xxx.png"         # 可选：该篇的 OG 分享图

@@ -1,0 +1,6 @@
+[
+  { "key": "evolution", "zh": "AI 演进", "en": "AI evolution" },
+  { "key": "agent", "zh": "Agent 工作流", "en": "Agent workflows" },
+  { "key": "cost", "zh": "AI 成本", "en": "AI cost" },
+  { "key": "ops", "zh": "运维与可观测", "en": "Ops and observability" }
+]

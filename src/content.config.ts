@@ -1,5 +1,6 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
+import topics from './data/topics.json';
 
 /**
  * 内容模型：路径即索引。
@@ -11,6 +12,11 @@ import { glob } from 'astro/loaders';
  *
  * 语言和系列都不再写进 frontmatter —— 目录说一次就够了，推导逻辑在 src/lib/articles.ts。
  */
+
+/** 主题 key 必须先在 src/data/topics.json 里登记，首页按它分组 */
+const topicKey = z.string().refine((key) => topics.some((topic) => topic.key === key), {
+  message: '主题未登记：请先在 src/data/topics.json 里添加',
+});
 
 /** 系列在一个语言下的文案块，中英各一份 */
 const localized = z.object({
@@ -64,6 +70,8 @@ const series = defineCollection({
     license: z.string().optional(),
     published: z.string().optional(),
     modified: z.string().optional(),
+    /** 所属主题，首页按主题分组；系列整体算一条 */
+    topic: topicKey.optional(),
     /** 章节型系列的分卷；key 与文章 frontmatter 的 part 对应 */
     parts: z.array(z.object({ key: z.string(), zh: z.string(), en: z.string() })).default([]),
     zh: localized,
@@ -86,6 +94,8 @@ const articles = defineCollection({
     /** 缺省时按正文字数估算，见 lib/articles.ts 的 minutesOf() */
     readingTime: z.number().optional(),
     tags: z.array(z.string()).default([]),
+    /** 所属主题；单篇必填（由 scripts/check-content.mjs 检查），章节型留空 */
+    topic: topicKey.optional(),
     date: z.string().regex(isoDate, '日期须为 YYYY-MM-DD'),
     updated: z.string().regex(isoDate, '日期须为 YYYY-MM-DD').optional(),
     cover: z.string().optional(),

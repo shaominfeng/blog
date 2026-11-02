@@ -1,5 +1,6 @@
 ---
 kind: chapters
+topic: "evolution"
 status: finished
 order: 1
 cover: "/images/evolution-ai-capability.webp"

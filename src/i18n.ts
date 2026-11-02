@@ -100,10 +100,9 @@ const zh = {
     label: '写作 / 2026',
     intro:
       '把做过的事写清楚，是我检验自己是否真的理解的方式。这里放长文：技术原理、架构判断，以及从企业实践里带回来的经验。',
-    essaysTitle: '单篇',
-    essaysNote: (n: number) => n + ' 篇',
-    seriesTitle: '系列',
-    seriesNote: (n: number) => n + ' 章',
+    topicsLabel: '主题',
+    badgeSeries: '系列',
+    badgeEssay: '单篇',
     aboutLink: '方法论与更新日志 →',
     aboutStatement: '下一篇文章，正在写。',
     aboutText:
@@ -246,10 +245,9 @@ const en = {
     label: 'Writing / 2026',
     intro:
       'Writing things down clearly is how I check whether I actually understand them. Long-form pieces on how the technology works, the architectural calls behind it, and what survives contact with a real enterprise.',
-    essaysTitle: 'Essays',
-    essaysNote: (n: number) => n + ' essays',
-    seriesTitle: 'Series',
-    seriesNote: (n: number) => n + ' chapters',
+    topicsLabel: 'Topics',
+    badgeSeries: 'Series',
+    badgeEssay: 'Essay',
     aboutLink: 'Method and changelog →',
     aboutStatement: 'The next piece is being written.',
     aboutText:
